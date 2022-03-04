@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Activity;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Repositories\SettingRepository;
+use BADDIServices\SourceeApp\Models\Setting;
+use BADDIServices\SourceeApp\Repositories\SettingRepository;
 
 class SettingService extends Service
 {

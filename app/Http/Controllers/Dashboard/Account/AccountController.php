@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\PackService;
-use BADDIServices\SocialRocket\Entities\StoreSetting;
-use BADDIServices\SocialRocket\Services\SettingService;
+use BADDIServices\SourceeApp\Services\PackService;
+use BADDIServices\SourceeApp\Entities\StoreSetting;
+use BADDIServices\SourceeApp\Services\SettingService;
 
 class AccountController extends Controller
 {

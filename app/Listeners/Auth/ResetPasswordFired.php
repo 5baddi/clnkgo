@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Listeners\Auth;
+namespace BADDIServices\SourceeApp\Listeners\Auth;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use BADDIServices\SocialRocket\Events\Auth\ResetPassword;
+use BADDIServices\SourceeApp\Events\Auth\ResetPassword;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ResetPasswordFired implements ShouldQueue

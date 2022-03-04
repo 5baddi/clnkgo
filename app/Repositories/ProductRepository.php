@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\SourceeApp\Repositories;
 
-use BADDIServices\SocialRocket\Models\Product;
+use BADDIServices\SourceeApp\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 
 class ProductRepository

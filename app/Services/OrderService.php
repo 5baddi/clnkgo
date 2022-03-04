@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
-use BADDIServices\SocialRocket\Models\Order;
-use BADDIServices\SocialRocket\Models\OrderProduct;
-use BADDIServices\SocialRocket\Models\Product;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Repositories\OrderRepository;
+use BADDIServices\SourceeApp\Models\Order;
+use BADDIServices\SourceeApp\Models\OrderProduct;
+use BADDIServices\SourceeApp\Models\Product;
+use BADDIServices\SourceeApp\Models\Setting;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Repositories\OrderRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
 

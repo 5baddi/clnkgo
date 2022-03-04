@@ -1,8 +1,8 @@
 <?php
 
-namespace BADDIServices\SocialRocket\Models;
+namespace BADDIServices\SourceeApp\Models;
 
-use BADDIServices\SocialRocket\Entities\ModelEntity;
+use BADDIServices\SourceeApp\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OAuth extends ModelEntity

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Models;
+namespace BADDIServices\SourceeApp\Models;
 
 use Illuminate\Support\Collection;
-use BADDIServices\SocialRocket\Entities\ModelEntity;
+use BADDIServices\SourceeApp\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

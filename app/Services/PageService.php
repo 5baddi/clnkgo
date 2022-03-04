@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use BADDIServices\SocialRocket\Models\Page;
+use BADDIServices\SourceeApp\Models\Page;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use BADDIServices\SocialRocket\Repositories\PageRepository;
+use BADDIServices\SourceeApp\Repositories\PageRepository;
 
 class PageService extends Service
 {

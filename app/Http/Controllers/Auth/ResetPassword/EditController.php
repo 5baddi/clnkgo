@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword;
+namespace BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\SourceeApp\Services\UserService;
 
 class EditController extends Controller
 {

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket;
+namespace BADDIServices\SourceeApp;
 
 use Throwable;
 use Bugsnag\Client;
 use Bugsnag\Configuration;
 use Bugsnag\Breadcrumbs\Breadcrumb;
 use Illuminate\Support\Facades\Log;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\Models\Store;
 
 class AppLogger
 {
@@ -62,6 +62,10 @@ class AppLogger
             'trace'     =>  $exception->getTraceAsString(),
             'extra'     =>  json_encode($extra)
         ]);
+
+        if (! self::$client) {
+            self::getInstance();
+        }
 
         self::$client->notifyException($exception);
     }

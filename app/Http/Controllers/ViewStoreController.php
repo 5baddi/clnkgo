@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers;
+namespace BADDIServices\SourceeApp\Http\Controllers;
 
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Routing\Controller as BaseController;
-use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
 
 class ViewStoreController extends BaseController
 {

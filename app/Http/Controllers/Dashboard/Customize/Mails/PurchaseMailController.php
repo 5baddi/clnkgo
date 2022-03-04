@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\Mails;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Customize\Mails;
 
 use Illuminate\Notifications\Messages\MailMessage;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
-use BADDIServices\SocialRocket\Http\Requests\Customize\PurchaseMailPreviewRequest;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Http\Requests\Customize\PurchaseMailPreviewRequest;
 
 class PurchaseMailController extends DashboardController
 {

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Stores;
+namespace BADDIServices\SourceeApp\Http\Controllers\Admin\Stores;
 
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\Entities\Alert;
+use BADDIServices\SourceeApp\Services\StoreService;
+use BADDIServices\SourceeApp\Http\Controllers\AdminController as ControllersAdminController;
+use BADDIServices\SourceeApp\Models\Store;
 
 class DisableStoreController extends ControllersAdminController
 {

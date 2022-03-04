@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\NewOrderController;
+use BADDIServices\SourceeApp\Http\Controllers\Affiliate\NewOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*

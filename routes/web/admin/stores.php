@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\ViewStoreController;
-use BADDIServices\SocialRocket\Http\Controllers\Admin\Stores as Stores;
+use BADDIServices\SourceeApp\Http\Controllers\ViewStoreController;
+use BADDIServices\SourceeApp\Http\Controllers\Admin\Stores as Stores;
 
 Route::middleware(['auth', 'admin'])
     ->prefix('admin/stores')

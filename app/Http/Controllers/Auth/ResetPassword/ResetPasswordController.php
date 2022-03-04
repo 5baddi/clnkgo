@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword;
+namespace BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Http\Requests\Auth\ResetPasswordRequest;
+use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Http\Requests\Auth\ResetPasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 

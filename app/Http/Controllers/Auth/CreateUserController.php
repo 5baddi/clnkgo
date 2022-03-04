@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
+namespace BADDIServices\SourceeApp\Http\Controllers\Auth;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Events\WelcomeMail;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Events\WelcomeMail;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Http\Requests\SignUpRequest;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 
@@ -31,7 +31,7 @@ class CreateUserController extends Controller
         $this->userService = $userService;
     }
 
-    public function __invoke(Store $store, SignUpRequest $request)
+    public function __invoke(SignUpRequest $request)
     {
         try {
             $existsEmail = $this->userService->findByEmail($request->input(User::EMAIL_COLUMN));
@@ -39,25 +39,25 @@ class CreateUserController extends Controller
                 return redirect('/signup')->withInput()->with("error", "Email already registred with another account");
             }
 
-            $user = $this->userService->create($store, $request->input());
+            $user = $this->userService->create($request->input());
             abort_unless($user instanceof User, Response::HTTP_UNPROCESSABLE_ENTITY, 'Unprocessable user entity');
 
-            Event::dispatch(new WelcomeMail($store, $user));
+            Event::dispatch(new WelcomeMail($user));
 
-            $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $request->input(User::PASSWORD_COLUMN)]);
-            if (!$authenticateUser) {
+            $authenticateUser = Auth::loginUsingId($user->getId());
+            if (! $authenticateUser) {
                 return redirect('/signin')->with('error', 'Something going wrong with the authentification');
             }
 
             return redirect('/dashboard')->with('success', 'Account created successfully');
         } catch (ValidationException $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
+            AppLogger::error($ex, 'client:create-account', $request->all());
 
             return redirect('/signup')->withInput()->withErrors($ex->errors());
         }  catch (Throwable $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
+            AppLogger::error($ex, 'client:create-account', $request->all());
             
-            return redirect()->route('signup', ['store' => $store->id])->withInput()->with("error", "Internal server error");
+            return redirect()->route('signup')->withInput()->with("error", "Internal server error");
         }
     }
 }

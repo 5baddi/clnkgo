@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Events;
+namespace BADDIServices\SourceeApp\Events;
 
 use App\Models\User;
 use Illuminate\Queue\SerializesModels;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Bus\Queueable;
@@ -25,14 +25,9 @@ class WelcomeMail
     /** @var User */
     public $user;
 
-    /** @var bool */
-    public $isAffiliate = false;
-
-    public function __construct(Store $store, User $user, bool $isAffiliate = false)
+    public function __construct(User $user)
     {
-        $this->store = $store;
         $this->user = $user;
-        $this->isAffiliate = $isAffiliate;
     }
 
     /**

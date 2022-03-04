@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
-use BADDIServices\SocialRocket\Models\AppSetting;
-use BADDIServices\SocialRocket\Repositories\AppRepository;
+use BADDIServices\SourceeApp\Models\AppSetting;
+use BADDIServices\SourceeApp\Repositories\AppRepository;
 
 class AppService extends Service
 {

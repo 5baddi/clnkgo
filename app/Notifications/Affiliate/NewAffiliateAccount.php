@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Notifications\Affiliate;
+namespace BADDIServices\SourceeApp\Notifications\Affiliate;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SourceeApp\Models\Setting;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class NewAffiliateAccount extends Notification implements ShouldQueue

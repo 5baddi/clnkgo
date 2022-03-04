@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Customize;
 
 use Throwable;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Entities\Alert;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\SettingService;
+use BADDIServices\SourceeApp\Services\SettingService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use BADDIServices\SocialRocket\Http\Requests\SaveCustomizeSettingRequest;
+use BADDIServices\SourceeApp\Http\Requests\SaveCustomizeSettingRequest;
 
 class SaveCustomizeSettingController extends DashboardController
 {

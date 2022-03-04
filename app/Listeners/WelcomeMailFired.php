@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Listeners;
+namespace BADDIServices\SourceeApp\Listeners;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Events\WelcomeMail;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Events\WelcomeMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class WelcomeMailFired implements ShouldQueue

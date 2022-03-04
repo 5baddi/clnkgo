@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword;
+namespace BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword;
 
 use Throwable;
 use Carbon\Carbon;
@@ -15,12 +15,12 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\SourceeApp\AppLogger;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Events\Auth\ResetPassword;
-use BADDIServices\SocialRocket\Http\Requests\Auth\ResetTokenRequest;
-use BADDIServices\SocialRocket\Exceptions\Auth\FailedToGenerateToken;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Events\Auth\ResetPassword;
+use BADDIServices\SourceeApp\Http\Requests\Auth\ResetTokenRequest;
+use BADDIServices\SourceeApp\Exceptions\Auth\FailedToGenerateToken;
 
 class SendResetTokenController extends Controller
 {

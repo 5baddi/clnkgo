@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 namespace App\Console\Commands\Store;
 
 use Throwable;
 use Illuminate\Console\Command;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\SourceeApp\Models\Setting;
+use BADDIServices\SourceeApp\Services\StoreService;
 
 class PurchaseReminderCommand extends Command
 {

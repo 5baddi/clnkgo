@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Pages;
+namespace BADDIServices\SourceeApp\Http\Controllers\Admin\Pages;
 
 use Throwable;
 use BADDIServices\SafeHTML\SafeHTML;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Services\PageService;
-use BADDIServices\SocialRocket\Http\Requests\Admin\Pages\StorePageRequest;
-use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
-use BADDIServices\SocialRocket\Models\Page;
+use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Entities\Alert;
+use BADDIServices\SourceeApp\Services\PageService;
+use BADDIServices\SourceeApp\Http\Requests\Admin\Pages\StorePageRequest;
+use BADDIServices\SourceeApp\Http\Controllers\AdminController as ControllersAdminController;
+use BADDIServices\SourceeApp\Models\Page;
 
 class StorePageController extends ControllersAdminController
 {

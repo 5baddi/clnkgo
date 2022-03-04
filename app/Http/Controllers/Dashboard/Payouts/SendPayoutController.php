@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Payouts;
 
 use Throwable;
-use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\SourceeApp\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\Payouts\SendPayoutRequest;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Services\CommissionService;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Models\Commission;
+use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Services\CommissionService;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 
 class SendPayoutController extends DashboardController
 {

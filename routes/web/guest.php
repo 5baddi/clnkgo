@@ -1,31 +1,28 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\SignInController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
-use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\ConnectController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
-use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword as ResetPassword;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\SignInController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\SignUpController;
+use BADDIServices\SourceeApp\Http\Controllers\OAuth\OAuthController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\ConnectController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\SignOutController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\CreateUserController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\AuthenticateController;
+use BADDIServices\SourceeApp\Http\Controllers\OAuth\OAuthCallbackController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword as ResetPassword;
 
 Route::middleware('guest')
     ->group(function() {
-        Route::get('/connect', ConnectController::class)->name('connect');
-        Route::get('/fast/connect', OAuthController::class)->name('fast.connect');
-        Route::post('/connect', OAuthController::class)->name('oauth.connect');
-        Route::get('/oauth/callback', OAuthCallbackController::class)->name('oauth.callback');
-
-        Route::get('/signup/{store}', SignUpController::class)->middleware(['has.store'])->name('signup');
-        Route::post('/auth/signup/{store}', CreateUserController::class)->middleware(['has.store'])->name('auth.signup');
+        Route::get('/connect', SignUpController::class)->name('connect');
+        Route::get('/auth/connect', SignUpController::class)->name('auth.connect');
+        Route::get('/signup', SignUpController::class)->name('signup');
+        Route::post('/auth/signup', CreateUserController::class)->name('auth.signup');
         Route::get('/signin', SignInController::class)->name('signin');
         Route::post('/auth/signin', AuthenticateController::class)->name('auth.signin');
 

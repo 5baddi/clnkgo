@@ -62,7 +62,7 @@
                     @endif
                     <div class="container" style="text-align: center;">
                         <p class="have-account">
-                            <a style="font-size: 12px; font-weight: 600; color: #000000 !important;" target="_blank" href="{{ route('signin') }}">
+                            <a style="font-size: 12px; font-weight: 600; color: #1d9bf0 !important;" target="_blank" href="{{ route('signin') }}">
                                 Already have an account? Sign in here.
                             </a>
                         </p>

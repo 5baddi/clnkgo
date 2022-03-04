@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account;
 
 use Throwable;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Services\SubscriptionService;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
+use BADDIServices\SourceeApp\Entities\Alert;
+use BADDIServices\SourceeApp\Services\SubscriptionService;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Exceptions\Shopify\CancelSubscriptionFailed;
 
 class CancelSubscriptionController extends DashboardController
 {

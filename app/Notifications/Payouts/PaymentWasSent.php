@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Notifications\Payouts;
+namespace BADDIServices\SourceeApp\Notifications\Payouts;
 
-use BADDIServices\SocialRocket\Models\Commission;
+use BADDIServices\SourceeApp\Models\Commission;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;

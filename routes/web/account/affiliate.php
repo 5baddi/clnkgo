@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\CreateAccountController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\SignUpController as AffiliateSignUpController;
+use BADDIServices\SourceeApp\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
+use BADDIServices\SourceeApp\Http\Controllers\Affiliate\Inscription\CreateAccountController;
+use BADDIServices\SourceeApp\Http\Controllers\Affiliate\Inscription\SignUpController as AffiliateSignUpController;
 
 Route::name('affiliate.')
     ->group(function() {

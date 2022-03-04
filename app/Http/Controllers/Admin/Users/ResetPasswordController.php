@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Users;
+namespace BADDIServices\SourceeApp\Http\Controllers\Admin\Users;
 
 use Throwable;
 use App\Models\User;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Entities\Alert;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Http\Requests\Admin\Users\UpdatePasswordRequest;
-use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
+use BADDIServices\SourceeApp\Http\Requests\Admin\Users\UpdatePasswordRequest;
+use BADDIServices\SourceeApp\Http\Controllers\AdminController as ControllersAdminController;
 
 class ResetPasswordController extends ControllersAdminController
 {

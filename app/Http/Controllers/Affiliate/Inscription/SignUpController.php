@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription;
+namespace BADDIServices\SourceeApp\Http\Controllers\Affiliate\Inscription;
 
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Setting;
+use BADDIServices\SourceeApp\Services\StoreService;
 
 class SignUpController extends Controller
 {

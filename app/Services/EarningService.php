@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Earning;
-use BADDIServices\SocialRocket\Repositories\EarningRepository;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Earning;
+use BADDIServices\SourceeApp\Repositories\EarningRepository;
 
 class EarningService extends Service
 {

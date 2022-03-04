@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Pack;
+use BADDIServices\SourceeApp\Models\Pack;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Repositories\PackRepository;
+use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\SourceeApp\Repositories\PackRepository;
 
 class PackService extends Service
 {

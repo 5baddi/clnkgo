@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Models;
+namespace BADDIServices\SourceeApp\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use BADDIServices\SocialRocket\Entities\ModelEntity;
+use BADDIServices\SourceeApp\Entities\ModelEntity;
 
 class Setting extends ModelEntity
 {
@@ -18,7 +18,7 @@ class Setting extends ModelEntity
     public const PERCENTAGE_TYPE = 'percentage';
     public const UNIQUE_DISCOUNT_FORMAT = 'unique';
     public const RANDOM_DISCOUNT_FORMAT = 'random';
-    public const DEFAULT_COLOR = '#000000';
+    public const DEFAULT_COLOR = '#1d9bf0';
     public const DEFAULT_CURRENCY = 'USD';
     public const DEFAULT_PAYMENT_METHOD = 'paypal';
 

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\IntegrationsController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\Mails\PurchaseMailController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\UpdateIntegrationsController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Customize\CustomizeController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Customize\IntegrationsController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Customize\Mails\PurchaseMailController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Customize\UpdateIntegrationsController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
     ->name('dashboard.customize')

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\OAuth;
+namespace BADDIServices\SourceeApp\Http\Controllers\OAuth;
 
 use Throwable;
 use Carbon\Carbon;
@@ -14,17 +14,17 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\OAuth;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Models\OAuth;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Events\WelcomeMail;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Http\Requests\OAuthCallbackRequest;
+use BADDIServices\SourceeApp\Events\WelcomeMail;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Services\StoreService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
+use BADDIServices\SourceeApp\Http\Requests\OAuthCallbackRequest;
 use Illuminate\Support\Facades\DB;
 
 class OAuthCallbackController extends Controller

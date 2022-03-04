@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Events\Affiliate;
+namespace BADDIServices\SourceeApp\Events\Affiliate;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\Models\Commission;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;

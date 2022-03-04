@@ -1,27 +1,27 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
 use Exception;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\Models\Pack;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
-use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
-use BADDIServices\SocialRocket\Events\Subscription\SubscriptionCancelled as SubscriptionCancelledEvent;
+use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\SourceeApp\Services\StoreService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
+use BADDIServices\SourceeApp\Repositories\SubscriptionRepository;
+use BADDIServices\SourceeApp\Notifications\Subscription\SubscriptionCancelled;
+use BADDIServices\SourceeApp\Events\Subscription\SubscriptionCancelled as SubscriptionCancelledEvent;
 
 class SubscriptionService extends Service
 {

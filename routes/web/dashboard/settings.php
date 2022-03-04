@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\SettingsController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\UpdateSettingsController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Settings\SettingsController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Settings\UpdateSettingsController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
     ->name('dashboard.settings')

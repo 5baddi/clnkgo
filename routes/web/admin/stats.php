@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\Admin\Stats as Stats;
+use BADDIServices\SourceeApp\Http\Controllers\Admin\Stats as Stats;
 
 Route::middleware(['auth', 'admin'])
     ->get('/admin', Stats\IndexController::class)

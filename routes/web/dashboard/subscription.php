@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\CancelController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\CancelController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\SubscriptionController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\BillingPaymentController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\BillingConfirmationController;
 
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
     ->name('subscription')

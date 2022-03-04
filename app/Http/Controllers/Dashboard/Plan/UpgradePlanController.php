@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Plan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Services\PackService;
+use BADDIServices\SourceeApp\Services\PackService;
 
 class UpgradePlanController extends Controller
 {

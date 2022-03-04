@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
-use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Models\Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\SourceeApp\Models\Authenticatable;
 
 class User extends Authenticatable
 {
@@ -27,33 +25,15 @@ class User extends Authenticatable
     public const ROLE_COLUMN = 'role';
     public const IS_SUPERADMIN_COLUMN = 'is_superadmin';
     public const BANNED_COLUMN = 'banned';
-    public const COUPON_COLUMN = 'coupon';
-    public const STORE_ID_COLUMN = 'store_id';
-    public const DEFAULT_ROLE = 'affiliate';
-    public const STORE_OWNER_ROLE = 'store-owner';
+    public const DEFAULT_ROLE = 'client';
 
     /** @var array */
     public const ROLES = [
-        self::DEFAULT_ROLE,
-        'store-owner'
+        self::DEFAULT_ROLE
     ];
 
     /** @var array */
-    protected $fillable = [
-        self::FIRST_NAME_COLUMN,
-        self::LAST_NAME_COLUMN,
-        self::EMAIL_COLUMN,
-        self::PHONE_COLUMN,
-        self::PASSWORD_COLUMN,
-        self::LAST_LOGIN_COLUMN,
-        self::VERIFIED_AT_COLUMN,
-        self::CUSTOMER_ID_COLUMN,
-        self::REMEMBER_TOLEN_COLUMN,
-        self::ROLE_COLUMN,
-        self::STORE_ID_COLUMN,
-        self::COUPON_COLUMN,
-        self::IS_SUPERADMIN_COLUMN,
-    ];
+    protected $guarded = [];
 
     /** @var array */
     protected $hidden = [
@@ -71,11 +51,6 @@ class User extends Authenticatable
         self::BANNED_COLUMN             => 'boolean',
     ];
 
-    public function store(): BelongsTo
-    {
-        return $this->belongsTo(Store::class);
-    }
-    
     public function subscription(): HasOne
     {
         return $this->hasOne(Subscription::class, 'user_id');
@@ -93,11 +68,6 @@ class User extends Authenticatable
         $this->attributes[self::PASSWORD_COLUMN] = Hash::make($value);
 
         return $this;
-    }
-
-    public function isAffiliateAccount(): bool
-    {
-        return !is_null($this->attributes[self::CUSTOMER_ID_COLUMN]) || $this->getAttribute(self::ROLE_COLUMN) === self::DEFAULT_ROLE;
     }
 
     public function getFullName(): ?string

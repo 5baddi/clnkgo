@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Listeners\Subscription;
+namespace BADDIServices\SourceeApp\Listeners\Subscription;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Events\Subscription\SubscriptionActivated;
+use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\SourceeApp\Events\Subscription\SubscriptionActivated;
 
 class SubscriptionActivatedFired implements ShouldQueue
 {

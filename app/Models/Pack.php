@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Models;
+namespace BADDIServices\SourceeApp\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use BADDIServices\SocialRocket\Entities\ModelEntity;
+use BADDIServices\SourceeApp\Entities\ModelEntity;
 
 class Pack extends ModelEntity
 {
@@ -37,6 +37,12 @@ class Pack extends ModelEntity
     public const CUSTOMIZATION = 4;
     public const SUPPORT = 5;
     public const REVENUE_NOT_SHARED = 5;
+
+    public const ALL_REQUESTS_ACCESS = 1;
+    public const INSTANT_REQUEST_NOTIFICATIONS = 2;
+    public const KEYWORDS = 3;
+    public const CANNED_RESPONSES = 4;
+    public const CANCEL_ANYTIME = 5;
 
     /** @var array */
     public const INTERVAL = [

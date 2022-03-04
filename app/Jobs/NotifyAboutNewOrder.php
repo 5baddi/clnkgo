@@ -1,26 +1,26 @@
 <?php
 
-namespace BADDIServices\SocialRocket\Jobs;
+namespace BADDIServices\SourceeApp\Jobs;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Entities\StoreSetting;
+use BADDIServices\SourceeApp\Entities\StoreSetting;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Collection;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Exceptions\Shopify\OrderNotFound;
-use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Services\CommissionService;
-use BADDIServices\SocialRocket\Services\OrderService;
-use BADDIServices\SocialRocket\Services\ProductService;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Services\StoreService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
+use BADDIServices\SourceeApp\Exceptions\Shopify\OrderNotFound;
+use BADDIServices\SourceeApp\Exceptions\Shopify\ProductNotFound;
+use BADDIServices\SourceeApp\Models\Commission;
+use BADDIServices\SourceeApp\Models\Setting;
+use BADDIServices\SourceeApp\Services\CommissionService;
+use BADDIServices\SourceeApp\Services\OrderService;
+use BADDIServices\SourceeApp\Services\ProductService;
 
 class NotifyAboutNewOrder implements ShouldQueue
 {

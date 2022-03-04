@@ -1,26 +1,26 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
 use Carbon\Carbon;
 use App\Models\User;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use BADDIServices\SocialRocket\App;
-use BADDIServices\SocialRocket\Models\OAuth;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\App;
+use BADDIServices\SourceeApp\Models\OAuth;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\SettingService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Repositories\StoreRepository;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Services\SettingService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
+use BADDIServices\SourceeApp\Repositories\StoreRepository;
 use Illuminate\Support\Facades\Validator;
 
 class StoreService extends Service

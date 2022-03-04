@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!--
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
 -->
 <html lang="en">
   <head>
@@ -18,28 +18,20 @@
     <link href="{{ asset('assets/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/daterangepicker.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/baddi.services.css') }}" rel="stylesheet"/>
-
-    @if (request()->routeIs('dashboard'))
-    <style>
-      .wrapper .page-wrapper{
-        margin-right: 15rem;
-      }
-    </style>
-    @endif
   </head>
   <body class="antialiased">
     <div class="wrapper">
       @include('partials.dashboard.menu')
       <div class="page-wrapper">
         @include('partials.dashboard.breadcrumb')
-        <div class="page-body mt-4">
+        <div class="page-body">
           <div class="container-xl">
             @include('partials.dashboard.alert')
 
             @yield('content')
           </div>
         </div>
-        {{-- <footer class="footer footer-transparent d-print-none">
+        <footer class="footer footer-transparent d-print-none">
           <div class="container">
             <div class="row text-center align-items-center flex-row-reverse">
               <div class="col-lg-auto ms-lg-auto">&nbsp;</div>
@@ -55,11 +47,8 @@
               </div>
             </div>
           </div>
-        </footer> --}}
+        </footer>
       </div>
-      @if (request()->routeIs('dashboard'))
-      @include('partials.dashboard.sidebar')
-      @endif
     </div>
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     @yield('scripts')

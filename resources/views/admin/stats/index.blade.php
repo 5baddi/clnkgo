@@ -271,7 +271,7 @@
             opacity: 0.5
         },
       },
-      colors: ["#000000"],
+      colors: ["#1d9bf0"],
       xaxis: {
         type: 'datetime',
         min: new Date("{{ $startDate }}").getTime(),

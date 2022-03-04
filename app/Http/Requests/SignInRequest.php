@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Requests;
+namespace BADDIServices\SourceeApp\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use BADDIServices\SocialRocket\Rules\ValidateHCaptcha;
+use BADDIServices\SourceeApp\Rules\ValidateHCaptcha;
 
 class SignInRequest extends FormRequest
 {

@@ -1,7 +1,7 @@
 <?php
 
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SourceeApp\Models\Commission;
+use BADDIServices\SourceeApp\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -34,54 +34,23 @@
         </div>
     </div>
     <div class="row row-deck row-cards">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div class="subheader">Total Revenue</div>
+                  <div class="subheader">Live Requests</div>
                 </div>
-                <div class="h1 mb-3 text-green">+${{ $ordersEarnings }}</div>
-                <div class="d-flex">
-                    <div>{{ $newOrdersCount }} orders</div>
-                </div>
+                <div class="h1 mt-3 mb-3 text-green text-center">{{ $ordersEarnings }}</div>
               </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div class="subheader">Commissions Paid</div>
+                  <div class="subheader">Last 24 Hours</div>
                 </div>
-                <div class="h1 mb-3">${{ $paidOrdersCommissions }}</div>
-                <div class="d-flex">
-                    <a href="{{ route('dashboard.payouts') }}#paid">
-                      View Payouts
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <polyline points="9 6 15 12 9 18"></polyline>
-                      </svg>
-                    </a>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <div class="subheader">Commissions owed</div>
-                </div>
-                <div class="h1 mb-3 text-red">${{ $unpaidOrdersCommissions }}</div>
-                <div class="d-flex">
-                    <a href="{{ route('dashboard.payouts') }}">
-                      Send Payouts
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <polyline points="9 6 15 12 9 18"></polyline>
-                      </svg>
-                    </a>
-                </div>
+                <div class="h1 mt-3 mb-3 text-center">{{ $paidOrdersCommissions }}</div>
               </div>
             </div>
         </div>
@@ -104,7 +73,7 @@
       </div>
     </div>
     <div class="row row-cards">
-      @if (sizeof($topAffiliates) > 0)
+      {{-- @if (sizeof($topAffiliates) > 0)
       <div class="col-6 mt-4">
         <div class="card">
           <div class="card-header">
@@ -132,8 +101,8 @@
           </div>
         </div>
       </div>
-      @endif
-      @if (sizeof($topProducts) > 0)
+      @endif --}}
+      {{-- @if (sizeof($topProducts) > 0)
       <div class="col-6 mt-4">
         <div class="card">
           <div class="card-header">
@@ -158,7 +127,7 @@
           </div>
         </div>
       </div>
-      @endif
+      @endif --}}
     </div>
 @endsection
 
@@ -221,7 +190,7 @@
             opacity: 0.5
         },
       },
-      colors: ["#000000"],
+      colors: ["#1d9bf0"],
       xaxis: {
         type: 'datetime',
         min: new Date("{{ $startDate }}").getTime(),

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Services\CouponService;
-use BADDIServices\SocialRocket\Repositories\AffiliateRepository;
-use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Setting;
+use BADDIServices\SourceeApp\Services\CouponService;
+use BADDIServices\SourceeApp\Repositories\AffiliateRepository;
+use BADDIServices\SourceeApp\Notifications\Affiliate\NewAffiliateAccount;
 use Illuminate\Support\Arr;
 
 class AffiliateService extends Service

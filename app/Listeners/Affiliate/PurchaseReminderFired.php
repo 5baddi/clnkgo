@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Listeners\Affiliate;
+namespace BADDIServices\SourceeApp\Listeners\Affiliate;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Events\Affiliate\PurchaseReminder;
-use BADDIServices\SocialRocket\Events\Affiliate\PurchaseReminder\FirstPurchaseReminder;
-use BADDIServices\SocialRocket\Events\Affiliate\PurchaseReminder\ThirdPurchaseReminder;
-use BADDIServices\SocialRocket\Events\Affiliate\PurchaseReminder\SecondPurchaseReminder;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Setting;
+use BADDIServices\SourceeApp\Events\Affiliate\PurchaseReminder;
+use BADDIServices\SourceeApp\Events\Affiliate\PurchaseReminder\FirstPurchaseReminder;
+use BADDIServices\SourceeApp\Events\Affiliate\PurchaseReminder\ThirdPurchaseReminder;
+use BADDIServices\SourceeApp\Events\Affiliate\PurchaseReminder\SecondPurchaseReminder;
 
 class PurchaseReminderFired implements ShouldQueue
 {

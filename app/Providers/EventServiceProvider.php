@@ -3,17 +3,17 @@
 namespace App\Providers;
 
 // use Illuminate\Auth\Events\Registered;
-use BADDIServices\SocialRocket\Events\WelcomeMail;
-use BADDIServices\SocialRocket\Events\Auth\ResetPassword;
-use BADDIServices\SocialRocket\Listeners\WelcomeMailFired;
-use BADDIServices\SocialRocket\Listeners\Auth\ResetPasswordFired;
+use BADDIServices\SourceeApp\Events\WelcomeMail;
+use BADDIServices\SourceeApp\Events\Auth\ResetPassword;
+use BADDIServices\SourceeApp\Listeners\WelcomeMailFired;
+use BADDIServices\SourceeApp\Listeners\Auth\ResetPasswordFired;
 // use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use BADDIServices\SocialRocket\Events\Affiliate\NewOrderCommission;
-use BADDIServices\SocialRocket\Events\Subscription\SubscriptionActivated;
-use BADDIServices\SocialRocket\Events\Subscription\SubscriptionCancelled;
-use BADDIServices\SocialRocket\Listeners\Affiliate\NewOrderCommissionFired;
-use BADDIServices\SocialRocket\Listeners\Subscription\SubscriptionActivatedFired;
-use BADDIServices\SocialRocket\Listeners\Subscription\SubscriptionCancelledFired;
+use BADDIServices\SourceeApp\Events\Affiliate\NewOrderCommission;
+use BADDIServices\SourceeApp\Events\Subscription\SubscriptionActivated;
+use BADDIServices\SourceeApp\Events\Subscription\SubscriptionCancelled;
+use BADDIServices\SourceeApp\Listeners\Affiliate\NewOrderCommissionFired;
+use BADDIServices\SourceeApp\Listeners\Subscription\SubscriptionActivatedFired;
+use BADDIServices\SourceeApp\Listeners\Subscription\SubscriptionCancelledFired;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider

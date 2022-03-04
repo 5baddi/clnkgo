@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\Admin\Users as Users;
+use BADDIServices\SourceeApp\Http\Controllers\Admin\Users as Users;
 
 Route::middleware(['auth', 'admin'])
     ->prefix('admin/accounts')

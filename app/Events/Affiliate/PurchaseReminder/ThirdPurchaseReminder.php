@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Events\Affiliate\PurchaseReminder;
+namespace BADDIServices\SourceeApp\Events\Affiliate\PurchaseReminder;
 
 class ThirdPurchaseReminder
 {

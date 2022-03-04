@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Middleware;
+namespace BADDIServices\SourceeApp\Http\Middleware;
 
 use Closure;
 use App\Models\User;
@@ -27,9 +27,9 @@ class StoreOwner
         /** @var User */
         $user = Auth::user();
 
-        if ($user->isAffiliateAccount()) {
-            return redirect()->route('affiliate.analytics');
-        }
+        // if ($user->isAffiliateAccount()) {
+        //     return redirect()->route('affiliate.analytics');
+        // }
 
         if ($user->isSuperAdmin()) {
             return redirect()->route('admin');

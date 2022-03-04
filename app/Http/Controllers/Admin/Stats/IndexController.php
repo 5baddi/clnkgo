@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Stats;
+namespace BADDIServices\SourceeApp\Http\Controllers\Admin\Stats;
 
 use Carbon\Carbon;
 use App\Http\Requests\AnalyticsRequest;
-use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
+use BADDIServices\SourceeApp\Http\Controllers\AdminController as ControllersAdminController;
 
 class IndexController extends ControllersAdminController
 {

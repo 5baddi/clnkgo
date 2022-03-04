@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\SourceeApp\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use BADDIServices\SocialRocket\Models\Order;
+use BADDIServices\SourceeApp\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\OrderProduct;
+use BADDIServices\SourceeApp\Models\OrderProduct;
 
 class OrderRepository
 {

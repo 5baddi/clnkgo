@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Middleware;
+namespace BADDIServices\SourceeApp\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\SourceeApp\AppLogger;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
 
 class IsShopifyWebhook
 {

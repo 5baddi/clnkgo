@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\OAuth;
+namespace BADDIServices\SourceeApp\Http\Controllers\OAuth;
 
 use Throwable;
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\SourceeApp\AppLogger;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Http\Requests\ConnectStoreRequest;
-use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
-use BADDIServices\SocialRocket\Exceptions\Store\StoreAlreadyLinkedException;
+use BADDIServices\SourceeApp\Services\StoreService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
+use BADDIServices\SourceeApp\Http\Requests\ConnectStoreRequest;
+use BADDIServices\SourceeApp\Exceptions\Shopify\InvalidStoreURLException;
+use BADDIServices\SourceeApp\Exceptions\Store\StoreAlreadyLinkedException;
 use Illuminate\Support\Facades\Session;
 
 class OAuthController extends Controller

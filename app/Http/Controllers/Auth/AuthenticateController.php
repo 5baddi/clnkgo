@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
+namespace BADDIServices\SourceeApp\Http\Controllers\Auth;
 
 use Throwable;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\SourceeApp\AppLogger;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Http\Requests\SignInRequest;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Http\Requests\SignInRequest;
 
 class AuthenticateController extends Controller
 {

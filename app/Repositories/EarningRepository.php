@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\SourceeApp\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Earning;
-use BADDIServices\SocialRocket\Models\Subscription;
+use BADDIServices\SourceeApp\Models\Earning;
+use BADDIServices\SourceeApp\Models\Subscription;
 
 class EarningRepository
 {

@@ -1,25 +1,25 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
 use App\Models\User;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Setting;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SocialRocket\Services\CouponService;
-use BADDIServices\SocialRocket\Repositories\UserRespository;
-use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
+use BADDIServices\SourceeApp\Services\CouponService;
+use BADDIServices\SourceeApp\Repositories\UserRespository;
+use BADDIServices\SourceeApp\Notifications\Affiliate\NewAffiliateAccount;
 
 class UserService extends Service
 {
@@ -70,43 +70,30 @@ class UserService extends Service
         return $this->userRepository->coupons($store->id);
     }
 
-    public function create(Store $store, array $attributes, bool $isAffiliate = false): User
+    public function create(array $attributes): User
     {
-        if (isset($attributes[User::ID_COLUMN])) {
-            Arr::set($attributes, User::CUSTOMER_ID_COLUMN, $attributes[User::ID_COLUMN]);
-        }
-
-        if ($isAffiliate) {
-            Arr::set($attributes, User::ROLE_COLUMN, User::DEFAULT_ROLE);
-        } else {
-            if (!isset($attributes[User::IS_SUPERADMIN_COLUMN])) {
-                Arr::set($attributes, User::ROLE_COLUMN, User::STORE_OWNER_ROLE);
-            } else {
-                Arr::set($attributes, User::IS_SUPERADMIN_COLUMN, $attributes[User::IS_SUPERADMIN_COLUMN]);
-            }
-        }
-
         $validator = Validator::make($attributes, [
-            User::CUSTOMER_ID_COLUMN   => 'nullable|integer',
             User::FIRST_NAME_COLUMN    => 'required|string|min:1',
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
-            User::PASSWORD_COLUMN      => 'nullable|string',
-            User::PHONE_COLUMN         => 'nullable|string|max:50'
+            User::PASSWORD_COLUMN      => 'required|string',
+            User::PHONE_COLUMN         => 'nullable|string|max:50',
+            User::IS_SUPERADMIN_COLUMN => 'nullable|boolean'
         ]);
-
-        if (Arr::has($attributes, User::PASSWORD_COLUMN)) {
-            $attributes[User::PASSWORD_COLUMN] = Hash::make($attributes[User::PASSWORD_COLUMN]);
-        }
 
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
 
-        $coupon = $this->couponService->generateDiscountCode($store, $attributes[User::FIRST_NAME_COLUMN]);
-        Arr::set($attributes, User::COUPON_COLUMN, $coupon);
+        if (! isset($attributes[User::IS_SUPERADMIN_COLUMN])) {
+            Arr::set($attributes, User::ROLE_COLUMN, User::DEFAULT_ROLE);
+        } else {
+            Arr::set($attributes, User::IS_SUPERADMIN_COLUMN, $attributes[User::IS_SUPERADMIN_COLUMN]);
+        }
 
-        return $this->userRepository->create($store->id, $attributes);
+        $attributes[User::PASSWORD_COLUMN] = Hash::make($attributes[User::PASSWORD_COLUMN]);
+
+        return $this->userRepository->create($attributes);
     }
 
     public function update(User $user, array $attributes): User

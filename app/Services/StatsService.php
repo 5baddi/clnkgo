@@ -1,29 +1,29 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
-use BADDIServices\SocialRocket\Models\Order;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Product;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Models\Earning;
-use BADDIServices\SocialRocket\Models\OrderProduct;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\OrderService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\EarningService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Services\CommissionService;
-use BADDIServices\SocialRocket\Services\SubscriptionService;
+use BADDIServices\SourceeApp\Models\Order;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Product;
+use BADDIServices\SourceeApp\Models\Commission;
+use BADDIServices\SourceeApp\Models\Earning;
+use BADDIServices\SourceeApp\Models\OrderProduct;
+use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Services\OrderService;
+use BADDIServices\SourceeApp\Services\StoreService;
+use BADDIServices\SourceeApp\Services\EarningService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
+use BADDIServices\SourceeApp\Services\CommissionService;
+use BADDIServices\SourceeApp\Services\SubscriptionService;
 
 class StatsService extends Service
 {

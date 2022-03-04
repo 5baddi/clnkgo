@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Database\Seeders;
+namespace BADDIServices\SourceeApp\Database\Seeders;
 
-use BADDIServices\SocialRocket\Models\AppSetting;
+use BADDIServices\SourceeApp\Models\AppSetting;
 use Illuminate\Database\Seeder;
 
 class SettingsSeeder extends Seeder

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
+namespace BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Services\PackService;
+use BADDIServices\SourceeApp\Models\Pack;
+use BADDIServices\SourceeApp\Services\PackService;
 
 class SubscriptionController extends Controller
 {

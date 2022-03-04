@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\PayoutsController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\SendPayoutController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Payouts\PayoutsController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Payouts\SendPayoutController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
     ->name('dashboard.payouts')

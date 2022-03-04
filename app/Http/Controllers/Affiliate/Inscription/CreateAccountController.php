@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription;
+namespace BADDIServices\SourceeApp\Http\Controllers\Affiliate\Inscription;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Events\WelcomeMail;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Http\Requests\AffiliateSignInRequest;
+use BADDIServices\SourceeApp\Events\WelcomeMail;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Http\Requests\AffiliateSignInRequest;
 
 class CreateAccountController extends Controller
 {

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Middleware;
+namespace BADDIServices\SourceeApp\Http\Middleware;
 
 use Closure;
 use App\Models\User;
@@ -28,9 +28,9 @@ class AffiliateAccount
         /** @var User */
         $user = Auth::user();
 
-        if (!$user->isAffiliateAccount()) {
-            abort(Response::HTTP_UNAUTHORIZED, "Unauthorized action");
-        }
+        // if (!$user->isAffiliateAccount()) {
+        //     abort(Response::HTTP_UNAUTHORIZED, "Unauthorized action");
+        // }
 
         return $next($request);
     }

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\SourceeApp\Repositories;
 
 use Carbon\Carbon;
 use App\Models\User;
@@ -37,7 +37,7 @@ class UserRespository
     public function findByEmail(string $email): ?User
     {
         return User::query()
-                    ->with(['store', 'subscription'])
+                    ->with(['subscription'])
                     ->where([
                         User::EMAIL_COLUMN => strtolower($email)
                     ])
@@ -73,9 +73,8 @@ class UserRespository
                     ->toArray();
     }
 
-    public function create(string $storeId, array $attributes): User
+    public function create(array $attributes): User
     {
-        Arr::set($attributes, User::STORE_ID_COLUMN, $storeId);
         Arr::set($attributes, User::EMAIL_COLUMN, strtolower($attributes[User::EMAIL_COLUMN]));
         
         return User::query()

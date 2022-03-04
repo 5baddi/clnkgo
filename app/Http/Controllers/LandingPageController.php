@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers;
+namespace BADDIServices\SourceeApp\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\Services\PackService;
+use BADDIServices\SourceeApp\Services\PackService;
 
 class LandingPageController extends Controller
 {

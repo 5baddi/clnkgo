@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Customize;
 
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 
 class IntegrationsController extends DashboardController
 {

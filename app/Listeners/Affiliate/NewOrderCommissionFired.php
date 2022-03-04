@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Listeners\Affiliate;
+namespace BADDIServices\SourceeApp\Listeners\Affiliate;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Events\Affiliate\NewOrderCommission;
+use BADDIServices\SourceeApp\Events\Affiliate\NewOrderCommission;
 use Illuminate\Support\Facades\Mail;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Commission;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Commission;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NewOrderCommissionFired implements ShouldQueue

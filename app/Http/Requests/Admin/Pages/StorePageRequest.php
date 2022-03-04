@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Requests\Admin\Pages;
+namespace BADDIServices\SourceeApp\Http\Requests\Admin\Pages;
 
 use Illuminate\Foundation\Http\FormRequest;
 

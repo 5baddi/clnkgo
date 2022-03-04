@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Database\Seeders;
+namespace BADDIServices\SourceeApp\Database\Seeders;
 
-use BADDIServices\SocialRocket\Models\Pack;
+use BADDIServices\SourceeApp\Models\Pack;
 use Illuminate\Database\Seeder;
 
 class PacksSeeder extends Seeder
@@ -21,31 +21,32 @@ class PacksSeeder extends Seeder
     public function run()
     {
         Pack::create([
-            'name'          =>  'Asteroid',
-            'price'         =>  10,
-            'type'          =>  Pack::TYPES[1],
-            'is_popular'    =>  false,
+            'name'          =>  'The plan',
+            'price'         =>  25,
+            'type'          =>  Pack::RECURRING_TYPE,
+            'is_popular'    =>  true,
             'features'      =>  [
                 [
-                    'key'       =>  Pack::UNLIMITED_AFFILIATES,
-                    'name'      =>  'unlimited affiliates',
-                    'enabled'   =>  true,
+                    'key'       =>  Pack::ALL_REQUESTS_ACCESS,
+                    'name'      =>  'Access to all Journo Requests',
+                    'enabled'   =>  true
                 ],
                 [
-                    'key'       =>  Pack::PAYOUT_METHODS,
-                    'name'      =>  '5 payout methods',
-                    'enabled'   =>  true,
-                    'limit'     =>  5,
+                    'key'       =>  Pack::INSTANT_REQUEST_NOTIFICATIONS,
+                    'name'      =>  'Instant Journo Request notifications',
+                    'enabled'   =>  true
                 ],
                 [
-                    'key'       =>  Pack::REPORTING,
-                    'name'      =>  'dashboard And data reports',
+                    'key'       =>  Pack::KEYWORDS,
+                    'name'      =>  '30 Keywords - More keywords = A greater chance of receiving relevant Journo Request notifications straight to your inbox',
                     'enabled'   =>  true,
+                    'limit'     => 30
                 ],
                 [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
+                    'key'       =>  Pack::CANNED_RESPONSES,
+                    'name'      =>  '10 Canned Responses - Save time by storing commonly used responses to Journo Requests',
                     'enabled'   =>  true,
+                    'limit'     => 10
                 ],
                 [
                     'key'       =>  Pack::SUPPORT,
@@ -53,50 +54,8 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
-                    'key'       =>  Pack::REVENUE_NOT_SHARED,
-                    'name'      =>  '100% of revenue is your\'s',
-                    'enabled'   =>  false,
-                ],
-            ]
-        ]);
-
-        Pack::create([
-            'name'              =>  'gravity',
-            'price'             =>  9.99,
-            'type'              =>  Pack::TYPES[0],
-            'symbol'            =>  '$',
-            'currency'          =>  'usd',
-            'is_popular'        =>  true,
-            'features'          =>  [
-                [
-                    'key'       =>  Pack::UNLIMITED_AFFILIATES,
-                    'name'      =>  'unlimited affiliates',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::PAYOUT_METHODS,
-                    'name'      =>  '5 payout methods',
-                    'enabled'   =>  true,
-                    'limit'     =>  5,
-                ],
-                [
-                    'key'       =>  Pack::REPORTING,
-                    'name'      =>  'dashboard And data reports',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::SUPPORT,
-                    'name'      =>  'live chat support',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::REVENUE_NOT_SHARED,
-                    'name'      =>  '100% of revenue is your\'s',
+                    'key'       =>  Pack::CANCEL_ANYTIME,
+                    'name'      =>  'Cancel Anytime',
                     'enabled'   =>  true,
                 ],
             ]

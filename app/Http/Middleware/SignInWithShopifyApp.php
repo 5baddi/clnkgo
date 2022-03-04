@@ -1,26 +1,26 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Middleware;
+namespace BADDIServices\SourceeApp\Http\Middleware;
 
 use Closure;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\SourceeApp\AppLogger;
 use Illuminate\Support\Facades\Validator;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureException;
-use BADDIServices\SocialRocket\Models\OAuth;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Services\StoreService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
+use BADDIServices\SourceeApp\Exceptions\Shopify\InvalidRequestSignatureException;
+use BADDIServices\SourceeApp\Models\OAuth;
 
 class SignInWithShopifyApp
 {

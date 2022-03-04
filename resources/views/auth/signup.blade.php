@@ -14,7 +14,7 @@
             @endif
         </div>
         <span class="clearfix"></span>
-        <form action="{{ route('auth.signup', ['store' => $store->id]) }}" method="POST">
+        <form action="{{ route('auth.signup') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label class="form-control-label">First name</label>
@@ -34,17 +34,6 @@
                     @if($errors->has('last_name'))
                     <div class="invalid-feedback">
                         {{ $errors::first('last_name') }}
-                    </div>
-                    @endif
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-control-label">Phone number</label>
-                <div class="input-group">
-                    <input type="text" name="phone" class="form-control @if($errors->has('phone')) is-invalid @endif" placeholder="Phone number" required/>
-                    @if($errors->has('phone'))
-                    <div class="invalid-feedback">
-                        {{ $errors::first('phone') }}
                     </div>
                     @endif
                 </div>

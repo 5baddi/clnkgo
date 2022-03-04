@@ -1,38 +1,38 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
+namespace BADDIServices\SourceeApp\Http\Controllers\Affiliate;
 
 use Throwable;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\Order;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Models\Order;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Entities\StoreSetting;
-use BADDIServices\SocialRocket\Services\OrderService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\CouponService;
-use BADDIServices\SocialRocket\Services\ProductService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Services\CommissionService;
-use BADDIServices\SocialRocket\Exceptions\Shopify\OrderNotFound;
-use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
-use BADDIServices\SocialRocket\Http\Controllers\AffiliateController;
-use BADDIServices\SocialRocket\Http\Requests\Affiliate\NewOrderRequest;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePriceRuleFailed;
-use BADDIServices\SocialRocket\Jobs\NotifyAboutNewOrder;
+use BADDIServices\SourceeApp\Models\Commission;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Entities\StoreSetting;
+use BADDIServices\SourceeApp\Services\OrderService;
+use BADDIServices\SourceeApp\Services\StoreService;
+use BADDIServices\SourceeApp\Services\CouponService;
+use BADDIServices\SourceeApp\Services\ProductService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
+use BADDIServices\SourceeApp\Services\CommissionService;
+use BADDIServices\SourceeApp\Exceptions\Shopify\OrderNotFound;
+use BADDIServices\SourceeApp\Exceptions\Shopify\ProductNotFound;
+use BADDIServices\SourceeApp\Exceptions\Shopify\CustomerNotFound;
+use BADDIServices\SourceeApp\Http\Controllers\AffiliateController;
+use BADDIServices\SourceeApp\Http\Requests\Affiliate\NewOrderRequest;
+use BADDIServices\SourceeApp\Exceptions\Shopify\CreatePriceRuleFailed;
+use BADDIServices\SourceeApp\Jobs\NotifyAboutNewOrder;
 use Illuminate\Support\Collection;
 
 class NewOrderController extends AffiliateController

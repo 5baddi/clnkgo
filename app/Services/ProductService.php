@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SourceeApp\Services;
 
-use BADDIServices\SocialRocket\Models\Product;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Repositories\ProductRepository;
+use BADDIServices\SourceeApp\Models\Product;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Repositories\ProductRepository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 

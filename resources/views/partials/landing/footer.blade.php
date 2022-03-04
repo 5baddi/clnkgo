@@ -17,17 +17,17 @@
                             <!-- Social -->
                             <ul class="nav mt-4">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ $settings->getFacebookUsername() }}" target="_blank">
+                                    <a class="nav-link" href="{{ $settings?->getFacebookUsername() }}" target="_blank">
                                         <img src="{{ asset('assets/img/facebook.svg') }}"/>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ $settings->getInstagramUsername() }}" target="_blank">
+                                    <a class="nav-link" href="{{ $settings?->getInstagramUsername() }}" target="_blank">
                                         <img src="{{ asset('assets/img/instagram.svg') }}"/>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ $settings->getTwitterUsername() }}" target="_blank">
+                                    <a class="nav-link" href="{{ $settings?->getTwitterUsername() }}" target="_blank">
                                         <img src="{{ asset('assets/img/twitter.svg') }}"/>
                                     </a>
                                 </li>
@@ -37,7 +37,7 @@
                     <hr class="divider divider-fade divider-dark my-4">
                     <div class="row">
                         <div class="col-lg-4">
-                            <a href="{{ $settings->getAppLinkOnShopifyAppStore() }}" target="_blank" class="avatar mb-3" style="width: 10rem;">
+                            <a href="{{ $settings?->getAppLinkOnShopifyAppStore() }}" target="_blank" class="avatar mb-3" style="width: 10rem;">
                                 <img src="{{ asset('assets/img/Shopify-App-Store-Badge.svg') }}" alt="Find it on the Shopify App Store"/>
                             </a>
                         </div>

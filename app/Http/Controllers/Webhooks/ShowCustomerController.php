@@ -2,21 +2,21 @@
 
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Webhooks;
+namespace BADDIServices\SourceeApp\Http\Controllers\Webhooks;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SourceeApp\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Webhooks\StoreRequest;
-use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\SourceeApp\Services\UserService;
 use Illuminate\Routing\Controller as BaseController;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\SourceeApp\Services\StoreService;
+use BADDIServices\SourceeApp\Services\ShopifyService;
 
 class ShowCustomerController extends BaseController
 {

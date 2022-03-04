@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard;
 
 use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Requests\AnalyticsRequest;
-use BADDIServices\SocialRocket\Services\StatsService;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Services\StatsService;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 
 class IndexController extends DashboardController
 {
@@ -38,13 +38,13 @@ class IndexController extends DashboardController
             'title'                             =>  'Dashboard',
             'startDate'                         =>  $startDate,
             'endDate'                           =>  $endDate,
-            'ordersEarnings'                    =>  $this->statsService->getOrdersEarnings($this->store, $period),
-            'ordersEarningsChart'               =>  $this->statsService->getOrdersEarningsChart($this->store, $period),
-            'newOrdersCount'                    =>  $this->statsService->getNewOrdersCount($this->store, $period),
-            'paidOrdersCommissions'             =>  $this->statsService->getPaidOrdersCommissions($this->store, $period),
-            'unpaidOrdersCommissions'           =>  $this->statsService->getUnpaidOrdersCommissions($this->store, $period),
-            'topProducts'                       =>  $this->statsService->getOrdersTopProducts($this->store, $period),
-            'topAffiliates'                     =>  $this->statsService->getTopAffiliatesByStore($this->store, $period),
+            'ordersEarnings'                    =>  0, //$this->statsService->getOrdersEarnings($this->store, $period),
+            'ordersEarningsChart'               =>  0, //$this->statsService->getOrdersEarningsChart($this->store, $period),
+            'newOrdersCount'                    =>  0, //$this->statsService->getNewOrdersCount($this->store, $period),
+            'paidOrdersCommissions'             =>  0, //$this->statsService->getPaidOrdersCommissions($this->store, $period),
+            'unpaidOrdersCommissions'           =>  0, //$this->statsService->getUnpaidOrdersCommissions($this->store, $period),
+            'topProducts'                       =>  0, //$this->statsService->getOrdersTopProducts($this->store, $period),
+            'topAffiliates'                     =>  0, //$this->statsService->getTopAffiliatesByStore($this->store, $period),
             'unreadNotifications'               =>  $this->user->unreadNotifications,
             'markAsReadNotifications'           =>  $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30)),
         ]);

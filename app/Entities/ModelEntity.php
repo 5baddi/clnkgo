@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Entities;
+namespace BADDIServices\SourceeApp\Entities;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
-use BADDIServices\SocialRocket\Traits\HasUUID;
+use BADDIServices\SourceeApp\Traits\HasUUID;
 use Carbon\Carbon;
 
 class ModelEntity extends EloquentModel

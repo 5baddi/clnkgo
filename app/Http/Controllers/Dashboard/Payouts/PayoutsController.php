@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts;
+namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Payouts;
 
 use App\Http\Requests\AnalyticsRequest;
 use Carbon\Carbon;
-use BADDIServices\SocialRocket\Services\StatsService;
-use BADDIServices\SocialRocket\Services\CommissionService;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Services\StatsService;
+use BADDIServices\SourceeApp\Services\CommissionService;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 
 class PayoutsController extends DashboardController
 {

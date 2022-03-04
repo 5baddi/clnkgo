@@ -31,18 +31,11 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-6">
+                        <div class="col-12">
                             <label class="form-label">Help URL</label>
                             <input type="url" name="help_url" class="form-control" value="{{ config('baddi.help_url') }}"/>
                             @if ($errors->has('help_url'))
                             <div class="invalid-feedback">{{ $errors->first('help_url') }}</div>
-                            @endif
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label">Setup guide</label>
-                            <input type="url" name="setup_guide" class="form-control" value="{{ config('baddi.setup_guide') }}"/>
-                            @if ($errors->has('setup_guide'))
-                            <div class="invalid-feedback">{{ $errors->first('setup_guide') }}</div>
                             @endif
                         </div>
                     </div>
@@ -53,20 +46,20 @@
         <div class="col-12 mt-4">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Shopify app credentials</h4>
+                    <h4 class="card-title">Twitter app credentials</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
                             <label class="form-label">API key</label>
-                            <input type="text" name="api_key" class="form-control" value="{{ config('shopify.api_key') }}" required/>
+                            <input type="text" name="api_key" class="form-control" value="{{ config('twitter.api_key') }}" required/>
                             @if ($errors->has('api_key'))
                             <div class="invalid-feedback">{{ $errors->first('api_key') }}</div>
                             @endif
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Client secret</label>
-                            <input type="text" name="client_secret" class="form-control" value="{{ config('shopify.client_secret') }}" required/>
+                            <label class="form-label">Secret</label>
+                            <input type="text" name="client_secret" class="form-control" value="{{ config('twitter.client_secret') }}" required/>
                             @if ($errors->has('client_secret'))
                             <div class="invalid-feedback">{{ $errors->first('client_secret') }}</div>
                             @endif

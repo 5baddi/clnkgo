@@ -1,30 +1,30 @@
 <?php
 
 /**
- * Social Rocket
+* Sourcee.app
  *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
+namespace BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\SourceeApp\AppLogger;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Events\Subscription\SubscriptionActivated as SubscriptionSubscriptionActivated;
+use BADDIServices\SourceeApp\Models\Pack;
+use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Entities\Alert;
+use BADDIServices\SourceeApp\Events\Subscription\SubscriptionActivated as SubscriptionSubscriptionActivated;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Services\PackService;
-use BADDIServices\SocialRocket\Services\SubscriptionService;
-use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
-use BADDIServices\SocialRocket\Http\Requests\BillingConfirmationRequest;
-use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionActivated;
-use BADDIServices\SocialRocket\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
+use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\SourceeApp\Services\PackService;
+use BADDIServices\SourceeApp\Services\SubscriptionService;
+use BADDIServices\SourceeApp\Exceptions\Shopify\AcceptPaymentFailed;
+use BADDIServices\SourceeApp\Http\Requests\BillingConfirmationRequest;
+use BADDIServices\SourceeApp\Notifications\Subscription\SubscriptionActivated;
+use BADDIServices\SourceeApp\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
 use Illuminate\Support\Facades\Event;
 
 class BillingConfirmationController extends Controller

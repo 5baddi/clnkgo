@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
-use BADDIServices\SocialRocket\Models\AppSetting;
-use BADDIServices\SocialRocket\Services\AppService;
+use BADDIServices\SourceeApp\Models\AppSetting;
+use BADDIServices\SourceeApp\Services\AppService;
 use Throwable;
 
 class AppServiceProvider extends ServiceProvider
