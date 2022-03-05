@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\AccountController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\UpdateAccountController;
     
-Route::middleware(['auth', 'has.subscription', 'store-owner'])
+Route::middleware(['auth', 'has.subscription', 'client'])
     ->name('dashboard.account')
     ->prefix('dashboard/account')
     ->group(function() {

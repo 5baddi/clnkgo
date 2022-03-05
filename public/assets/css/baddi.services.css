@@ -103,3 +103,28 @@ svg {
 .btn-signout {
     color: white !important;
 }
+
+.navbar-vertical.navbar-expand-lg {
+    width: 16rem !important;
+}
+
+.bootstrap-tagsinput {
+    padding: .5rem !important;
+    font-size: 12pt !important;
+    color: white !important;
+    min-height: 120px !important;
+    width: 100% !important;
+}
+
+.bootstrap-tagsinput .tag {
+    padding: .5rem !important;
+    background-color: #1d9bf0 !important;
+    border-radius: 4px !important;
+    margin-top: .2rem !important;
+    margin-bottom: .2rem !important;
+    display: inline-block;
+}
+
+#words-cloud {
+    min-height: 200px;
+}

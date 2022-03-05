@@ -9,7 +9,7 @@
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Preview\CheckoutPreviewController;
     
-Route::middleware(['auth', 'has.subscription', 'store-owner'])
+Route::middleware(['auth', 'has.subscription', 'client'])
     ->name('dashboard.preview')
     ->prefix('dashboard/preview')
     ->group(function() {

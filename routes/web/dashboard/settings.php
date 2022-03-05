@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Settings\SettingsController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Settings\UpdateSettingsController;
     
-Route::middleware(['auth', 'has.subscription', 'store-owner'])
+Route::middleware(['auth', 'has.subscription', 'client'])
     ->name('dashboard.settings')
     ->prefix('dashboard/settings')
     ->group(function() {

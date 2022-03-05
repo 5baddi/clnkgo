@@ -9,7 +9,7 @@
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\IndexController;
 
-Route::middleware(['auth', 'has.subscription', 'store-owner'])
+Route::middleware(['auth', 'has.subscription', 'client'])
     ->prefix('dashboard')
     ->group(function() {
         Route::get('/', IndexController::class)->name('dashboard');

@@ -18,6 +18,7 @@ class User extends Authenticatable
     public const FIRST_NAME_COLUMN = 'first_name';
     public const PHONE_COLUMN = 'phone';
     public const PASSWORD_COLUMN = 'password';
+    public const KEYWORDS_COLUMN = 'keywords';
     public const CUSTOMER_ID_COLUMN = 'customer_id';
     public const LAST_LOGIN_COLUMN = 'last_login';
     public const VERIFIED_AT_COLUMN = 'verified_at';
@@ -93,5 +94,10 @@ class User extends Authenticatable
     public function getPassword(): ?string
     {
         return $this->getAttribute(self::PASSWORD_COLUMN);
+    }
+
+    public function getKeywords(): ?string
+    {
+        return $this->getAttribute(self::KEYWORDS_COLUMN);
     }
 }

@@ -17,6 +17,7 @@
     <link href="{{ asset('assets/css/tabler-payments.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/daterangepicker.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/bootstrap-tagsinput.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/baddi.services.css') }}" rel="stylesheet"/>
   </head>
   <body class="antialiased">

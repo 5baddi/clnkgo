@@ -13,60 +13,39 @@
           <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
+                    <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
+                  </svg>
                 </span>
-                <span class="nav-link-title">Dashboard</span>
+                <span class="nav-link-title">Answer Requests</span>
             </a>
           </li>
-          <li class="nav-item dropdown {{ request()->routeIs('dashboard.customize') ? 'active' : '' }}">
-            <a class="nav-link dropdown-toggle" href="{{ route('dashboard.customize') }}" aria-expanded="false">
+          <li class="nav-item {{ request()->routeIs('dashboard.keywords') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.keywords') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-horizontal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <circle cx="14" cy="6" r="2"></circle>
-                        <line x1="4" y1="6" x2="12" y2="6"></line>
-                        <line x1="16" y1="6" x2="20" y2="6"></line>
-                        <circle cx="8" cy="12" r="2"></circle>
-                        <line x1="4" y1="12" x2="6" y2="12"></line>
-                        <line x1="10" y1="12" x2="20" y2="12"></line>
-                        <circle cx="17" cy="18" r="2"></circle>
-                        <line x1="4" y1="18" x2="15" y2="18"></line>
-                        <line x1="19" y1="18" x2="20" y2="18"></line>
-                    </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-key" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="8" cy="15" r="4"></circle>
+                    <line x1="10.85" y1="12.15" x2="19" y2="4"></line>
+                    <line x1="18" y1="5" x2="20" y2="7"></line>
+                    <line x1="15" y1="8" x2="17" y2="10"></line>
+                  </svg>
                 </span>
-                <span class="nav-link-title">Customize</span>
-            </a>
-            <div class="dropdown-menu {{ (request()->routeIs('dashboard.customize') || request()->routeIs('dashboard.customize.*')) ? 'show' : '' }}">
-              <div class="dropdown-menu-columns">
-                <div class="dropdown-menu-column">
-                  <a class="dropdown-item {{ request()->routeIs('dashboard.customize.integrations') ? 'active' : '' }}" href="{{ route('dashboard.customize.integrations') }}">Integrations</a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item {{ request()->routeIs('dashboard.payouts') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.payouts') }}">
-                <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <circle cx="12" cy="12" r="9"></circle>
-                        <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"></path>
-                        <path d="M12 6v2m0 8v2"></path>
-                    </svg>
-                </span>
-                <span class="nav-link-title">Payouts</span>
+                <span class="nav-link-title">Keywords</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('dashboard.account') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.account') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <polyline points="3 7 12 13 21 7"></polyline>
                   </svg>
                 </span>
-                <span class="nav-link-title">Account</span>
+                <span class="nav-link-title">Canned Responses</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('dashboard.settings') ? 'active' : '' }}">

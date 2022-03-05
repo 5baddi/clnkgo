@@ -10,12 +10,9 @@ namespace BADDIServices\SourceeApp\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use BADDIServices\SourceeApp\Models\Setting;
 use BADDIServices\SourceeApp\Models\Subscription;
 use Illuminate\Routing\Controller as BaseController;
-use BADDIServices\SourceeApp\Entities\StoreSetting;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -25,12 +22,6 @@ class DashboardController extends BaseController
 
     /** @var User */
     protected $user;
-
-    /** @var Store */
-    protected $store;
-    
-    /** @var Setting */
-    protected $setting;
     
     /** @var Subscription */
     protected $subscription;

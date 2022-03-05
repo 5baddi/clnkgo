@@ -67,7 +67,7 @@ class Kernel extends HttpKernel
         'has.subscription'      => \BADDIServices\SourceeApp\Http\Middleware\HasSubscription::class,
         'cors'                  => \BADDIServices\SourceeApp\Http\Middleware\Cors::class,
         'is.affiliate'          => \BADDIServices\SourceeApp\Http\Middleware\AffiliateAccount::class,
-        'store-owner'           => \BADDIServices\SourceeApp\Http\Middleware\StoreOwner::class,
+        'client'                => \BADDIServices\SourceeApp\Http\Middleware\Client::class,
         'admin'                 => \BADDIServices\SourceeApp\Http\Middleware\SuperAdmin::class,
         'signin.with.app'       => \BADDIServices\SourceeApp\Http\Middleware\SignInWithShopifyApp::class,
         'is-shopify-webhook'    => \BADDIServices\SourceeApp\Http\Middleware\IsShopifyWebhook::class,

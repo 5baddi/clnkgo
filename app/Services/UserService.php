@@ -77,6 +77,8 @@ class UserService extends Service
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
             User::PASSWORD_COLUMN      => 'required|string',
+            User::KEYWORDS_COLUMN      => 'nullable|array',
+            User::KEYWORDS_COLUMN . '*'=> 'string',
             User::PHONE_COLUMN         => 'nullable|string|max:50',
             User::IS_SUPERADMIN_COLUMN => 'nullable|boolean'
         ]);
@@ -89,6 +91,12 @@ class UserService extends Service
             Arr::set($attributes, User::ROLE_COLUMN, User::DEFAULT_ROLE);
         } else {
             Arr::set($attributes, User::IS_SUPERADMIN_COLUMN, $attributes[User::IS_SUPERADMIN_COLUMN]);
+        }
+
+        if (isset($attributes[User::KEYWORDS_COLUMN])) {
+            $keywords = implode(',', $attributes[User::KEYWORDS_COLUMN]);
+
+            Arr::set($attributes, User::KEYWORDS_COLUMN, trim($keywords));
         }
 
         $attributes[User::PASSWORD_COLUMN] = Hash::make($attributes[User::PASSWORD_COLUMN]);

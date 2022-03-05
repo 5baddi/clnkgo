@@ -13,7 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class StoreOwner
+class Client
 {
     /**
      * Handle an incoming request.
@@ -26,10 +26,6 @@ class StoreOwner
     {
         /** @var User */
         $user = Auth::user();
-
-        // if ($user->isAffiliateAccount()) {
-        //     return redirect()->route('affiliate.analytics');
-        // }
 
         if ($user->isSuperAdmin()) {
             return redirect()->route('admin');

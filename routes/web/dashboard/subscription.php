@@ -12,7 +12,7 @@ use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\SubscriptionCont
 use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\BillingPaymentController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\BillingConfirmationController;
 
-Route::middleware(['auth', 'has.subscription', 'store-owner'])
+Route::middleware(['auth', 'has.subscription', 'client'])
     ->name('subscription')
     ->prefix('subscription')
     ->group(function() {
