@@ -6,6 +6,8 @@ use Throwable;
 use Illuminate\Console\Command;
 use BADDIServices\SourceeApp\AppLogger;
 use BADDIServices\SourceeApp\Domains\TwitterService;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class FetchLatestTweets extends Command
 {
@@ -48,7 +50,11 @@ class FetchLatestTweets extends Command
         $startTime = microtime(true);
 
         try {
-            dd($this->twitterService->fetchTweetsByHashtags());
+            $keywrods = $this->fetchUsersKeywords();
+
+            $keywrods->map(function ($keyword) {
+                dd($this->twitterService->fetchTweetsByHashtags($keyword));
+            });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:twitter:latest-tweets', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while fetching latest tweets: %s", $e->getMessage()));
@@ -57,5 +63,21 @@ class FetchLatestTweets extends Command
         }
 
         $this->info("Done fetching latest tweets");
+    }
+
+    private function fetchUsersKeywords(): Collection
+    {
+        $keywrods = collect();
+        $usersKeywords = DB::table('users')->pluck('keywords');
+
+        $usersKeywords = $usersKeywords->filter(function ($value) {
+            return $value !== null;
+        });
+
+        $usersKeywords->map(function ($value) use(&$keywrods) {
+            $keywrods = $keywrods->merge(explode(',', trim($value)));
+        });
+
+        return $keywrods->unique();
     }
 }

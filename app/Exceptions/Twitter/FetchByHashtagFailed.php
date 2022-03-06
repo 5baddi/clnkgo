@@ -6,18 +6,18 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Exceptions\Shopify;
+namespace BADDIServices\SourceeApp\Exceptions\Twitter;
 
 use Exception;
 use Throwable;
 
-class CreatePaymentConfirmationFailed extends Exception
+class FetchByHashtagFailed extends Exception
 {
     /** @var int */
-    public const CODE = 60;
+    public const CODE = 303;
 
     /** @var string */
-    public const MESSAGE = "Failed to redirect to payment confirmation link";
+    public const MESSAGE = "Failed to fetch by hashtag";
 
     public function __construct(string $message = self::MESSAGE, int $code = self::CODE, Throwable $previous = null)
     {

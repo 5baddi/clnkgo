@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Sourcee.app
+ * Sourcee.app
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
@@ -11,6 +11,7 @@ namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Keywords;
 use Throwable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\KeywordsRequest;
+use App\Models\User;
 use BADDIServices\SourceeApp\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SourceeApp\Services\UserService;
@@ -33,7 +34,8 @@ class SaveKeywordsController extends DashboardController
         try {
             DB::beginTransaction();
 
-            $this->userService->update($this->user, $request->input());
+            $keywords = trim(strtolower($request->input(User::KEYWORDS_COLUMN)));
+            $this->userService->update($this->user, [User::KEYWORDS_COLUMN => $keywords]);
 
             DB::commit();
 
