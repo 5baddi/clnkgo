@@ -86,11 +86,9 @@
             <div class="col-12">
                 <div class="d-flex justify-content-center">
                     <div id="words-cloud">
-                        <span data-weight="14">word</span>
-                        <span data-weight="5">another</span>
-                        <span data-weight="7">things</span>
-                        <span data-weight="23">super</span>
-                        <span data-weight="10">cloud</span>
+                        @foreach ($hashtags as $hashtag)
+                        <span data-weight="{{ rand(10, 42) }}">{{ $hashtag }}</span>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -128,6 +126,23 @@
             $('#keywords').val(tags.join(','));
         });
 
-        $('#words-cloud').awesomeCloud({});
+        $('#words-cloud').awesomeCloud({
+            'shape' : 'circle',
+            'size' : {
+                'grid' : 16,
+                'factor': 0,
+                'normalize': true
+            },
+            'color': {
+                'start': '#1d9bf0',
+                'end': '#311847'
+            },
+            'options': {
+                'rotationRatio': 0.3,
+                'printMultiplier': 3,
+                'color': 'gradient',
+                'sort': 'highest'
+            }
+        });
     });
 @endsection

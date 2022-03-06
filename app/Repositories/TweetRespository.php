@@ -33,6 +33,14 @@ class TweetRespository
             ])
             ->get();
     }
+    
+    public function getHashtags(): Collection
+    {
+        return Tweet::query()
+            ->select([Tweet::HASHTAG_COLUMN])
+            ->distinct()
+            ->get();
+    }
 
     public function save(array $attributes): Tweet
     {

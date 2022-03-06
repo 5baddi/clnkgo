@@ -21,6 +21,14 @@ class TweetService extends Service
         $this->tweetRespository = $tweetRespository;
     }
 
+    public function getHashtags(): array
+    {
+        return $this->tweetRespository
+            ->getHashtags()
+            ->pluck([Tweet::HASHTAG_COLUMN])
+            ->toArray();
+    }
+
     public function save(string $hashtag, array $attributes): Tweet
     {
         $attributes[Tweet::HASHTAG_COLUMN] = $hashtag;
