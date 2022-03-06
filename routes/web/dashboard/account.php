@@ -15,5 +15,5 @@ Route::middleware(['auth', 'has.subscription', 'client'])
     ->prefix('dashboard/account')
     ->group(function() {
         Route::get('/', AccountController::class);
-        Route::post('/', UpdateAccountController::class)->name('.account.save');
+        Route::post('/', UpdateAccountController::class)->name('.save');
     });

@@ -7,7 +7,7 @@
 @section('content')
 <div class="d-flex justify-content-center align-items-center">
     @foreach ($packs as $pack)
-    <div class="mx-3">
+    <div class="mx-3 col-4">
         <div class="card card-md">
             @if ($pack->is_popular)
             <div class="ribbon ribbon-top ribbon-bookmark bg-green" title="Most Popular">
@@ -22,7 +22,7 @@
                 </div>
                 <p></p>
                 <hr/>
-                <ul class="list-unstyled space-y-1">
+                <ul class="list-unstyled space-y-3">
                     @foreach ($pack->features as $feature)
                     <li>
                         @if ($feature['enabled'])

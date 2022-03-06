@@ -32,19 +32,19 @@ class CancelSubscriptionController extends DashboardController
             $this->subscriptionService->cancelSubscription($this->user, $this->store, $this->subscription);
 
             return redirect()
-                        ->route('subscription.select.pack')
-                        ->with('success', 'Subscription has been canceled successfully');
+                ->back()
+                ->with('success', 'Subscription has been canceled successfully');
         } catch (CancelSubscriptionFailed $ex) {
             return redirect()
-                        ->back()
-                        ->with(
-                            'alert',
-                            new Alert($ex->getMessage())
-                        );
+                ->back()
+                ->with(
+                    'alert',
+                    new Alert($ex->getMessage())
+                );
         } catch (Throwable $ex) {
             return redirect()
-                        ->route('subscription.select.pack')
-                        ->with('error', 'Something going wrong during cancel subscription');
+                ->back()
+                ->with('error', 'Something going wrong during cancel subscription');
         }
     }
 }

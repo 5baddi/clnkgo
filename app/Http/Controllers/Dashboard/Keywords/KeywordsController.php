@@ -19,13 +19,13 @@ class KeywordsController extends DashboardController
     public function __construct(TweetService $tweetService)
     {
         parent::__construct();
-        
+
         $this->tweetService = $tweetService;
     }
 
     public function __invoke()
     {
-        return view('dashboard.keywords.index', [
+        return view('dashboard.keywords', [
             'title'             => 'Your Keywords 🔑',
             'keywords'          => $this->user->getKeywords(),
             'hashtags'          => $this->tweetService->getHashtags()

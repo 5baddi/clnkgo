@@ -20,7 +20,7 @@ class ValidateCurrentPassword implements Rule
         /** @var User */
         $user = Auth::user();
 
-        if (!$user->hasPassword()) {
+        if (! $user->hasPassword()) {
             return true;
         }
 

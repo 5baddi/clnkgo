@@ -25,15 +25,15 @@ class SettingsController extends Controller
         try {
             /** @var User */
             $user = Auth::user();
-            $user->load('store');
+            // $user->load('store');
 
-            $store = $user->store;
-            if (!$store instanceof Store) {
-                throw new NotFoundHttpException('Store not found!');
-            }
+            // $store = $user->store;
+            // if (!$store instanceof Store) {
+            //     throw new NotFoundHttpException('Store not found!');
+            // }
 
-            $store->load('setting');
-            $setting = $store->setting;
+            // $store->load('setting');
+            $setting = null;
             if(!$setting instanceof Setting) {
                 $setting = new StoreSetting();
             }

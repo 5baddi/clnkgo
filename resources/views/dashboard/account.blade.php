@@ -40,52 +40,34 @@
                     @if ($tab === 'settings')
                     <div class="row">
                         <p class="text-muted">Setup your account, edit profile details, and change password</p>
-                        <div class="col-4">
+                        <div class="col-6">
                             <label class="form-label">First name</label>
                             <input type="text" name="first_name" class="form-control @if ($errors->has('first_name')) is-invalid @endif" value="{{ old('first_name') ?? ucfirst($user->first_name)  }}" placeholder="Your first name" autofocus/>
                             @if ($errors->has('first_name'))
                             <div class="invalid-feedback">{{ $errors->first('first_name') }}</div>
                             @endif
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <label class="form-label">First name</label>
                             <input type="text" name="last_name" class="form-control @if ($errors->has('last_name')) is-invalid @endif" value="{{ old('last_name') ?? ucfirst($user->last_name) }}" placeholder="Your last name"/>
                             @if ($errors->has('last_name'))
                             <div class="invalid-feedback">{{ $errors->first('last_name') }}</div>
                             @endif
                         </div>
-                        <div class="col-4">
-                            <label class="form-label">Brand name</label>
-                            <input type="text" name="brand_name" class="form-control @if ($errors->has('brand_name')) is-invalid @endif" value="{{ old('brand_name') ?? $setting->brand_name }}" placeholder="Brand name"/>
-                            @if ($errors->has('brand_name'))
-                            <div class="invalid-feedback">{{ $errors->first('brand_name') }}</div>
-                            @endif
-                        </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-4">
+                        <div class="col-6">
                             <label class="form-label">E-mail</label>
                             <input type="email" name="email" class="form-control @if ($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? $user->email }}" placeholder="E-mail"/>
                             @if ($errors->has('email'))
                             <div class="invalid-feedback">{{ $errors->first('email') }}</div>
                             @endif
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <label class="form-label">Phone</label>
                             <input type="text" name="phone" class="form-control @if ($errors->has('phone')) is-invalid @endif" value="{{ old('phone') ?? $user->phone }}" placeholder="Your phone number"/>
                             @if ($errors->has('phone'))
                             <div class="invalid-feedback">{{ $errors->first('phone') }}</div>
-                            @endif
-                        </div>
-                        <div class="col-4">
-                            <label class="form-label">Currency</label>
-                            <select name="currency" class="form-select @if ($errors->has('currency')) is-invalid @endif" placeholder="Select a currency" id="select-currency">
-                                @foreach ($currencies as $key => $format)
-                                <option @if (old('currency') == $key || (is_null(old('currency')) && $setting->currency == $key) || (is_null(old('currency')) && is_null($setting->currency) && \BADDIServices\SourceeApp\Models\Setting::DEFAULT_CURRENCY == $key)) selected @endif value="{{ $key }}">{{ ucwords($format) }}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('currency'))
-                            <div class="invalid-feedback">{{ $errors->first('currency') }}</div>
                             @endif
                         </div>
                     </div>
@@ -126,8 +108,12 @@
                                   </span>
                                 </div>
                                 <div class="col">
-                                  <div class="font-weight-medium">{{ ucwords($currentPack->name) }}</div>
+                                  <div class="font-weight-medium">{{ $currentPack ? ucwords($currentPack->name) : "Free Plan" }}</div>
+                                  @if($currentPack)
                                   <div class="text-muted">{{ $currentPack->isFixedPrice() ? $currentPack->symbol : '' }}{{ $currentPack->price }}{{ !$currentPack->isFixedPrice() ? '% of revenue share' : ' per month' }}</div>
+                                  @else
+                                  <div class="text-muted">$0 per month</div>
+                                  @endif
                                 </div>
                               </div>
                             </div>
@@ -140,8 +126,8 @@
             <div class="row mt-4">
                 <div class="col-12 text-end">
                     <div class="d-flex justify-content-end">
-                        @if ($tab === 'plan')
-                        <a href="{{ route('dashboard.plan.cancel') }}" class="btn btn-ghost-danger">Cancel subscription</a>
+                        @if($tab === 'plan')
+                        @if($currentPack)<a href="{{ route('dashboard.plan.cancel') }}" class="btn btn-ghost-danger">Cancel subscription</a>@endif
                         <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-ghost-dark" style="margin-left: .5rem;">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

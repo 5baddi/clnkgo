@@ -36,8 +36,8 @@
                 <span class="nav-link-title">Keywords</span>
             </a>
           </li>
-          <li class="nav-item {{ request()->routeIs('dashboard.account') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.account') }}">
+          <li class="nav-item {{ request()->routeIs('dashboard.responses') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.responses') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -48,8 +48,8 @@
                 <span class="nav-link-title">Canned Responses</span>
             </a>
           </li>
-          <li class="nav-item {{ request()->routeIs('dashboard.settings') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.settings') }}">
+          <li class="nav-item {{ request()->routeIs(['dashboard.account', 'dashboard.plan.*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.account') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -60,21 +60,6 @@
                 <span class="nav-link-title">Settings</span>
             </a>
           </li>
-          @if (config('baddi.help_url'))
-          <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.help') }}" target="_blank">
-                <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <circle cx="12" cy="12" r="9"></circle>
-                        <line x1="12" y1="17" x2="12" y2="17.01"></line>
-                        <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4"></path>
-                    </svg>
-                </span>
-                <span class="nav-link-title">Help</span>
-            </a>
-          </li>
-          @endif
         </ul>
         <div class="row mb-4">
             <div class="col-12">
