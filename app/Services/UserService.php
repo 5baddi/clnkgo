@@ -110,6 +110,10 @@ class UserService extends Service
             User::VERIFIED_AT_COLUMN,
             User::KEYWORDS_COLUMN
         ])->filter(function($value, $key) {
+            if ($key === User::KEYWORDS_COLUMN) {
+                return true;
+            }
+
             return $value !== null;
         });
 

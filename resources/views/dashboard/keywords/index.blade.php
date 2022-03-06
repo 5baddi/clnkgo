@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <input type="text" value={{ $keywords }} id="tags-input" class="form-control @if ($errors->has('keywords')) is-invalid @endif" autofocus placeholder="Add your keywords"/>
+                            <input type="text" value="{{ $keywords ?? '' }}" id="tags-input" class="form-control @if ($errors->has('keywords')) is-invalid @endif" autofocus placeholder="Add your keywords"/>
                             @if ($errors->has('keywords'))
                             <div class="invalid-feedback">{{ $errors::first('keywords') }}</div>
                             @endif
