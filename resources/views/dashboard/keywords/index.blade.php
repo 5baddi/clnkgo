@@ -25,12 +25,13 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <input type="text" value="{{ $keywords ?? '' }}" id="tags-input" class="form-control @if ($errors->has('keywords')) is-invalid @endif" autofocus placeholder="Add your keywords"/>
                             @if ($errors->has('keywords'))
                             <div class="invalid-feedback">{{ $errors::first('keywords') }}</div>
                             @endif
                         </div>
+                        <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> or <kbd>comma</kbd> to add a keyword</span>
                     </div>
                 </div>
             </div>
