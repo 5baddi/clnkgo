@@ -34,6 +34,7 @@ class TwitterService extends Service
     const BASE_URL = "https://api.twitter.com/2/";
     const RECENT_SEARCH_ENDPOINT = "tweets/search/recent";
     const TWEET_URL = "https://twitter.com/{authorId}/status/{tweetId}";
+    const USER_URL = "https://twitter.com/{username}";
 
     /** @var Client */
     private $client;
@@ -137,7 +138,7 @@ class TwitterService extends Service
                         TwitterUser::DESCRIPTION_COLUMN           => $user['description'] ?? null,
                         TwitterUser::PINNED_TWEET_ID_COLUMN       => $user['pinned_tweet_id'] ?? null,
                         TwitterUser::LOCATION_COLUMN              => $user['location'] ?? null,
-                        TwitterUser::URL_COLUMN                   => $user['url'] ?? null,
+                        TwitterUser::URL_COLUMN                   => is_string($user['url']) ? $user['url'] : $this->getUserUrl($user['username']),
                         TwitterUser::REGISTERED_AT_COLUMN         => Carbon::parse($user['created_at'] ?? now()),
                         TwitterUser::ENTITIES_COLUMN              => json_encode($user['entities'] ?? null),
                         TwitterUser::PUBLIC_METRICS_COLUMN        => json_encode($user['public_metrics'] ?? null),
@@ -170,6 +171,13 @@ class TwitterService extends Service
     {
         $url = (string)Str::replace("{authorId}", $authorId, self::TWEET_URL);
         $url = (string)Str::replace("{tweetId}", $tweetId, $url);
+
+        return $url;
+    }
+    
+    private function getUserUrl(string $username): string
+    {
+        $url = (string)Str::replace("{username}", $username, self::USER_URL);
 
         return $url;
     }
