@@ -127,8 +127,8 @@
                 <div class="col-12 text-end">
                     <div class="d-flex justify-content-end">
                         @if($tab === 'plan')
-                        @if($currentPack)<a href="{{ route('dashboard.plan.cancel') }}" class="btn btn-ghost-danger">Cancel subscription</a>@endif
-                        <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-ghost-dark" style="margin-left: .5rem;">
+                        @if($currentPack)<a href="{{ route('dashboard.plan.cancel') }}" class="btn btn-danger">Cancel subscription</a>@endif
+                        <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-twitter" style="margin-left: .5rem;">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M15 4.55a8 8 0 0 0 -6 14.9m0 -4.45v5h-5"></path>
@@ -141,7 +141,7 @@
                             &nbsp;Upgrade plan
                         </a>
                         @else
-                        <button type="submit" class="btn btn-ghost-dark">
+                        <button type="submit" class="btn btn-twitter">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path>
