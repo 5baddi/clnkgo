@@ -31,6 +31,7 @@ class TwitterUserService extends Service
             ->only([
                 TwitterUser::ID_COLUMN,
                 TwitterUser::USERNAME_COLUMN,
+                TwitterUser::EMAIL_COLUMN,
                 TwitterUser::NAME_COLUMN,
                 TwitterUser::VERIFIED_COLUMN,
                 TwitterUser::PROTECTED_COLUMN,

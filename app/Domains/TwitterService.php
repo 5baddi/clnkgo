@@ -92,6 +92,7 @@ class TwitterService extends Service
 
             return $this->saveTweets($hashtag, $data);
         } catch (Exception | ClientException | RequestException $e) {
+            dd($e);
             AppLogger::error($e, 'twitter:fetch-by-hashtags');
 
             throw new FetchByHashtagFailed();
@@ -127,10 +128,13 @@ class TwitterService extends Service
 
         collect(isset($tweets['includes']['users']) ? $tweets['includes']['users'] : [])
             ->each(function ($user) {
+                preg_match("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $user['description'] ?? '', $emailMatches);
+
                 $this->twitterUserService->save(
                     [
                         TwitterUser::ID_COLUMN                    => $user['id'],
                         TwitterUser::USERNAME_COLUMN              => $user['username'],
+                        TwitterUser::EMAIL_COLUMN                 => $emailMatches[0] ?? null,
                         TwitterUser::NAME_COLUMN                  => $user['name'] ?? null,
                         TwitterUser::VERIFIED_COLUMN              => $user['verified'] ?? false,
                         TwitterUser::PROTECTED_COLUMN             => $user['protected'] ?? false,

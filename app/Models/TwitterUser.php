@@ -15,6 +15,7 @@ class TwitterUser extends ModelEntity
     /** @var string */
     public const NAME_COLUMN = 'name';
     public const USERNAME_COLUMN = 'username';
+    public const EMAIL_COLUMN = 'email';
     public const URL_COLUMN = 'url';
     public const DESCRIPTION_COLUMN = 'description';
     public const PROFILE_IMAGE_URL_COLUMN = 'profile_image_url';
