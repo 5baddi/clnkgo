@@ -6,6 +6,7 @@ use Throwable;
 use Illuminate\Console\Command;
 use BADDIServices\SourceeApp\AppLogger;
 use BADDIServices\SourceeApp\Domains\TwitterService;
+use BADDIServices\SourceeApp\Services\TweetService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -25,18 +26,23 @@ class FetchLatestTweets extends Command
      */
     protected $description = 'Fetch latest tweets by hashtags';
 
+    /** @var TwitterService */
     private $twitterService;
+
+    /** @var TweetService */
+    private $tweetService;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(TwitterService $twitterService)
+    public function __construct(TwitterService $twitterService, TweetService $tweetService)
     {
         parent::__construct();
 
         $this->twitterService = $twitterService;
+        $this->tweetService = $tweetService;
     }
 
     /**
@@ -53,7 +59,11 @@ class FetchLatestTweets extends Command
             $keywrods = $this->fetchUsersKeywords();
 
             $keywrods->map(function ($keyword) {
-                dd($this->twitterService->fetchTweetsByHashtags($keyword));
+                $tweets = $this->twitterService->fetchTweetsByHashtags($keyword);
+
+                $tweets->each(function ($tweet) use ($keyword) {
+                    $this->tweetService->save($keyword, $tweet);
+                });
             });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:twitter:latest-tweets', ['execution_time' => (microtime(true) - $startTime)]);

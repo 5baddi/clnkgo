@@ -16,12 +16,14 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use BADDIServices\SourceeApp\Services\Service;
 use BADDIServices\SourceeApp\Exceptions\Twitter\FetchByHashtagFailed;
-use BADDIServices\SourceeApp\Exceptions\Shopify\LoadConfigurationsFailed;
+use BADDIServices\SourceeApp\Models\Tweet;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class TwitterService extends Service
 {
     /** @var int */
-    const MAX_RESULTS_PER_RESPONSE = 100;
+    const MAX_RESULTS_PER_RESPONSE = 10;
 
     /** @var string */
     const BASE_URL = "https://api.twitter.com/2/";
@@ -43,7 +45,7 @@ class TwitterService extends Service
     /**
      * @throws FetchByHashtagFailed
      */
-    public function fetchTweetsByHashtags(string $hashtag): array
+    public function fetchTweetsByHashtags(string $hashtag): Collection
     {
         try {
             $response = $this->client->request('GET', self::RECENT_SEARCH_ENDPOINT, 
@@ -58,7 +60,8 @@ class TwitterService extends Service
                         'tweet.fields'  => 'id,text,source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
                         'user.fields'   => 'id,name,username,created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
                         'media.fields'  => 'duration_ms,height,media_key,preview_image_url,public_metrics,type,width,alt_text',
-                        'max_results'   => self::MAX_RESULTS_PER_RESPONSE
+                        'max_results'   => self::MAX_RESULTS_PER_RESPONSE,
+                        'expansions'    => 'attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id'
                     ]
                 ]
             );
@@ -68,7 +71,7 @@ class TwitterService extends Service
                 throw new Exception();
             }
 
-            return $this->parseTweets($data['data']);
+            return $this->parseTweets($data);
         } catch (Exception | ClientException | RequestException $e) {
             AppLogger::error($e, 'twitter:fetch-by-hashtags');
 
@@ -76,16 +79,24 @@ class TwitterService extends Service
         }
     }
 
-    public function parseTweets(array $tweets = []): array
+    public function parseTweets(array $tweets = []): Collection
     {
-        $parsedTweets = collect($tweets)
+        $parsedTweets = collect($tweets['data'])
             ->map(function ($tweet) {
-                $tweet['url'] = $this->getTweetUrl($tweet['author_id'], $tweet['id']);
-
-                return $tweet;
+                return [
+                    Tweet::ID_COLUMN                => $tweet['id'],
+                    Tweet::URL_COLUMN               => $this->getTweetUrl($tweet['author_id'], $tweet['id']),
+                    Tweet::PUBLISHED_AT_COLUMN      => Carbon::parse($tweet['created_at']),
+                    Tweet::SOURCE_COLUMN            => $tweet['source'] ?? null,
+                    Tweet::AUTHOR_ID_COLUMN         => $tweet['author_id'],
+                    Tweet::TEXT_COLUMN              => $tweet['text'],
+                    Tweet::LANG_COLUMN              => $tweet['lang'] ?? null,
+                    Tweet::PUBLIC_METRICS_COLUMN    => $tweet['public_metrics'] ?? null,
+                    Tweet::ENTITIES_COLUMN          => $tweet['entities'] ?? null,
+                ];
             });
 
-        return $parsedTweets->toArray();
+        return $parsedTweets;
     }
 
     private function getTweetUrl(string $authorId, string $tweetId): string
