@@ -26,14 +26,19 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <input type="text" id="tags-input" class="form-control" autofocus placeholder="Add your keywords"/>
+                            <input type="text" value={{ $keywords }} id="tags-input" class="form-control @if ($errors->has('keywords')) is-invalid @endif" autofocus placeholder="Add your keywords"/>
+                            @if ($errors->has('keywords'))
+                            <div class="invalid-feedback">{{ $errors::first('keywords') }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="col-12 text-end">
-                    <div class="d-flex">
+                    <form class="d-flex" action="{{ route('dashboard.keywords.save') }}" method="POST">
+                        @csrf
+                        <input type="hidden" id="keywords" name="keywords"/>
                         <button type="submit" class="btn btn-twitter ms-auto">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -43,7 +48,7 @@
                             </svg>
                             &nbsp;Save
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -100,6 +105,7 @@
     $('document').ready(function() {
         $('#tags-input').tagsinput({
             maxTags: 30,
+            cancelConfirmKeysOnEmpty: true,
             trimValue: true,
             allowDuplicates: false,
         });
@@ -108,12 +114,14 @@
             var tags = $('#tags-input').tagsinput('items');
 
             $('#tags-count').text(tags.length || 0);
+            $('#keywords').val(tags.join(','));
         });
         
         $('#tags-input').on('itemRemoved', function(event) {
             var tags = $('#tags-input').tagsinput('items');
 
             $('#tags-count').text(tags.length || 0);
+            $('#keywords').val(tags.join(','));
         });
 
         $('#words-cloud').awesomeCloud({});
