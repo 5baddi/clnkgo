@@ -38,7 +38,7 @@ class TweetRespository
     {
         return Tweet::query()
             ->updateOrCreate(
-                [Tweet::ID_COLUMN, $attributes[Tweet::ID_COLUMN]],
+                [Tweet::ID_COLUMN => $attributes[Tweet::ID_COLUMN]],
                 $attributes
             );
     }

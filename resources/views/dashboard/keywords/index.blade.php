@@ -111,6 +111,9 @@
             allowDuplicates: false,
         });
 
+        var tags = $('#tags-input').tagsinput('items');
+        $('#tags-count').text(tags.length || 0);
+
         $('#tags-input').on('itemAdded', function(event) {
             var tags = $('#tags-input').tagsinput('items');
 

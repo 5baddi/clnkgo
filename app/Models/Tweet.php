@@ -23,4 +23,10 @@ class Tweet extends ModelEntity
     public const ENTITIES_COLUMN = 'entities';
     public const POSSIBLY_SENSITIVE_COLUMN = 'possibly_sensitive';
     public const PUBLISHED_AT_COLUMN = 'published_at';
+    public const WITHHELD_COLUMN = 'withheld';
+    public const ATTACHMENTS_COLUMN = 'attachments';
+    public const REFERENCED_TWEETS_COLUMN = 'referenced_tweets';
+    public const IN_REPLY_TO_USER_ID_COLUMN = 'in_reply_to_user_id';
+    public const CONTEXT_ANNOTATIONS_COLUMN = 'context_annotations';
+    public const GEO_COLUMN = 'geo';
 }
