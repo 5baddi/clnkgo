@@ -15,5 +15,7 @@ Route::middleware(['auth', 'has.subscription', 'client'])
     ->prefix('dashboard/responses')
     ->group(function() {
         Route::get('/', ResponsesController::class);
-        Route::post('/', SaveKeywordsController::class)->name('.save');
+
+        Route::get('/new', SaveKeywordsController::class)->name('.new');
+        Route::post('/new', SaveKeywordsController::class)->name('.save');
     });
