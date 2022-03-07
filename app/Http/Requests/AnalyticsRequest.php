@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class AnalyticsRequest extends FormRequest
+class AnalyticsRequest extends PaginationRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +11,7 @@ class AnalyticsRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return parent::authorize();
     }
 
     /**
@@ -23,11 +21,14 @@ class AnalyticsRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'start-date'    =>  ['nullable', 'date', 'date_format:Y-m-d'],
-            'end-date'      =>  ['nullable', 'date', 'date_format:Y-m-d'],
-            'ap'            =>  ['nullable', 'integer'],
-            'pp'            =>  ['nullable', 'integer'],
-        ];
+        return array_merge(
+            parent::rules(),
+            [
+                'start-date'    =>  ['nullable', 'date', 'date_format:Y-m-d'],
+                'end-date'      =>  ['nullable', 'date', 'date_format:Y-m-d'],
+                'ap'            =>  ['nullable', 'integer'],
+                'pp'            =>  ['nullable', 'integer'],
+            ]
+        );
     }
 }

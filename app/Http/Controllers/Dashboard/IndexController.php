@@ -13,17 +13,22 @@ use App\Models\User;
 use App\Http\Requests\AnalyticsRequest;
 use BADDIServices\SourceeApp\Services\StatsService;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Services\TweetService;
 
 class IndexController extends DashboardController
 {
     /** @var StatsService */
     private $statsService;
 
-    public function __construct(StatsService $statsService)
+    /** @var TweetService */
+    private $tweetService;
+
+    public function __construct(StatsService $statsService, TweetService $tweetService)
     {
         parent::__construct();
 
         $this->statsService = $statsService;
+        $this->tweetService = $tweetService;
     }
 
     public function __invoke(AnalyticsRequest $request)
@@ -38,6 +43,7 @@ class IndexController extends DashboardController
             'title'                             =>  'Dashboard',
             'startDate'                         =>  $startDate,
             'endDate'                           =>  $endDate,
+            'tweets'                            => $this->tweetService->paginate($this->user, $request->query('page')),
             'ordersEarnings'                    =>  0, //$this->statsService->getOrdersEarnings($this->store, $period),
             'ordersEarningsChart'               =>  0, //$this->statsService->getOrdersEarningsChart($this->store, $period),
             'newOrdersCount'                    =>  0, //$this->statsService->getNewOrdersCount($this->store, $period),

@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="chart-lg mt-4" id="earnings-chart"></div>
+            {{-- <div class="chart-lg mt-4" id="earnings-chart"></div> --}}
           </div>
         </div>
       </div>

@@ -8,7 +8,9 @@
 
 namespace BADDIServices\SourceeApp\Services;
 
+use App\Models\User;
 use BADDIServices\SourceeApp\Models\Tweet;
+use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Repositories\TweetRespository;
 
 class TweetService extends Service
@@ -19,6 +21,11 @@ class TweetService extends Service
     public function __construct(TweetRespository $tweetRespository)
     {
         $this->tweetRespository = $tweetRespository;
+    }
+
+    public function paginate(User $user, ?int $page = null): LengthAwarePaginator
+    {
+        return $this->tweetRespository->paginate($user->getKeywords(), $page);
     }
 
     public function getHashtags(): array
@@ -56,6 +63,10 @@ class TweetService extends Service
                 Tweet::CONTEXT_ANNOTATIONS_COLUMN,
                 Tweet::GEO_COLUMN,
             ]);
+
+        if ($filteredAttributes->has(Tweet::HASHTAG_COLUMN)) {
+            $filteredAttributes->put(Tweet::HASHTAG_COLUMN, strtolower($filteredAttributes->get(User::KEYWORDS_COLUMN)));
+        }
 
         return $this->tweetRespository->save($filteredAttributes->toArray());
     }

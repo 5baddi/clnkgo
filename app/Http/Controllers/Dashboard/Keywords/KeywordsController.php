@@ -27,7 +27,7 @@ class KeywordsController extends DashboardController
     {
         return view('dashboard.keywords', [
             'title'             => 'Your Keywords 🔑',
-            'keywords'          => $this->user->getKeywords(),
+            'keywords'          => $this->user->getKeywordsAsString(),
             'hashtags'          => $this->tweetService->getHashtags()
         ]);
     }

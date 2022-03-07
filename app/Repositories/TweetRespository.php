@@ -10,9 +10,17 @@ namespace BADDIServices\SourceeApp\Repositories;
 
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TweetRespository
 {
+    public function paginate(array $keywords = [], ?int $page = null): LengthAwarePaginator
+    {
+        return Tweet::query()
+            ->whereIn(Tweet::HASHTAG_COLUMN, $keywords)
+            ->paginate(10, ['*'], 'page', $page);
+    }
+    
     public function all(): Collection
     {
         return Tweet::query()

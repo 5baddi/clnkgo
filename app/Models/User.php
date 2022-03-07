@@ -96,8 +96,17 @@ class User extends Authenticatable
         return $this->getAttribute(self::PASSWORD_COLUMN);
     }
 
-    public function getKeywords(): ?string
+    public function getKeywordsAsString(): ?string
     {
         return $this->getAttribute(self::KEYWORDS_COLUMN);
+    }
+    
+    public function getKeywords(): array
+    {
+        if ($this->getAttribute(self::KEYWORDS_COLUMN) !== null && strlen($this->getAttribute(self::KEYWORDS_COLUMN)) > 0) {
+            return explode(',', $this->getAttribute(self::KEYWORDS_COLUMN));
+        }
+
+        return [];
     }
 }

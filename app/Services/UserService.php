@@ -100,7 +100,7 @@ class UserService extends Service
     {
         $attributes = collect($attributes);
 
-        $filterAttributes = $attributes->only([
+        $filteredAttributes = $attributes->only([
             User::FIRST_NAME_COLUMN,
             User::LAST_NAME_COLUMN,
             User::EMAIL_COLUMN,
@@ -117,11 +117,15 @@ class UserService extends Service
             return $value !== null;
         });
 
-        if ($attributes->has(User::PASSWORD_COLUMN)) {
-            $filterAttributes->put(User::PASSWORD_COLUMN, Hash::make($attributes->get(User::PASSWORD_COLUMN)));
+        if ($filteredAttributes->has(User::PASSWORD_COLUMN)) {
+            $filteredAttributes->put(User::PASSWORD_COLUMN, Hash::make($filteredAttributes->get(User::PASSWORD_COLUMN)));
         }
 
-        return $this->userRepository->update($user, $filterAttributes->toArray());
+        if ($filteredAttributes->has(User::KEYWORDS_COLUMN)) {
+            $filteredAttributes->put(User::KEYWORDS_COLUMN, strtolower($filteredAttributes->get(User::KEYWORDS_COLUMN)));
+        }
+
+        return $this->userRepository->update($user, $filteredAttributes->toArray());
     }
     
     public function delete(User $user): bool
