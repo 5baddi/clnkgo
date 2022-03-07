@@ -20,7 +20,7 @@ class ResponsesController extends DashboardController
     public function __construct(SavedResponseService $savedResponseService)
     {
         parent::__construct();
-        
+
         $this->savedResponseService = $savedResponseService;
     }
 

@@ -8,7 +8,8 @@
 
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\ResponsesController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Keywords\SaveKeywordsController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\NewResponseController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\SaveResponseController;
     
 Route::middleware(['auth', 'has.subscription', 'client'])
     ->name('dashboard.responses')
@@ -16,6 +17,6 @@ Route::middleware(['auth', 'has.subscription', 'client'])
     ->group(function() {
         Route::get('/', ResponsesController::class);
 
-        Route::get('/new', SaveKeywordsController::class)->name('.new');
-        Route::post('/new', SaveKeywordsController::class)->name('.save');
+        Route::get('/new', NewResponseController::class)->name('.new');
+        Route::post('/new', SaveResponseController::class)->name('.save');
     });
