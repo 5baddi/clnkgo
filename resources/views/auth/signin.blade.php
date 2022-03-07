@@ -78,6 +78,6 @@
     </div>
     <div class="card-footer px-md-5">
         <small>Not registered yet?</small>
-        <a href="{{ route('connect') }}" class="small font-weight-bold">Create account</a>
+        <a href="{{ route('signup') }}" class="small font-weight-bold">Create account</a>
     </div>
 @endsection

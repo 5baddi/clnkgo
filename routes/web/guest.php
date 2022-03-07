@@ -9,18 +9,13 @@
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\SignInController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\SignUpController;
-use BADDIServices\SourceeApp\Http\Controllers\OAuth\OAuthController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\ConnectController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\AuthenticateController;
-use BADDIServices\SourceeApp\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword as ResetPassword;
 
 Route::middleware('guest')
     ->group(function() {
-        Route::get('/connect', SignUpController::class)->name('connect');
-        Route::get('/auth/connect', SignUpController::class)->name('auth.connect');
         Route::get('/signup', SignUpController::class)->name('signup');
         Route::post('/auth/signup', CreateUserController::class)->name('auth.signup');
         Route::get('/signin', SignInController::class)->name('signin');

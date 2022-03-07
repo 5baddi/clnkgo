@@ -6,7 +6,6 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SourceeApp\Http\Controllers\Affiliate\NewOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +18,3 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::name('rest')
-    ->prefix('v1')
-    ->middleware(['cors'])
-    ->group(function() {
-        Route::post('/affiliate/order', NewOrderController::class)->name('.affiliate.order');
-    });
