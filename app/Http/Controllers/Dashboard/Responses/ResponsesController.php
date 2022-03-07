@@ -26,7 +26,7 @@ class ResponsesController extends DashboardController
 
     public function __invoke(PaginationRequest $request)
     {
-        return view('dashboard.responses', [
+        return view('dashboard.responses.index', [
             'title'     => 'Canned Responses',
             'responses' => $this->savedResponseService->paginate($this->user, $request->query('page'))
         ]);
