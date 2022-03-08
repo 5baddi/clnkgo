@@ -8,7 +8,6 @@
 
 namespace BADDIServices\SourceeApp\Services;
 
-use App\Models\User;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Repositories\TweetRespository;
@@ -39,6 +38,12 @@ class TweetService extends Service
             ->getHashtags()
             ->pluck([Tweet::HASHTAG_COLUMN])
             ->toArray();
+    }
+    
+    public function findById(string $id): ?Tweet
+    {
+        return $this->tweetRespository
+            ->findById($id);
     }
 
     public function save(string $hashtag, array $attributes): Tweet
