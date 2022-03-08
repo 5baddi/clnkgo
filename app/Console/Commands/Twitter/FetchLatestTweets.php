@@ -51,10 +51,10 @@ class FetchLatestTweets extends Command
         $startTime = microtime(true);
 
         try {
-            $keywrods = $this->fetchUsersKeywords();
+            $hashtags = collect(config('twitter.hashtags'), []);
 
-            $keywrods->each(function ($keyword) {
-                $this->twitterService->fetchTweetsByHashtags($keyword);
+            $hashtags->each(function ($hashtag) {
+                $this->twitterService->fetchTweetsByHashtags($hashtag);
 
                 sleep(3);
             });
