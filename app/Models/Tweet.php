@@ -9,6 +9,7 @@
 namespace BADDIServices\SourceeApp\Models;
 
 use BADDIServices\SourceeApp\Entities\ModelEntity;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Tweet extends ModelEntity
 {   
@@ -29,4 +30,17 @@ class Tweet extends ModelEntity
     public const IN_REPLY_TO_USER_ID_COLUMN = 'in_reply_to_user_id';
     public const CONTEXT_ANNOTATIONS_COLUMN = 'context_annotations';
     public const GEO_COLUMN = 'geo';
+    public const DUE_AT_COLUMN = 'due_at';
+    public const EMAIL_COLUMN = 'email';
+
+    /** @var array */
+    protected $casts = [
+        self::PUBLISHED_AT_COLUMN   => 'datetime',
+        self::DUE_AT_COLUMN         => 'datetime'
+    ];
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(TwitterUser::class, self::AUTHOR_ID_COLUMN);
+    }
 }

@@ -17,7 +17,8 @@ class TweetRespository
     public function paginate(array $keywords = [], ?int $page = null): LengthAwarePaginator
     {
         return Tweet::query()
-            ->whereIn(Tweet::HASHTAG_COLUMN, $keywords)
+            ->with(['author'])
+            ->whereIn(Tweet::HASHTAG_COLUMN, array_values($keywords))
             ->paginate(10, ['*'], 'page', $page);
     }
     

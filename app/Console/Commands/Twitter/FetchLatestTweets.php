@@ -74,10 +74,14 @@ class FetchLatestTweets extends Command
         $usersKeywords = DB::table('users')->pluck('keywords');
 
         $usersKeywords = $usersKeywords->filter(function ($value) {
-            return $value !== null;
+            return $value !== null || $value !== "" || strlen($value) > 0;
         });
 
-        $usersKeywords->map(function ($value) use(&$keywrods) {
+        $usersKeywords->each(function ($value) use(&$keywrods) {
+            if ($value === null || $value === "" || strlen($value) === 0) {
+                return true;
+            }
+
             $keywrods = $keywrods->merge(explode(',', trim($value)));
         });
 

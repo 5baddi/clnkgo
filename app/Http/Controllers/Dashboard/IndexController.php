@@ -40,9 +40,9 @@ class IndexController extends DashboardController
         $period = $this->statsService->getPeriod(Carbon::parse($startDate . ' 00:00:00'), Carbon::parse($endDate . ' 23:59:59'));
 
         return view('dashboard.index', [
-            'title'                             =>  'Dashboard',
-            'startDate'                         =>  $startDate,
-            'endDate'                           =>  $endDate,
+            'title'                             => 'Dashboard',
+            'startDate'                         => $startDate,
+            'endDate'                           => $endDate,
             'tweets'                            => $this->tweetService->paginate($this->user, $request->query('page')),
             'ordersEarnings'                    =>  0, //$this->statsService->getOrdersEarnings($this->store, $period),
             'ordersEarningsChart'               =>  0, //$this->statsService->getOrdersEarningsChart($this->store, $period),
@@ -51,8 +51,8 @@ class IndexController extends DashboardController
             'unpaidOrdersCommissions'           =>  0, //$this->statsService->getUnpaidOrdersCommissions($this->store, $period),
             'topProducts'                       =>  0, //$this->statsService->getOrdersTopProducts($this->store, $period),
             'topAffiliates'                     =>  0, //$this->statsService->getTopAffiliatesByStore($this->store, $period),
-            'unreadNotifications'               =>  $this->user->unreadNotifications,
-            'markAsReadNotifications'           =>  $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30)),
+            'unreadNotifications'               => $this->user->unreadNotifications,
+            'markAsReadNotifications'           => $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30)),
         ]);
     }
 }

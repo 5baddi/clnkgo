@@ -67,6 +67,10 @@ class TwitterService extends Service
     public function fetchTweetsByHashtags(string $hashtag): Collection
     {
         try {
+            if (strlen($hashtag) === 0 || $hashtag === "") {
+                return collect();
+            }
+
             $response = $this->client->request('GET', self::RECENT_SEARCH_ENDPOINT, 
                 [
                     'headers'   => [
@@ -103,6 +107,9 @@ class TwitterService extends Service
     {
         $parsedTweets = collect($tweets['data'])
             ->map(function ($tweet) use ($hashtag) {
+                $dueAt = extractDate($tweet['text']);
+                preg_match("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $tweet['text'] ?? '', $emailMatches);
+
                 return $this->tweetService->save(
                     $hashtag,
                     [
@@ -113,6 +120,8 @@ class TwitterService extends Service
                         Tweet::AUTHOR_ID_COLUMN             => $tweet['author_id'],
                         Tweet::TEXT_COLUMN                  => $tweet['text'],
                         Tweet::LANG_COLUMN                  => $tweet['lang'] ?? null,
+                        Tweet::DUE_AT_COLUMN                => null,
+                        Tweet::EMAIL_COLUMN                 => $emailMatches[0] ?? null,
                         Tweet::POSSIBLY_SENSITIVE_COLUMN    => $tweet['possibly_sensitive'] ?? false,
                         Tweet::IN_REPLY_TO_USER_ID_COLUMN   => $tweet['in_reply_to_user_id'] ?? null,
                         Tweet::REFERENCED_TWEETS_COLUMN     => json_encode($tweet['referenced_tweets'] ?? null),

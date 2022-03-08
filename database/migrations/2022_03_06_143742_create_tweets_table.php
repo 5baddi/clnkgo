@@ -21,6 +21,7 @@ class CreateTweetsTable extends Migration
             $table->longText('text');
             $table->string('source')->nullable();
             $table->string('in_reply_to_user_id')->nullable();
+            $table->string('email')->nullable();
             $table->string('lang', 10)->nullable();
             $table->json('geo')->nullable();
             $table->json('referenced_tweets')->nullable();
@@ -30,6 +31,7 @@ class CreateTweetsTable extends Migration
             $table->json('entities')->nullable();
             $table->json('withheld')->nullable();
             $table->boolean('possibly_sensitive')->nullable();
+            $table->timestamp('due_at')->nullable();
             $table->timestamp('published_at');
             $table->timestamps();
         });

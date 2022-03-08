@@ -62,10 +62,12 @@ class TweetService extends Service
                 Tweet::IN_REPLY_TO_USER_ID_COLUMN,
                 Tweet::CONTEXT_ANNOTATIONS_COLUMN,
                 Tweet::GEO_COLUMN,
+                Tweet::DUE_AT_COLUMN,
+                Tweet::EMAIL_COLUMN,
             ]);
 
         if ($filteredAttributes->has(Tweet::HASHTAG_COLUMN)) {
-            $filteredAttributes->put(Tweet::HASHTAG_COLUMN, strtolower($filteredAttributes->get(User::KEYWORDS_COLUMN)));
+            $filteredAttributes->put(Tweet::HASHTAG_COLUMN, strtolower($filteredAttributes->get(Tweet::HASHTAG_COLUMN)));
         }
 
         return $this->tweetRespository->save($filteredAttributes->toArray());

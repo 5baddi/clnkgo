@@ -55,79 +55,35 @@
             </div>
         </div>
     </div>
-    <div class="row row-cards">
-      <div class="col-12 mt-4">
-        <div class="card">
-          <div class="card-header align-items-center">
-            <div class="col-auto">
-              <h4 class="card-title">Overview</h4>
+    <div class="row row-cards mt-4">
+      @foreach ($tweets as $tweet)
+        <div class="col-12">
+          <a class="card card-link" href="#">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-auto">
+                  <span class="avatar rounded" style="background-image: url({{ $tweet->author->profile_image_url }})"></span>
+                </div>
+                <div class="col">
+                  <div class="font-weight-medium">{{ $tweet->author->name }}</div>
+                  <div class="text-muted">{{ '@' . $tweet->author->username }}</div>
+                </div>
+                <div class="col-12 mt-4 mb-2">
+                  <p>{{ $tweet->text }}</p>
+                </div>
+              </div>
+              <div class="card-meta d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l5 5l10 -10"></path></svg>
+                  <span>Posted: {{ $tweet->published_at->format('d M - h:i A') }}</span>
+                </div>
+                <span>Due 2 days</span>
+              </div>
             </div>
-            <div class="col-auto ms-auto">
-              <h4 class="card-title text-muted">{{ \Carbon\Carbon::parse($startDate)->format('d F') }} - {{ \Carbon\Carbon::parse($endDate)->format('d F Y') }}</h4>
-            </div>
-          </div>
-          <div class="card-body">
-            {{-- <div class="chart-lg mt-4" id="earnings-chart"></div> --}}
-          </div>
+          </a>
         </div>
-      </div>
-    </div>
-    <div class="row row-cards">
-      {{-- @if (sizeof($topAffiliates) > 0)
-      <div class="col-6 mt-4">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="card-title">Top Affiliates</h4>
-          </div>
-          <div class="card-body">
-            <table class="table card-table table-vcenter">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th class="text-end">Sales Generated</th>
-                  <th class="text-end">Total Earned</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($topAffiliates as $affiliate)
-                <tr>
-                  <td class="text-start">{{ $affiliate['fullname'] }}</td>
-                  <td class="text-end text-green">${{ $affiliate['sales'] }}</td>
-                  <td class="text-end">${{ $affiliate['amount'] }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      @endif --}}
-      {{-- @if (sizeof($topProducts) > 0)
-      <div class="col-6 mt-4">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="card-title">Top Products</h4>
-          </div>
-          <div class="card-body">
-            <table class="table card-table table-vcenter">
-              <tbody>
-                @foreach ($topProducts as $product)
-                <tr>
-                  <td width="100">
-                    <a href="{{ $product['url'] }}" title="Show product" target="_blank">
-                      <span class="avatar avatar-sm" style="background-image: url({{ $product['image'] }})"></span>
-                    </a>
-                  </td>
-                  <td class="text-start">{{ ucwords($product['title']) }}</td>
-                  <td class="text-end text-green">{{ $product['currency'] === 'USD' ? '$' : '' }}{{ $product['sales'] }} {{ $product['currency'] !== 'USD' ? $product['currency'] : '' }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      @endif --}}
+      @endforeach
     </div>
 @endsection
 
