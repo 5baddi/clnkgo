@@ -14,11 +14,20 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TweetRespository
 {
-    public function paginate(array $keywords = [], ?int $page = null): LengthAwarePaginator
+    public function paginate(?int $page = null): LengthAwarePaginator
     {
         return Tweet::query()
             ->with(['author'])
-            ->whereIn(Tweet::HASHTAG_COLUMN, array_values($keywords))
+            ->orderBy(Tweet::PUBLISHED_AT_COLUMN, 'desc')
+            ->paginate(10, ['*'], 'page', $page);
+    }
+    
+    public function paginateByHashtags(array $hashtags = [], ?int $page = null): LengthAwarePaginator
+    {
+        return Tweet::query()
+            ->with(['author'])
+            ->whereIn(Tweet::HASHTAG_COLUMN, array_values($hashtags))
+            ->orderBy(Tweet::PUBLISHED_AT_COLUMN, 'desc')
             ->paginate(10, ['*'], 'page', $page);
     }
     

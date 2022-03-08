@@ -78,11 +78,11 @@ class TwitterService extends Service
                         'Authorization' => sprintf('Bearer %s', config('twitter.bearer_token'))
                     ],
                     'query'     => [
-                        'query'         => sprintf('#%s', $hashtag),
+                        'query'         => sprintf('#%s -is:retweet', $hashtag),
                         'start_time'    => date(DATE_RFC3339, strtotime('-15 minutes')),
-                        'tweet.fields'  => 'id,text,source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
-                        'user.fields'   => 'id,name,username,created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
-                        'media.fields'  => 'duration_ms,height,media_key,preview_image_url,public_metrics,type,width,alt_text,url',
+                        'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
+                        'user.fields'   => 'created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
+                        'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
                         'max_results'   => self::MAX_RESULTS_PER_RESPONSE,
                         'expansions'    => 'attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id'
                     ]
@@ -90,11 +90,11 @@ class TwitterService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
-            if (! isset($data['data'])) {
-                throw new Exception();
+            if (isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
+                return $this->saveTweets($hashtag, $data);
             }
 
-            return $this->saveTweets($hashtag, $data);
+            return collect();
         } catch (Exception | ClientException | RequestException $e) {
             AppLogger::error($e, 'twitter:fetch-by-hashtags');
 

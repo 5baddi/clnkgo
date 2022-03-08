@@ -39,11 +39,13 @@ class IndexController extends DashboardController
 
         $period = $this->statsService->getPeriod(Carbon::parse($startDate . ' 00:00:00'), Carbon::parse($endDate . ' 23:59:59'));
 
+        $tweets = $this->tweetService->paginate($request->query('page'));
+
         return view('dashboard.index', [
             'title'                             => 'Dashboard',
             'startDate'                         => $startDate,
             'endDate'                           => $endDate,
-            'tweets'                            => $this->tweetService->paginate($this->user, $request->query('page')),
+            'tweets'                            => $tweets,
             'ordersEarnings'                    =>  0, //$this->statsService->getOrdersEarnings($this->store, $period),
             'ordersEarningsChart'               =>  0, //$this->statsService->getOrdersEarningsChart($this->store, $period),
             'newOrdersCount'                    =>  0, //$this->statsService->getNewOrdersCount($this->store, $period),

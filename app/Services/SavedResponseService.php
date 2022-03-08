@@ -14,6 +14,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Models\SavedResponse;
 use BADDIServices\SourceeApp\Repositories\SavedResponseRepository;
+use Illuminate\Support\Arr;
 
 class SavedResponseService extends Service
 {
@@ -28,6 +29,11 @@ class SavedResponseService extends Service
     public function paginate(User $user, ?int $page = null): LengthAwarePaginator
     {
         return $this->savedResponseRepository->paginate($user->getId(), $page);
+    }
+    
+    public function count(User $user): int
+    {
+        return $this->savedResponseRepository->count($user->getId());
     }
 
     public function findById(string $id): ?SavedResponse
@@ -45,6 +51,14 @@ class SavedResponseService extends Service
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
+
+        $attributes = Arr::only(
+            $attributes,
+            [
+                SavedResponse::TITLE_COLUMN,
+                SavedResponse::CONTENT_COLUMN,
+            ]
+        );
         
         $attributes[SavedResponse::USER_ID_COLUMN] = $user->getId();
 
@@ -65,11 +79,24 @@ class SavedResponseService extends Service
             throw new ValidationException($validator);
         }
 
+        $attributes = Arr::only(
+            $attributes,
+            [
+                SavedResponse::TITLE_COLUMN,
+                SavedResponse::CONTENT_COLUMN,
+            ]
+        );
+
         $updated = $this->savedResponseRepository->update($savedResponse->getId(), $attributes);
         if ($updated) {
             return $this->findById($savedResponse->getId());
         }
 
         return false;
+    }
+
+    public function delete(SavedResponse $response): bool
+    {
+        return $this->savedResponseRepository->delete($response->id);
     }
 }

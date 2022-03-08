@@ -11,6 +11,7 @@ namespace BADDIServices\SourceeApp\Services;
 use App\Models\User;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use BADDIServices\SourceeApp\Models\Store;
@@ -33,6 +34,29 @@ class UserService extends Service
     {
         $this->userRepository = $userRepository;
         $this->couponService = $couponService;
+    }
+
+    public function getUsersKeywords(): Collection
+    {
+        $keywrods = collect();
+        $usersKeywords = User::query()
+            ->select('keywords')
+            ->get()
+            ->pluck('keywords');
+
+        $usersKeywords = $usersKeywords->filter(function ($value) {
+            return $value !== null || $value !== "" || strlen($value) > 0;
+        });
+
+        $usersKeywords->each(function ($value) use(&$keywrods) {
+            if ($value === null || $value === "" || strlen($value) === 0) {
+                return true;
+            }
+
+            $keywrods = $keywrods->merge(explode(',', trim($value)));
+        });
+
+        return $keywrods->unique();
     }
 
     public function paginateWithRelations(?int $page = null): LengthAwarePaginator

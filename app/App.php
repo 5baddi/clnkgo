@@ -11,4 +11,5 @@ namespace BADDIServices\SourceeApp;
 class App
 {
     public const CHUNK_SIZE = 1000;
+    public const TWEET_CHARACTERS_LIMIT = 280;
 }

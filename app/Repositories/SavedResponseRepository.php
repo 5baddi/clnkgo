@@ -23,8 +23,15 @@ class SavedResponseRepository
     public function paginate(string $userId, ?int $page = null): LengthAwarePaginator
     {
         return SavedResponse::query()
-            ->where(SavedResponse::USER_ID_COLUMN, '!=', $userId)
+            ->where(SavedResponse::USER_ID_COLUMN, $userId)
             ->paginate(10, ['*'], 'page', $page);
+    }
+    
+    public function count(string $userId): int
+    {
+        return SavedResponse::query()
+            ->where(SavedResponse::USER_ID_COLUMN, $userId)
+            ->count();
     }
 
     public function findById(string $id): ?SavedResponse

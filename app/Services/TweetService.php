@@ -23,9 +23,14 @@ class TweetService extends Service
         $this->tweetRespository = $tweetRespository;
     }
 
-    public function paginate(User $user, ?int $page = null): LengthAwarePaginator
+    public function paginate(?int $page = null): LengthAwarePaginator
     {
-        return $this->tweetRespository->paginate($user->getKeywords(), $page);
+        return $this->tweetRespository->paginate($page);
+    }
+    
+    public function paginateByHashtags(array $hashtags, ?int $page = null): LengthAwarePaginator
+    {
+        return $this->tweetRespository->paginateByHashtags($hashtags, $page);
     }
 
     public function getHashtags(): array

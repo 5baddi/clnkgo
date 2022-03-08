@@ -10,8 +10,10 @@ namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses;
 
 use BADDIServices\SourceeApp\Services\SavedResponseService;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Models\SavedResponse;
+use Illuminate\Http\Response;
 
-class NewResponseController extends DashboardController
+class EditResponseController extends DashboardController
 {
     /** @var SavedResponseService */
     private $savedResponseService;
@@ -23,11 +25,15 @@ class NewResponseController extends DashboardController
         $this->savedResponseService = $savedResponseService;
     }
     
-    public function __invoke()
+    public function __invoke(string $id)
     {
-        return view('dashboard.responses.new', [
-            'title'     => 'New Canned Response',
-            'count'     => $this->savedResponseService->count($this->user)
+        $response = $this->savedResponseService->findById($id);
+        abort_unless($response instanceof SavedResponse, Response::HTTP_NOT_FOUND);
+
+        return view('dashboard.responses.edit', [
+            'title'     => 'Edit Canned Response',
+            'count'     => $this->savedResponseService->count($this->user),
+            'response'  => $response
         ]);
     }
 }

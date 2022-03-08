@@ -14,21 +14,10 @@ use App\Http\Requests\KeywordsRequest;
 use App\Models\User;
 use BADDIServices\SourceeApp\Entities\Alert;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SourceeApp\Services\UserService;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 
 class SaveKeywordsController extends DashboardController
 {
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        parent::__construct();
-        
-        $this->userService = $userService;
-    }
-
     public function __invoke(KeywordsRequest $request)
     {
         try {

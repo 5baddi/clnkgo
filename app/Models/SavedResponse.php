@@ -16,4 +16,14 @@ class SavedResponse extends ModelEntity
     public const USER_ID_COLUMN = 'user_id';
     public const TITLE_COLUMN = 'title';
     public const CONTENT_COLUMN = 'content';
+
+    public function getTitle(): string
+    {
+        return $this->getAttribute(self::TITLE_COLUMN);
+    }
+    
+    public function getContent(): ?string
+    {
+        return $this->getAttribute(self::CONTENT_COLUMN);
+    }
 }

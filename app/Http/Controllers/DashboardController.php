@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\SourceeApp\Services\UserService;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -26,9 +27,14 @@ class DashboardController extends BaseController
     /** @var Subscription */
     protected $subscription;
 
+    /** @var UserService */
+    protected $userService;
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
+            $this->userService = app(UserService::class);
+
             $this->user = Auth::user();
             $this->subscription = $this->user->subscription;
 

@@ -9,26 +9,15 @@
 namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Keywords;
 
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
-use BADDIServices\SourceeApp\Services\TweetService;
 
 class KeywordsController extends DashboardController
 {
-    /** @var TweetService */
-    private $tweetService;
-
-    public function __construct(TweetService $tweetService)
-    {
-        parent::__construct();
-
-        $this->tweetService = $tweetService;
-    }
-
     public function __invoke()
     {
         return view('dashboard.keywords', [
             'title'             => 'Your Keywords 🔑',
             'keywords'          => $this->user->getKeywordsAsString(),
-            'hashtags'          => $this->tweetService->getHashtags()
+            'hashtags'          => $this->userService->getUsersKeywords()
         ]);
     }
 }

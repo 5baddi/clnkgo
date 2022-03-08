@@ -67,24 +67,4 @@ class FetchLatestTweets extends Command
 
         $this->info("Done fetching latest tweets");
     }
-
-    private function fetchUsersKeywords(): Collection
-    {
-        $keywrods = collect();
-        $usersKeywords = DB::table('users')->pluck('keywords');
-
-        $usersKeywords = $usersKeywords->filter(function ($value) {
-            return $value !== null || $value !== "" || strlen($value) > 0;
-        });
-
-        $usersKeywords->each(function ($value) use(&$keywrods) {
-            if ($value === null || $value === "" || strlen($value) === 0) {
-                return true;
-            }
-
-            $keywrods = $keywrods->merge(explode(',', trim($value)));
-        });
-
-        return $keywrods->unique();
-    }
 }
