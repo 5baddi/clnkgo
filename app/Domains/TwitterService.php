@@ -96,7 +96,6 @@ class TwitterService extends Service
 
             return $this->saveTweets($hashtag, $data);
         } catch (Exception | ClientException | RequestException $e) {
-            dd($e);
             AppLogger::error($e, 'twitter:fetch-by-hashtags');
 
             throw new FetchByHashtagFailed();
