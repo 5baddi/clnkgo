@@ -40,6 +40,7 @@ class TweetRespository
     public function findById(string $id): ?Tweet
     {
         return Tweet::query()
+            ->with(['author', 'media'])
             ->find($id);
     }
     

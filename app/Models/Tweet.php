@@ -47,7 +47,7 @@ class Tweet extends ModelEntity
     
     public function media(): HasMany
     {
-        return $this->hasMany(TwitterMedia::class, self::ID_COLUMN);
+        return $this->hasMany(TwitterMedia::class, TwitterMedia::TWEET_ID_COLUMN, self::ID_COLUMN);
     }
 
     public function getText(): string
