@@ -111,27 +111,29 @@ class TwitterService extends Service
                 if (isset($tweet['attachments'], $tweet['attachments']['media_keys'])) {
                     collect($tweet['attachments']['media_keys'])
                         ->each(function ($key) use ($tweets, $tweet) {
-                            $media = collect(isset($tweets['includes']['media']) ? $tweets['includes']['media'] : [])
-                                ->where('media_key', $key);
+                            collect(isset($tweets['includes']['media']) ? $tweets['includes']['media'] : [])
+                                ->each(function ($media) use($key, $tweet) {
+                                    if (! isset($media['media_key']) || $media['media_key'] !== $key) {
+                                        return true;
+                                    }
 
-                            if ($media === null || $media->count() === 0) {
-                                return true;
-                            }
+                                    $this->twitterMediaService->save(
+                                        [
+                                            TwitterMedia::TWEET_ID_COLUMN           => $tweet['id'],
+                                            TwitterMedia::ID_COLUMN                 => $media['media_key'],
+                                            TwitterMedia::TYPE_COLUMN               => $media['type'],
+                                            TwitterMedia::URL_COLUMN                => $media['url'] ?? null,
+                                            TwitterMedia::PREVIEW_IMAGE_URL_COLUMN  => $media['preview_image_url'] ?? null,
+                                            TwitterMedia::ALT_TEXT_COLUMN           => $media['alt_text'] ?? null,
+                                            TwitterMedia::HEIGHT_COLUMN             => $media['height'] ?? null,
+                                            TwitterMedia::WIDTH_COLUMN              => $media['width'] ?? null,
+                                            TwitterMedia::DURATION_MS_COLUMN        => $media['duration_ms'] ?? null,
+                                            TwitterMedia::PUBLIC_METRICS_COLUMN     => json_encode($media['public_metrics'] ?? null),
+                                        ]
+                                    );
+                                });
 
-                            $this->twitterMediaService->save(
-                                [
-                                    TwitterMedia::TWEET_ID_COLUMN           => $tweet['id'],
-                                    TwitterMedia::ID_COLUMN                 => $media['media_key'],
-                                    TwitterMedia::TYPE_COLUMN               => $media['type'],
-                                    TwitterMedia::URL_COLUMN                => $media['url'] ?? null,
-                                    TwitterMedia::PREVIEW_IMAGE_URL_COLUMN  => $media['preview_image_url'] ?? null,
-                                    TwitterMedia::ALT_TEXT_COLUMN           => $media['alt_text'] ?? null,
-                                    TwitterMedia::HEIGHT_COLUMN             => $media['height'] ?? null,
-                                    TwitterMedia::WIDTH_COLUMN              => $media['width'] ?? null,
-                                    TwitterMedia::DURATION_MS_COLUMN        => $media['duration_ms'] ?? null,
-                                    TwitterMedia::PUBLIC_METRICS_COLUMN     => json_encode($media['public_metrics'] ?? null),
-                                ]
-                            );
+                            
                         });
                 }
 
