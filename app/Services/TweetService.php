@@ -45,6 +45,18 @@ class TweetService extends Service
         return $this->tweetRespository
             ->findById($id);
     }
+    
+    public function count(): int
+    {
+        return $this->tweetRespository
+            ->count();
+    }
+    
+    public function countOfLast24Hours(): int
+    {
+        return $this->tweetRespository
+            ->count();
+    }
 
     public function save(string $hashtag, array $attributes): Tweet
     {

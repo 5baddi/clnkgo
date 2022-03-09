@@ -40,19 +40,19 @@ class IndexController extends DashboardController
         $period = $this->statsService->getPeriod(Carbon::parse($startDate . ' 00:00:00'), Carbon::parse($endDate . ' 23:59:59'));
 
         $tweets = $this->tweetService->paginate($request->query('page'));
+        $countOfLast24Hours = $tweets->getCollection()
+            ->filter(function ($tweet) {
+                return $tweet->published_at->greaterThan(Carbon::now()->subHours(24)) && ($tweet->due_at === null || Carbon::now()->endOfDay()->greaterThan($tweet->due_at));
+            })
+            ->count();
 
         return view('dashboard.index', [
             'title'                             => 'Dashboard',
             'startDate'                         => $startDate,
             'endDate'                           => $endDate,
             'tweets'                            => $tweets,
-            'ordersEarnings'                    =>  0, //$this->statsService->getOrdersEarnings($this->store, $period),
-            'ordersEarningsChart'               =>  0, //$this->statsService->getOrdersEarningsChart($this->store, $period),
-            'newOrdersCount'                    =>  0, //$this->statsService->getNewOrdersCount($this->store, $period),
-            'paidOrdersCommissions'             =>  0, //$this->statsService->getPaidOrdersCommissions($this->store, $period),
-            'unpaidOrdersCommissions'           =>  0, //$this->statsService->getUnpaidOrdersCommissions($this->store, $period),
-            'topProducts'                       =>  0, //$this->statsService->getOrdersTopProducts($this->store, $period),
-            'topAffiliates'                     =>  0, //$this->statsService->getTopAffiliatesByStore($this->store, $period),
+            'liveRequests'                      => $tweets->total(),
+            'last24hRequests'                   => $countOfLast24Hours,
             'unreadNotifications'               => $this->user->unreadNotifications,
             'markAsReadNotifications'           => $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30)),
         ]);

@@ -12,7 +12,7 @@
                 <div class="d-flex align-items-center">
                   <div class="subheader">Live Requests</div>
                 </div>
-                <div class="h1 mt-3 mb-3 text-green text-center">{{ $ordersEarnings }}</div>
+                <div class="h1 mt-3 mb-3 text-green text-center">{{ $liveRequests }}</div>
               </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="d-flex align-items-center">
                   <div class="subheader">Last 24 Hours</div>
                 </div>
-                <div class="h1 mt-3 mb-3 text-center">{{ $paidOrdersCommissions }}</div>
+                <div class="h1 mt-3 mb-3 text-center">{{ $liveRequests }}</div>
               </div>
             </div>
         </div>

@@ -44,6 +44,12 @@ class TweetRespository
             ->find($id);
     }
     
+    public function count(): int
+    {
+        return Tweet::query()
+            ->count();
+    }
+    
     public function getByHashtag(string $hashtag): Collection
     {
         return Tweet::query()
