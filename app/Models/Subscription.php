@@ -11,6 +11,7 @@ namespace BADDIServices\SourceeApp\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use BADDIServices\SourceeApp\Entities\ModelEntity;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Subscription extends ModelEntity
@@ -27,6 +28,7 @@ class Subscription extends ModelEntity
     public const BILLING_ON_COLUMN = 'billing_on';
     public const ACTIVATED_ON_COLUMN = 'activated_on';
     public const TRIAL_ENDS_ON_COLUMN = 'trial_ends_on';
+    public const ENDS_ON_COLUMN = 'ends_on';
     public const CANCELLED_ON_COLUMN = 'cancelled_on';
     public const ACTIVE_STATUS = 'active';
 
@@ -63,6 +65,8 @@ class Subscription extends ModelEntity
     /** @var array */
     protected $casts = [
         self::ACTIVATED_ON_COLUMN   => 'date',
+        self::TRIAL_ENDS_ON_COLUMN  => 'date',
+        self::ENDS_ON_COLUMN        => 'date',
     ];
 
     public function user(): BelongsTo
@@ -88,5 +92,25 @@ class Subscription extends ModelEntity
     public function isChargeSubscription(): bool
     {
         return $this->getAttribute(self::CHARGE_ID_COLUMN) !== null;
+    }
+    
+    public function getTrialEndsOn(): ?Carbon
+    {
+        return $this->getAttribute(self::TRIAL_ENDS_ON_COLUMN);
+    }
+    
+    public function getEndsOn(): ?Carbon
+    {
+        return $this->getAttribute(self::ENDS_ON_COLUMN);
+    }
+    
+    public function isTrial(): bool
+    {
+        return $this->getTrialEndsOn() !== null && $this->getTrialEndsOn()->greaterThan(Carbon::now()->addDay());
+    }
+    
+    public function isActive(): bool
+    {
+        return $this->isTrial() || ($this->getEndsOn() !== null && $this->getEndsOn()->greaterThan(Carbon::now()->addDay()));
     }
 }

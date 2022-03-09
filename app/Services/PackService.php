@@ -29,9 +29,14 @@ class PackService extends Service
         return $this->packRepository->all();
     }
     
-    public function findById(string $id): Pack
+    public function findById(string $id): ?Pack
     {
         return $this->packRepository->findById($id);
+    }
+    
+    public function findByName(string $name): ?Pack
+    {
+        return $this->packRepository->findByName($name);
     }
 
     public function loadCurrentPack(User $user): ?Pack

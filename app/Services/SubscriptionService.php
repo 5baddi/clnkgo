@@ -106,22 +106,33 @@ class SubscriptionService extends Service
         return $subscription;
     }
     
-    public function save(User $user, Store $store, Pack $pack, array $billing): Subscription
+    public function startTrial(User $user, Pack $pack): Subscription
+    {
+        return $this->save(
+            $user,
+            [
+                Subscription::PACK_ID_COLUMN        => $pack->getId(),
+                Subscription::STATUS_COLUMN         => Subscription::CHARGE_ACCEPTED,
+                Subscription::ACTIVATED_ON_COLUMN   => Carbon::now(),
+                Subscription::TRIAL_ENDS_ON_COLUMN  => Carbon::now()->addDays(Pack::DEFAULT_TRIAL_DAYS)
+            ]
+        );
+    }
+    
+    public function save(User $user, array $billing): Subscription
     {
         $billing = collect($billing);
 
         $billing = $billing->only([
-            Subscription::USAGE_ID_COLUMN,
-            Subscription::CHARGE_ID_COLUMN,
+            Subscription::PACK_ID_COLUMN,
             Subscription::STATUS_COLUMN,
             Subscription::BILLING_ON_COLUMN,
             Subscription::ACTIVATED_ON_COLUMN,
             Subscription::TRIAL_ENDS_ON_COLUMN,
-            Subscription::CANCELLED_ON_COLUMN,
-            Subscription::CREATED_AT_COLUMN
+            Subscription::CANCELLED_ON_COLUMN
         ]);
 
-        $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
+        $subscription = $this->subscriptionRepository->save($user->getId(), $billing->toArray());
 
         return $subscription;
     }

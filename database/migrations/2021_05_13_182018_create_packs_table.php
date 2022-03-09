@@ -21,7 +21,7 @@ class CreatePacksTable extends Migration
             $table->float('price')->default(0.0);
             $table->enum('type', Pack::TYPES);
             $table->enum('interval', Pack::INTERVAL)->default(Pack::PER_MONTH);
-            $table->integer('trial_days')->default(Pack::DEFAULT_TRIAL_DAYS);
+            $table->integer('trial_days')->nullable();
             $table->boolean('is_popular')->default(false);
             $table->string('currency', 10)->default('usd');
             $table->string('symbol', 10)->nullable();

@@ -19,10 +19,13 @@ class Pack extends ModelEntity
     /** @var string */
     public const PER_MONTH = 'month';
     public const PER_YEAR = 'year';
+    public const NAME_COLUMN = 'name';
     public const FEATURES_COLUMN = 'features';
     public const PRICE_COLUMN = 'price';
     public const TYPE_COLUMN = 'type';
     public const INTERVAL_COLUMN = 'interval';
+    public const TRIAL_DAYS_COLUMN = 'trial_days';
+
     public const RECURRING_TYPE = 'recurring';
     public const USAGE_TYPE = 'usage';
     public const IS_POPULAR_TYPE = 'is_popular';

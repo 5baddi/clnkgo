@@ -21,11 +21,12 @@ class PacksSeeder extends Seeder
     public function run()
     {
         Pack::create([
-            'name'          =>  'The plan',
-            'price'         =>  25,
-            'type'          =>  Pack::RECURRING_TYPE,
-            'is_popular'    =>  true,
-            'features'      =>  [
+            'name'          => 'The plan',
+            'price'         => 25,
+            'type'          => Pack::RECURRING_TYPE,
+            'is_popular'    => true,
+            'trial_days'    => 7,
+            'features'      => [
                 [
                     'key'       =>  Pack::ALL_REQUESTS_ACCESS,
                     'name'      =>  'Access to all Journo Requests',

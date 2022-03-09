@@ -105,9 +105,35 @@ class TwitterService extends Service
     public function saveTweets(string $hashtag, array $tweets = []): Collection
     {
         $parsedTweets = collect($tweets['data'])
-            ->map(function ($tweet) use ($hashtag) {
+            ->map(function ($tweet) use ($hashtag, $tweets) {
                 $dueAt = extractDate($tweet['text']);
                 preg_match("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $tweet['text'] ?? '', $emailMatches);
+                if (isset($tweet['attachments'], $tweet['attachments']['media_keys'])) {
+                    collect($tweet['attachments']['media_keys'])
+                        ->each(function ($key) use ($tweets, $tweet) {
+                            $media = collect(isset($tweets['includes']['media']) ? $tweets['includes']['media'] : [])
+                                ->where('media_key', $key);
+
+                            if ($media === null || $media->count() === 0) {
+                                return true;
+                            }
+
+                            $this->twitterMediaService->save(
+                                [
+                                    TwitterMedia::TWEET_ID_COLUMN           => $tweet['id'],
+                                    TwitterMedia::ID_COLUMN                 => $media['media_key'],
+                                    TwitterMedia::TYPE_COLUMN               => $media['type'],
+                                    TwitterMedia::URL_COLUMN                => $media['url'] ?? null,
+                                    TwitterMedia::PREVIEW_IMAGE_URL_COLUMN  => $media['preview_image_url'] ?? null,
+                                    TwitterMedia::ALT_TEXT_COLUMN           => $media['alt_text'] ?? null,
+                                    TwitterMedia::HEIGHT_COLUMN             => $media['height'] ?? null,
+                                    TwitterMedia::WIDTH_COLUMN              => $media['width'] ?? null,
+                                    TwitterMedia::DURATION_MS_COLUMN        => $media['duration_ms'] ?? null,
+                                    TwitterMedia::PUBLIC_METRICS_COLUMN     => json_encode($media['public_metrics'] ?? null),
+                                ]
+                            );
+                        });
+                }
 
                 return $this->tweetService->save(
                     $hashtag,
@@ -155,23 +181,6 @@ class TwitterService extends Service
                         TwitterUser::ENTITIES_COLUMN              => json_encode($user['entities'] ?? null),
                         TwitterUser::PUBLIC_METRICS_COLUMN        => json_encode($user['public_metrics'] ?? null),
                         TwitterUser::WITHHELD_COLUMN              => json_encode($user['withheld'] ?? null),
-                    ]
-                );
-            });
-            
-        collect(isset($tweets['includes']['media']) ? $tweets['includes']['media'] : [])
-            ->each(function ($media) {
-                $this->twitterMediaService->save(
-                    [
-                        TwitterMedia::ID_COLUMN                 => $media['media_key'],
-                        TwitterMedia::TYPE_COLUMN               => $media['type'],
-                        TwitterMedia::URL_COLUMN                => $media['url'] ?? null,
-                        TwitterMedia::PREVIEW_IMAGE_URL_COLUMN  => $media['preview_image_url'] ?? null,
-                        TwitterMedia::ALT_TEXT_COLUMN           => $media['alt_text'] ?? null,
-                        TwitterMedia::HEIGHT_COLUMN             => $media['height'] ?? null,
-                        TwitterMedia::WIDTH_COLUMN              => $media['width'] ?? null,
-                        TwitterMedia::DURATION_MS_COLUMN        => $media['duration_ms'] ?? null,
-                        TwitterMedia::PUBLIC_METRICS_COLUMN     => json_encode($media['public_metrics'] ?? null),
                     ]
                 );
             });

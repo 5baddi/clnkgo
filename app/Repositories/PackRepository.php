@@ -24,4 +24,11 @@ class PackRepository
         return Pack::query()
                     ->find($id);
     }
+    
+    public function findByName(string $name): ?Pack
+    {
+        return Pack::query()
+                    ->where(Pack::NAME_COLUMN, $name)
+                    ->first();
+    }
 }

@@ -10,6 +10,7 @@ namespace BADDIServices\SourceeApp\Models;
 
 use BADDIServices\SourceeApp\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tweet extends ModelEntity
 {   
@@ -42,5 +43,15 @@ class Tweet extends ModelEntity
     public function author(): BelongsTo
     {
         return $this->belongsTo(TwitterUser::class, self::AUTHOR_ID_COLUMN);
+    }
+    
+    public function media(): HasMany
+    {
+        return $this->hasMany(TwitterMedia::class, self::ID_COLUMN);
+    }
+
+    public function getText(): string
+    {
+        return $this->getAttribute(self::TEXT_COLUMN);
     }
 }

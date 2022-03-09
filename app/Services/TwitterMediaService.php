@@ -28,6 +28,7 @@ class TwitterMediaService extends Service
                 return $value !== null;
             })
             ->only([
+                TwitterMedia::TWEET_ID_COLUMN,
                 TwitterMedia::ID_COLUMN,
                 TwitterMedia::TYPE_COLUMN,
                 TwitterMedia::URL_COLUMN,

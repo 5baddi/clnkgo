@@ -15,6 +15,7 @@ class CreateTwitterMediasTable extends Migration
     {
         Schema::create('twitter_media', function (Blueprint $table) {
             $table->string('id')->primary();
+            $table->string('tweet_id');
             $table->string('type');
             $table->integer('duration_ms')->nullable();
             $table->integer('height')->nullable();

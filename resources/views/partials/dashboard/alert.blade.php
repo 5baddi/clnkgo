@@ -22,12 +22,12 @@
         <div>
             <h4 class="alert-title">
                 @if ($alert->type == 'error')
-                Something going wrong&hellip;
+                &nbsp;Something going wrong&hellip;
                 @else
-                Finished!
+                &nbsp;Finished!
                 @endif
             </h4>
-            <div class="text-muted">{{ $alert->message }}.</div>
+            <div class="text-muted">&nbsp;{{ $alert->message }}</div>
         </div>
     </div>
     <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
