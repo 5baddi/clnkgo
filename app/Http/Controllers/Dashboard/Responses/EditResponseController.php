@@ -8,10 +8,12 @@
 
 namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses;
 
+use Illuminate\Http\Response;
+use BADDIServices\SourceeApp\App;
+use BADDIServices\SourceeApp\Models\Pack;
+use BADDIServices\SourceeApp\Models\SavedResponse;
 use BADDIServices\SourceeApp\Services\SavedResponseService;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
-use BADDIServices\SourceeApp\Models\SavedResponse;
-use Illuminate\Http\Response;
 
 class EditResponseController extends DashboardController
 {
@@ -33,7 +35,8 @@ class EditResponseController extends DashboardController
         return view('dashboard.responses.edit', [
             'title'     => 'Edit Canned Response',
             'count'     => $this->savedResponseService->count($this->user),
-            'response'  => $response
+            'response'  => $response,
+            'max'       => collect($this->pack->features)->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES
         ]);
     }
 }

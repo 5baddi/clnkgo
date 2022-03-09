@@ -9,6 +9,7 @@
 namespace BADDIServices\SourceeApp\Http\Controllers;
 
 use App\Models\User;
+use BADDIServices\SourceeApp\Models\Pack;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use BADDIServices\SourceeApp\Models\Subscription;
@@ -30,6 +31,9 @@ class DashboardController extends BaseController
     /** @var UserService */
     protected $userService;
 
+    /** @var Pack */
+    protected $pack;
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
@@ -37,6 +41,9 @@ class DashboardController extends BaseController
 
             $this->user = Auth::user();
             $this->subscription = $this->user->subscription;
+
+            $this->subscription->load('pack');
+            $this->pack = $this->subscription->pack;
 
             if ($request->has('notification')) {
                 $this->user->unreadNotifications->where('id', $request->query('notification'))->markAsRead();

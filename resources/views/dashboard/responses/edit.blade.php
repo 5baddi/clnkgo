@@ -14,7 +14,7 @@
                     <h3 class="card-title">Edit canned response</h3>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mt-2">You have used <strong>{{ $count }}</strong> of <strong>10</strong> canned responses in your plan.</p>
+                    <p class="text-muted mt-2">You have used <strong>{{ $count }}</strong> of <strong>{{ $max }}</strong> canned responses in your plan.</p>
                     <div class="row">
                         <div class="col-12 mt-2">
                             <label class="form-label required">Title</label>

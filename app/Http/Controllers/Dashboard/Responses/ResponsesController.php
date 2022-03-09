@@ -8,7 +8,9 @@
 
 namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses;
 
+use BADDIServices\SourceeApp\App;
 use App\Http\Requests\PaginationRequest;
+use BADDIServices\SourceeApp\Models\Pack;
 use BADDIServices\SourceeApp\Services\SavedResponseService;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 
@@ -28,7 +30,8 @@ class ResponsesController extends DashboardController
     {
         return view('dashboard.responses.index', [
             'title'     => 'Canned Responses',
-            'responses' => $this->savedResponseService->paginate($this->user, $request->query('page'))
+            'responses' => $this->savedResponseService->paginate($this->user, $request->query('page')),
+            'max'       => collect($this->pack->features)->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES
         ]);
     }
 }

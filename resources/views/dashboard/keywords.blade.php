@@ -13,14 +13,14 @@
                     <div class="col-12">
                         <p>Welcome to the Sourcee engine room! Enter keywords relating to your expertise and we will notify you when a relevant request comes through that matches any of your keywords.</p>
                         <p>The more keywords you enter, the greater the chance we will be able to find requests for you.</p>
-                        <p>Struggling to maximise your 30 slots? Scroll down to our tips & tricks section.</p>
+                        <p>Struggling to maximise your {{ $max }} slots? Scroll down to our tips & tricks section.</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card mt-4">
             <div class="card-header">
-                <h3 class="card-title">Keyword Used: (<span id="tags-count">0</span> of 30)</h3>
+                <h3 class="card-title">Keyword Used: (<span id="tags-count">0</span> of {{ $max }})</h3>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -103,7 +103,7 @@
 @section('script')
     $('document').ready(function() {
         $('#tags-input').tagsinput({
-            maxTags: 30,
+            maxTags: {{ $max }},
             cancelConfirmKeysOnEmpty: true,
             trimValue: true,
             allowDuplicates: false,

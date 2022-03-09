@@ -13,7 +13,7 @@
                     <div class="col-12">
                         <p>Save time when answering the next request, use a canned response. 🥫</p>
                         <p>These are predetermined responses that you can tailor to answer common requests.</p>
-                        <p>You have used <strong>{{ $responses->count() }}</strong> of <strong>10</strong> canned responses in your plan.</p>
+                        <p>You have used <strong>{{ $responses->count() }}</strong> of <strong>{{ $max }}</strong> canned responses in your plan.</p>
                     </div>
                 </div>
             </div>

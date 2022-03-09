@@ -8,6 +8,8 @@
 
 namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses;
 
+use BADDIServices\SourceeApp\App;
+use BADDIServices\SourceeApp\Models\Pack;
 use BADDIServices\SourceeApp\Services\SavedResponseService;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 
@@ -27,7 +29,8 @@ class NewResponseController extends DashboardController
     {
         return view('dashboard.responses.new', [
             'title'     => 'New Canned Response',
-            'count'     => $this->savedResponseService->count($this->user)
+            'count'     => $this->savedResponseService->count($this->user),
+            'max'       => collect($this->pack->features)->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES
         ]);
     }
 }
