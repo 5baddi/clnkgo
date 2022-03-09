@@ -13,5 +13,7 @@ Route::middleware(['auth', 'has.subscription', 'client'])
     ->name('dashboard.requests')
     ->prefix('dashboard/requests')
     ->group(function() {
+        Route::redirect('/', '/dashboard');
+
         Route::get('/{id}', ShowRequestController::class);
     });
