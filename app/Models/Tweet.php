@@ -47,7 +47,7 @@ class Tweet extends ModelEntity
     
     public function answers(): HasMany
     {
-        return $this->hasMany(RequestAnswer::class, self::ID_COLUMN, RequestAnswer::TWEET_ID_COLUMN);
+        return $this->hasMany(RequestAnswer::class, RequestAnswer::TWEET_ID_COLUMN, self::ID_COLUMN);
     }
     
     public function media(): HasMany

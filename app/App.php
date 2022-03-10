@@ -10,6 +10,7 @@ namespace BADDIServices\SourceeApp;
 
 class App
 {
+    public const PAGINATION_LIMIT = 10;
     public const CHUNK_SIZE = 1000;
     public const TWEET_CHARACTERS_LIMIT = 280;
     public const MAX_KEYWORDS = 30;

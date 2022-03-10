@@ -9,6 +9,8 @@
 namespace BADDIServices\SourceeApp\Services;
 
 use App\Models\User;
+use BADDIServices\SourceeApp\App;
+use BADDIServices\SourceeApp\Models\RequestAnswer;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Repositories\TweetRespository;
@@ -23,20 +25,32 @@ class TweetService extends Service
         $this->tweetRespository = $tweetRespository;
     }
 
-    public function paginate(?int $page = null, string $term = null, string $sort = null, string $filter = null, ?User $user = null, ?bool $withAnswers = false): LengthAwarePaginator
+    public function paginate(?int $page = null, string $term = null, string $sort = null, string $filter = null, ?User $user = null): LengthAwarePaginator
     {
-        $conditions = [
-            'term' => $term
-        ];
-
         $paginatedTweets = $this->tweetRespository->paginate(
             $sort === 'oldest' ? 'asc' : 'desc',
-            $page, 
-            $conditions, 
-            $withAnswers
+            $term,
+            $page,
+            $filter === 'answered'
         );
 
-        return $paginatedTweets;
+        $tweets = $paginatedTweets->getCollection();
+
+        if ($filter === 'answered' && $user instanceof User) {
+            $tweets = $tweets->filter(function ($tweet) use ($user) {
+                if ($tweet->answers->count() === 0) {
+                    return false;
+                }
+
+                return ($tweet->answers
+                    ->where(RequestAnswer::TWEET_ID_COLUMN, $tweet->getId())
+                    ->where(RequestAnswer::USER_ID_COLUMN, $user->getId())
+                    ->first() instanceof RequestAnswer
+                );
+            });
+        }
+
+        return new LengthAwarePaginator($tweets, $tweets->count(), App::PAGINATION_LIMIT);
     }
     
     public function paginateByHashtags(array $hashtags, ?int $page = null): LengthAwarePaginator

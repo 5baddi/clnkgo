@@ -8,13 +8,14 @@
 
 namespace BADDIServices\SourceeApp\Repositories;
 
+use BADDIServices\SourceeApp\App;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class TweetRespository
 {
-    public function paginate(string $sort = 'desc', ?int $page = null, array $conditions = null, ?bool $withAnswers = false): LengthAwarePaginator
+    public function paginate(string $sort = 'desc', ?string $term = null, ?int $page = null, ?bool $withAnswers = false): LengthAwarePaginator
     {
         $relations = ['author'];
 
@@ -25,13 +26,15 @@ class TweetRespository
         $query = Tweet::query()
             ->with($relations);
 
-        if (isset($conditions['term']) && strlen($conditions['term']) > 0) {
-            $query = $query->where(Tweet::TEXT_COLUMN, 'like', "%{$conditions['term']}%");
+        if ($term !== null && strlen($term) > 0) {
+            $query = $query->where(Tweet::TEXT_COLUMN, 'like', "%{$term}%");
+        } else {
+            
         }
 
         $query->orderBy(Tweet::PUBLISHED_AT_COLUMN, $sort === 'asc' ? 'asc' : 'desc');
 
-        return $query->paginate(10, ['*'], 'page', $page);
+        return $query->paginate(App::PAGINATION_LIMIT, ['*'], 'page', $page);
     }
     
     public function paginateByHashtags(array $hashtags = [], ?int $page = null): LengthAwarePaginator
