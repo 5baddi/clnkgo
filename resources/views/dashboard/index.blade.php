@@ -30,9 +30,12 @@
     <div class="card mt-4">
       <div class="card-body">
         <form class="row" action="{{ route('dashboard') }}" method="GET">
-          <div class="col-6 form-group">
-            <label class="form-label">Search</label>
-            <input type="text" name="term" value="{{ old('term') ?? $term }}" class="form-control @if ($errors->has('term')) is-invalid @endif" placeholder="Enter search term..."/>
+          <div class="col-6">
+            <div class="form-group mb-2">
+              <label class="form-label">Search</label>
+              <input type="text" name="term" value="{{ old('term') ?? $term }}" class="form-control @if ($errors->has('term')) is-invalid @endif" placeholder="Enter search term..."/>  
+            </div>
+            <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> to search by term</span>
           </div>
           <div class="col-3 form-group">
             <label class="form-label">Sort by</label>

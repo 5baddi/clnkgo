@@ -25,6 +25,10 @@ class TweetRespository
         $query = Tweet::query()
             ->with($relations);
 
+        if (isset($conditions['term']) && strlen($conditions['term']) > 0) {
+            $query = $query->where(Tweet::TEXT_COLUMN, 'like', "%{$conditions['term']}%");
+        }
+
         $query->orderBy(Tweet::PUBLISHED_AT_COLUMN, $sort === 'asc' ? 'asc' : 'desc');
 
         return $query->paginate(10, ['*'], 'page', $page);

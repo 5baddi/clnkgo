@@ -25,7 +25,9 @@ class TweetService extends Service
 
     public function paginate(?int $page = null, string $term = null, string $sort = null, string $filter = null, ?User $user = null, ?bool $withAnswers = false): LengthAwarePaginator
     {
-        $conditions = [];
+        $conditions = [
+            'term' => $term
+        ];
 
         $paginatedTweets = $this->tweetRespository->paginate(
             $sort === 'oldest' ? 'asc' : 'desc',
