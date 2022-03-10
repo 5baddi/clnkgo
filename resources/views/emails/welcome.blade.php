@@ -8,7 +8,7 @@
 		Thanks you for joining <strong>{{ config('app.name') }}</strong>!
       </p>
       <p style="margin: 0 0 24px;">
-		Please review our <a href="{{ route('guide') }}" target="_blank">getting started guide</a> to ensure that your account is set up correctly.
+		{{-- Please review our <a href="{{ route('guide') }}" target="_blank">getting started guide</a> to ensure that your account is set up correctly. --}}
       </p>
       {{-- <a href="{{ route('signin') }}" style="display: block; font-size: 14px; line-height: 100%; margin-bottom: 24px; --text-opacity: 1; color: #7367f0; color: rgba(115, 103, 240, var(--text-opacity)); text-decoration: none;">{{ route('signin') }}</a> --}}
       <table style="font-family: 'Montserrat',Arial,sans-serif;" cellpadding="0" cellspacing="0" role="presentation">

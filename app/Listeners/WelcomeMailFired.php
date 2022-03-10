@@ -27,13 +27,7 @@ class WelcomeMailFired implements ShouldQueue
         /** @var User */
         $user = $event->user;
 
-        /** @var bool */
-        $isAffiliate = $event->isAffiliate ?? false;
-
         $template = 'emails.welcome';
-        if ($isAffiliate) {
-            $template = 'emails.affiliate.welcome';
-        }
 
         Mail::send($template, ['store' => $store, 'user' => $user, 'subject' => self::SUBJECT . config('app.name')], function($message) use ($user) {
             $message->to($user->email);

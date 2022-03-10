@@ -8,17 +8,13 @@
 
 namespace BADDIServices\SourceeApp\Services;
 
-use Exception;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
 use BADDIServices\SourceeApp\Models\Pack;
-use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Models\Subscription;
-use BADDIServices\SourceeApp\Services\StoreService;
-use BADDIServices\SourceeApp\Services\ShopifyService;
 use BADDIServices\SourceeApp\Repositories\SubscriptionRepository;
 use BADDIServices\SourceeApp\Notifications\Subscription\SubscriptionCancelled;
 use BADDIServices\SourceeApp\Events\Subscription\SubscriptionCancelled as SubscriptionCancelledEvent;
@@ -27,18 +23,10 @@ class SubscriptionService extends Service
 {
     /** @var SubscriptionRepository */
     private $subscriptionRepository;
-    
-    /** @var ShopifyService */
-    private $shopifyService;
 
-    /** @var StoreService */
-    private $storeService;
-
-    public function __construct(SubscriptionRepository $subscriptionRepository, ShopifyService $shopifyService, StoreService $storeService)
+    public function __construct(SubscriptionRepository $subscriptionRepository)
     {
         $this->subscriptionRepository = $subscriptionRepository;
-        $this->shopifyService = $shopifyService;
-        $this->storeService = $storeService;
     }
 
     public function loadRelations(Subscription &$subscription): Subscription
@@ -51,59 +39,6 @@ class SubscriptionService extends Service
     public function getUsageBills(): Collection
     {
         return $this->subscriptionRepository->getUsageBills();
-    }
-    
-    public function createBillingConfirmationURL(Store $store, Pack $pack): string
-    {
-        $charge = [
-            'name'          =>  ucwords($pack->name),
-            'trial_days'    =>  $pack->trial_days,
-            'test'          =>  config('shopify.test_enabled'),
-            'price'         =>  $pack->price,
-            'return_url'    =>  route('subscription.billing.confirmation', ['pack' => $pack->id])
-        ];
-
-        if ($pack->type === Pack::USAGE_TYPE) {
-            $charge = array_merge($charge, [
-                'name'          =>  ucwords($pack->name) . ' Trial',
-                'capped_amount' =>  Pack::DEFAULT_MAX_USAGE_PRICE,
-                'price'         =>  0,
-                'terms'         =>  $pack->price . '% of revenue share'
-            ]);
-        }
-
-        return $this->shopifyService->createRecurringBillingURL($store, $charge);
-    }
-
-    public function confirmBilling(User $user, Store $store, Pack $pack, string $chargeId): Subscription
-    {
-        if ($pack->isUsageType()) {
-            $billing = collect($this->shopifyService->getUsageBilling($store, $pack, $chargeId));
-
-            $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
-            $billing->put(Subscription::USAGE_ID_COLUMN, $billing->get('id', $billing->get('id')));
-        } else {
-            $billing = collect($this->shopifyService->getBilling($store, $chargeId));
-
-            $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
-        }
-
-        $billing = $billing->only([
-            Subscription::USAGE_ID_COLUMN,
-            Subscription::CHARGE_ID_COLUMN,
-            Subscription::STATUS_COLUMN,
-            Subscription::BILLING_ON_COLUMN,
-            Subscription::ACTIVATED_ON_COLUMN,
-            Subscription::TRIAL_ENDS_ON_COLUMN,
-            Subscription::CANCELLED_ON_COLUMN,
-            Subscription::CREATED_AT_COLUMN
-        ]);
-
-        $subscription = $this->save($user, $store, $pack, $billing->toArray());
-
-        $this->createScriptTag($store);
-
-        return $subscription;
     }
     
     public function startTrial(User $user, Pack $pack): Subscription
@@ -137,24 +72,8 @@ class SubscriptionService extends Service
         return $subscription;
     }
 
-    public function createScriptTag(Store $store)
+    public function cancelSubscription(User $user, Subscription $subscription): void
     {
-        if (is_null($store->script_tag_id)) {
-            $scriptTag = collect($this->shopifyService->createScriptTag($store));
-            $this->storeService->update($store, [
-                Store::SCRIPT_TAG_ID_COLUMN => $scriptTag->get('id')
-            ]);
-        }
-    }
-
-    public function cancelSubscription(User $user, Store $store, Subscription $subscription): void
-    {
-        if ($subscription->charge_id === Subscription::CHARGE_CANCELLD) {
-            throw new Exception('Subscription already cancelled');
-        }
-
-        $this->shopifyService->cancelSubscription($store, $subscription->charge_id);
-
         $this->subscriptionRepository->delete($subscription->id);
 
         $subscription->load('pack');
@@ -167,22 +86,5 @@ class SubscriptionService extends Service
     public function paginateWithRelations(?int $page = null): LengthAwarePaginator
     {
         return $this->subscriptionRepository->paginateWithRelations($page);
-    }
-
-    public function countByPeriod(Carbon $startDate, carbon $endDate, array $conditions = []): int
-    {
-        return Subscription::query()
-                    ->whereDate(
-                        Store::CREATED_AT,
-                        '>=',
-                        $startDate
-                    )
-                    ->whereDate(
-                        Store::CREATED_AT,
-                        '<=',
-                        $endDate
-                    )
-                    ->where($conditions)
-                    ->count();
     }
 }

@@ -16,19 +16,14 @@ use BADDIServices\SourceeApp\AppLogger;
 use BADDIServices\SourceeApp\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SourceeApp\Services\UserService;
-use BADDIServices\SourceeApp\Services\StoreService;
 
 class CancelController extends Controller
 {
-    /** @var StoreService */
-    private $storeService;
-    
     /** @var UserService */
     private $userService;
 
-    public function __construct(StoreService $storeService, UserService $userService)
+    public function __construct(UserService $userService)
     {
-        $this->storeService = $storeService;
         $this->userService = $userService;
     }
 
@@ -37,12 +32,7 @@ class CancelController extends Controller
         try {
             /** @var User */
             $user = Auth::user();
-            $user->load('store');
-
-            $store = $user->store;
-            abort_unless($store instanceof Store, Response::HTTP_NOT_FOUND, 'Store not found');
             
-            $this->storeService->delete($store);
             $this->userService->delete($user);
 
             return redirect()->route('landing');
