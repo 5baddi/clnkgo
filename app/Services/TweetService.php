@@ -36,6 +36,10 @@ class TweetService extends Service
             $filter === 'answered'
         );
 
+        $tweets = $tweets->filter(function ($tweet) {
+            return ! is_null($tweet->author);
+        });
+
         if ($filter === 'answered' && $user instanceof User) {
             $tweets = $tweets->filter(function ($tweet) use ($user) {
                 if ($tweet->answers->count() === 0) {

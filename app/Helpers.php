@@ -8,155 +8,56 @@ use Carbon\Carbon;
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-function extractDate(string $string)
+/**
+ * https://ielts.com.au/australia/prepare/article-how-to-write-the-date-correctly
+ */
+function extractDate(string $text): ?string
 {
-    $shortenize = function( $string ) {
-        return substr( $string, 0, 3 );
-      };
-    
-      // Define month name:
-      $month_names = array(
-        "january",
-        "february",
-        "march",
-        "april",
-        "may",
-        "june",
-        "july",
-        "august",
-        "september",
-        "october",
-        "november",
-        "december"
-      );
-      $short_month_names = array_map( $shortenize, $month_names );
-    
-      // Define day name
-      $day_names = array(
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-        "sunday"
-      );
-      $short_day_names = array_map( $shortenize, $day_names );
-    
-      // Define ordinal number
-      $ordinal_number = ['st', 'nd', 'rd', 'th'];
-    
-      $day = "";
-      $month = "";
-      $year = "";
-    
-      // Match dates: 01/01/2012 or 30-12-11 or 1 2 1985
-      preg_match( '/([0-9]?[0-9])[\.\-\/ ]+([0-1]?[0-9])[\.\-\/ ]+([0-9]{2,4})/', $string, $matches );
-      if ( $matches ) {
-        if ( $matches[1] )
-          $day = $matches[1];
-        if ( $matches[2] )
-          $month = $matches[2];
-        if ( $matches[3] )
-          $year = $matches[3];
-      }
-    
-      // Match dates: Sunday 1st March 2015; Sunday, 1 March 2015; Sun 1 Mar 2015; Sun-1-March-2015
-      preg_match('/(?:(?:' . implode( '|', $day_names ) . '|' . implode( '|', $short_day_names ) . ')[ ,\-_\/]*)?([0-9]?[0-9])[ ,\-_\/]*(?:' . implode( '|', $ordinal_number ) . ')?[ ,\-_\/]*(' . implode( '|', $month_names ) . '|' . implode( '|', $short_month_names ) . ')[ ,\-_\/]+([0-9]{4})/i', $string, $matches );
-      if ( $matches ) {
-        if ( empty( $day ) && $matches[1] )
-          $day = $matches[1];
-    
-        if ( empty( $month ) && $matches[2] ) {
-          $month = array_search( strtolower( $matches[2] ),  $short_month_names );
-    
-          if ( ! $month )
-            $month = array_search( strtolower( $matches[2] ),  $month_names );
-    
-          $month = $month !== "" ? $month + 1 : $month;
-        }
-    
-        if ( empty( $year ) && $matches[3] )
-          $year = $matches[3];
-      }
-    
-      // Match dates: March 1st 2015; March 1 2015; March-1st-2015
-      preg_match('/(' . implode( '|', $month_names ) . '|' . implode( '|', $short_month_names ) . ')[ ,\-_\/]*([0-9]?[0-9])[ ,\-_\/]*(?:' . implode( '|', $ordinal_number ) . ')?[ ,\-_\/]+([0-9]{4})/i', $string, $matches );
-      if ( $matches ) {
-        if ( empty( $month ) && $matches[1] ) {
-          $month = array_search( strtolower( $matches[1] ),  $short_month_names );
-    
-          if ( ! $month )
-            $month = array_search( strtolower( $matches[1] ),  $month_names );
-    
-          $month = $month !== "" ? $month + 1 : $month;
-        }
-    
-        if ( empty( $day ) && $matches[2] )
-          $day = $matches[2];
-    
-        if ( empty( $year ) && $matches[3] )
-          $year = $matches[3];
-      }
-    
-      // Match month name:
-      if ( empty( $month ) ) {
-        preg_match( '/(' . implode( '|', $month_names ) . ')/i', $string, $matches_month_word );
-        if ( $matches_month_word && $matches_month_word[1] )
-          $month = array_search( strtolower( $matches_month_word[1] ),  $month_names );
-    
-        // Match short month names
-        if ( empty( $month ) ) {
-          preg_match( '/(' . implode( '|', $short_month_names ) . ')/i', $string, $matches_month_word );
-          if ( $matches_month_word && $matches_month_word[1] )
-            $month = array_search( strtolower( $matches_month_word[1] ),  $short_month_names );
-        }
+    $text = strtolower($text);
 
-        $month = $month !== "" ? $month + 1 : $month;
-      }
-    
-      // Match 5th 1st day:
-      if ( empty( $day ) ) {
-        preg_match( '/([0-9]?[0-9])(' . implode( '|', $ordinal_number ) . ')/', $string, $matches_day );
-        if ( $matches_day && $matches_day[1] )
-          $day = $matches_day[1];
-      }
-    
-      // Match Year if not already setted:
-      if ( empty( $year ) ) {
-        preg_match( '/[0-9]{4}/', $string, $matches_year );
-        if ( $matches_year && $matches_year[0] )
-          $year = $matches_year[0];
-      }
-      if ( ! empty ( $day ) && ! empty ( $month ) && empty( $year ) ) {
-        preg_match( '/[0-9]{2}/', $string, $matches_year );
-        if ( $matches_year && $matches_year[0] )
-          $year = $matches_year[0];
-      }
-    
-      // Day leading 0
-      if ( 1 == strlen( $day ) )
-        $day = '0' . $day;
-    
-      // Month leading 0
-      if ( 1 == strlen( $month ) )
-        $month = '0' . $month;
-    
-      // Check year:
-      if ( 2 == strlen( $year ) && $year > 20 )
-        $year = '19' . $year;
-      else if ( 2 == strlen( $year ) && $year < 20 )
-        $year = '20' . $year;
-    
-      $date = array(
-        'year'  => $year,
-        'month' => $month,
-        'day'   => $day
-      );
+    $allRegex = [
+        "/[0-9]{2}/[0-9]{2}/[0-9]{4}/i",
+        "/[0-9]{2}.[0-9]{2}.[0-9]{4}/i",
+        "/[0-9]{2}.[0-9]{2}.[0-9]{2}/i",
+        "/[0-9]{2}-[0-9]{2}-[0-9]{4}/i",
+    ];
 
-      // Return false if nothing found:
-      if ( empty( $year ) && empty( $month ) && empty( $day ) )
-        return false;
-      else
-        return Carbon::parse("{$date['day']}/{$date['month']}/{$date['year']}")->toDateString();    
+    foreach($allRegex as $regex) {
+        preg_match_all($regex, $text, $dateMatches);
+        if (! is_null($dateMatches) && isset($dateMatches[0]) && ! is_null(array_key_last($dateMatches[0]))) {
+            $date = $dateMatches[0][array_key_last($dateMatches[0])];
+
+            return Carbon::parse($date)->toDateString();
+        }
+    }
+    
+    preg_match_all("/\d{2}\/\d{2}\/\d{4}/i", $text, $dateMatches);
+    if (! is_null($dateMatches) && isset($dateMatches[0]) && ! is_null(array_key_last($dateMatches[0]))) {
+        $date = $dateMatches[0][array_key_last($dateMatches[0])];
+
+        return Carbon::parse($date)->toDateString();
+    }
+    
+    preg_match_all("/this year/i", $text, $yearMatches);
+    if (! is_null($yearMatches) && isset($yearMatches[0]) && ! is_null(array_key_last($yearMatches[0]))) {
+        $year = $yearMatches[0][array_key_last($yearMatches[0])];
+
+        return Carbon::parse("last day of December {$year}")->toDateString();
+    }
+    
+    preg_match_all("/this month|january|february|march|april|may|june|july|august|september|october|november|december/i", $text, $monthMatches);
+    if (! is_null($monthMatches) && isset($monthMatches[0]) && ! is_null(array_key_last($monthMatches[0]))) {
+        $month = $monthMatches[0][array_key_last($monthMatches[0])];
+
+        return Carbon::parse("last day of {$month}")->toDateString();
+    }
+    
+    preg_match_all("/today|tomorrow|next week|sunday|monday|tuesday|wednesday|thursday|friday|saturday/i", $text, $dayMatches);
+    if (! is_null($dayMatches) && isset($dayMatches[0]) && ! is_null(array_key_last($dayMatches[0]))) {
+        $day = $dayMatches[0][array_key_last($dayMatches[0])];
+
+        return Carbon::parse("{$day} 23:59:59")->toDateString();
+    }
+
+    return null;
 }

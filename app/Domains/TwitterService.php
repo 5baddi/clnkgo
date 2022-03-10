@@ -18,12 +18,12 @@ use GuzzleHttp\Exception\ClientException;
 use BADDIServices\SourceeApp\Models\Tweet;
 use GuzzleHttp\Exception\RequestException;
 use BADDIServices\SourceeApp\Services\Service;
-use BADDIServices\SourceeApp\Services\TweetService;
-use BADDIServices\SourceeApp\Exceptions\Twitter\FetchByHashtagFailed;
-use BADDIServices\SourceeApp\Models\TwitterMedia;
 use BADDIServices\SourceeApp\Models\TwitterUser;
-use BADDIServices\SourceeApp\Services\TwitterMediaService;
+use BADDIServices\SourceeApp\Models\TwitterMedia;
+use BADDIServices\SourceeApp\Services\TweetService;
 use BADDIServices\SourceeApp\Services\TwitterUserService;
+use BADDIServices\SourceeApp\Services\TwitterMediaService;
+use BADDIServices\SourceeApp\Exceptions\Twitter\FetchByHashtagFailed;
 
 class TwitterService extends Service
 {
@@ -75,6 +75,7 @@ class TwitterService extends Service
      */
     public function fetchTweetsByHashtags(string $hashtag): Collection
     {
+        // dd(extractDate('this year'));
         try {
             if (strlen($hashtag) === 0 || $hashtag === "") {
                 return collect();
@@ -105,6 +106,7 @@ class TwitterService extends Service
 
             return collect();
         } catch (Exception | ClientException | RequestException $e) {
+            dd($e);
             AppLogger::error($e, 'twitter:fetch-by-hashtags');
 
             throw new FetchByHashtagFailed();
@@ -116,6 +118,7 @@ class TwitterService extends Service
         $parsedTweets = collect($tweets['data'])
             ->map(function ($tweet) use ($hashtag, $tweets) {
                 $dueAt = extractDate($tweet['text']);
+
                 preg_match("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $tweet['text'] ?? '', $emailMatches);
 
                 if (isset($tweet['attachments'], $tweet['attachments']['media_keys'])) {
@@ -157,7 +160,7 @@ class TwitterService extends Service
                         Tweet::AUTHOR_ID_COLUMN             => $tweet['author_id'],
                         Tweet::TEXT_COLUMN                  => $tweet['text'],
                         Tweet::LANG_COLUMN                  => $tweet['lang'] ?? null,
-                        Tweet::DUE_AT_COLUMN                => $dueAt !== false ? Carbon::parse($dueAt) : null,
+                        Tweet::DUE_AT_COLUMN                => ! is_null($dueAt) ? Carbon::parse($dueAt) : null,
                         Tweet::EMAIL_COLUMN                 => $emailMatches[0] ?? null,
                         Tweet::POSSIBLY_SENSITIVE_COLUMN    => $tweet['possibly_sensitive'] ?? false,
                         Tweet::IN_REPLY_TO_USER_ID_COLUMN   => $tweet['in_reply_to_user_id'] ?? null,
