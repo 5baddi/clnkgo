@@ -10,7 +10,6 @@ namespace BADDIServices\SourceeApp\Notifications\Subscription;
 
 use BADDIServices\SourceeApp\Models\Subscription;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class SubscriptionActivated extends Notification
