@@ -162,22 +162,3 @@
 @section('scripts')
     @include('partials.dashboard.scripts.form')
 @endsection
-
-@section('script')
-    document.addEventListener("DOMContentLoaded", function () {
-        var el = document.getElementById('select-currency');
-        window.Choices && (new Choices(el, {
-            classNames: {
-                containerInner: el.className,
-                input: 'form-control',
-                inputCloned: 'form-control-sm',
-                listDropdown: 'dropdown-menu',
-                itemChoice: 'dropdown-item',
-                activeState: 'show',
-                selectedState: 'active',
-            },
-            shouldSort: true,
-            searchEnabled: true,
-        }));
-    });
-@endsection

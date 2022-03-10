@@ -13,8 +13,8 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-@if($tweet->media->first())8 d-flex align-items-center @else 12 @endif">
-                        <p @if($tweet->media->first())style="line-height: 2rem;"@endif>{{ $tweet->getText() }}</p>
+                    <div class="col-@if($tweet->media->first())8 @else 12 @endif d-flex align-items-center">
+                        <p style="line-height: 2rem;">{{ $tweet->getText() }}</p>
                     </div>
                     @if($tweet->media->first())
                     <div class="col-4">
@@ -38,6 +38,22 @@
                 @if($tweet->due_at)
                 <span>Due {{ $tweet->due_at->diffForHumans() }}</span>
                 @endif
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Draft your Response</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <p>The Writer may indicate a preferred communication method in their request. Either a Twitter Direct Message (DM) or an email.</p>
+                        <p>Draft your response below and we will pre-populate a DM/Email for you when you click send. You will then have the chance to make any final changes before you submit.</p>
+                        <p>You can find out more about the Writer to tailor your response in the 'Posted by' section below.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
