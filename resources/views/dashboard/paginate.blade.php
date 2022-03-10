@@ -24,10 +24,10 @@
                 <line x1="4" y1="11" x2="20" y2="11"></line>
                 <rect x="8" y="15" width="2" height="2"></rect>
                 </svg>&nbsp;
-                <span>{{ $tweet->published_at->format('d M - h:i A') }}</span>
+                <span title="Published at">{{ $tweet->published_at->format('d M - h:i A') }}</span>
             </div>
             @if($tweet->due_at)
-            <span>Due {{ $tweet->due_at->diffForHumans() }}</span>
+            <span title="Due on">Due {{ $tweet->due_at->diffForHumans() }}</span>
             @endif
             </div>
         </div>
