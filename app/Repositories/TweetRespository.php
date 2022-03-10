@@ -15,7 +15,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TweetRespository
 {
-    public function paginate(string $sort = 'desc', ?string $term = null, ?int $page = null, ?bool $withAnswers = false): LengthAwarePaginator
+    public function paginate(string $sort = 'desc', ?string $term = null, array $keywords = [], ?int $page = null, ?bool $withAnswers = false): LengthAwarePaginator
     {
         $relations = ['author'];
 
@@ -29,7 +29,17 @@ class TweetRespository
         if ($term !== null && strlen($term) > 0) {
             $query = $query->where(Tweet::TEXT_COLUMN, 'like', "%{$term}%");
         } else {
-            
+            if (count($keywords) > 0) {
+                $query = $query->where(Tweet::TEXT_COLUMN, 'like', "%{$keywords[0]}%");
+
+                unset($keywords[0]);
+            }
+        }
+
+        if (count($keywords) > 0) {
+            foreach($keywords as $keyword) {
+                $query = $query->orWhere(Tweet::TEXT_COLUMN, 'like', "%{$keyword}%");
+            }
         }
 
         $query->orderBy(Tweet::PUBLISHED_AT_COLUMN, $sort === 'asc' ? 'asc' : 'desc');

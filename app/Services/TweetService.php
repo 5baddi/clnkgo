@@ -12,6 +12,7 @@ use App\Models\User;
 use BADDIServices\SourceeApp\App;
 use BADDIServices\SourceeApp\Models\RequestAnswer;
 use BADDIServices\SourceeApp\Models\Tweet;
+use BADDIServices\SourceeApp\Models\UserFavoriteTweet;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Repositories\TweetRespository;
 
@@ -30,6 +31,7 @@ class TweetService extends Service
         $paginatedTweets = $this->tweetRespository->paginate(
             $sort === 'oldest' ? 'asc' : 'desc',
             $term,
+            $filter === 'keyword' && $user instanceof User ? $user->getKeywords() : [],
             $page,
             $filter === 'answered'
         );
@@ -46,6 +48,20 @@ class TweetService extends Service
                     ->where(RequestAnswer::TWEET_ID_COLUMN, $tweet->getId())
                     ->where(RequestAnswer::USER_ID_COLUMN, $user->getId())
                     ->first() instanceof RequestAnswer
+                );
+            });
+        }
+        
+        if ($filter === 'bookmarked' && $user instanceof User) {
+            $tweets = $tweets->filter(function ($tweet) use ($user) {
+                if ($user->favorite->count() === 0) {
+                    return false;
+                }
+
+                return ($user->favorite
+                    ->where(UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())
+                    ->where(UserFavoriteTweet::USER_ID_COLUMN, $user->getId())
+                    ->first() instanceof UserFavoriteTweet
                 );
             });
         }
