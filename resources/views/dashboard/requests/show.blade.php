@@ -41,8 +41,9 @@
                 @if($tweet->due_at)
                 <span title="Due on">Due {{ $tweet->due_at->diffForHumans() }}</span>
                 @endif
+                @if($answer && ! $answer->isAnswered())
                 <div class="card-actions">
-                    <form action="{{ route(sprintf('dashboard.%sbookmark.tweet', $inFavorite ? 'un' : ''), ['id' => $tweet->getId()]) }}" method="POST">
+                    <form action="{{ route('dashboard.requests.answered', ['id' => $tweet->getId()]) }}" method="POST">
                         @csrf
                         <button class="btn btn-default btn-xs" type="submit">
                             Response sent? Mark as answered&nbsp;
@@ -54,6 +55,7 @@
                         </button>
                     </form>
                 </div>
+                @endif
             </div>
         </div>
     </div>
@@ -70,17 +72,20 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <strong>Response not sent? Mark as unanswered</strong>
-                    </div>
-                    <div class="col-auto ms-auto">
-                        <label class="form-check form-switch m-0">
-                            <input class="form-check-input position-static" type="checkbox" checked/>
-                        </label>
-                    </div>
-                  </div>
+            <div class="card-footer d-flex justify-content-between">
+                <div class="card-actions">
+                    <form action="{{ route('dashboard.requests.unanswered', ['id' => $tweet->getId()]) }}" method="POST">
+                        @csrf
+                        <button class="btn btn-default btn-xs" type="submit">
+                            Response not sent? Mark as unanswered&nbsp;
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checks" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M7 12l5 5l10 -10"></path>
+                                <path d="M2 12l5 5m5 -5l5 -5"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -102,7 +107,7 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label required">Your response</label>
-                            <textarea rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') }}</textarea>
+                            <textarea rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') ?? ($answer ? $answer->content : '') }}</textarea>
                             @if($errors->has('content'))
                                 <div class="invalid-feedback d-block">
                                     {{ $errors->first('content') }}

@@ -30,8 +30,8 @@ class RequestAnswerRepository
         return RequestAnswer::query()
             ->where(
                 [
-                    RequestAnswer::TWEET_ID_COLUMN  => $userId,
-                    RequestAnswer::USER_ID_COLUMN   => $tweetId
+                    RequestAnswer::USER_ID_COLUMN  => $userId,
+                    RequestAnswer::TWEET_ID_COLUMN => $tweetId
                 ]
             )
             ->first();
