@@ -14,10 +14,16 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TweetRespository
 {
-    public function paginate(?int $page = null): LengthAwarePaginator
+    public function paginate(?int $page = null, ?bool $withAnswers = false): LengthAwarePaginator
     {
+        $relations = ['author'];
+
+        if ($withAnswers === true) {
+            $relations[] = 'answers';
+        }
+
         return Tweet::query()
-            ->with(['author'])
+            ->with($relations)
             ->orderBy(Tweet::PUBLISHED_AT_COLUMN, 'desc')
             ->paginate(10, ['*'], 'page', $page);
     }
