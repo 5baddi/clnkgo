@@ -24,6 +24,18 @@ class RequestAnswerRepository
         return RequestAnswer::query()
             ->find($id);
     }
+    
+    public function find(string $userId, string $tweetId): ?RequestAnswer
+    {
+        return RequestAnswer::query()
+            ->where(
+                [
+                    RequestAnswer::TWEET_ID_COLUMN  => $userId,
+                    RequestAnswer::USER_ID_COLUMN   => $tweetId
+                ]
+            )
+            ->first();
+    }
 
     public function save(array $attributes): RequestAnswer
     {

@@ -18,4 +18,9 @@ class RequestAnswer extends ModelEntity
     public const CONTENT_COLUMN = 'content';
     public const ANSWERED_COLUMN = 'answered';
     public const MAIL_SENT_AT_COLUMN = 'mail_sent_at';
+
+    public function isAnswered(): bool
+    {
+        return (bool)$this->getAttribute(self::ANSWERED_COLUMN);
+    }
 }

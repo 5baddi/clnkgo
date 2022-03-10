@@ -41,6 +41,7 @@
             </div>
         </div>
     </div>
+    @if($answer && $answer->isAnswered())
     <div class="col-12 mt-4">
         <div class="card">
             <div class="card-header">
@@ -67,6 +68,8 @@
             </div>
         </div>
     </div>
+    @endif
+    @if(! $answer || ! $answer->isAnswered())
     <div class="col-12 mt-4">
         <form class="card" action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank">
             @csrf
@@ -139,6 +142,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 @endsection
 
