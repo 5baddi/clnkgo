@@ -26,7 +26,13 @@ class PaginateController extends DashboardController
 
     public function __invoke(AnalyticsRequest $request)
     {
-        $tweets = $this->tweetService->paginate($request->query('page'));
+        $tweets = $this->tweetService->paginate(
+            $request->query('page'), 
+            $request->query('term'), 
+            $request->query('sort'), 
+            $request->query('filter'), 
+            $request->query('filter') !== '-1' ? $this->user : null
+        );
 
         return view('dashboard.paginate', [
             'user'      => $this->user,

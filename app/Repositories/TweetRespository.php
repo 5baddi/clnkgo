@@ -15,7 +15,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TweetRespository
 {
-    public function paginate(string $sort = 'desc', ?string $term = null, array $keywords = [], ?int $page = null, ?bool $withAnswers = false): LengthAwarePaginator
+    public function search(string $sort = 'desc', ?string $term = null, array $keywords = [], ?int $page = null, ?bool $withAnswers = false): Collection
     {
         $relations = ['author'];
 
@@ -44,7 +44,7 @@ class TweetRespository
 
         $query->orderBy(Tweet::PUBLISHED_AT_COLUMN, $sort === 'asc' ? 'asc' : 'desc');
 
-        return $query->paginate(App::PAGINATION_LIMIT, ['*'], 'page', $page);
+        return $query->get();
     }
     
     public function paginateByHashtags(array $hashtags = [], ?int $page = null): LengthAwarePaginator

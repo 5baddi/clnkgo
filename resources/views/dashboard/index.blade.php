@@ -57,6 +57,17 @@
       </div>
     </div>
     <div class="row row-cards mt-4">
+      @if ($tweets->count() === 0)
+      <div class="card">
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-12">
+              <h4>You don't have any requests yet.<br/>today could be the day! 😉</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
       @include('dashboard.paginate')
       <div class="custom-loader">Loading...</div>
     </div>

@@ -28,15 +28,13 @@ class TweetService extends Service
 
     public function paginate(?int $page = null, string $term = null, string $sort = null, string $filter = null, ?User $user = null): LengthAwarePaginator
     {
-        $paginatedTweets = $this->tweetRespository->paginate(
+        $tweets = $this->tweetRespository->search(
             $sort === 'oldest' ? 'asc' : 'desc',
             $term,
             $filter === 'keyword' && $user instanceof User ? $user->getKeywords() : [],
             $page,
             $filter === 'answered'
         );
-
-        $tweets = $paginatedTweets->getCollection();
 
         if ($filter === 'answered' && $user instanceof User) {
             $tweets = $tweets->filter(function ($tweet) use ($user) {
@@ -66,7 +64,7 @@ class TweetService extends Service
             });
         }
 
-        return new LengthAwarePaginator($tweets, $tweets->count(), App::PAGINATION_LIMIT);
+        return new LengthAwarePaginator($tweets->forPage($page, App::PAGINATION_LIMIT), $tweets->count(), App::PAGINATION_LIMIT, $page);
     }
     
     public function paginateByHashtags(array $hashtags, ?int $page = null): LengthAwarePaginator
