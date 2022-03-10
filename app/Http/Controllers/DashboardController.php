@@ -37,9 +37,10 @@ class DashboardController extends BaseController
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
+            /** @var UserService */
             $this->userService = app(UserService::class);
 
-            $this->user = Auth::user();
+            $this->user = Auth::id() !== null ? $this->userService->findById(Auth::id()) : null;
             $this->subscription = $this->user->subscription;
 
             $this->subscription->load('pack');

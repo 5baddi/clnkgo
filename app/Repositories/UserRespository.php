@@ -34,6 +34,13 @@ class UserRespository
                     ->first();
     }
     
+    public function findById(string $id): ?User
+    {
+        return User::query()
+                    ->with(['subscription', 'favorite'])
+                    ->find($id);
+    }
+    
     public function findByEmail(string $email): ?User
     {
         return User::query()

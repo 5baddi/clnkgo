@@ -37,6 +37,7 @@ class IndexController extends DashboardController
 
         return view('dashboard.index', [
             'title'                             => 'Dashboard',
+            'user'                              => $this->user,
             'tweets'                            => $tweets,
             'liveRequests'                      => $tweets->total(),
             'last24hRequests'                   => $countOfLast24Hours,

@@ -29,6 +29,7 @@ class PaginateController extends DashboardController
         $tweets = $this->tweetService->paginate($request->query('page'));
 
         return view('dashboard.paginate', [
+            'user'      => $this->user,
             'tweets'    => $tweets
         ]);
     }

@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use BADDIServices\SourceeApp\Models\Subscription;
 use BADDIServices\SourceeApp\Models\Authenticatable;
+use BADDIServices\SourceeApp\Models\UserFavoriteTweet;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -55,6 +57,11 @@ class User extends Authenticatable
     public function subscription(): HasOne
     {
         return $this->hasOne(Subscription::class, 'user_id');
+    }
+    
+    public function favorite(): HasMany
+    {
+        return $this->hasMany(UserFavoriteTweet::class, 'user_id');
     }
 
     public function setEmailAttribute($value): self
