@@ -63,14 +63,8 @@ class Kernel extends HttpKernel
         'signed'                => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'              => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'              => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'has.store'             => \BADDIServices\SourceeApp\Http\Middleware\HasStore::class,
         'has.subscription'      => \BADDIServices\SourceeApp\Http\Middleware\HasSubscription::class,
-        'cors'                  => \BADDIServices\SourceeApp\Http\Middleware\Cors::class,
-        'is.affiliate'          => \BADDIServices\SourceeApp\Http\Middleware\AffiliateAccount::class,
         'client'                => \BADDIServices\SourceeApp\Http\Middleware\Client::class,
-        'admin'                 => \BADDIServices\SourceeApp\Http\Middleware\SuperAdmin::class,
-        'signin.with.app'       => \BADDIServices\SourceeApp\Http\Middleware\SignInWithShopifyApp::class,
-        'is-shopify-webhook'    => \BADDIServices\SourceeApp\Http\Middleware\IsShopifyWebhook::class,
     ];
 
     protected function bootstrappers()
