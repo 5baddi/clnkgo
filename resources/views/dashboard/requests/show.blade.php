@@ -10,6 +10,9 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Writer Request</h3>
+                <div class="card-actions">
+                    @include('dashboard.bookmark-button')
+                </div>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -38,6 +41,19 @@
                 @if($tweet->due_at)
                 <span title="Due on">Due {{ $tweet->due_at->diffForHumans() }}</span>
                 @endif
+                <div class="card-actions">
+                    <form action="{{ route(sprintf('dashboard.%sbookmark.tweet', $inFavorite ? 'un' : ''), ['id' => $tweet->getId()]) }}" method="POST">
+                        @csrf
+                        <button class="btn btn-default btn-xs" type="submit">
+                            Response sent? Mark as answered&nbsp;
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checks" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M7 12l5 5l10 -10"></path>
+                                <path d="M2 12l5 5m5 -5l5 -5"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -71,43 +87,45 @@
     @endif
     @if(! $answer || ! $answer->isAnswered())
     <div class="col-12 mt-4">
-        <form class="card" action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank">
-            @csrf
+        <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Draft your Response</h3>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <p>The Writer may indicate a preferred communication method in their request. Either a Twitter Direct Message (DM) or an email.</p>
-                        <p>Draft your response below and we will pre-populate a DM/Email for you when you click send. You will then have the chance to make any final changes before you submit.</p>
-                        <p>You can find out more about the Writer to tailor your response in the 'Posted by' section below.</p>
-                    </div>
-                    <div class="col-12">
-                        <label class="form-label required">Your response</label>
-                        <textarea rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') }}</textarea>
-                        @if($errors->has('content'))
-                            <div class="invalid-feedback d-block">
-                                {{ $errors->first('content') }}
-                            </div>
-                        @endif
-                        <p class="small text-muted mt-2">To send your response as a Direct Message via Twitter <strong>(make sure you are signed in)</strong></p>
+            <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank">
+                @csrf
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>The Writer may indicate a preferred communication method in their request. Either a Twitter Direct Message (DM) or an email.</p>
+                            <p>Draft your response below and we will pre-populate a DM/Email for you when you click send. You will then have the chance to make any final changes before you submit.</p>
+                            <p>You can find out more about the Writer to tailor your response in the 'Posted by' section below.</p>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label required">Your response</label>
+                            <textarea rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') }}</textarea>
+                            @if($errors->has('content'))
+                                <div class="invalid-feedback d-block">
+                                    {{ $errors->first('content') }}
+                                </div>
+                            @endif
+                            <p class="small text-muted mt-2">To send your response as a Direct Message via Twitter <strong>(make sure you are signed in)</strong></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <div class="col-12 text-end">
-                    <button type="submit" class="btn btn-twitter ms-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                            <path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"></path>
-                        </svg>
-                        &nbsp;Send as a Direct Message
-                    </button>
+                <div class="card-footer">
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-twitter ms-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                                <path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"></path>
+                            </svg>
+                            &nbsp;Send as a Direct Message
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <div class="col-12 mt-4">
         <div class="card">
