@@ -27,6 +27,32 @@
             </div>
         </div>
     </div>
+    <div class="card mt-4">
+      <div class="card-body">
+        <form class="row" action="{{ route('dashboard') }}" method="GET">
+          <div class="col-6 form-group">
+            <label class="form-label">Search</label>
+            <input type="text" name="term" value="{{ old('term') ?? $term }}" class="form-control @if ($errors->has('term')) is-invalid @endif" placeholder="Enter search term..."/>
+          </div>
+          <div class="col-3 form-group">
+            <label class="form-label">Sort by</label>
+            <select name="sort" class="form-select @if ($errors->has('sort')) is-invalid @endif" placeholder="Sort by" id="sort-by" onchange="this.form.submit()">
+              <option @if (old('sort') === 'oldest' || $sort === 'oldest') selected @endif value="oldest">Oldest</option>
+              <option @if (old('sort') === 'newest' || $sort === 'newest' || is_null($sort)) selected @endif value="newest">Newest</option>
+            </select>
+          </div>
+          <div class="col-3 form-group">
+            <label class="form-label">Filter by</label>
+            <select name="filter" class="form-select @if ($errors->has('filter')) is-invalid @endif" placeholder="Filter by" id="filter-by" onchange="this.form.submit()">
+              <option selected value="-1">Choose a filter</option>
+              <option @if (old('filter') === 'keyword' || $filter === 'keyword') selected @endif value="keyword">Keyword Match</option>
+              <option @if (old('filter') === 'bookmarked' || $filter === 'bookmarked') selected @endif value="bookmarked">Bookmarked</option>
+              <option @if (old('filter') === 'answered' || $filter === 'answered') selected @endif value="answered">Answered Requests</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="row row-cards mt-4">
       @include('dashboard.paginate')
       <div class="custom-loader">Loading...</div>
@@ -39,6 +65,36 @@
 
 @section('script')
   $('document').ready(function() {
+    var sortByEl = document.getElementById('sort-by');
+    window.Choices && (new Choices(sortByEl, {
+        classNames: {
+            containerInner: sortByEl.className,
+            input: 'form-control',
+            inputCloned: 'form-control-sm',
+            listDropdown: 'dropdown-menu',
+            itemChoice: 'dropdown-item',
+            activeState: 'show',
+            selectedState: 'active',
+        },
+        shouldSort: false,
+        searchEnabled: false,
+    }));
+    
+    var filterByEl = document.getElementById('filter-by');
+    window.Choices && (new Choices(filterByEl, {
+        classNames: {
+            containerInner: filterByEl.className,
+            input: 'form-control',
+            inputCloned: 'form-control-sm',
+            listDropdown: 'dropdown-menu',
+            itemChoice: 'dropdown-item',
+            activeState: 'show',
+            selectedState: 'active',
+        },
+        shouldSort: false,
+        searchEnabled: false,
+    }));
+
     var page = 1;
 
     $(window).scroll(function(){

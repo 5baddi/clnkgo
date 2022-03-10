@@ -28,7 +28,14 @@ class IndexController extends DashboardController
 
     public function __invoke(AnalyticsRequest $request)
     {
-        $tweets = $this->tweetService->paginate($request->query('page'), false);
+        $tweets = $this->tweetService->paginate(
+            $request->query('page'), 
+            $request->query('term'), 
+            $request->query('sort'), 
+            $request->query('filter'), 
+            $request->query('filter') !== '-1' ? $this->user : null
+        );
+
         $countOfLast24Hours = $tweets->getCollection()
             ->filter(function ($tweet) {
                 return $tweet->published_at->greaterThan(Carbon::now()->subHours(24)) && ($tweet->due_at === null || Carbon::now()->endOfDay()->greaterThan($tweet->due_at));
@@ -38,6 +45,9 @@ class IndexController extends DashboardController
         return view('dashboard.index', [
             'title'                             => 'Dashboard',
             'user'                              => $this->user,
+            'sort'                              => $request->query('sort'),
+            'term'                              => $request->query('term'),
+            'filter'                            => $request->query('filter'),
             'tweets'                            => $tweets,
             'liveRequests'                      => $tweets->total(),
             'last24hRequests'                   => $countOfLast24Hours,

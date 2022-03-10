@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SourceeApp\Services;
 
+use App\Models\User;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Repositories\TweetRespository;
@@ -22,9 +23,18 @@ class TweetService extends Service
         $this->tweetRespository = $tweetRespository;
     }
 
-    public function paginate(?int $page = null, ?bool $withAnswers = false): LengthAwarePaginator
+    public function paginate(?int $page = null, string $term = null, string $sort = null, string $filter = null, ?User $user = null, ?bool $withAnswers = false): LengthAwarePaginator
     {
-        return $this->tweetRespository->paginate($page, $withAnswers);
+        $conditions = [];
+
+        $paginatedTweets = $this->tweetRespository->paginate(
+            $sort === 'oldest' ? 'asc' : 'desc',
+            $page, 
+            $conditions, 
+            $withAnswers
+        );
+
+        return $paginatedTweets;
     }
     
     public function paginateByHashtags(array $hashtags, ?int $page = null): LengthAwarePaginator

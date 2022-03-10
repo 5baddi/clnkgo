@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rules\In;
+
 class AnalyticsRequest extends PaginationRequest
 {
     /**
@@ -28,6 +30,9 @@ class AnalyticsRequest extends PaginationRequest
                 'end-date'      =>  ['nullable', 'date', 'date_format:Y-m-d'],
                 'ap'            =>  ['nullable', 'integer'],
                 'pp'            =>  ['nullable', 'integer'],
+                'term'          =>  ['nullable', 'string', 'min:1'],
+                'sort'          =>  ['nullable', 'string', new In(['oldest', 'newest'])],
+                'filter'        =>  ['nullable', 'string', new In([-1, 'keyword', 'bookmarked', 'answered'])],
             ]
         );
     }
