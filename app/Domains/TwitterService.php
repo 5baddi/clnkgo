@@ -157,7 +157,7 @@ class TwitterService extends Service
                         Tweet::AUTHOR_ID_COLUMN             => $tweet['author_id'],
                         Tweet::TEXT_COLUMN                  => $tweet['text'],
                         Tweet::LANG_COLUMN                  => $tweet['lang'] ?? null,
-                        Tweet::DUE_AT_COLUMN                => null,
+                        Tweet::DUE_AT_COLUMN                => $dueAt !== false ? Carbon::parse($dueAt) : null,
                         Tweet::EMAIL_COLUMN                 => $emailMatches[0] ?? null,
                         Tweet::POSSIBLY_SENSITIVE_COLUMN    => $tweet['possibly_sensitive'] ?? false,
                         Tweet::IN_REPLY_TO_USER_ID_COLUMN   => $tweet['in_reply_to_user_id'] ?? null,

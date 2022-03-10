@@ -28,6 +28,7 @@ class IndexController extends DashboardController
 
     public function __invoke(AnalyticsRequest $request)
     {
+        dd(extractDate(' some text 01/01/2012 some text'));
         $tweets = $this->tweetService->paginate(
             $request->query('page'), 
             $request->query('term'), 
