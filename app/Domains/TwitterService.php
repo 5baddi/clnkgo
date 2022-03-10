@@ -35,6 +35,7 @@ class TwitterService extends Service
     const RECENT_SEARCH_ENDPOINT = "tweets/search/recent";
     const TWEET_URL = "https://twitter.com/{authorId}/status/{tweetId}";
     const USER_URL = "https://twitter.com/{username}";
+    const DM_URL = "https://twitter.com/messages/compose?recipient_id={userId}&text={text}";
 
     /** @var Client */
     private $client;
@@ -59,6 +60,14 @@ class TwitterService extends Service
             'debug'         => false,
             'http_errors'   => false,
         ]);
+    }
+
+    public function getDMLink(string $userId, string $text): string
+    {
+        $url = (string)Str::replace("{userId}", $userId, self::DM_URL);
+        $url = (string)Str::replace("{text}", $text, $url);
+
+        return $url;
     }
 
     /**

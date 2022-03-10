@@ -68,7 +68,8 @@
         </div>
     </div>
     <div class="col-12 mt-4">
-        <div class="card">
+        <form class="card" action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank">
+            @csrf
             <div class="card-header">
                 <h3 class="card-title">Draft your Response</h3>
             </div>
@@ -81,7 +82,7 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label required">Your response</label>
-                        <textarea rows="5" maxlength="{{ \BADDIServices\SourceeApp\App::TWEET_CHARACTERS_LIMIT }}" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') }}</textarea>
+                        <textarea rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') }}</textarea>
                         @if($errors->has('content'))
                             <div class="invalid-feedback d-block">
                                 {{ $errors->first('content') }}
@@ -103,7 +104,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="col-12 mt-4">
         <div class="card">

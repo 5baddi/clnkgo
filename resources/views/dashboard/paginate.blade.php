@@ -1,6 +1,6 @@
 @foreach ($tweets as $tweet)
     <div class="col-12">
-        <a class="card card-link" href="{{ route('dashboard.requests', ['id' => $tweet->getId()]) }}">
+        <a class="card card-link" href="{{ route('dashboard.requests.show', ['id' => $tweet->getId()]) }}">
         <div class="card-body">
             <div class="row">
             <div class="col-auto">
