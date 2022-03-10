@@ -16,14 +16,14 @@ function extractDate(string $text): ?string
     $text = strtolower($text);
 
     $allRegex = [
-        "/[0-9]{2}/[0-9]{2}/[0-9]{4}/i",
-        "/[0-9]{2}.[0-9]{2}.[0-9]{4}/i",
-        "/[0-9]{2}.[0-9]{2}.[0-9]{2}/i",
-        "/[0-9]{2}-[0-9]{2}-[0-9]{4}/i",
+        "[0-9]{2}\/[0-9]{2}\/[0-9]{4}",
+        "[0-9]{2}.[0-9]{2}.[0-9]{4}",
+        "[0-9]{2}.[0-9]{2}.[0-9]{2}",
+        "[0-9]{2}-[0-9]{2}-[0-9]{4}",
     ];
 
     foreach($allRegex as $regex) {
-        preg_match_all($regex, $text, $dateMatches);
+        preg_match_all("/{$regex}/i", $text, $dateMatches);
         if (! is_null($dateMatches) && isset($dateMatches[0]) && ! is_null(array_key_last($dateMatches[0]))) {
             $date = $dateMatches[0][array_key_last($dateMatches[0])];
 
