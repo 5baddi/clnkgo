@@ -142,6 +142,41 @@
             </div>
         </div>
     </div>
+    <div class="col-12 mt-4">
+        <h2>Posted by</h2>
+        <div class="card card-link">
+            <div class="card-cover card-cover-blurred text-center">
+              <span class="avatar avatar-xl avatar-thumb avatar-rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? 'https://abs.twimg.com/sticky/default_profile_images/default_profile.png' }})"></span>
+            </div>
+            <div class="card-body text-center">
+                <div class="row">
+                    <div class="card-title mb-1">{{ $tweet->author->name }}</div>
+                    <div class="text-muted">{{ '@' . $tweet->author->username }}</div>
+                    <p class="mt-4">{{ $tweet->author->description }}</p>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    @if($tweet->author->location)
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <circle cx="12" cy="11" r="3"></circle>
+                        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+                    </svg>&nbsp;
+                    <span title="Published at">{{ $tweet->author->location }}</span>
+                    @endif
+                    @if($tweet->author->email)
+                    <svg style="margin-left: 2rem;" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                        <polyline points="3 7 12 13 21 7"></polyline>
+                    </svg>&nbsp;
+                    <span title="Email">{{ $tweet->author->email }}</span>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
     @endif
 </div>
 @endsection

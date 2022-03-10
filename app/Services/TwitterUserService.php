@@ -10,7 +10,6 @@ namespace BADDIServices\SourceeApp\Services;
 
 use BADDIServices\SourceeApp\Models\TwitterUser;
 use BADDIServices\SourceeApp\Repositories\TwitterUserRespository;
-use Illuminate\Support\Arr;
 
 class TwitterUserService extends Service
 {
@@ -36,6 +35,7 @@ class TwitterUserService extends Service
                 TwitterUser::VERIFIED_COLUMN,
                 TwitterUser::PROTECTED_COLUMN,
                 TwitterUser::PROFILE_IMAGE_URL_COLUMN,
+                TwitterUser::PROFILE_BANNER_URL_COLUMN,
                 TwitterUser::DESCRIPTION_COLUMN,
                 TwitterUser::PINNED_TWEET_ID_COLUMN,
                 TwitterUser::LOCATION_COLUMN,

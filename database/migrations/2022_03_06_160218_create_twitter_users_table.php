@@ -21,6 +21,7 @@ class CreateTwitterUsersTable extends Migration
             $table->string('url')->nullable();
             $table->longText('description')->nullable();
             $table->string('profile_image_url')->nullable();
+            $table->string('profile_banner_url')->nullable();
             $table->boolean('verified')->nullable();
             $table->boolean('protected')->nullable();
             $table->string('location')->nullable();

@@ -19,6 +19,7 @@ class TwitterUser extends ModelEntity
     public const URL_COLUMN = 'url';
     public const DESCRIPTION_COLUMN = 'description';
     public const PROFILE_IMAGE_URL_COLUMN = 'profile_image_url';
+    public const PROFILE_BANNER_URL_COLUMN = 'profile_banner_url';
     public const VERIFIED_COLUMN = 'verified';
     public const REGISTERED_AT_COLUMN = 'registered_at';
     public const PROTECTED_COLUMN = 'protected';

@@ -175,6 +175,11 @@ class TwitterService extends Service
         collect(isset($tweets['includes']['users']) ? $tweets['includes']['users'] : [])
             ->each(function ($user) {
                 preg_match("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $user['description'] ?? '', $emailMatches);
+                
+                if (! isset($emailMatches[0]) && isset($user['location']) && filter_var($user['location'], FILTER_VALIDATE_EMAIL)) {
+                    $emailMatches[0] = $user['location'];
+                    $user['location'] = null;
+                }
 
                 $this->twitterUserService->save(
                     [
@@ -185,6 +190,7 @@ class TwitterService extends Service
                         TwitterUser::VERIFIED_COLUMN              => $user['verified'] ?? false,
                         TwitterUser::PROTECTED_COLUMN             => $user['protected'] ?? false,
                         TwitterUser::PROFILE_IMAGE_URL_COLUMN     => $user['profile_image_url'] ? (string)Str::replace('_normal', '', $user['profile_image_url']) : null,
+                        TwitterUser::PROFILE_BANNER_URL_COLUMN    => $user['profile_banner_url'] ?? null,
                         TwitterUser::DESCRIPTION_COLUMN           => $user['description'] ?? null,
                         TwitterUser::PINNED_TWEET_ID_COLUMN       => $user['pinned_tweet_id'] ?? null,
                         TwitterUser::LOCATION_COLUMN              => $user['location'] ?? null,
