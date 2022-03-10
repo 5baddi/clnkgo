@@ -37,11 +37,11 @@
                     <rect x="8" y="15" width="2" height="2"></rect>
                   </svg>&nbsp;
                   <span title="Published at">{{ $tweet->published_at->format('d M - h:i A') }}</span>
+                  @if($tweet->due_at)
+                  <span title="Due on" style="margin-left: 2rem !important;">Due {{ $tweet->due_at->diffForHumans() }}</span>
+                  @endif
                 </div>
-                @if($tweet->due_at)
-                <span title="Due on">Due {{ $tweet->due_at->diffForHumans() }}</span>
-                @endif
-                @if($answer && ! $answer->isAnswered())
+                @if(! $answer || ! $answer->isAnswered())
                 <div class="card-actions">
                     <form action="{{ route('dashboard.requests.answered', ['id' => $tweet->getId()]) }}" method="POST">
                         @csrf
