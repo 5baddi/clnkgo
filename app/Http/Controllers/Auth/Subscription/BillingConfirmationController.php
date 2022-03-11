@@ -9,25 +9,20 @@
 namespace BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription;
 
 use Throwable;
-use App\Models\User;
-use App\Http\Controllers\Controller;
 use BADDIServices\SourceeApp\AppLogger;
-use Illuminate\Support\Facades\Auth;
 use BADDIServices\SourceeApp\Models\Pack;
-use BADDIServices\SourceeApp\Models\Store;
 use BADDIServices\SourceeApp\Entities\Alert;
 use BADDIServices\SourceeApp\Events\Subscription\SubscriptionActivated as SubscriptionSubscriptionActivated;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SourceeApp\Models\Subscription;
 use BADDIServices\SourceeApp\Services\PackService;
 use BADDIServices\SourceeApp\Services\SubscriptionService;
-use BADDIServices\SourceeApp\Exceptions\Shopify\AcceptPaymentFailed;
-use BADDIServices\SourceeApp\Http\Requests\BillingConfirmationRequest;
 use BADDIServices\SourceeApp\Notifications\Subscription\SubscriptionActivated;
-use BADDIServices\SourceeApp\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 
-class BillingConfirmationController extends Controller
+class BillingConfirmationController extends DashboardController
 {
     /** @var PackService */
     private $packService;
@@ -37,37 +32,35 @@ class BillingConfirmationController extends Controller
 
     public function __construct(PackService $packService, SubscriptionService $subscriptionService)
     {
+        parent::__construct();
+
         $this->packService = $packService;
         $this->subscriptionService = $subscriptionService;
     }
 
-    public function __invoke(string $packId, BillingConfirmationRequest $request)
+    public function __invoke(string $packId)
     {
         try {
-            /** @var User */
-            $user = Auth::user();
-            $user->load('store');
-
-            $store = $user->store;
-            abort_unless($store instanceof Store, Response::HTTP_NOT_FOUND, 'Store not found');
-            
             $pack = $this->packService->findById($packId);
             abort_unless($pack instanceof Pack, Response::HTTP_NOT_FOUND, 'No pack selected');
 
-            $subscription = $this->subscriptionService->confirmBilling($user, $store, $pack, $request->query('charge_id'));
-            if (! $subscription instanceof Subscription || $subscription->status !== Subscription::CHARGE_ACCEPTED) {
-                return redirect()
-                    ->route('subscription.select.pack')
-                    ->with(
-                        'alert',
-                        new Alert('Plan not activated please try to accept the billiing')
-                    );
-            }
+            $subscription = $this->subscriptionService->save(
+                $this->user,
+                [
+                    Subscription::PACK_ID_COLUMN        => $pack->getId(),
+                    Subscription::STATUS_COLUMN         => Subscription::CHARGE_ACCEPTED,
+                    Subscription::BILLING_ON_COLUMN     => Carbon::now(),
+                    Subscription::ACTIVATED_ON_COLUMN   => Carbon::now(),
+                    Subscription::ENDS_ON_COLUMN        => $pack->interval === 'month' ? Carbon::now()->addMonth(1) : Carbon::now()->addYear(1),
+                    Subscription::TRIAL_ENDS_ON_COLUMN  => null,
+                    Subscription::CANCELLED_ON_COLUMN   => null
+                ]
+            );
 
-            $subscription = $this->subscriptionService->loadRelations($subscription);
-            $user->notify(new SubscriptionActivated($subscription));
+            $subscription->load(['user', 'pack']);
+            $this->user->notify(new SubscriptionActivated($subscription));
 
-            Event::dispatch(new SubscriptionSubscriptionActivated($user, $subscription));
+            Event::dispatch(new SubscriptionSubscriptionActivated($this->user, $subscription));
 
             return redirect()
                 ->route('dashboard')
@@ -75,18 +68,11 @@ class BillingConfirmationController extends Controller
                     'alert',
                     new  Alert(ucwords($pack->name) . ' plan activated successfully', 'success')
                 );
-        } catch (AcceptPaymentFailed | IntegateAppLayoutToThemeFailed $e) {
-            return redirect()
-                ->route('subscription.select.pack')
-                ->with(
-                    'alert',
-                    new Alert($e->getMessage())
-                ); 
         } catch (Throwable $e) {
-            AppLogger::setStore($store ?? null)->error($e, 'store:confirm-billing', ['playload' => $request->all()]);
+            AppLogger::error($e, 'store:confirm-billing', ['pack' => $packId]);
 
             return redirect()
-                ->route('subscription.select.pack')
+                ->route('dashboard.plan.upgrade')
                 ->with(
                     'alert',
                     new Alert('Internal server error')

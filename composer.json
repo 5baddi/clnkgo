@@ -21,7 +21,8 @@
         "guzzlehttp/guzzle": "^7.3",
         "imliam/laravel-env-set-command": "^1.3",
         "laravel/framework": "^8.40",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "stripe/stripe-php": "^7.116"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

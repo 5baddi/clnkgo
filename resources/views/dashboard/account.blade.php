@@ -127,7 +127,7 @@
                 <div class="col-12 text-end">
                     <div class="d-flex justify-content-end">
                         @if($tab === 'plan')
-                        @if(! $user->subscription->isTrial())<a href="{{ route('dashboard.plan.cancel') }}" class="btn btn-danger">Cancel subscription</a>@endif
+                        @if(! $user->subscription->isTrial())<a href="{{ route('subscription.cancel') }}" class="btn btn-danger">Cancel subscription</a>@endif
                         <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-twitter" style="margin-left: .5rem;">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

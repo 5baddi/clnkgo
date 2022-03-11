@@ -9,37 +9,32 @@
 namespace BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription;
 
 use Throwable;
-use App\Models\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Models\Store;
-use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Services\SubscriptionService;
 
-class CancelController extends Controller
+class CancelController extends DashboardController
 {
-    /** @var UserService */
-    private $userService;
+    /** @var SubscriptionService */
+    private $subscriptionService;
 
-    public function __construct(UserService $userService)
+    public function __construct(SubscriptionService $subscriptionService)
     {
-        $this->userService = $userService;
+        parent::__construct();
+
+        $this->subscriptionService = $subscriptionService;
     }
 
     public function __invoke()
     {
         try {
-            /** @var User */
-            $user = Auth::user();
-            
-            $this->userService->delete($user);
+            $this->subscriptionService->cancelSubscription($this->user, $this->subscription);
 
-            return redirect()->route('landing');
+            return redirect()->route('dashboard.plan.upgrade');
         } catch(Throwable $e) {
-            AppLogger::setStore($store ?? null)->error($e, 'store:delete-account');
+            AppLogger::error($e, 'store:delete-account');
 
-            return redirect()->route('subscription.select.pack')->with('error', 'Internal server error');
+            return redirect()->back()->with('error', 'Internal server error');
         }
     }
 }

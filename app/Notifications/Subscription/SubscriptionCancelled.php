@@ -57,7 +57,7 @@ class SubscriptionCancelled extends Notification
             'name'              => $this->subscription->pack->name,
             'cancelled_at'      => $this->subscription->delete_at,
             'link'              =>  [
-                'url'           =>  route('subscription.select.pack'),
+                'url'           =>  route('dashboard.plan.upgrade'),
                 'label'         =>  'Choose a plan'
             ]
         ];

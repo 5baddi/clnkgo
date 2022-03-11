@@ -48,21 +48,6 @@ class Subscription extends ModelEntity
     ];
 
     /** @var array */
-    protected $fillable = [
-        self::USER_ID_COLUMN,
-        self::STORE_ID_COLUMN,
-        self::PACK_ID_COLUMN,
-        self::CHARGE_ID_COLUMN,
-        self::USAGE_ID_COLUMN,
-        self::STATUS_COLUMN,
-        self::BILLING_ON_COLUMN,
-        self::ACTIVATED_ON_COLUMN,
-        self::TRIAL_ENDS_ON_COLUMN,
-        self::CANCELLED_ON_COLUMN,
-        self::CREATED_AT_COLUMN
-    ];
-
-    /** @var array */
     protected $casts = [
         self::ACTIVATED_ON_COLUMN   => 'date',
         self::TRIAL_ENDS_ON_COLUMN  => 'date',
@@ -79,29 +64,22 @@ class Subscription extends ModelEntity
         return $this->belongsTo(Pack::class);
     }
     
-    public function store(): BelongsTo
-    {
-        return $this->belongsTo(Store::class);
-    }
-
-    public function isUsageSubscription(): bool
-    {
-        return $this->getAttribute(self::USAGE_ID_COLUMN) !== null;
-    }
-    
-    public function isChargeSubscription(): bool
-    {
-        return $this->getAttribute(self::CHARGE_ID_COLUMN) !== null;
-    }
-    
     public function getTrialEndsOn(): ?Carbon
     {
-        return $this->getAttribute(self::TRIAL_ENDS_ON_COLUMN);
+        if (is_null($this->getAttribute(self::TRIAL_ENDS_ON_COLUMN))) {
+            return null;
+        }
+
+        return Carbon::parse($this->getAttribute(self::TRIAL_ENDS_ON_COLUMN));
     }
     
     public function getEndsOn(): ?Carbon
     {
-        return $this->getAttribute(self::ENDS_ON_COLUMN);
+        if (is_null($this->getAttribute(self::ENDS_ON_COLUMN))) {
+            return null;
+        }
+
+        return Carbon::parse($this->getAttribute(self::ENDS_ON_COLUMN));
     }
     
     public function isTrial(): bool

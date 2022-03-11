@@ -63,18 +63,26 @@ class SubscriptionService extends Service
             Subscription::STATUS_COLUMN,
             Subscription::BILLING_ON_COLUMN,
             Subscription::ACTIVATED_ON_COLUMN,
+            Subscription::ENDS_ON_COLUMN,
             Subscription::TRIAL_ENDS_ON_COLUMN,
             Subscription::CANCELLED_ON_COLUMN
         ]);
 
-        $subscription = $this->subscriptionRepository->save($user->getId(), $billing->toArray());
-
-        return $subscription;
+        return $this->subscriptionRepository->save($user->getId(), $billing->toArray());
     }
 
     public function cancelSubscription(User $user, Subscription $subscription): void
     {
-        $this->subscriptionRepository->delete($subscription->id);
+        $this->subscriptionRepository->save(
+            $user->getId(),
+            [
+                Subscription::STATUS_COLUMN         => Subscription::CANCELLED_ON_COLUMN,
+                Subscription::ACTIVATED_ON_COLUMN   => null,
+                Subscription::TRIAL_ENDS_ON_COLUMN  => null,
+                Subscription::ENDS_ON_COLUMN        => null,
+                Subscription::CANCELLED_ON_COLUMN   => Carbon::now()
+            ]
+        );
 
         $subscription->load('pack');
 

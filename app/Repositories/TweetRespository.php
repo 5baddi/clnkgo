@@ -15,7 +15,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TweetRespository
 {
-    public function search(string $sort = 'desc', ?string $term = null, array $keywords = [], ?int $page = null, ?bool $withAnswers = false): Collection
+    public function search(string $sort = 'desc', ?string $term = null, array $keywords = [], ?bool $withAnswers = false): Collection
     {
         $relations = ['author'];
 

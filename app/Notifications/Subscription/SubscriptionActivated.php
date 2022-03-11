@@ -55,14 +55,14 @@ class SubscriptionActivated extends Notification
             'subject'           => sprintf(self::SUBJECT, ucwords($this->subscription->pack->name)),
             'subscription_id'   => $this->subscription->id, 
             'pack_id'           => $this->subscription->pack_id, 
-            'type'              => $this->subscription->pack->price_type,
+            'type'              => $this->subscription->pack->type,
             'price'             => $this->subscription->pack->price,
             'name'              => $this->subscription->pack->name,
-            'cycle'             => $this->subscription->pack->payment_cycle,
-            'currency_symbol'   => $this->subscription->pack->currency_symbol,
-            'is_paid'           => !is_null($this->subscription->paid_at),
+            'cycle'             => $this->subscription->pack->interval,
+            'currency_symbol'   => $this->subscription->pack->currency,
+            'is_paid'           => !is_null($this->subscription->billing_on),
             'link'              =>  [
-                'url'           =>  route('dashboard.customize.integrations'),
+                'url'           =>  route('dashboard'),
                 'label'         =>  'Getting started'
             ]
         ];

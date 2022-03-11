@@ -8,7 +8,6 @@
 
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Plan\UpgradePlanController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\CancelSubscriptionController;
     
 Route::middleware(['auth', 'has.subscription', 'client'])
     ->name('dashboard.plan')
@@ -19,5 +18,4 @@ Route::middleware(['auth', 'has.subscription', 'client'])
         });
 
         Route::get('/upgrade', UpgradePlanController::class)->name('.upgrade');
-        Route::get('/cancel', CancelSubscriptionController::class)->name('.cancel');
     });

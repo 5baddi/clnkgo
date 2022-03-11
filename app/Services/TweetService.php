@@ -32,7 +32,6 @@ class TweetService extends Service
             $sort === 'oldest' ? 'asc' : 'desc',
             $term,
             $filter === 'keyword' && $user instanceof User ? $user->getKeywords() : [],
-            $page,
             $filter === 'answered'
         );
 
