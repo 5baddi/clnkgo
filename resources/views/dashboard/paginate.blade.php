@@ -32,7 +32,7 @@
                         </svg>&nbsp;
                         <span title="Published at">{{ $tweet->published_at->format('d M - h:i A') }}</span>
                     </div>
-                    @if($tweet->due_at)
+                    @if($tweet->due_at && $tweet->due_at->greaterThan(now()))
                     <span title="Due on">Due {{ $tweet->due_at->diffForHumans() }}</span>
                     @endif
                 </div>

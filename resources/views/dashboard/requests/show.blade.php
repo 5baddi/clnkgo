@@ -37,7 +37,7 @@
                     <rect x="8" y="15" width="2" height="2"></rect>
                   </svg>&nbsp;
                   <span title="Published at">{{ $tweet->published_at->format('d M - h:i A') }}</span>
-                  @if($tweet->due_at)
+                  @if($tweet->due_at && $tweet->due_at->greaterThan(now()))
                   <span title="Due on" style="margin-left: 2rem !important;">Due {{ $tweet->due_at->diffForHumans() }}</span>
                   @endif
                 </div>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label required">Your response</label>
-                            <textarea rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') ?? ($answer ? $answer->content : '') }}</textarea>
+                            <textarea id="direct-content" rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') ?? ($answer ? $answer->content : '') }}</textarea>
                             @if($errors->has('content'))
                                 <div class="invalid-feedback d-block">
                                     {{ $errors->first('content') }}
@@ -137,11 +137,14 @@
             <div class="card-header">
                 <h3 class="card-title">Send your response as an email</h3>
             </div>
+            <form action="{{ route('dashboard.requests.mail', ['id' => $tweet->getId()]) }}" method="POST">
+            @csrf
+            <input type="hidden" name="content" id="mail-content"/>
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
                         <label class="form-label">Detected email</label>
-                        <input type="text" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? ($tweet->email ?? $tweet->author->email) }}" placeholder="Email address"/>
+                        <input type="text" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? ($answer->email ?? ($tweet->email ?? $tweet->author->email)) }}" placeholder="Email address"/>
                         <p class="small text-muted mt-2">💡 For most requests can identify if an email address exists. But occasionally it might need help, you can edit the address if needed.</p>
                         @if($errors->has('email'))
                             <div class="invalid-feedback d-block">
@@ -163,6 +166,7 @@
                     </button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
     <div class="col-12 mt-4">
@@ -206,4 +210,14 @@
 
 @section('scripts')
   @include('partials.dashboard.scripts.form')
+@endsection
+
+@section('script')
+    $('document').ready(function() {
+        $('#mail-content').val($('#direct-content').val());
+
+        $('#direct-content').on('change', function (event) {
+            $('#mail-content').val($('#direct-content').val());
+        });
+    });
 @endsection

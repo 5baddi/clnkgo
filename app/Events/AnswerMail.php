@@ -6,29 +6,38 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Events\Payouts;
+namespace BADDIServices\SourceeApp\Events;
 
 use App\Models\User;
+use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
-use BADDIServices\SourceeApp\Models\Store;
+use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Bus\Queueable;
+use BADDIServices\SourceeApp\Models\RequestAnswer;
 
-class PaymentWasSent
+class AnswerMail
 {
     use Dispatchable, InteractsWithSockets, SerializesModels, Queueable;
 
-    /** @var Store */
-    public $store;
+    /** @var string */
+    public $email;
     
     /** @var User */
     public $user;
+    
+    /** @var Tweet */
+    public $tweet;
+    
+    /** @var RequestAnswer */
+    public $answer;
 
-    public function __construct(Store $store, User $user)
+    public function __construct(string $email, User $user, Tweet $tweet, RequestAnswer $answer)
     {
-        $this->store = $store;
+        $this->email = $email;
         $this->user = $user;
+        $this->tweet = $tweet;
+        $this->answer = $answer;
     }
 
     /**

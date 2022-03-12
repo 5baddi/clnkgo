@@ -6,12 +6,11 @@ namespace App\Providers;
 use BADDIServices\SourceeApp\Events\WelcomeMail;
 use BADDIServices\SourceeApp\Events\Auth\ResetPassword;
 use BADDIServices\SourceeApp\Listeners\WelcomeMailFired;
+use BADDIServices\SourceeApp\Listeners\AnswerMailFired;
 use BADDIServices\SourceeApp\Listeners\Auth\ResetPasswordFired;
 // use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use BADDIServices\SourceeApp\Events\Affiliate\NewOrderCommission;
 use BADDIServices\SourceeApp\Events\Subscription\SubscriptionActivated;
 use BADDIServices\SourceeApp\Events\Subscription\SubscriptionCancelled;
-use BADDIServices\SourceeApp\Listeners\Affiliate\NewOrderCommissionFired;
 use BADDIServices\SourceeApp\Listeners\Subscription\SubscriptionActivatedFired;
 use BADDIServices\SourceeApp\Listeners\Subscription\SubscriptionCancelledFired;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -28,6 +27,10 @@ class EventServiceProvider extends ServiceProvider
             WelcomeMailFired::class,
         ],
 
+        AnswerMail::class => [
+            AnswerMailFired::class,
+        ],
+
         ResetPassword::class => [
             ResetPasswordFired::class,
         ],
@@ -39,10 +42,6 @@ class EventServiceProvider extends ServiceProvider
         SubscriptionCancelled::class => [
             SubscriptionCancelledFired::class,
         ],
-
-        NewOrderCommission::class => [
-            NewOrderCommissionFired::class,
-        ]
     ];
 
     public function boot()
