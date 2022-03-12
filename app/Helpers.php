@@ -20,44 +20,58 @@ function extractDate(string $text): ?string
         "[0-9]{2}.[0-9]{2}.[0-9]{4}",
         "[0-9]{2}.[0-9]{2}.[0-9]{2}",
         "[0-9]{2}-[0-9]{2}-[0-9]{4}",
+        "[0-9]{4}-[0-9]{2}-[0-9]{1,2}",
+        "due by (month|january|february|march|april|may|june|july|august|september|october|november|december) [0-9]{1,2}th, [0-9]{4} at [0-9]{1,2}-[0-9]{2}(pm|am)",
+        "due (month|january|february|march|april|may|june|july|august|september|october|november|december) [0-9]{1,2}th, [0-9]{4} at [0-9]{1,2}-[0-9]{2}(pm|am)",
+        "due on (month|january|february|march|april|may|june|july|august|september|october|november|december) [0-9]{1,2}th, [0-9]{4} at [0-9]{1,2}-[0-9]{2}(pm|am)",
+        "due (month|january|february|march|april|may|june|july|august|september|october|november|december)",
+        "due by (month|january|february|march|april|may|june|july|august|september|october|november|december)",
+        "(today|tomorrow|next week|sunday|monday|tuesday|wednesday|thursday|friday|saturday) at [0-9]{1,2}-[0-9]{2}(pm|am)",
+        "(today|tomorrow|next week|sunday|monday|tuesday|wednesday|thursday|friday|saturday) [0-9]{1,2}th, at [0-9]{1,2}-[0-9]{2}(pm|am)",
+        "(today|tomorrow|next week|sunday|monday|tuesday|wednesday|thursday|friday|saturday) [0-9]{1,2}th at [0-9]{1,2}-[0-9]{2}(pm|am)",
+        "(today|tomorrow|next week|sunday|monday|tuesday|wednesday|thursday|friday|saturday) [0-9]{1,2} at [0-9]{1,2}-[0-9]{2}(pm|am)",
     ];
 
-    foreach($allRegex as $regex) {
-        preg_match_all("/{$regex}/i", $text, $dateMatches);
+    try {
+        foreach($allRegex as $regex) {
+            preg_match_all("/{$regex}/i", $text, $dateMatches);
+            if (! is_null($dateMatches) && isset($dateMatches[0]) && ! is_null(array_key_last($dateMatches[0]))) {
+                $date = $dateMatches[0][array_key_last($dateMatches[0])];
+    
+                return Carbon::parse($date)->toDateString();
+            }
+        }
+        
+        preg_match_all("/\d{2}\/\d{2}\/\d{4}/i", $text, $dateMatches);
         if (! is_null($dateMatches) && isset($dateMatches[0]) && ! is_null(array_key_last($dateMatches[0]))) {
             $date = $dateMatches[0][array_key_last($dateMatches[0])];
-
+    
             return Carbon::parse($date)->toDateString();
         }
-    }
+        
+        preg_match_all("/this year/i", $text, $yearMatches);
+        if (! is_null($yearMatches) && isset($yearMatches[0]) && ! is_null(array_key_last($yearMatches[0]))) {
+            $year = $yearMatches[0][array_key_last($yearMatches[0])];
     
-    preg_match_all("/\d{2}\/\d{2}\/\d{4}/i", $text, $dateMatches);
-    if (! is_null($dateMatches) && isset($dateMatches[0]) && ! is_null(array_key_last($dateMatches[0]))) {
-        $date = $dateMatches[0][array_key_last($dateMatches[0])];
-
-        return Carbon::parse($date)->toDateString();
-    }
+            return Carbon::parse("last day of December {$year}")->toDateString();
+        }
+        
+        preg_match_all("/this month|january|february|march|april|may|june|july|august|september|october|november|december/i", $text, $monthMatches);
+        if (! is_null($monthMatches) && isset($monthMatches[0]) && ! is_null(array_key_last($monthMatches[0]))) {
+            $month = $monthMatches[0][array_key_last($monthMatches[0])];
     
-    preg_match_all("/this year/i", $text, $yearMatches);
-    if (! is_null($yearMatches) && isset($yearMatches[0]) && ! is_null(array_key_last($yearMatches[0]))) {
-        $year = $yearMatches[0][array_key_last($yearMatches[0])];
-
-        return Carbon::parse("last day of December {$year}")->toDateString();
-    }
+            return Carbon::parse("last day of {$month}")->toDateString();
+        }
+        
+        preg_match_all("/today|tomorrow|next week|sunday|monday|tuesday|wednesday|thursday|friday|saturday/i", $text, $dayMatches);
+        if (! is_null($dayMatches) && isset($dayMatches[0]) && ! is_null(array_key_last($dayMatches[0]))) {
+            $day = $dayMatches[0][array_key_last($dayMatches[0])];
     
-    preg_match_all("/this month|january|february|march|april|may|june|july|august|september|october|november|december/i", $text, $monthMatches);
-    if (! is_null($monthMatches) && isset($monthMatches[0]) && ! is_null(array_key_last($monthMatches[0]))) {
-        $month = $monthMatches[0][array_key_last($monthMatches[0])];
+            return Carbon::parse("{$day} 23:59:59")->toDateString();
+        }
 
-        return Carbon::parse("last day of {$month}")->toDateString();
+        return null;
+    } catch (Throwable $e) {
+        return null;
     }
-    
-    preg_match_all("/today|tomorrow|next week|sunday|monday|tuesday|wednesday|thursday|friday|saturday/i", $text, $dayMatches);
-    if (! is_null($dayMatches) && isset($dayMatches[0]) && ! is_null(array_key_last($dayMatches[0]))) {
-        $day = $dayMatches[0][array_key_last($dayMatches[0])];
-
-        return Carbon::parse("{$day} 23:59:59")->toDateString();
-    }
-
-    return null;
 }
