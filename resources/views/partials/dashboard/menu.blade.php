@@ -19,7 +19,7 @@
                     <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
                   </svg>
                 </span>
-                <span class="nav-link-title">Answer Requests</span>
+                <span class="nav-link-title">Queries</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('dashboard.keywords') ? 'active' : '' }}">
@@ -57,7 +57,7 @@
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
                 </span>
-                <span class="nav-link-title">Settings</span>
+                <span class="nav-link-title">Dashboard</span>
             </a>
           </li>
         </ul>

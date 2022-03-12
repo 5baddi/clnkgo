@@ -14,6 +14,8 @@ use BADDIServices\SourceeApp\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword as ResetPassword;
 
+Route::redirect('/', 'dashboard');
+
 Route::middleware('guest')
     ->group(function() {
         Route::get('/signup', SignUpController::class)->name('signup');

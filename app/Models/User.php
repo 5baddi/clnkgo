@@ -70,13 +70,6 @@ class User extends Authenticatable
 
         return $this;
     }
-    
-    public function setPasswordAttribute($value): self
-    {
-        $this->attributes[self::PASSWORD_COLUMN] = Hash::make($value);
-
-        return $this;
-    }
 
     public function getFullName(): ?string
     {

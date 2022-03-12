@@ -71,7 +71,7 @@
                         <ul>
                             <li>Add your local village, town, city, county etc.</li>
                             <li>Add your hobbies, family circumstances and things you have a passion for.</li>
-                            <li>Regularly check new requests on the 'Answer Requests' page for keyword ideas. </li>
+                            <li>Regularly check new requests on the 'Queries' page for keyword ideas. </li>
                         </ul>
                         <p>Still struggling to come up with keywords? Have a look at our Word Cloud. 👇</p>
                         <h4 class="mt-2">Word Cloud</h4>

@@ -39,7 +39,7 @@ class UpdateMostUsedKeywords extends Command
         $startTime = microtime(true);
 
         try {
-            $keywords = [];
+            $keywords = collect();
 
             Tweet::query()
                 ->select([Tweet::ID_COLUMN, Tweet::TEXT_COLUMN, Tweet::CREATED_AT_COLUMN])
@@ -51,10 +51,10 @@ class UpdateMostUsedKeywords extends Command
                         $text .= " {$tweet->text}";
                     });
 
-                    $keywords = collect(RakePlus::create($text ?? '')->keywords() ?? []);
+                    $keywords = $keywords->merge(RakePlus::create($text ?? '')->keywords() ?? []);
 
                     $keywords = $keywords->filter(function ($value) {
-                        return strpos($value, 'mail') === false && ! filter_var($value, FILTER_VALIDATE_EMAIL) && $value !== null && $value !== ' ' && $value !== '' && ! in_array($value, ['\u', '/', '\\', '’', '\\\\', 'https', '&amp', '-', '_', 'the','to','i','am','is','are','he','she','a','an','and','here','there','can','could','were','has','have','had','been','welcome','of','home','&nbsp;','&ldquo;','words','into','this','there']);
+                        return strpos($value, 'mail') === false && ! filter_var($value, FILTER_VALIDATE_EMAIL) && $value !== null && $value !== ' ' && $value !== '' && ! in_array($value, ['pls', '\u', '/', '\\', '’', '\\\\', 'https', '&amp', '-', '_', 'the','to','i','am','is','are','he','she','a','an','and','here','there','can','could','were','has','have','had','been','welcome','of','home','&nbsp;','&ldquo;','words','into','this','there']);
                     });
 
                     $keywords = $keywords->map(function ($value) {
@@ -66,15 +66,17 @@ class UpdateMostUsedKeywords extends Command
                     });
                     
                     $keywords = $keywords->filter(function ($value) {
-                        return strpos($value, 'mail') === false && ! filter_var($value, FILTER_VALIDATE_EMAIL) && $value !== null && $value !== ' ' && $value !== '' && ! in_array($value, ['\u', '’', '&amp', 'https', 'the','to','i','am','is','are','he','she','a','an','and','here','there','can','could','were','has','have','had','been','welcome','of','home','&nbsp;','&ldquo;','words','into','this','there']);
+                        return strpos($value, 'mail') === false && ! filter_var($value, FILTER_VALIDATE_EMAIL) && $value !== null && $value !== ' ' && $value !== '' && ! in_array($value, ['pls', '\u', '’', '&amp', 'https', 'the','to','i','am','is','are','he','she','a','an','and','here','there','can','could','were','has','have','had','been','welcome','of','home','&nbsp;','&ldquo;','words','into','this','there']);
                     });
-
-                    AppSetting::query()
-                        ->updateOrCreate(
-                            [AppSetting::KEY_COLUMN => App::APP_MOST_USED_KEYWORDS],
-                            [AppSetting::KEY_COLUMN => App::APP_MOST_USED_KEYWORDS, AppSetting::VALUE_COLUMN => json_encode($keywords->toArray())]
-                        );
                 });
+
+                $keywords = $keywords->unique();
+
+                AppSetting::query()
+                    ->updateOrCreate(
+                        [AppSetting::KEY_COLUMN => App::APP_MOST_USED_KEYWORDS],
+                        [AppSetting::KEY_COLUMN => App::APP_MOST_USED_KEYWORDS, AppSetting::VALUE_COLUMN => json_encode($keywords->toArray())]
+                    );
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:mail:app:update-most-used-keywords', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while updating most used keywords: %s", $e->getMessage()));
