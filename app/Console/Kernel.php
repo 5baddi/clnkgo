@@ -30,6 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('queue:work --tries=3 --timeout=2000 --once')->everyMinute()->withoutOverlapping()->runInBackground();
         $schedule->command('twitter:latest-tweets')->everyFifteenMinutes()->withoutOverlapping();
         $schedule->command('mail:new-request')->hourly()->withoutOverlapping();
+        $schedule->command('app:update-most-used-keywords')->weekly();
     }
 
     /**

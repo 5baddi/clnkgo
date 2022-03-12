@@ -15,4 +15,6 @@ class App
     public const TWEET_CHARACTERS_LIMIT = 280;
     public const MAX_KEYWORDS = 30;
     public const MAX_CANNED_RESPONSES = 10;
+
+    public const APP_MOST_USED_KEYWORDS = 'app_most_used_keywords';
 }
