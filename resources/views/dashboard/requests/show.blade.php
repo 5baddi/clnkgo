@@ -105,7 +105,15 @@
                             <p>Draft your response below and we will pre-populate a DM/Email for you when you click send. You will then have the chance to make any final changes before you submit.</p>
                             <p>You can find out more about the Writer to tailor your response in the 'Posted by' section below.</p>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mt-2">
+                            <label class="form-label">Use a canned response</label>
+                            <select class="form-select" id="canned-responses">
+                                @foreach ($cannedResponses as $cannedResponse)
+                                <option value="{{ $cannedResponse->content }}">{{ $cannedResponse->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-12 mt-4">
                             <label class="form-label required">Your response</label>
                             <textarea id="direct-content" rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') ?? ($answer ? $answer->content : '') }}</textarea>
                             @if($errors->has('content'))
@@ -211,7 +219,6 @@
 @section('scripts')
   @include('partials.dashboard.scripts.form')
 @endsection
-
 @section('script')
     $('document').ready(function() {
         $('#mail-content').val($('#direct-content').val());
@@ -219,5 +226,31 @@
         $('#direct-content').on('change', function (event) {
             $('#mail-content').val($('#direct-content').val());
         });
+
+        var cannedResponses = document.getElementById('canned-responses');
+        window.Choices && (new Choices(cannedResponses, {
+            classNames: {
+                containerInner: cannedResponses.className,
+                input: 'form-control',
+                inputCloned: 'form-control-sm',
+                listDropdown: 'dropdown-menu',
+                itemChoice: 'dropdown-item',
+                activeState: 'show',
+                selectedState: 'active',
+            },
+            shouldSort: true,
+            searchEnabled: true,
+        }));
+
+        cannedResponses.addEventListener(
+            'choice',
+            function(event) {
+                if (typeof event.detail.choice.value !== "undefined") {
+                    $('#direct-content').val(event.detail.choice.value);
+                    $('#mail-content').val(event.detail.choice.value);
+                }
+            },
+            false,
+        );
     });
 @endsection

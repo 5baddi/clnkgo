@@ -14,6 +14,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Models\SavedResponse;
 use BADDIServices\SourceeApp\Repositories\SavedResponseRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 
 class SavedResponseService extends Service
@@ -39,6 +40,11 @@ class SavedResponseService extends Service
     public function findById(string $id): ?SavedResponse
     {
         return $this->savedResponseRepository->findById($id);
+    }
+    
+    public function getByUser(User $user): Collection
+    {
+        return $this->savedResponseRepository->getByUserId($user->getId());
     }
     
     public function create(User $user, array $attributes): SavedResponse
