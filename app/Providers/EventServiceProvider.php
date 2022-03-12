@@ -4,9 +4,12 @@ namespace App\Providers;
 
 // use Illuminate\Auth\Events\Registered;
 use BADDIServices\SourceeApp\Events\WelcomeMail;
+use BADDIServices\SourceeApp\Events\AnswerMail;
+use BADDIServices\SourceeApp\Events\NewRequestMail;
 use BADDIServices\SourceeApp\Events\Auth\ResetPassword;
 use BADDIServices\SourceeApp\Listeners\WelcomeMailFired;
 use BADDIServices\SourceeApp\Listeners\AnswerMailFired;
+use BADDIServices\SourceeApp\Listeners\NewRequestMailFired;
 use BADDIServices\SourceeApp\Listeners\Auth\ResetPasswordFired;
 // use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use BADDIServices\SourceeApp\Events\Subscription\SubscriptionActivated;
@@ -29,6 +32,10 @@ class EventServiceProvider extends ServiceProvider
 
         AnswerMail::class => [
             AnswerMailFired::class,
+        ], 
+        
+        NewRequestMail::class => [
+            NewRequestMailFired::class,
         ],
 
         ResetPassword::class => [

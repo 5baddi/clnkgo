@@ -3,14 +3,15 @@
 namespace App\Console\Commands;
 
 use Throwable;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Console\Command;
 use BADDIServices\SourceeApp\App;
+use Illuminate\Support\Facades\Event;
 use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\SourceeApp\Events\NewRequestMail;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SourceeApp\Services\TweetService;
-use Carbon\Carbon;
 
 class MailUserWhenThereNewRequest extends Command
 {
@@ -61,7 +62,7 @@ class MailUserWhenThereNewRequest extends Command
 
                         $tweets->get()
                             ->each(function (Tweet $tweet) use ($user) {
-                                // TODO: send mail
+                                Event::dispatch(new NewRequestMail($user, $tweet));
                             });
                     });
                 });
