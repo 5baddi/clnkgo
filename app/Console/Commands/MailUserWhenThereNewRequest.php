@@ -41,10 +41,15 @@ class MailUserWhenThereNewRequest extends Command
 
         try {
             User::query()
+                ->with(['subscription'])
                 ->select([User::ID_COLUMN, User::EMAIL_COLUMN, User::KEYWORDS_COLUMN])
                 ->where(User::IS_SUPERADMIN_COLUMN, false)
                 ->chunkById(App::CHUNK_SIZE, function (Collection $users) {
                     $users->each(function (User $user) {
+                        if (! $user->subscription->isActive()) {
+                            return true;
+                        }
+
                         $keywords = $user->getKeywords();
                         if (count($keywords) === 0) {
                             return true;
