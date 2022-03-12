@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\Twitter\FetchLatestTweets;
+use App\Console\Commands\MailUserWhenThereNewRequest;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -14,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        FetchLatestTweets::class
+        FetchLatestTweets::class,
+        MailUserWhenThereNewRequest::class,
     ];
 
     /**
@@ -26,7 +28,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('queue:work --tries=3 --timeout=2000 --once')->everyMinute()->withoutOverlapping()->runInBackground();
-        // $schedule->command('purchase:reminder')->dailyAt('00:00');
+        $schedule->command('twitter:latest-tweets')->everyFifteenMinutes()->withoutOverlapping();
+        $schedule->command('mail:new-request')->hourly()->withoutOverlapping();
     }
 
     /**
