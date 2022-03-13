@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
+use Creativeorange\Gravatar\Facades\Gravatar;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,7 +36,11 @@ class AppServiceProvider extends ServiceProvider
         }
 
         view()->composer('partials.dashboard.menu', function ($view) {
-            $view->with('user', Auth::user());
+            $user = Auth::user();
+            $avatar = $user instanceof User ? Gravatar::get($user->email) : null;
+
+            $view->with('user', $user);
+            $view->with('avatar', $avatar);
         });
     }
 }
