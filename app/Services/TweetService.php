@@ -26,11 +26,14 @@ class TweetService extends Service
         $this->tweetRespository = $tweetRespository;
     }
 
-    public function paginate(?int $page = null, string $term = null, string $sort = null, string $filter = null, ?User $user = null): LengthAwarePaginator
+    public function paginate(?int $page = null, ?string $term = null, ?string $sort = null, ?string $category = null, ?string $filter = null, ?User $user = null): LengthAwarePaginator
     {
+        $category = strtolower($category);
+
         $tweets = $this->tweetRespository->search(
             $sort === 'oldest' ? 'asc' : 'desc',
             $term,
+            $category !== 'all' ? explode(',', $category) : [],
             $filter === 'keyword' && $user instanceof User ? $user->getKeywords() : [],
             $filter === 'answered'
         );

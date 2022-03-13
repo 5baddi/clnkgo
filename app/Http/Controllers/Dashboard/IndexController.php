@@ -32,6 +32,7 @@ class IndexController extends DashboardController
             $request->query('page'), 
             $request->query('term'), 
             $request->query('sort'), 
+            $request->query('category'),
             $request->query('filter'), 
             $request->query('filter') !== '-1' ? $this->user : null
         );
@@ -45,6 +46,7 @@ class IndexController extends DashboardController
         return view('dashboard.index', [
             'title'                             => 'Dashboard',
             'user'                              => $this->user,
+            'category'                          => $request->query('category'),
             'sort'                              => $request->query('sort'),
             'term'                              => $request->query('term'),
             'filter'                            => $request->query('filter'),

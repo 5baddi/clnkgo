@@ -33,6 +33,7 @@ class AnalyticsRequest extends PaginationRequest
                 'term'          =>  ['nullable', 'string', 'min:1'],
                 'sort'          =>  ['nullable', 'string', new In(['oldest', 'newest'])],
                 'filter'        =>  ['nullable', 'string', new In([-1, 'keyword', 'bookmarked', 'answered'])],
+                'category'      =>  ['nullable', 'string', 'min:1'],
             ]
         );
     }

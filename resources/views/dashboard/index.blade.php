@@ -37,14 +37,30 @@
             </div>
             <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> to search by term</span>
           </div>
-          <div class="col-3 form-group">
+          <div class="col-2 form-group">
+            <label class="form-label">Category</label>
+            <select name="category" class="form-select @if ($errors->has('category')) is-invalid @endif" placeholder="Category" id="category" onchange="this.form.submit()">
+              <option @if (old('category') === 'all' || $category === 'all' || is_null($sort)) selected @endif value="all">All</option>
+              <option @if (old('category') === 'health,psychology,mental,illness,disease,doctor' || $category === 'health,psychology,mental,illness,disease,doctor') selected @endif value="health,psychology,mental,illness,disease,doctor">Health</option>
+              <option @if (old('category') === 'tech,technology' || $category === 'tech,technology') selected @endif value="tech,technology">Tech</option>
+              <option @if (old('category') === 'business' || $category === 'business') selected @endif value="business">Business</option>
+              <option @if (old('category') === 'fashion' || $category === 'fashion') selected @endif value="fashion">Fashion</option>
+              <option @if (old('category') === 'sports' || $category === 'sports') selected @endif value="sports">Sports</option>
+              <option @if (old('category') === 'uk,united kingdom' || $category === 'uk, united kingdom') selected @endif value="uk,united kingdom">United Kingdom</option>
+              <option @if (old('category') === 'finance' || $category === 'finance') selected @endif value="finance">Finance</option>
+              <option @if (old('category') === 'travel' || $category === 'travel') selected @endif value="travel">Travel</option>
+              <option @if (old('category') === 'news' || $category === 'news') selected @endif value="news">News</option>
+              <option @if (old('category') === 'podcast' || $category === 'podcast') selected @endif value="podcast">Podcast</option>
+            </select>
+          </div>
+          <div class="col-2 form-group">
             <label class="form-label">Sort by</label>
             <select name="sort" class="form-select @if ($errors->has('sort')) is-invalid @endif" placeholder="Sort by" id="sort-by" onchange="this.form.submit()">
               <option @if (old('sort') === 'oldest' || $sort === 'oldest') selected @endif value="oldest">Oldest</option>
               <option @if (old('sort') === 'newest' || $sort === 'newest' || is_null($sort)) selected @endif value="newest">Newest</option>
             </select>
           </div>
-          <div class="col-3 form-group">
+          <div class="col-2 form-group">
             <label class="form-label">Filter by</label>
             <select name="filter" class="form-select @if ($errors->has('filter')) is-invalid @endif" placeholder="Filter by" id="filter-by" onchange="this.form.submit()">
               <option selected value="-1">Choose a filter</option>
@@ -86,6 +102,21 @@
 
 @section('script')
   $('document').ready(function() {
+    var categoryEl = document.getElementById('category');
+    window.Choices && (new Choices(categoryEl, {
+        classNames: {
+            containerInner: categoryEl.className,
+            input: 'form-control',
+            inputCloned: 'form-control-sm',
+            listDropdown: 'dropdown-menu',
+            itemChoice: 'dropdown-item',
+            activeState: 'show',
+            selectedState: 'active',
+        },
+        shouldSort: true,
+        searchEnabled: true,
+    }));
+    
     var sortByEl = document.getElementById('sort-by');
     window.Choices && (new Choices(sortByEl, {
         classNames: {
