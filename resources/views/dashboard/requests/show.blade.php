@@ -100,11 +100,6 @@
                 @csrf
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
-                            <p>The Writer may indicate a preferred communication method in their request. Either a Twitter Direct Message (DM) or an email.</p>
-                            <p>Draft your response below and we will pre-populate a DM/Email for you when you click send. You will then have the chance to make any final changes before you submit.</p>
-                            <p>You can find out more about the Writer to tailor your response in the 'Posted by' section below.</p>
-                        </div>
                         <div class="col-12 mt-2">
                             <label class="form-label">Use a canned response</label>
                             <select class="form-select" id="canned-responses">
@@ -178,7 +173,7 @@
         </div>
     </div>
     <div class="col-12 mt-4">
-        <h2>Posted by</h2>
+        <h2>Journalist's Bio</h2>
         <div class="card card-link">
             <div class="card-cover card-cover-blurred text-center">
               <span class="avatar avatar-xl avatar-thumb avatar-rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? asset('assets/img/default_avatar.png') }})"></span>

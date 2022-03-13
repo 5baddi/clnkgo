@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\URL;
 use Illuminate\Database\Schema\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,5 +32,9 @@ class AppServiceProvider extends ServiceProvider
         if (app()->environment() !== 'local') {
 	        URL::forceScheme('https');
         }
+
+        view()->composer('partials.dashboard.menu', function ($view) {
+            $view->with('user', Auth::user());
+        });
     }
 }

@@ -7,6 +7,8 @@
 
 Get in the press 📰 Be the source a journalist is looking for.
 
+![screenshot](./screenshots/dashboard.png)
+
 ## Requirements
 
 - PHP >= 7.4
@@ -63,41 +65,32 @@ php artisan schedule:run
 ## Mail configuration
 `MAIL_MAILER`=smtp
 
-`MAIL_HOST`=trysocialrocket.com
+`MAIL_HOST`=baddi.info
 
 `MAIL_PORT`=465
 
-`MAIL_USERNAME`=noreply@trysocialrocket.com
+`MAIL_USERNAME`=noreply@baddi.info
 
 `MAIL_PASSWORD`=VR4sE0JIBOHP
 
 `MAIL_ENCRYPTION`=SSL
 
-`MAIL_FROM_ADDRESS=`noreply@trysocialrocket.com
+`MAIL_FROM_ADDRESS=`noreply@baddi.info
 
 ---
-## Preparing to submit your app
 
-![App screenshot](./screenshots/shopify_app.png)
+## Twitter API Config variables
 
-The official shopify building apps documentation include how to prepare your shopify app for review.
+- TWITTER_BEARER_TOKEN
 
-You can follow next [steps](https://www.shopify.co.uk/partners/blog/how-to-build-a-shopify-app#prepare-submit) to get approved.
+    `Set your Twitter App API bearer token you can get it from your Twitter developer account`
+    
+- TWITTER_MAIN_HASHTAGS
 
-## Shopify API Config variables
+    `Set main hashtags for queries`
+    
+## Stripe API Config variables
 
-- SHOPIFY_API_KEY
+- STRIPE_API_SECRET_KEY
 
-- SHOPIFY_API_SECRET
-
-## Zendesk Config variables
-
-- ZENDESK_KEY
-
-- HELP_URL
-
-    `Set your zendesk help/guide page url`
-
-- SETUP_GUIDE
-
-    `Set setup guide page url will be included in affiliate iframe settings`
+    `Set your Stripe API secret key you can get it from your Stripe account`

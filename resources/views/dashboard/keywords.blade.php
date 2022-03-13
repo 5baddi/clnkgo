@@ -11,9 +11,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
-                        <p>Welcome to the Sourcee engine room! Enter keywords relating to your expertise and we will notify you when a relevant request comes through that matches any of your keywords.</p>
-                        <p>The more keywords you enter, the greater the chance we will be able to find requests for you.</p>
-                        <p>Struggling to maximise your {{ $max }} slots? Scroll down to our tips & tricks section.</p>
+                        <p>Forget about having to search for the perfect query to pitch.</p>
+                        <p>We do the searching for you, using your keywords and preferences to match you with opportunities that are just right for you.</p>
+                        <p>Enter your keyword and we'll notified you every time query matches with your keyword.</p>
                     </div>
                 </div>
             </div>

@@ -65,7 +65,7 @@
             <select name="filter" class="form-select @if ($errors->has('filter')) is-invalid @endif" placeholder="Filter by" id="filter-by" onchange="this.form.submit()">
               <option selected value="-1">Choose a filter</option>
               <option @if (old('filter') === 'keyword' || $filter === 'keyword') selected @endif value="keyword">Keyword Match</option>
-              <option @if (old('filter') === 'bookmarked' || $filter === 'bookmarked') selected @endif value="bookmarked">Bookmarked</option>
+              <option @if (old('filter') === 'bookmarked' || $filter === 'bookmarked') selected @endif value="bookmarked">Saved Queries</option>
               <option @if (old('filter') === 'answered' || $filter === 'answered') selected @endif value="answered">Answered Requests</option>
             </select>
           </div>

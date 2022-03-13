@@ -243,7 +243,7 @@
                     <line x1="15" y1="8" x2="17" y2="10"></line>
                   </svg>
                 </span>
-                <span class="nav-link-title">Keywords</span>
+                <span class="nav-link-title">E-mail Notification</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs(['dashboard.responses', 'dashboard.responses.*']) ? 'active' : '' }}">
@@ -255,7 +255,7 @@
                     <polyline points="3 7 12 13 21 7"></polyline>
                   </svg>
                 </span>
-                <span class="nav-link-title">Canned Responses</span>
+                <span class="nav-link-title">Template</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs(['dashboard.account', 'dashboard.plan.*']) ? 'active' : '' }}">
