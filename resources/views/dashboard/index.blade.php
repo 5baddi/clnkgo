@@ -29,11 +29,11 @@
     </div>
     <div class="card mt-4">
       <div class="card-body">
-        <form class="row" action="{{ route('dashboard') }}" method="GET">
+        <form id="search-form" class="row" action="{{ route('dashboard') }}" method="GET">
           <div class="col-6">
             <div class="form-group mb-2">
               <label class="form-label">Search</label>
-              <input type="text" name="term" value="{{ old('term') ?? $term }}" class="form-control @if ($errors->has('term')) is-invalid @endif" placeholder="Enter search term..."/>  
+              <input id="term" type="text" name="term" value="{{ old('term') ?? $term }}" class="form-control @if ($errors->has('term')) is-invalid @endif" placeholder="Enter search term..." onblur="this.form.submit()"/>  
             </div>
             <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> to search by term</span>
           </div>
@@ -146,6 +146,12 @@
         shouldSort: false,
         searchEnabled: false,
     }));
+
+    $("#term").keyup(function(event) {
+      if (event.keyCode === 13) {
+          $("#search-form").submit();
+      }
+    });
 
     var page = 1;
 
