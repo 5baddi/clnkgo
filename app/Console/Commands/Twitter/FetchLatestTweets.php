@@ -6,8 +6,6 @@ use Throwable;
 use Illuminate\Console\Command;
 use BADDIServices\SourceeApp\AppLogger;
 use BADDIServices\SourceeApp\Domains\TwitterService;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 class FetchLatestTweets extends Command
 {

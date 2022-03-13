@@ -181,7 +181,7 @@
         <h2>Posted by</h2>
         <div class="card card-link">
             <div class="card-cover card-cover-blurred text-center">
-              <span class="avatar avatar-xl avatar-thumb avatar-rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? 'https://abs.twimg.com/sticky/default_profile_images/default_profile.png' }})"></span>
+              <span class="avatar avatar-xl avatar-thumb avatar-rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? asset('assets/img/default_avatar.png') }})"></span>
             </div>
             <div class="card-body text-center">
                 <div class="row">

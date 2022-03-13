@@ -5,31 +5,13 @@
 .navbar-brand-image{
     height: auto !important;
     width: 100% !important;
-}
-
-.antialiased{
-    background-color: #ffffff !important;
+    max-width: 110px !important;
+    max-height: 32px !important;
 }
 
 .navbar-vertical{
     border-right: 1px solid rgba(32,107,196,.06);
     background-color: #f4f6fa !important;
-}
-
-.navbar .navbar-nav .active{
-    text-decoration: none;
-    background-color: rgba(32,107,196,.06);
-}
-.navbar .navbar-nav .dropdown-active{
-    text-decoration: none;
-    background-color: rgba(0, 0, 0,.06);
-}
-.navbar .navbar-nav .active .nav-link .nav-link-title, .nav-link-title:active{
-    color: #206bc4 !important;
-}
-.navbar .navbar-nav .nav-link:hover{
-    color: inherit;
-    background-color: rgba(101,109,119,.06);
 }
 
 #period{
@@ -83,12 +65,13 @@
     font-size: 14pt;
 }
 
-.navbar .navbar-nav .active .nav-link .nav-link-title, .nav-link-title:active {
-    color: #ffffff !important;
-}
-
 .navbar-vertical.navbar-expand-lg .navbar-brand {
     padding: 2.3rem 0 !important;
+}
+
+.navbar-expand-md .navbar-light .nav-item.active:after, .navbar-expand-md.navbar-light .nav-item.active:after {
+    border: 0 solid #257CFF !important;
+    border-bottom-width: 2px !important;
 }
 
 svg {

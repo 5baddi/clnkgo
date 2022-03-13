@@ -4,7 +4,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-auto">
-                        <span class="avatar rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? 'https://abs.twimg.com/sticky/default_profile_images/default_profile.png' }})"></span>
+                        <span class="avatar rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? asset('assets/img/default_avatar.png') }})"></span>
                     </div>
                     <div class="col">
                         <div class="font-weight-medium">{{ $tweet->author->name }}</div>

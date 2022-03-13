@@ -12,7 +12,7 @@
 <div class="row row-cards">
     <div class="col">
         <div class="card">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" style="border-bottom: unset !important;">
               <li class="nav-item">
                 <a href="{{ route('dashboard.account', ['tab' => 'settings']) }}" class="nav-link {{ $tab === 'settings' ? 'active' : '' }}">Account Info</a>
               </li>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard.account.save', ['tab' => $tab]) }}" method="POST">
+    <form action="{{ route('dashboard.account.save', ['tab' => $tab]) }}" method="POST" style="margin-top: 0 !important;">
         @csrf
         <div class="col">
             <div class="card">
