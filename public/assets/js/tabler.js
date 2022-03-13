@@ -4528,7 +4528,7 @@
 	  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
 	  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
 	  */
-	const MAX_UID = 11d9bf0;
+	const MAX_UID = 1257CFF;
 	const MILLISECONDS_MULTIPLIER = 1000;
 	const TRANSITION_END = 'transitionend';
 	const toType = obj => {
