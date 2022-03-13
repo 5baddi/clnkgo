@@ -62,6 +62,8 @@ class UpdateMostUsedKeywords extends Command
                             return null;
                         }
 
+                        $value = preg_replace('/\xEE[\x80-\xBF][\x80-\xBF]|\xEF[\x81-\x83][\x80-\xBF]/', '', $value);
+
                         return strtolower(str_replace(["," ,"." ,";" ,":", "\"", '’', "'", "“","”","(",")", '&amp', "!","?", '#', '@', '\u', '\u', '/', '\\', '\\\\', '-', '_'], '', $value) ?? '');
                     });
                     
