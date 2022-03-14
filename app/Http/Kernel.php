@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified'              => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'has.subscription'      => \BADDIServices\SourceeApp\Http\Middleware\HasSubscription::class,
         'client'                => \BADDIServices\SourceeApp\Http\Middleware\Client::class,
+        'basic.auth'            => \Sven\SuperBasicAuth\SuperBasicAuth::class,
     ];
 
     protected function bootstrappers()

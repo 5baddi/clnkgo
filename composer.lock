@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1bc76c2e8c7304eb3eba512f6da36f4",
+    "content-hash": "609a8f4502a394dcd48fa6e004d9e703",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3527,6 +3527,60 @@
                 "source": "https://github.com/stripe/stripe-php/tree/v7.116.0"
             },
             "time": "2022-03-02T15:51:15+00:00"
+        },
+        {
+            "name": "sven/super-basic-auth",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/svenluijten/super-basic-auth.git",
+                "reference": "5bd7d072554f8b4d745f2095129af8a04464708c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/svenluijten/super-basic-auth/zipball/5bd7d072554f8b4d745f2095129af8a04464708c",
+                "reference": "5bd7d072554f8b4d745f2095129af8a04464708c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.0",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sven\\SuperBasicAuth\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Luijten",
+                    "email": "contact@svenluijten.com",
+                    "homepage": "https://svenluijten.com"
+                }
+            ],
+            "description": "A lightweight package to add basic authentication to your Laravel app.",
+            "keywords": [
+                "Authentication",
+                "auth",
+                "basic",
+                "http",
+                "laravel",
+                "password",
+                "user"
+            ],
+            "support": {
+                "issues": "https://github.com/svenluijten/super-basic-auth/issues",
+                "source": "https://github.com/svenluijten/super-basic-auth/tree/v2.5.0"
+            },
+            "time": "2022-02-05T14:08:32+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

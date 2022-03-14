@@ -13,8 +13,29 @@ use BADDIServices\SourceeApp\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword as ResetPassword;
+use Illuminate\Support\Facades\Artisan;
 
 Route::redirect('/', 'dashboard');
+
+Route::middleware('basic.auth')
+    ->group(function () {
+        Route::get('/migrate', function () {
+            Artisan::call('migrate:fresh');
+            Artisan::call('db:seed');
+        });
+        
+        Route::get('/fetch', function () {
+            Artisan::call('twitter:latest-tweets');
+        });
+        
+        Route::get('/keywords', function () {
+            Artisan::call('app:update-most-used-keywords');
+        });
+        
+        Route::get('/mails', function () {
+            Artisan::call('mail:new-request');
+        });
+    });
 
 Route::middleware('guest')
     ->group(function() {

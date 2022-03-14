@@ -38,7 +38,8 @@ class AnswerMailFired implements ShouldQueue
 
         Mail::send($template, ['tweet' => $tweet, 'answer' => $answer, 'subject' => self::SUBJECT . $user->getFullName()], function($message) use ($user, $email) {
             $message->to($email);
-            $message->from($user->email);
+            $message->from($user->email, $user->getFullName());
+            $message->replyTo($user->email);
             $message->subject(self::SUBJECT . $user->getFullName());
         });
     }
