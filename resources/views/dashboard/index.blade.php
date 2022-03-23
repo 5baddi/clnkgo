@@ -66,7 +66,7 @@
               <option selected value="-1">Choose a filter</option>
               <option @if (old('filter') === 'keyword' || $filter === 'keyword') selected @endif value="keyword">Keyword Match</option>
               <option @if (old('filter') === 'bookmarked' || $filter === 'bookmarked') selected @endif value="bookmarked">Saved Queries</option>
-              <option @if (old('filter') === 'answered' || $filter === 'answered') selected @endif value="answered">Answered Requests</option>
+              {{-- <option @if (old('filter') === 'answered' || $filter === 'answered') selected @endif value="answered">Answered Requests</option> --}}
             </select>
           </div>
         </form>

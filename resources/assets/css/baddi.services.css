@@ -178,3 +178,13 @@ svg {
 .btn-twitter:hover {
     background-color: #257cffd1 !important;
 }
+
+.btn-without-bg {
+    background-color: unset !important;
+    color: white !important;
+    font-size: 13pt;
+}
+
+.btn-without-bg .icon {
+    color: white !important;
+}
