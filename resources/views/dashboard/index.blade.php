@@ -47,7 +47,7 @@
             </div>
             <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> to search by term</span>
           </div>
-          <div class="col-2 form-group">
+          <div class="col-3 form-group">
             <label class="form-label">Category</label>
             <select name="category" class="form-select @if ($errors->has('category')) is-invalid @endif" placeholder="Category" id="category" onchange="this.form.submit()">
               <option @if (old('category') === 'all' || $category === 'all' || is_null($sort)) selected @endif value="all">All</option>
@@ -63,22 +63,22 @@
               <option @if (old('category') === 'podcast' || $category === 'podcast') selected @endif value="podcast">Podcast</option>
             </select>
           </div>
-          <div class="col-2 form-group">
+          <div class="col-3 form-group">
             <label class="form-label">Sort by</label>
             <select name="sort" class="form-select @if ($errors->has('sort')) is-invalid @endif" placeholder="Sort by" id="sort-by" onchange="this.form.submit()">
               <option @if (old('sort') === 'oldest' || $sort === 'oldest') selected @endif value="oldest">Oldest</option>
               <option @if (old('sort') === 'newest' || $sort === 'newest' || is_null($sort)) selected @endif value="newest">Newest</option>
             </select>
           </div>
-          <div class="col-2 form-group">
+          {{-- <div class="col-2 form-group">
             <label class="form-label">Filter by</label>
             <select name="filter" class="form-select @if ($errors->has('filter')) is-invalid @endif" placeholder="Filter by" id="filter-by" onchange="this.form.submit()">
               <option selected value="-1">Choose a filter</option>
               <option @if (old('filter') === 'keyword' || $filter === 'keyword') selected @endif value="keyword">Keyword Match</option>
               <option @if (old('filter') === 'bookmarked' || $filter === 'bookmarked') selected @endif value="bookmarked">Saved Queries</option>
-              {{-- <option @if (old('filter') === 'answered' || $filter === 'answered') selected @endif value="answered">Answered Requests</option> --}}
+              <option @if (old('filter') === 'answered' || $filter === 'answered') selected @endif value="answered">Answered Requests</option>
             </select>
-          </div>
+          </div> --}}
         </form>
       </div>
     </div>
@@ -142,7 +142,7 @@
         searchEnabled: false,
     }));
     
-    var filterByEl = document.getElementById('filter-by');
+    {{-- var filterByEl = document.getElementById('filter-by');
     window.Choices && (new Choices(filterByEl, {
         classNames: {
             containerInner: filterByEl.className,
@@ -155,7 +155,7 @@
         },
         shouldSort: false,
         searchEnabled: false,
-    }));
+    })); --}}
 
     $("#term").keyup(function(event) {
       if (event.keyCode === 13) {
