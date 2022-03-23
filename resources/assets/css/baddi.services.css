@@ -183,8 +183,19 @@ svg {
     background-color: unset !important;
     color: white !important;
     font-size: 13pt;
+    border: none !important;
 }
 
 .btn-without-bg .icon {
     color: white !important;
+}
+
+.btn-without-bg:hover {
+    background-color: unset !important;
+    color: #ffffff99 !important;
+    border: none !important;
+}
+
+.btn-without-bg:hover .icon {
+    color: #ffffff99 !important;
 }

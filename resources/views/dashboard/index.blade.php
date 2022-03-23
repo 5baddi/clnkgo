@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="row row-deck row-cards">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
@@ -16,7 +16,17 @@
               </div>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div class="subheader">Last 24 Hours</div>
+                </div>
+                <div class="h1 mt-3 mb-3 text-center">{{ $liveRequests }}</div>
+              </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
