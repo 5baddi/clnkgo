@@ -10,7 +10,6 @@ namespace BADDIServices\SourceeApp\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use BADDIServices\SourceeApp\Models\Setting;
 use BADDIServices\SourceeApp\Rules\ValidateCurrentPassword;
 
 class UpdateAccountRequest extends FormRequest
@@ -37,8 +36,6 @@ class UpdateAccountRequest extends FormRequest
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
             User::PHONE_COLUMN         => 'nullable|string|max:25',
-            Setting::BRAND_NAME_COLUMN => 'nullable|string|min:1',
-            Setting::CURRENCY_COLUMN   => 'nullable|string|max:10',
             'current_password'         => [new ValidateCurrentPassword()],
             User::PASSWORD_COLUMN      => 'nullable|string|min:8|required_with:current_password|same:confirm_password',
             'confirm_password'         => 'nullable|string|min:8'
