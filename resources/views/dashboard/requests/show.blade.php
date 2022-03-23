@@ -96,7 +96,7 @@
             <div class="card-header">
                 <h3 class="card-title">Draft your Response</h3>
             </div>
-            <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank">
+            <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST">
                 @csrf
                 <div class="card-body">
                     <div class="row">

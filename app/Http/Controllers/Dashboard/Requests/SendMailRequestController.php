@@ -51,6 +51,7 @@ class SendMailRequestController extends DashboardController
                 RequestAnswer::MAIL_SENT_AT_COLUMN  => now(),
                 RequestAnswer::CONTENT_COLUMN       => $request->input('content'),
                 RequestAnswer::EMAIL_COLUMN         => $request->input('email'),
+                RequestAnswer::ANSWERED_COLUMN      => true,
             ]);
 
             DB::commit();

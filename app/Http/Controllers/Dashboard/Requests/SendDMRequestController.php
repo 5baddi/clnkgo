@@ -50,6 +50,7 @@ class SendDMRequestController extends DashboardController
                 RequestAnswer::USER_ID_COLUMN   => $this->user->getId(),
                 RequestAnswer::TWEET_ID_COLUMN  => $tweet->getId(),
                 RequestAnswer::CONTENT_COLUMN   => $request->input('content'),
+                RequestAnswer::ANSWERED_COLUMN  => true,
             ]);
 
             $link = $this->twitterService->getDMLink($tweet->author_id, $request->input('content'));
