@@ -9,7 +9,7 @@
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <form id="card-payment" method="POST" action="">
+                <form id="card-payment" action="#">
                 @csrf
                 <input type="hidden" name="amount" value="{{ $pack->price }}"/>
                 <div class="mb-3">
@@ -92,7 +92,7 @@
                 @endif
                 </div>
                 <div class="mt-2">
-                <button id="pay-with-card-btn" type="submit" class="btn btn-primary w-100" disabled>
+                <button id="pay-with-card-btn" type="submit" class="btn btn-twitter w-100" disabled>
                     {{ __('dashboard.buttons.pay', ['amount' => $pack->price, 'symbol' => $pack->symbol ?? '$']) }}
                 </button>
                 </div>
@@ -105,4 +105,92 @@
 
 @section('scripts')
 <script src="https://www.2checkout.com/checkout/api/2co.min.js"></script>
+@endsection
+
+@section('script')
+$(function () {
+    var $form = $("#card-payment");
+    
+    var tokenRequest = function() {
+        var args = {
+            sellerId: "{{ config('2checkout.seller_id') }}",
+            publishableKey: "{{ config('2checkout.publishable_key') }}",
+            ccNo: $('#card-number').val(),
+            cvv: $("#card-cvv").val(),
+            expMonth: $("#card-expiry-month").val(),
+            expYear: $("#card-expiry-year").val()
+        };
+
+        TCO.requestToken(TwoCheckoutResponse, TwoCheckoutResponse, args);
+    };
+
+    $('form#card-payment').bind('submit', function (e) {
+      $('#pay-with-card-btn').attr('disabled', true);
+  
+      var $form = $("#card-payment"),
+          inputVal = ['input[type=email]', 'input[type=password]',
+              'input[type=text]', 'input[type=file]',
+              'textarea'
+          ].join(', '),
+          $inputs = $form.find('.card').find(inputVal),
+          $errorStatus = $form.find('div.invalid-feedback'),
+          valid = true;
+      $errorStatus.addClass('d-none');
+  
+      $('.is-invalid').removeClass('is-invalid');
+      $inputs.each(function (i, el) {
+          var $input = $(el);
+          if ($input.val() === '') {
+              $input.parent().addClass('is-invalid');
+              $errorStatus.removeClass('d-none');
+              e.preventDefault();
+          }
+      });
+  
+        e.preventDefault();
+
+        TCO.loadPubKey('{{ (app()->environment() === 'local') ? 'sandbox' : 'production' }}', function() {
+            tokenRequest();
+        });
+    });
+  
+    $('.saved-card').on('click', function() {
+      $('#card-number').val($(this).data('number'));
+      $('#card-name').val($(this).data('name'));
+      $('#card-expiry-month').val($(this).data('month'));
+      $('#card-expiry-year').val($(this).data('year'));
+      $('#card-cvv').val('');
+    });
+  
+    $('input[id^=card]').on('change', function() {
+      if ($(this).val() == '') {
+        $('#pay-with-card-btn').attr('disabled', true);
+        return;
+      }
+  
+      $('input[id^=card]').each(function() {
+        if ($(this).val() != '') {
+          $('#pay-with-card-btn').attr('disabled', false);
+        } else {
+          $('#pay-with-card-btn').attr('disabled', true);
+          return;
+        }
+      });
+    });
+  
+    function TwoCheckoutResponse(data) {
+        if (data.errorCode !== 200) {
+            $form.find('div.invalid-feedback')
+              .removeClass('d-none')
+              .html(data.errorMsg);
+
+            $('#pay-with-card-btn').attr('disabled', false);
+        } else {
+            var token = data.response.token.token;
+            $form.find('input[type=text]').empty();
+            $form.append("<input type='hidden' name='response_token' value='" + token + "'/>");
+            $form.get(0).submit();
+        }
+    }
+  });
 @endsection
