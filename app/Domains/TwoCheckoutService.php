@@ -23,6 +23,7 @@ class TwoCheckoutService extends Service
 
         if (app()->environment() !== 'production') {
             Twocheckout::verifySSL(false);
+            Twocheckout::sandbox(true);
         }
 
         Twocheckout::format('json');
