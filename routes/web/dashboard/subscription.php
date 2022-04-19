@@ -12,7 +12,7 @@ use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\BillingConfirmat
 use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\CheckoutController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\CancelCheckoutController;
 
-Route::middleware(['auth', 'has.subscription', 'client'])
+Route::middleware(['auth', 'has.subscription'])
     ->name('subscription')
     ->prefix('subscription')
     ->group(function() {

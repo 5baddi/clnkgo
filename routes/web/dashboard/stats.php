@@ -12,7 +12,7 @@ use BADDIServices\SourceeApp\Http\Controllers\Dashboard\PaginateController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\BookmarkTweetController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\UnbookmarkTweetController;
 
-Route::middleware(['auth', 'has.subscription', 'client'])
+Route::middleware(['auth', 'has.subscription'])
     ->prefix('dashboard')
     ->group(function() {
         Route::get('/', IndexController::class)->name('dashboard');

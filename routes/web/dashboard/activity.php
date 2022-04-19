@@ -11,7 +11,7 @@ use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Activity\ActivityControl
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Activity\ActivityMarkAsReadController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Activity\ActivityMarkAllAsReadController;
     
-Route::middleware(['auth', 'has.subscription', 'client'])
+Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.activity')
     ->prefix('dashboard/activity')
     ->group(function() {

@@ -9,7 +9,7 @@
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Plan\UpgradePlanController;
     
-Route::middleware(['auth', 'has.subscription', 'client'])
+Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.plan')
     ->prefix('dashboard/plan')
     ->group(function() {

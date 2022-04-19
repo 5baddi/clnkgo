@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Keywords\KeywordsController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Keywords\SaveKeywordsController;
     
-Route::middleware(['auth', 'has.subscription', 'client'])
+Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.keywords')
     ->prefix('dashboard/keywords')
     ->group(function() {

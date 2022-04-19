@@ -13,7 +13,7 @@ use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\SendMailRequest
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\MarkAsAnsweredController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\MarkAsUnansweredController;
     
-Route::middleware(['auth', 'has.subscription', 'client'])
+Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.requests')
     ->prefix('dashboard/requests')
     ->group(function() {

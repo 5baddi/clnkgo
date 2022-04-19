@@ -14,7 +14,7 @@ use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\EditResponseCo
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\UpdateResponseController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\DeleteResponseController;
     
-Route::middleware(['auth', 'has.subscription', 'client'])
+Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.responses')
     ->prefix('dashboard/responses')
     ->group(function() {
