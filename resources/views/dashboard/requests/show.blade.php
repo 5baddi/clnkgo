@@ -185,6 +185,7 @@
                     <p class="mt-4">{{ $tweet->author->description }}</p>
                 </div>
             </div>
+            @if($tweet->author && ($tweet->author->location || $tweet->author->email))
             <div class="card-footer d-flex justify-content-between">
                 <div class="d-flex align-items-center">
                     @if($tweet->author->location)
@@ -205,6 +206,7 @@
                     @endif
                 </div>
             </div>
+            @endif
         </div>
     </div>
     @endif
