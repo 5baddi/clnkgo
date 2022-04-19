@@ -65,7 +65,7 @@ class Kernel extends HttpKernel
         'throttle'              => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'              => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'has.subscription'      => \BADDIServices\SourceeApp\Http\Middleware\HasSubscription::class,
-        'client'                => \BADDIServices\SourceeApp\Http\Middleware\Client::class,
+        'is.super-admin'        => \BADDIServices\SourceeApp\Http\Middleware\IsSuperAdmin::class,
         'basic.auth'            => \Sven\SuperBasicAuth\SuperBasicAuth::class,
     ];
 

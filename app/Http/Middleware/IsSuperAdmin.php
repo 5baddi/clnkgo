@@ -11,9 +11,10 @@ namespace BADDIServices\SourceeApp\Http\Middleware;
 use Closure;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
-class Client
+class IsSuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -27,8 +28,8 @@ class Client
         /** @var User */
         $user = Auth::user();
 
-        if ($user->isSuperAdmin()) {
-            return redirect()->route('admin');
+        if (! $user->isSuperAdmin()) {
+            return abort(Response::HTTP_UNAUTHORIZED);
         }
 
         return $next($request);

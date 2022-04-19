@@ -57,12 +57,6 @@ class AuthenticateController extends Controller
             $this->userService->update($user, [
                 User::LAST_LOGIN_COLUMN    =>  Carbon::now()
             ]);
-
-            if ($user->isSuperAdmin()) {
-                return redirect()
-                    ->route('admin')
-                    ->with('success', 'Welcome back ' . strtoupper($user->first_name));
-            }
             
             return redirect()
                 ->route('dashboard')
