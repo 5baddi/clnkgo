@@ -35,7 +35,7 @@ class HasSubscription
             /** @var Subscription */
             $subscription = $user->subscription;
 
-            if(! $subscription instanceof Subscription || $subscription->trashed() || ! $subscription->isActive()) {
+            if(! $user->isSuperAdmin() || ! $subscription instanceof Subscription || $subscription->trashed() || ! $subscription->isActive()) {
                 return redirect()
                     ->route('dashboard.plan.upgrade')
                     ->with(

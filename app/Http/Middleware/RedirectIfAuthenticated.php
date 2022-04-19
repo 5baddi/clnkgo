@@ -35,10 +35,6 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 /** @var User */
                 $user = Auth::user();
-
-                if ($user->isSuperAdmin()) {
-                    return redirect()->route('admin');
-                }
                 
                 return redirect(RouteServiceProvider::HOME)->with('success', 'Welcome back ' . strtoupper($user->first_name));
             }
