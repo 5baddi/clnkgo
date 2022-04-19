@@ -75,7 +75,6 @@ class TwitterService extends Service
      */
     public function fetchTweetsByHashtags(string $hashtag): Collection
     {
-        // dd(extractDate('this year'));
         try {
             if (strlen($hashtag) === 0 || $hashtag === "") {
                 return collect();
