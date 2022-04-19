@@ -24,7 +24,7 @@ class KeywordsController extends DashboardController
             'title'             => 'Your Keywords 🔑',
             'keywords'          => $this->user->getKeywordsAsString(),
             'hashtags'          => $hashtags,
-            'max'               => collect($this->pack->features)->where('key', Pack::KEYWORDS)->first()['limit'] ?? App::MAX_KEYWORDS
+            'max'               => collect($this->pack->features ?? [])->where('key', Pack::KEYWORDS)->first()['limit'] ?? App::MAX_KEYWORDS
         ]);
     }
 }

@@ -19,9 +19,11 @@
               <li class="nav-item">
                 <a href="{{ route('dashboard.account', ['tab' => 'emails']) }}" class="nav-link {{ $tab === 'emails' ? 'active' : '' }}">Email preferences</a>
               </li>
+              @if(! $user->isSuperAdmin())
               <li class="nav-item">
                 <a href="{{ route('dashboard.account', ['tab' => 'plan']) }}" class="nav-link {{ $tab === 'plan' ? 'active' : '' }}">Your plan</a>
               </li>
+              @endif
             </ul>
         </div>
     </div>
@@ -34,7 +36,7 @@
                     <h4 class="card-title">
                         @if ($tab === 'settings')
                         General Info
-                        @elseif($tab === 'plan')
+                        @elseif($tab === 'plan' && ! $user->isSuperAdmin())
                         Your current plan
                         @else
                         Email preferences
@@ -102,7 +104,7 @@
                             @endif
                         </div>
                     </div>
-                    @elseif($tab === 'plan')
+                    @elseif($tab === 'plan' && ! $user->isSuperAdmin())
                     <div class="row">
                         <div class="card bg-azure-lt">
                             <div class="card-body">
@@ -143,7 +145,7 @@
             <div class="row mt-4">
                 <div class="col-12 text-end">
                     <div class="d-flex justify-content-end">
-                        @if($tab === 'plan')
+                        @if($tab === 'plan' && ! $user->isSuperAdmin())
                         @if(! $user->subscription->isTrial())<a href="{{ route('subscription.cancel') }}" class="btn btn-danger">Cancel subscription</a>@endif
                         <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-twitter" style="margin-left: .5rem;">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

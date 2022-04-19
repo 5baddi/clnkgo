@@ -30,7 +30,7 @@ class NewResponseController extends DashboardController
         return view('dashboard.responses.new', [
             'title'     => 'New Canned Response',
             'count'     => $this->savedResponseService->count($this->user),
-            'max'       => collect($this->pack->features)->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES
+            'max'       => collect($this->pack->features ?? [])->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES
         ]);
     }
 }

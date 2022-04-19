@@ -25,6 +25,10 @@ class HasSubscription
         /** @var User */
         $user = Auth::user();
 
+        if ($user->isSuperAdmin()) {
+            return $next($request);
+        }
+
         if (
             strpos($request->path(), "dashboard") === 0 
             && strpos($request->path(), "logout") === false
@@ -35,7 +39,7 @@ class HasSubscription
             /** @var Subscription */
             $subscription = $user->subscription;
 
-            if(! $user->isSuperAdmin() || ! $subscription instanceof Subscription || $subscription->trashed() || ! $subscription->isActive()) {
+            if(! $subscription instanceof Subscription || $subscription->trashed() || ! $subscription->isActive()) {
                 return redirect()
                     ->route('dashboard.plan.upgrade')
                     ->with(

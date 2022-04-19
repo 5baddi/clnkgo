@@ -43,8 +43,10 @@ class DashboardController extends BaseController
             $this->user = Auth::id() !== null ? $this->userService->findById(Auth::id()) : null;
             $this->subscription = $this->user->subscription;
 
-            $this->subscription->load('pack');
-            $this->pack = $this->subscription->pack;
+            if ($this->subscription instanceof Subscription) {
+                $this->subscription->load('pack');
+                $this->pack = $this->subscription->pack;
+            }
 
             if ($request->has('notification')) {
                 $this->user->unreadNotifications->where('id', $request->query('notification'))->markAsRead();

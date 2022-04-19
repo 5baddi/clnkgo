@@ -36,7 +36,7 @@ class EditResponseController extends DashboardController
             'title'     => 'Edit Canned Response',
             'count'     => $this->savedResponseService->count($this->user),
             'response'  => $response,
-            'max'       => collect($this->pack->features)->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES
+            'max'       => collect($this->pack->features ?? [])->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES
         ]);
     }
 }

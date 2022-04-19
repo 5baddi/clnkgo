@@ -31,7 +31,7 @@ class ResponsesController extends DashboardController
         return view('dashboard.responses.index', [
             'title'     => 'Canned Responses',
             'responses' => $this->savedResponseService->paginate($this->user, $request->query('page')),
-            'max'       => collect($this->pack->features)->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES
+            'max'       => collect($this->pack->features ?? [])->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES
         ]);
     }
 }

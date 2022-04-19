@@ -29,7 +29,7 @@ class UpgradePlanController extends DashboardController
         return view('dashboard.plan.upgrade', [
             'title'                 => 'Upgrade your plan',
             'subscription'          => $this->subscription,
-            'isTrial'               => $this->subscription->isTrial(),
+            'isTrial'               => ($this->user->isSuperAdmin() || $this->subscription->isTrial()),
             'packs'                 => $this->packService->all(),
             'currentPack'           => $this->packService->loadCurrentPack(Auth::user())
         ]);
