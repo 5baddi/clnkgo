@@ -16,17 +16,11 @@ use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 
 class CheckoutController extends DashboardController
 {
-    /** @var PackService */
-    private $packService;
-
-    private StripeService $stripeService;
-
-    public function __construct(PackService $packService, StripeService $stripeService)
+    public function __construct(
+        private PackService $packService, 
+        private StripeService $stripeService)
     {
         parent::__construct();
-
-        $this->packService = $packService;
-        $this->stripeService = $stripeService;
     }
 
     public function __invoke(string $id)
