@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SourceeApp\Repositories;
 
+use Carbon\Carbon;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -117,5 +118,13 @@ class TweetRespository
         return Tweet::query()
             ->find($id)
             ->delete();
+    }
+
+    public function last24hRequests(): int
+    {
+        return Tweet::query()
+            ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '>', Carbon::now()->subHours(24))
+            ->orWhereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
+            ->count();
     }
 }

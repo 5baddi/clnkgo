@@ -12,18 +12,16 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Requests\AnalyticsRequest;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\SourceeApp\Services\AnalyticsService;
 use BADDIServices\SourceeApp\Services\TweetService;
 
 class IndexController extends DashboardController
 {
-    /** @var TweetService */
-    private $tweetService;
-
-    public function __construct(TweetService $tweetService)
-    {
+    public function __construct(
+        private TweetService $tweetService,
+        private AnalyticsService $analyticsService
+    ) {
         parent::__construct();
-
-        $this->tweetService = $tweetService;
     }
 
     public function __invoke(AnalyticsRequest $request)
@@ -52,7 +50,7 @@ class IndexController extends DashboardController
             'filter'                            => $request->query('filter'),
             'tweets'                            => $tweets,
             'liveRequests'                      => $tweets->total(),
-            'last24hRequests'                   => $countOfLast24Hours,
+            'last24hRequests'                   => $this->analyticsService->last24hRequests(),
             'unreadNotifications'               => $this->user->unreadNotifications,
             'markAsReadNotifications'           => $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30)),
         ]);
