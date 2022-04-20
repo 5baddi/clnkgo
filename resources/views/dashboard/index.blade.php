@@ -30,9 +30,9 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div class="subheader">Last 24 Hours</div>
+                  <div class="subheader">Keyword Match</div>
                 </div>
-                <div class="h1 mt-3 mb-3 text-center">{{ $liveRequests }}</div>
+                <div class="h1 mt-3 mb-3 text-center">{{ $keywordMatch }}</div>
               </div>
             </div>
         </div>

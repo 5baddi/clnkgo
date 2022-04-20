@@ -45,6 +45,7 @@ class IndexController extends DashboardController
             'tweets'                            => $tweets,
             'liveRequests'                      => $this->analyticsService->liveRequests(),
             'last24hRequests'                   => $this->analyticsService->last24hRequests(),
+            'keywordMatch'                      => $this->analyticsService->last24hRequests(),
             'unreadNotifications'               => $this->user->unreadNotifications,
             'markAsReadNotifications'           => $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30)),
         ]);
