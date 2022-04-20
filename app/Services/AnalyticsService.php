@@ -20,4 +20,9 @@ class AnalyticsService extends Service
     {
         return $this->tweetRespository->last24hRequests();
     }
+
+    public function liveRequests(): int
+    {
+        return $this->tweetRespository->liveRequests();
+    }
 }
