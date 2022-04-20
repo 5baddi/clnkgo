@@ -66,8 +66,8 @@
           <div class="col-3 form-group">
             <label class="form-label">Sort by</label>
             <select name="sort" class="form-select @if ($errors->has('sort')) is-invalid @endif" placeholder="Sort by" id="sort-by" onchange="this.form.submit()">
-              <option @if (old('sort') === 'oldest' || $sort === 'oldest') selected @endif value="oldest">Oldest</option>
-              <option @if (old('sort') === 'newest' || $sort === 'newest' || is_null($sort)) selected @endif value="newest">Newest</option>
+              <option @if (old('sort') === 'published_at' || $sort === 'published_at') selected @endif value="published_at">Oldest</option>
+              <option @if (old('sort') === '-published_at' || $sort === '-published_at' || is_null($sort)) selected @endif value="-published_at">Newest</option>
             </select>
           </div>
           {{-- <div class="col-2 form-group">

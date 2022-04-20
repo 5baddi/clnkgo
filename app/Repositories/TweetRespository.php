@@ -8,6 +8,8 @@
 
 namespace BADDIServices\SourceeApp\Repositories;
 
+use BADDIServices\SourceeApp\App;
+use BADDIServices\SourceeApp\Http\Filters\Tweet\TweetQueryFilter;
 use Carbon\Carbon;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,57 +17,21 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TweetRespository
 {
-    public function search(string $sort = 'desc', ?string $term = null, ?array $category = [], array $keywords = [], ?bool $withAnswers = false): Collection
+    public function paginate(TweetQueryFilter $queryFilter): LengthAwarePaginator
     {
-        $relations = ['author'];
-
-        if ($withAnswers === true) {
-            $relations[] = 'answers';
-        }
-
-        $query = Tweet::query()
-            ->with($relations);
-
-        if ($term !== null && strlen($term) > 0) {
-            $query = $query->whereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$term}%"]);
-        } else {
-            if (count($keywords) > 0) {
-                $query = $query->whereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$keywords[0]}%"]);
-
-                unset($keywords[0]);
-            }
-
-            if (count($category) > 0) {
-                $query = $query->whereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$category[0]}%"]);
-
-                unset($category[0]);
-            }
-        }
-
-        if (count($keywords) > 0) {
-            foreach($keywords as $keyword) {
-                $query = $query->orWhereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$keyword}%"]);
-            }
-        }
-        
-        if (count($category) > 0) {
-            foreach($category as $word) {
-                $query = $query->orWhereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$word}%"]);
-            }
-        }
-
-        $query->orderBy(Tweet::PUBLISHED_AT_COLUMN, $sort === 'asc' ? 'asc' : 'desc');
-
-        return $query->get();
+        return Tweet::query()
+            ->with(["author", "answers"])
+            ->filter($queryFilter)
+            ->paginate(App::PAGINATION_LIMIT, ['*'], "page", $queryFilter->getPage());
     }
     
     public function paginateByHashtags(array $hashtags = [], ?int $page = null): LengthAwarePaginator
     {
         return Tweet::query()
-            ->with(['author'])
+            ->with(["author"])
             ->whereIn(Tweet::HASHTAG_COLUMN, array_values($hashtags))
             ->orderBy(Tweet::PUBLISHED_AT_COLUMN, 'desc')
-            ->paginate(10, ['*'], 'page', $page);
+            ->paginate(App::PAGINATION_LIMIT, ['*'], 'page', $page);
     }
     
     public function all(): Collection

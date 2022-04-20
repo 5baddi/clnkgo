@@ -8,13 +8,14 @@
 
 namespace BADDIServices\SourceeApp\Entities;
 
+use BADDIServices\SourceeApp\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use BADDIServices\SourceeApp\Traits\HasUUID;
 use Carbon\Carbon;
 
 class ModelEntity extends EloquentModel
 {
-    use HasUUID;
+    use HasUUID, Filterable;
 
     /** @var string */
     public const ID_COLUMN = 'id';

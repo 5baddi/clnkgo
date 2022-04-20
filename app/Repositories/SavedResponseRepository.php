@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SourceeApp\Repositories;
 
+use BADDIServices\SourceeApp\App;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Models\SavedResponse;
@@ -24,7 +25,7 @@ class SavedResponseRepository
     {
         return SavedResponse::query()
             ->where(SavedResponse::USER_ID_COLUMN, $userId)
-            ->paginate(10, ['*'], 'page', $page);
+            ->paginate(App::PAGINATION_LIMIT, ['*'], 'page', $page);
     }
     
     public function count(string $userId): int
