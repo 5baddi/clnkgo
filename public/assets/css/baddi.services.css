@@ -61,7 +61,7 @@
 }
 
 .navbar-dark {
-    background-color: #257CFF !important;
+    background-color: #202837 !important;
     font-size: 14pt;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .navbar-expand-md .navbar-light .nav-item.active:after, .navbar-expand-md.navbar-light .nav-item.active:after {
-    border: 0 solid #257CFF !important;
+    border: 0 solid #202837 !important;
     border-bottom-width: 2px !important;
 }
 
@@ -198,4 +198,22 @@ svg {
 
 .btn-without-bg:hover .icon {
     color: #ffffff99 !important;
+}
+
+.analytics-card {
+    background-color: #202837 !important;
+    color: white !important;
+}
+
+.analytics-card .subheader {
+    color: inherit !important;
+}
+
+.filters-card {
+    background-color: #202837 !important;
+    color: white !important;
+}
+
+.filters-card kbd {
+    background-color: #bbc5d1 !important;
 }

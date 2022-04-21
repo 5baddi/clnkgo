@@ -8,17 +8,17 @@
     <div class="row row-deck row-cards">
         <div class="col-sm-4">
             <div class="card">
-              <div class="card-body">
+              <div class="card-body analytics-card">
                 <div class="d-flex align-items-center">
                   <div class="subheader">Live Requests</div>
                 </div>
-                <div class="h1 mt-3 mb-3 text-green text-center">{{ $liveRequests }}</div>
+                <div class="h1 mt-3 mb-3 text-center">{{ $liveRequests }}</div>
               </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="card">
-              <div class="card-body">
+              <div class="card-body analytics-card">
                 <div class="d-flex align-items-center">
                   <div class="subheader">Last 24 Hours</div>
                 </div>
@@ -28,7 +28,7 @@
         </div>
         <div class="col-sm-4">
             <div class="card">
-              <div class="card-body">
+              <div class="card-body analytics-card">
                 <div class="d-flex align-items-center">
                   <div class="subheader">Keyword Match</div>
                 </div>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="card mt-4">
-      <div class="card-body">
+      <div class="card-body filters-card">
         <form id="search-form" class="row" action="{{ route('dashboard') }}" method="GET">
           <div class="col-6">
             <div class="form-group mb-2">
