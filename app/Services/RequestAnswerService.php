@@ -39,6 +39,7 @@ class RequestAnswerService extends Service
                 RequestAnswer::TWEET_ID_COLUMN,
                 RequestAnswer::CONTENT_COLUMN,
                 RequestAnswer::EMAIL_COLUMN,
+                RequestAnswer::SUBJECT_COLUMN,
                 RequestAnswer::ANSWERED_COLUMN,
                 RequestAnswer::MAIL_SENT_AT_COLUMN,
             ]);

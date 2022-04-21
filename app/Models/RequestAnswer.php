@@ -17,6 +17,7 @@ class RequestAnswer extends ModelEntity
     public const USER_ID_COLUMN = 'user_id';
     public const CONTENT_COLUMN = 'content';
     public const EMAIL_COLUMN = 'email';
+    public const SUBJECT_COLUMN = 'subject';
     public const ANSWERED_COLUMN = 'answered';
     public const MAIL_SENT_AT_COLUMN = 'mail_sent_at';
 
