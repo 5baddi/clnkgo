@@ -20,7 +20,7 @@
         </div>
         <div class="card mt-4">
           <div class="card-header">
-            <h3 class="card-title">Canned Responses</h3>
+            <h3 class="card-title">Templates</h3>
             <div class="col-auto ms-auto d-print-none">
                 <div class="btn-list">
                     <a href="{{ route('dashboard.responses.new') }}" class="btn btn-twitter d-none d-sm-inline-block">

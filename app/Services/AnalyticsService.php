@@ -27,12 +27,12 @@ class AnalyticsService extends Service
         return $this->tweetRespository->liveRequests();
     }
     
-    public function last24hKeywordMatch(User $user): int
+    public function keywordsMatch(User $user): int
     {
         if (count($user->getKeywords()) === 0) {
             return 0;
         }
 
-        return $this->tweetRespository->last24hKeywordMatch($user->getKeywords());
+        return $this->tweetRespository->keywordsMatch($user->getKeywords());
     }
 }

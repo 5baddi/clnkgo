@@ -32,7 +32,7 @@
                 <div class="d-flex align-items-center">
                   <div class="subheader">Keyword Match</div>
                 </div>
-                <div class="h1 mt-3 mb-3 text-center">{{ $keywordMatch }}</div>
+                <div class="h1 mt-3 mb-3 text-center">{{ $keywordsMatch }}</div>
               </div>
             </div>
         </div>
@@ -68,6 +68,8 @@
             <select name="sort" class="form-select @if ($errors->has('sort')) is-invalid @endif" placeholder="Sort by" id="sort-by" onchange="this.form.submit()">
               <option @if (old('sort') === 'published_at' || $sort === 'published_at') selected @endif value="published_at">Oldest</option>
               <option @if (old('sort') === '-published_at' || $sort === '-published_at' || is_null($sort)) selected @endif value="-published_at">Newest</option>
+              <option @if (old('sort') === 'last24hrs' || $sort === 'last24hrs') selected @endif value="last24hrs">Last 24 hrs</option>
+              <option @if (old('sort') === 'keywordmatch' || $sort === 'keywordmatch') selected @endif value="keywordmatch">Keyword Match</option>
             </select>
           </div>
           {{-- <div class="col-2 form-group">

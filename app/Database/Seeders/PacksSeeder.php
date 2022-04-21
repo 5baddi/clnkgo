@@ -45,7 +45,7 @@ class PacksSeeder extends Seeder
                 ],
                 [
                     'key'       =>  Pack::CANNED_RESPONSES,
-                    'name'      =>  '10 Canned Responses - Save time by storing commonly used responses to Journo Requests',
+                    'name'      =>  '10 Templates - Save time by storing commonly used responses to Journo Requests',
                     'enabled'   =>  true,
                     'limit'     => 10
                 ],

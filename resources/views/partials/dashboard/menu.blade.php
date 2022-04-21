@@ -45,10 +45,23 @@
                     <polyline points="3 7 12 13 21 7"></polyline>
                   </svg>
                 </span>
-                <span class="nav-link-title">Canned Responses</span>
+                <span class="nav-link-title">Templates</span>
             </a>
           </li>
-          <li class="nav-item {{ request()->routeIs(['dashboard.account', 'dashboard.plan.*']) ? 'active' : '' }}">
+          <li class="nav-item {{ request()->routeIs('dashboard.plan.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.plan.upgrade') }}">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rocket" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"></path>
+                    <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"></path>
+                    <circle cx="15" cy="9" r="1"></circle>
+                  </svg>
+                </span>
+                <span class="nav-link-title">Upgrade</span>
+            </a>
+          </li>
+          <li class="nav-item {{ request()->routeIs('dashboard.account') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.account') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
