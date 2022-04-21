@@ -8,11 +8,14 @@
 
 namespace BADDIServices\SourceeApp\Http\Filters;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 abstract class QueryFilter
 {
+    public const SORT_FIELD = "-created_at";
+
     /**
      * @var Request
      */
@@ -39,10 +42,14 @@ abstract class QueryFilter
         $this->builder = $builder;
 
         foreach ($this->fields() as $field => $value) {
-            $method = camel_case($field);
+            $method = Str::camel($field);
             if (method_exists($this, $method)) {
                 call_user_func_array([$this, $method], (array)$value);
             }
+        }
+
+        if (is_null($this->getSortField())) {
+            $this->sort();
         }
     }
 
@@ -52,9 +59,9 @@ abstract class QueryFilter
      *
      * @param string $value
      */
-    public function sort(string $value = "-created_at")
+    public function sort(?string $value = null)
     {
-        collect(explode(',', $value))->mapWithKeys(function (string $field) {
+        collect(explode(',', (! blank($value) ? $value : $this->getDefaultSortField())))->mapWithKeys(function (string $field) {
             switch (substr($field, 0, 1)) {
                 case '-':
                     return [substr($field, 1) => 'desc'];
@@ -71,6 +78,16 @@ abstract class QueryFilter
     public function getPage(): int
     {
         return $this->request->query("page", 1);
+    }
+    
+    public function getSortField(): ?string
+    {
+        return $this->request->query("sort");
+    }
+    
+    public function getDefaultSortField(): string
+    {
+        return self::SORT_FIELD;
     }
 
     /**

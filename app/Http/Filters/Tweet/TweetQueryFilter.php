@@ -90,4 +90,9 @@ class TweetQueryFilter extends QueryFilter
             });
         }
     }
+
+    public function getDefaultSortField(): string
+    {
+        return "-published_at";
+    }
 }

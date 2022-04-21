@@ -31,7 +31,7 @@ class AnalyticsRequest extends PaginationRequest
                 'ap'            =>  ['nullable', 'integer'],
                 'pp'            =>  ['nullable', 'integer'],
                 'term'          =>  ['nullable', 'string', 'min:1'],
-                'sort'          =>  ['nullable', 'string', new In(['oldest', 'newest'])],
+                'sort'          =>  ['nullable', 'string', new In(['published_at', '-published_at'])],
                 'filter'        =>  ['nullable', 'string', new In([-1, 'keyword', 'bookmarked', 'answered'])],
                 'category'      =>  ['nullable', 'string', 'min:1'],
             ]
