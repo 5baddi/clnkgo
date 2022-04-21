@@ -12,11 +12,13 @@
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <a href="{{ route('dashboard.account') }}" class="dropdown-item">Account</a>
-              @if($user->isSuperAdmin())
+              <a href="{{ route('dashboard.account') }}" class="dropdown-item {{ request()->routeIs('dashboard.account') ? 'active' : '' }}">Account</a>
+              @if($user->isSuperAdmin() && ! request()->routeIs('admin'))
               <a href="{{ route('admin') }}" class="dropdown-item">Admin area</a>
+              @elseif($user->isSuperAdmin() && request()->routeIs('admin'))
+              <a href="{{ route('dashboard') }}" class="dropdown-item">Source area</a>
               @endif
-              <a href="{{ route('dashboard.plan.upgrade') }}" class="dropdown-item">Upgrade</a>
+              <a href="{{ route('dashboard.plan.upgrade') }}" class="dropdown-item {{ request()->routeIs('dashboard.plan.*') ? 'active' : '' }}">Upgrade</a>
               <div class="dropdown-divider"></div>
               <a href="{{ env('SUPPORT_URL', '#') }}" class="dropdown-item">Support</a>
               <a href="{{ route('signout') }}" class="dropdown-item">Logout</a>
