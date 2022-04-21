@@ -104,7 +104,7 @@ class TweetQueryFilter extends QueryFilter
             /** @var User */
             $user = $authManager->user();
             
-            $this->filterByUserKeywords($user);
+            return $this->filterByUserKeywords($user);
         }
 
         return parent::sort($value);
