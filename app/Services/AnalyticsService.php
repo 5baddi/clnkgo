@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SourceeApp\Services;
 
+use App\Models\User;
 use BADDIServices\SourceeApp\Repositories\TweetRespository;
 
 class AnalyticsService extends Service
@@ -24,5 +25,14 @@ class AnalyticsService extends Service
     public function liveRequests(): int
     {
         return $this->tweetRespository->liveRequests();
+    }
+    
+    public function last24hKeywordMatch(User $user): int
+    {
+        if (count($user->getKeywords()) === 0) {
+            return 0;
+        }
+
+        return $this->tweetRespository->last24hKeywordMatch($user->getKeywords());
     }
 }

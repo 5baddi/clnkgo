@@ -102,4 +102,21 @@ class TweetRespository
             ->orWhereNull(Tweet::DUE_AT_COLUMN)
             ->count();
     }
+    
+    public function last24hKeywordMatch(array $keywords): int
+    {
+        $query = Tweet::query()
+            ->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
+            ->orWhereNull(Tweet::DUE_AT_COLUMN);
+
+        foreach($keywords as $index => $keyword) {
+            if ($index === 0) {
+                $query = $query->whereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$keyword}%"]);
+            }
+
+            $query = $query->orWhereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$keyword}%"]);
+        }
+
+        return $query->count();
+    }
 }
