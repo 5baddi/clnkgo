@@ -90,6 +90,7 @@ class TweetRespository
     {
         return Tweet::query()
             ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '>', Carbon::now()->subHours(24))
+            ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '<=', Carbon::now())
             ->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
             ->orWhereNull(Tweet::DUE_AT_COLUMN)
             ->count();
@@ -106,6 +107,8 @@ class TweetRespository
     public function last24hKeywordMatch(array $keywords): int
     {
         $query = Tweet::query()
+            ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '>', Carbon::now()->subHours(24))
+            ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '<=', Carbon::now())
             ->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
             ->orWhereNull(Tweet::DUE_AT_COLUMN);
 
