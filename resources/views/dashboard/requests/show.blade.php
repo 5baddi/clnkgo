@@ -146,8 +146,17 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
+                        <label class="form-label">Subject</label>
+                        <input type="text" name="subject" class="form-control @if($errors->has('subject')) is-invalid @endif" value="{{ old('subject', $answer->subject) }}" placeholder="Subject"/>
+                        @if($errors->has('subject'))
+                            <div class="invalid-feedback d-block">
+                                {{ $errors->first('subject') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-12 mt-2">
                         <label class="form-label">Detected email</label>
-                        <input type="text" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? ($answer->email ?? ($tweet->email ?? $tweet->author->email)) }}" placeholder="Email address"/>
+                        <input type="email" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? ($answer->email ?? ($tweet->email ?? $tweet->author->email)) }}" placeholder="Email address"/>
                         <p class="small text-muted mt-2">💡 For most requests can identify if an email address exists. But occasionally it might need help, you can edit the address if needed.</p>
                         @if($errors->has('email'))
                             <div class="invalid-feedback d-block">
