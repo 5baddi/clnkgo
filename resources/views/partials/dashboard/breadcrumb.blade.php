@@ -12,11 +12,13 @@
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <a href="{{ route('dashboard.account') }}" class="dropdown-item">Account</a>
-              @if($user->isSuperAdmin())
+              <a href="{{ route('dashboard.account') }}" class="dropdown-item {{ request()->routeIs('dashboard.account') ? 'active' : '' }}">Account</a>
+              @if($user->isSuperAdmin() && ! request()->routeIs(['admin', 'admin.*']))
               <a href="{{ route('admin') }}" class="dropdown-item">Admin area</a>
+              @elseif($user->isSuperAdmin() && request()->routeIs(['admin', 'admin.*']))
+              <a href="{{ route('dashboard') }}" class="dropdown-item">Source area</a>
               @endif
-              <a href="{{ route('dashboard.plan.upgrade') }}" class="dropdown-item">Upgrade</a>
+              <a href="{{ route('dashboard.plan.upgrade') }}" class="dropdown-item {{ request()->routeIs('dashboard.plan.*') ? 'active' : '' }}">Upgrade</a>
               <div class="dropdown-divider"></div>
               <a href="{{ env('SUPPORT_URL', '#') }}" class="dropdown-item">Support</a>
               <a href="{{ route('signout') }}" class="dropdown-item">Logout</a>
@@ -33,16 +35,22 @@
           <h2 class="page-title">
               @yield('title')
           </h2>
-          @if (! request()->routeIs('dashboard'))
+          @if (! request()->routeIs(['dashboard', 'dashboard.*']) && ! request()->routeIs(['admin', 'admin.*']))
           <div class="mt-2">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item">
+                  @if(request()->routeIs(['admin', 'admin.*']))
+                  <a href="{{ route('admin.*') }}">Admin</a>
+                  @else
+                  <a href="{{ route('dashboard.*') }}">Dashboard</a>
+                  @endif
+                </li>
                 @foreach (request()->segments() as $key => $segment)
                     @if ($segment === 'dashboard')
                     @continue
                     @endif
                     @if(! is_numeric($segment) && (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $segment) !== 1))
-                    <li class="breadcrumb-item {{ (sizeof(request()->segments()) - 1) === ($key) ? 'active' : '' }}"><a href="{{ url('dashboard/' . $segment) }}">{{ ucfirst($segment) }}</a></li>
+                    <li class="breadcrumb-item {{ (sizeof(request()->segments()) - 1) === ($key) ? 'active' : '' }}"><a href="{{ url((request()->routeIs(['admin', 'admin.*']) ? 'admin/' : 'dashboard/') . $segment) }}">{{ ucfirst($segment) }}</a></li>
                     @endif
                 @endforeach
               </ol>

@@ -24,10 +24,10 @@
     <div class="wrapper">
       @include('partials.admin.menu')
       <div class="page-wrapper">
-        @include('partials.admin.breadcrumb')
+        @include('partials.dashboard.breadcrumb')
         <div class="page-body">
           <div class="container-xl">
-            @include('partials.admin.alert')
+            @include('partials.dashboard.alert')
 
             @yield('content')
           </div>
