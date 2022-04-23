@@ -30,7 +30,7 @@ class AccountController extends DashboardController
             'title'         => 'Account',
             'tab'           => $request->query('tab', 'settings'),
             'user'          => $this->user,
-            'emails'        => $this->user->linkedEmails->pluck('email')->toArray(),
+            'emails'        => implode(',', $this->user->linkedEmails->pluck('email')->toArray() ?? []),
             'currentPack'   => $this->packService->loadCurrentPack($this->user)
         ]);
     }
