@@ -17,6 +17,9 @@
                 <a href="{{ route('dashboard.account', ['tab' => 'settings']) }}" class="nav-link {{ $tab === 'settings' ? 'active' : '' }}">Account Info</a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('dashboard.account', ['tab' => 'password']) }}" class="nav-link {{ $tab === 'password' ? 'active' : '' }}">Account Password</a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('dashboard.account', ['tab' => 'emails']) }}" class="nav-link {{ $tab === 'emails' ? 'active' : '' }}">Email preferences</a>
               </li>
               @if(! $user->isSuperAdmin())
@@ -30,12 +33,16 @@
 
     <form action="{{ route('dashboard.account.save', ['tab' => $tab]) }}" method="POST" style="margin-top: 0 !important;" id="main-form">
         @csrf
+        <input type="hidden" id="emails" name="emails"/>
+
         <div class="col">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">
                         @if ($tab === 'settings')
-                        General Info
+                        General info
+                        @elseif ($tab === 'password')
+                        Account password
                         @elseif($tab === 'plan' && ! $user->isSuperAdmin())
                         Your current plan
                         @else
@@ -46,7 +53,7 @@
                 <div class="card-body">
                     @if ($tab === 'settings')
                     <div class="row">
-                        <p class="text-muted">Setup your account, edit profile details, and change password</p>
+                        <p class="text-muted">Setup your account, edit profile details</p>
                         <div class="col-6">
                             <label class="form-label">First name</label>
                             <input type="text" name="first_name" class="form-control @if ($errors->has('first_name')) is-invalid @endif" value="{{ old('first_name') ?? ucfirst($user->first_name)  }}" placeholder="Your first name" autofocus/>
@@ -78,8 +85,9 @@
                             @endif
                         </div>
                     </div>
-                    <hr/>
+                    @elseif ($tab === 'password')
                     <div class="row">
+                        <p class="text-muted">Change or set a new password</p>
                         @if ($user->hasPassword())
                         <div class="col-4">
                             <label class="form-label">Current password</label>
@@ -128,6 +136,7 @@
                     </div>
                     @else
                     <div class="row">
+                        <p class="text-muted">You can link many emails, to use them during sending requests</p>
                         <div class="col-12">
                             <div class="form-group mb-2">
                                 <input type="text" value="{{ $emails ?? '' }}" id="tags-input" class="form-control @if ($errors->has('emails')) is-invalid @endif" autofocus placeholder="Add your emails"/>
@@ -191,39 +200,22 @@
         });
 
         var tags = $('#tags-input').tagsinput('items');
-        $('#tags-count').text(tags.length || 0);
-
-        $('#tags-input').on('itemAdded', function(event) {
-            var tags = $('#tags-input').tagsinput('items');
-
+        if (typeof tags !== 'undefined') {
             $('#tags-count').text(tags.length || 0);
-            $('#emails').val(tags.join(','));
-        });
-        
-        $('#tags-input').on('itemRemoved', function(event) {
-            var tags = $('#tags-input').tagsinput('items');
 
-            $('#tags-count').text(tags.length || 0);
-            $('#emails').val(tags.join(','));
-        });
-
-        $('#words-cloud').awesomeCloud({
-            'shape' : 'circle',
-            'size' : {
-                'grid' : 16,
-                'factor': 0,
-                'normalize': true
-            },
-            'color': {
-                'start': '#257CFF',
-                'end': '#311847'
-            },
-            'options': {
-                'rotationRatio': 0.3,
-                'printMultiplier': 3,
-                'color': 'gradient',
-                'sort': 'highest'
-            }
-        });
+            $('#tags-input').on('itemAdded', function(event) {
+                var tags = $('#tags-input').tagsinput('items');
+    
+                $('#tags-count').text(tags.length || 0);
+                $('#emails').val(tags.join(','));
+            });
+            
+            $('#tags-input').on('itemRemoved', function(event) {
+                var tags = $('#tags-input').tagsinput('items');
+    
+                $('#tags-count').text(tags.length || 0);
+                $('#emails').val(tags.join(','));
+            });
+        }
     });
 @endsection
