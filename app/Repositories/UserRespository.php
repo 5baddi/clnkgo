@@ -38,7 +38,7 @@ class UserRespository
     public function findById(string $id): ?User
     {
         return User::query()
-                    ->with(['subscription', 'favorite'])
+                    ->with(['subscription', 'favorite', 'linkedEmails'])
                     ->find($id);
     }
     

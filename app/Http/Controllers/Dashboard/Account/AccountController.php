@@ -27,10 +27,11 @@ class AccountController extends DashboardController
     public function __invoke(Request $request)
     {
         return view('dashboard.account', [
-            'title'         =>  'Account',
-            'tab'           =>  $request->query('tab', 'settings'),
-            'user'          =>  $this->user,
-            'currentPack'   =>  $this->packService->loadCurrentPack($this->user)
+            'title'         => 'Account',
+            'tab'           => $request->query('tab', 'settings'),
+            'user'          => $this->user,
+            'emails'        => $this->user->linkedEmails->pluck('email')->toArray(),
+            'currentPack'   => $this->packService->loadCurrentPack($this->user)
         ]);
     }
 }
