@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Plan;
 
+use BADDIServices\SourceeApp\Entities\Alert;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\SourceeApp\Services\PackService;
@@ -26,6 +27,12 @@ class UpgradePlanController extends DashboardController
 
     public function __invoke()
     {
+        if ($this->user->isSuperAdmin()) {
+            return redirect()
+                ->route('admin')
+                ->with(new Alert('Don\'t forget you\'re using super admin account!'));
+        }
+
         return view('dashboard.plan.upgrade', [
             'title'                 => 'Upgrade your plan',
             'subscription'          => $this->subscription,

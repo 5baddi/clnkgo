@@ -7,7 +7,7 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\IndexController;
+use BADDIServices\SourceeApp\Http\Controllers\Admin\IndexController;
 
 Route::middleware(['auth', 'is.super-admin'])
     ->prefix('admin')

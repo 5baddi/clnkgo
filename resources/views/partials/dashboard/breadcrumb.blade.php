@@ -18,9 +18,13 @@
               @elseif($user->isSuperAdmin() && request()->routeIs(['admin', 'admin.*']))
               <a href="{{ route('dashboard') }}" class="dropdown-item">Source area</a>
               @endif
+              @if(! $user->isSuperAdmin())
               <a href="{{ route('dashboard.plan.upgrade') }}" class="dropdown-item {{ request()->routeIs('dashboard.plan.*') ? 'active' : '' }}">Upgrade</a>
+              @endif
               <div class="dropdown-divider"></div>
+              @if(! $user->isSuperAdmin())
               <a href="{{ env('SUPPORT_URL', '#') }}" class="dropdown-item">Support</a>
+              @endif
               <a href="{{ route('signout') }}" class="dropdown-item">Logout</a>
             </div>
           </div>
