@@ -164,4 +164,9 @@ class UserService extends Service
     {
         return $this->userRepository->removeResetPasswordToken($token);
     }
+
+    public function saveLinkedEmails(User $user, array $emails): bool
+    {
+        return $this->userRepository->saveLinkedEmails($user->getId(), $emails);
+    }
 }

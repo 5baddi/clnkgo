@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use BADDIServices\SourceeApp\Models\Subscription;
-use BADDIServices\SourceeApp\Models\Authenticatable;
-use BADDIServices\SourceeApp\Models\UserFavoriteTweet;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use BADDIServices\SourceeApp\Models\Authenticatable;
+use BADDIServices\SourceeApp\Models\UserLinkedEmail;
+use BADDIServices\SourceeApp\Models\UserFavoriteTweet;
 
 class User extends Authenticatable
 {
@@ -62,6 +62,11 @@ class User extends Authenticatable
     public function favorite(): HasMany
     {
         return $this->hasMany(UserFavoriteTweet::class, 'user_id');
+    }
+    
+    public function linkedEmails(): HasMany
+    {
+        return $this->hasMany(UserLinkedEmail::class, 'user_id');
     }
 
     public function setEmailAttribute($value): self

@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard.account.save', ['tab' => $tab]) }}" method="POST" style="margin-top: 0 !important;">
+    <form action="{{ route('dashboard.account.save', ['tab' => $tab]) }}" method="POST" style="margin-top: 0 !important;" id="main-form">
         @csrf
         <div class="col">
             <div class="card">
@@ -130,12 +130,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mb-2">
-                                <input type="text" value="{{ $keywords ?? '' }}" id="tags-input" class="form-control @if ($errors->has('keywords')) is-invalid @endif" autofocus placeholder="Add your keywords"/>
-                                @if ($errors->has('keywords'))
-                                <div class="invalid-feedback">{{ $errors::first('keywords') }}</div>
+                                <input type="text" value="{{ $emails ?? '' }}" id="tags-input" class="form-control @if ($errors->has('emails')) is-invalid @endif" autofocus placeholder="Add your emails"/>
+                                @if ($errors->has('emails'))
+                                <div class="invalid-feedback">{{ $errors::first('emails') }}</div>
                                 @endif
                             </div>
-                            <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> or <kbd>comma</kbd> to add a keyword</span>
+                            <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> or <kbd>comma</kbd> to add an email</span>
                         </div>
                     </div>
                     @endif
@@ -180,4 +180,50 @@
 
 @section('scripts')
     @include('partials.dashboard.scripts.form')
+@endsection
+
+@section('script')
+    $('document').ready(function() {
+        $('#tags-input').tagsinput({
+            cancelConfirmKeysOnEmpty: false,
+            trimValue: true,
+            allowDuplicates: false,
+        });
+
+        var tags = $('#tags-input').tagsinput('items');
+        $('#tags-count').text(tags.length || 0);
+
+        $('#tags-input').on('itemAdded', function(event) {
+            var tags = $('#tags-input').tagsinput('items');
+
+            $('#tags-count').text(tags.length || 0);
+            $('#emails').val(tags.join(','));
+        });
+        
+        $('#tags-input').on('itemRemoved', function(event) {
+            var tags = $('#tags-input').tagsinput('items');
+
+            $('#tags-count').text(tags.length || 0);
+            $('#emails').val(tags.join(','));
+        });
+
+        $('#words-cloud').awesomeCloud({
+            'shape' : 'circle',
+            'size' : {
+                'grid' : 16,
+                'factor': 0,
+                'normalize': true
+            },
+            'color': {
+                'start': '#257CFF',
+                'end': '#311847'
+            },
+            'options': {
+                'rotationRatio': 0.3,
+                'printMultiplier': 3,
+                'color': 'gradient',
+                'sort': 'highest'
+            }
+        });
+    });
 @endsection

@@ -38,7 +38,8 @@ class UpdateAccountRequest extends FormRequest
             User::PHONE_COLUMN         => 'nullable|string|max:25',
             'current_password'         => [new ValidateCurrentPassword()],
             User::PASSWORD_COLUMN      => 'nullable|string|min:8|required_with:current_password|same:confirm_password',
-            'confirm_password'         => 'nullable|string|min:8'
+            'confirm_password'         => 'nullable|string|min:8',
+            'emails'                   => ['nullable', 'string'],
         ];
     }
 }

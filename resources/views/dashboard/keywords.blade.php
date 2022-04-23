@@ -100,11 +100,12 @@
 @section('scripts')
     @include('partials.dashboard.scripts.form')
 @endsection
+
 @section('script')
     $('document').ready(function() {
         $('#tags-input').tagsinput({
             maxTags: {{ $max }},
-            cancelConfirmKeysOnEmpty: true,
+            cancelConfirmKeysOnEmpty: false,
             trimValue: true,
             allowDuplicates: false,
         });

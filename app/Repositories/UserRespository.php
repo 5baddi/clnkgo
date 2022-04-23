@@ -10,6 +10,7 @@ namespace BADDIServices\SourceeApp\Repositories;
 
 use Carbon\Carbon;
 use App\Models\User;
+use BADDIServices\SourceeApp\Models\UserLinkedEmail;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -152,5 +153,25 @@ class UserRespository
         return DB::table('password_resets')
             ->where('token', $token)
             ->delete() > 0;
+    }
+
+    public function saveLinkedEmails(string $userId, array $emails): bool
+    {
+        $linkedEmails = 0;
+
+        foreach($emails as $email) {
+            UserLinkedEmail::query()
+                ->updateOrCreate(
+                    [
+                        'email'     => $email
+                    ],
+                    [
+                        'email'     => $email,
+                        'user_id'   => $userId,
+                    ]
+                );
+        }
+
+        return $linkedEmails > 0;
     }
 }

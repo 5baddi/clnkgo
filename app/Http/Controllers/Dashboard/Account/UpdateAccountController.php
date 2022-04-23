@@ -11,11 +11,12 @@ namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account;
 use Throwable;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use BADDIServices\SourceeApp\Entities\Alert;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use BADDIServices\SourceeApp\Http\Requests\UpdateAccountRequest;
 use Illuminate\Validation\ValidationException;
+use BADDIServices\SourceeApp\Http\Requests\UpdateAccountRequest;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 
 class UpdateAccountController extends DashboardController
 {    
@@ -42,6 +43,20 @@ class UpdateAccountController extends DashboardController
 
             $this->user = $this->userService->update($this->user, $request->input());
             Auth::setUser($this->user);
+
+            if ($request->has('emails')) {
+                $emails = explode(',', $request->input('emails', ''));
+
+                $validator = Validator::make($emails, ['*' => 'email']);
+                if ($validator->fails()) {
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with(new Alert('You must enter valid emails in Email preferences!'));
+                }
+
+                $this->userService->saveLinkedEmails($this->user, $emails);
+            }
 
             return redirect()->route('dashboard.account', ['tab' => $request->query('tab', 'settings')])
                 ->with(
