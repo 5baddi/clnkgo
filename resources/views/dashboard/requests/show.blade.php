@@ -147,7 +147,7 @@
                 <div class="row">
                     <div class="col-12">
                         <label class="form-label">Subject</label>
-                        <input type="text" name="subject" class="form-control @if($errors->has('subject')) is-invalid @endif" value="{{ old('subject', $answer->subject) }}" placeholder="Subject"/>
+                        <input type="text" name="subject" class="form-control @if($errors->has('subject')) is-invalid @endif" value="{{ old('subject', ! is_null($answer) ? $answer->subject : null) }}" placeholder="Subject"/>
                         @if($errors->has('subject'))
                             <div class="invalid-feedback d-block">
                                 {{ $errors->first('subject') }}
