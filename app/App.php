@@ -17,4 +17,11 @@ class App
     public const MAX_CANNED_RESPONSES = 10;
 
     public const APP_MOST_USED_KEYWORDS = 'app_most_used_keywords';
+
+    public const EMAIL_PROVIDERS = [
+        'gmail',
+        'outlook',
+        'yahoo',
+        'hotmail'
+    ];
 }

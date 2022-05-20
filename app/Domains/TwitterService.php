@@ -187,6 +187,7 @@ class TwitterService extends Service
                         TwitterUser::ID_COLUMN                    => $user['id'],
                         TwitterUser::USERNAME_COLUMN              => $user['username'],
                         TwitterUser::EMAIL_COLUMN                 => $emailMatches[0] ?? null,
+                        TwitterUser::WEBSITE_COLUMN               => extractWebsite($user['description']),
                         TwitterUser::NAME_COLUMN                  => $user['name'] ?? null,
                         TwitterUser::VERIFIED_COLUMN              => $user['verified'] ?? false,
                         TwitterUser::PROTECTED_COLUMN             => $user['protected'] ?? false,
