@@ -84,21 +84,29 @@ if (! function_exists('extractDate')) {
 if (! function_exists('extractWebsite')) {
     function extractWebsite(string $text): ?string 
     {
+        $domainName = null;
+
         try {
             if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
-                $domainName = array_pop(explode('@', $text));
-                if (! in_array($domainName, App::EMAIL_PROVIDERS)) {
+                $domainName = end(explode('@', $text));
+                if (is_string($domainName) && ! in_array($domainName, App::EMAIL_PROVIDERS)) {
                     return $domainName;
                 }
-            } else {
-                preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $match);
+            }
 
-                return array_shift($match);
+            preg_match('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $matches);
+
+            $domainName = $matches[0] ?? null;
+
+            if (is_string($domainName) && filter_var($domainName, FILTER_VALIDATE_URL)) {
+                $parsedDomainName = parse_url($domainName, PHP_URL_PATH);
+
+                return $parsedDomainName['host'] ?? null;
             }
         } catch (Throwable $e) {
             // TODO: implement logger
         }
 
-        return null;
+        return $domainName;
     }
 }
