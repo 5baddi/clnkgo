@@ -30,7 +30,7 @@ class UpgradePlanController extends DashboardController
         if ($this->user->isSuperAdmin()) {
             return redirect()
                 ->route('admin')
-                ->with(new Alert('Don\'t forget you\'re using super admin account!'));
+                ->with('alert', new Alert('Don\'t forget you\'re using super admin account!'));
         }
 
         return view('dashboard.plan.upgrade', [
