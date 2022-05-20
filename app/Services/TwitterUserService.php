@@ -31,6 +31,7 @@ class TwitterUserService extends Service
                 TwitterUser::ID_COLUMN,
                 TwitterUser::USERNAME_COLUMN,
                 TwitterUser::EMAIL_COLUMN,
+                TwitterUser::WEBSITE_COLUMN,
                 TwitterUser::NAME_COLUMN,
                 TwitterUser::VERIFIED_COLUMN,
                 TwitterUser::PROTECTED_COLUMN,
