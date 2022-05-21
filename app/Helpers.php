@@ -2,6 +2,7 @@
 
 use BADDIServices\SourceeApp\App;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 
 /**
  * Presspitch.io
@@ -89,6 +90,7 @@ if (! function_exists('extractWebsite')) {
         try {
             if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
                 $domainName = end(explode('@', $text));
+
                 if (is_string($domainName) && ! in_array($domainName, App::EMAIL_PROVIDERS)) {
                     return $domainName;
                 }
@@ -99,14 +101,15 @@ if (! function_exists('extractWebsite')) {
             $domainName = $matches[0] ?? null;
 
             if (is_string($domainName) && filter_var($domainName, FILTER_VALIDATE_URL)) {
-                $parsedDomainName = parse_url($domainName, PHP_URL_PATH);
+                $parsedDomainName = parse_url($domainName);
 
-                return $parsedDomainName['host'] ?? null;
+                if (Arr::has($parsedDomainName, ['host', 'path'])) {
+                    $domainName = $parsedDomainName['host'] . $parsedDomainName['path'];
+                }
             }
         } catch (Throwable $e) {
             // TODO: implement logger
         }
-
         return $domainName;
     }
 }
