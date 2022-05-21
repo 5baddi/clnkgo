@@ -88,7 +88,7 @@ class TwitterService extends Service
                     ],
                     'query'     => [
                         'query'         => sprintf('#%s -is:retweet', $hashtag),
-                        // 'start_time'    => date(DATE_RFC3339, strtotime('-15 minutes')),
+                        'start_time'    => date(DATE_RFC3339, strtotime('-15 minutes')),
                         'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
                         'user.fields'   => 'created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
                         'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
@@ -182,12 +182,14 @@ class TwitterService extends Service
                     $user['location'] = null;
                 }
 
+                $website = extractWebsite($user['description'] ?? '') ?? extractWebsite($emailMatches[0] ?? '');
+
                 $this->twitterUserService->save(
                     [
                         TwitterUser::ID_COLUMN                    => $user['id'],
                         TwitterUser::USERNAME_COLUMN              => $user['username'],
                         TwitterUser::EMAIL_COLUMN                 => $emailMatches[0] ?? null,
-                        TwitterUser::WEBSITE_COLUMN               => extractWebsite($user['description']),
+                        TwitterUser::WEBSITE_COLUMN               => $website,
                         TwitterUser::NAME_COLUMN                  => $user['name'] ?? null,
                         TwitterUser::VERIFIED_COLUMN              => $user['verified'] ?? false,
                         TwitterUser::PROTECTED_COLUMN             => $user['protected'] ?? false,
