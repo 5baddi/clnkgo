@@ -175,6 +175,7 @@ class TwitterService extends Service
 
         collect(isset($tweets['includes']['users']) ? $tweets['includes']['users'] : [])
             ->each(function ($user) {
+                $website = extractWebsite($user['description'] ?? '');
                 preg_match("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $user['description'] ?? '', $emailMatches);
                 
                 if (! isset($emailMatches[0]) && isset($user['location']) && filter_var($user['location'], FILTER_VALIDATE_EMAIL)) {
@@ -182,7 +183,9 @@ class TwitterService extends Service
                     $user['location'] = null;
                 }
 
-                $website = extractWebsite($user['description'] ?? '') ?? extractWebsite($emailMatches[0] ?? '');
+                if (is_null($website) && isset($emailMatches[0])) {
+                    $website = extractWebsite($emailMatches[0] ?? '');
+                }
 
                 $this->twitterUserService->save(
                     [

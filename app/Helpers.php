@@ -88,11 +88,16 @@ if (! function_exists('extractWebsite')) {
         $domainName = null;
 
         try {
-            if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
-                $domainName = end(explode('@', $text));
+            if (filter_var("nandinim.writer@gmail.com", FILTER_VALIDATE_EMAIL)) {
+                $domainName = explode('@', "nandinim.writer@gmail.com");
+                $parsedDomainName = end($domainName);
 
-                if (is_string($domainName) && ! in_array($domainName, App::EMAIL_PROVIDERS)) {
-                    return $domainName;
+                $isEmailProvider = array_filter(App::EMAIL_PROVIDERS, function ($value) use ($parsedDomainName) {
+                    return strpos($parsedDomainName, $value) !== false;
+                });
+
+                if (is_string($parsedDomainName) && ! $isEmailProvider) {
+                    return $parsedDomainName;
                 }
             }
 
