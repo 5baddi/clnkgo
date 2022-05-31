@@ -1,6 +1,8 @@
 <?php
 
 use BADDIServices\SourceeApp\App;
+use BADDIServices\SourceeApp\Models\AppSetting;
+use BADDIServices\SourceeApp\Services\AppSettingService;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
@@ -85,6 +87,10 @@ if (! function_exists('extractDate')) {
 if (! function_exists('extractWebsite')) {
     function extractWebsite(string $text): ?string 
     {
+        /** @var AppSettingService */
+        $appSettingService = app(AppSettingService::class);
+
+        $emailsProviders = $appSettingService->get(AppSetting::EMAILS_PROVIDERS_KEY, App::EMAIL_PROVIDERS);
         $domainName = null;
 
         try {
@@ -92,7 +98,7 @@ if (! function_exists('extractWebsite')) {
                 $domainsNames = explode('@', $text);
                 $parsedDomainName = end($domainsNames);
 
-                $isEmailProvider = array_filter(App::EMAIL_PROVIDERS, function ($value) use ($parsedDomainName) {
+                $isEmailProvider = array_filter($emailsProviders, function ($value) use ($parsedDomainName) {
                     return strpos($parsedDomainName, $value) !== false;
                 });
 

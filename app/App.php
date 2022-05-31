@@ -22,6 +22,8 @@ class App
         'gmail',
         'outlook',
         'yahoo',
-        'hotmail'
+        'hotmail',
+        'icloud',
+        'live'
     ];
 }
