@@ -48,6 +48,7 @@
                 <span class="nav-link-title">Templates</span>
             </a>
           </li>
+          @if(! $user->isSuperAdmin())
           <li class="nav-item {{ request()->routeIs('dashboard.plan.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.plan.upgrade') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -61,6 +62,7 @@
                 <span class="nav-link-title">Upgrade</span>
             </a>
           </li>
+          @endif
           <li class="nav-item {{ request()->routeIs('dashboard.account') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.account') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
