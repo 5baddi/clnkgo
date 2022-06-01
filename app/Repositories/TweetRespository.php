@@ -107,10 +107,12 @@ class TweetRespository
     
     public function keywordsMatch(array $keywords): int
     {
-        $query = Tweet::query();
-            // ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '>', Carbon::now()->subDays(10))
-            // ->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
-            // ->orWhereNull(Tweet::DUE_AT_COLUMN);
+        $query = Tweet::query()
+            ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '>', Carbon::now()->subDays(10))
+            ->where(function ($query) {
+                $query->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
+                    ->orWhereNull(Tweet::DUE_AT_COLUMN);
+            });
 
         foreach($keywords as $index => $keyword) {
             if ($index === 0) {
