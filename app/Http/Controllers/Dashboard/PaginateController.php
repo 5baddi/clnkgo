@@ -8,7 +8,6 @@
 
 namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard;
 
-use App\Http\Requests\AnalyticsRequest;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 use BADDIServices\SourceeApp\Http\Filters\Tweet\TweetQueryFilter;
 use BADDIServices\SourceeApp\Services\TweetService;
@@ -25,7 +24,7 @@ class PaginateController extends DashboardController
         $this->tweetService = $tweetService;
     }
 
-    public function __invoke(AnalyticsRequest $request, TweetQueryFilter $queryFilter)
+    public function __invoke(TweetQueryFilter $queryFilter)
     {
         $tweets = $this->tweetService->paginate($queryFilter);
 
