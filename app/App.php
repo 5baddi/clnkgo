@@ -19,12 +19,13 @@ class App
     public const APP_MOST_USED_KEYWORDS = 'app_most_used_keywords';
 
     public const DEFAULT_EMAIL_PROVIDERS = [
-        'gmail',
-        'outlook',
-        'yahoo',
-        'hotmail',
-        'icloud',
-        'live'
+        'gmail.com',
+        'outlook.com',
+        'yahoo.com',
+        'hotmail.com',
+        'icloud.com',
+        'live.com',
+        'msn.com'
     ];
     
     public const DEFAULT_MAIN_HASHTAGS = [
