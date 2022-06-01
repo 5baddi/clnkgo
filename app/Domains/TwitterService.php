@@ -159,7 +159,7 @@ class TwitterService extends Service
                         Tweet::TEXT_COLUMN                  => $tweet['text'],
                         Tweet::LANG_COLUMN                  => $tweet['lang'] ?? null,
                         Tweet::DUE_AT_COLUMN                => ! is_null($dueAt) ? Carbon::parse($dueAt) : null,
-                        Tweet::EMAIL_COLUMN                 => $emailMatches[0] ?? null,
+                        Tweet::EMAIL_COLUMN                 => ! empty($emailMatches[0]) ? strtolower($emailMatches[0]) : null,
                         Tweet::POSSIBLY_SENSITIVE_COLUMN    => $tweet['possibly_sensitive'] ?? false,
                         Tweet::IN_REPLY_TO_USER_ID_COLUMN   => $tweet['in_reply_to_user_id'] ?? null,
                         Tweet::REFERENCED_TWEETS_COLUMN     => json_encode($tweet['referenced_tweets'] ?? null),
@@ -191,7 +191,7 @@ class TwitterService extends Service
                     [
                         TwitterUser::ID_COLUMN                    => $user['id'],
                         TwitterUser::USERNAME_COLUMN              => $user['username'],
-                        TwitterUser::EMAIL_COLUMN                 => $emailMatches[0] ?? null,
+                        TwitterUser::EMAIL_COLUMN                 => ! empty($emailMatches[0]) ? strtolower($emailMatches[0]) : null,
                         TwitterUser::WEBSITE_COLUMN               => $website,
                         TwitterUser::NAME_COLUMN                  => $user['name'] ?? null,
                         TwitterUser::VERIFIED_COLUMN              => $user['verified'] ?? false,
