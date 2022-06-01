@@ -105,19 +105,27 @@ if (! function_exists('extractWebsite')) {
                 if (is_string($parsedDomainName) && ! $isEmailProvider) {
                     $domainName = $parsedDomainName;
                 }
-            } else {
+            }
+
+            if (! filter_var($text, FILTER_VALIDATE_EMAIL)) {
+                preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $text ?? '', $emailMatches);
+
+                if (isset($emailMatches[0]) && filter_var($emailMatches[0], FILTER_VALIDATE_EMAIL)) {
+                    $text = $emailMatches[0];
+                }
+    
                 preg_match('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $matches);
-
+    
                 $domainName = $matches[0] ?? null;
-
+    
                 if (is_string($domainName) && filter_var($domainName, FILTER_VALIDATE_URL)) {
                     $parsedDomainName = parse_url($domainName);
-
+    
                     if (Arr::has($parsedDomainName, ['host', 'path'])) {
                         $domainName = $parsedDomainName['host'] . $parsedDomainName['path'];
                     }
                 }
-            }
+            }            
         } catch (Throwable $e) {
             // TODO: implement logger
         }
