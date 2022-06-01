@@ -90,7 +90,7 @@ if (! function_exists('extractWebsite')) {
         /** @var AppSettingService */
         $appSettingService = app(AppSettingService::class);
 
-        $emailsProviders = $appSettingService->get(AppSetting::EMAILS_PROVIDERS_KEY, App::EMAIL_PROVIDERS);
+        $emailsProviders = $appSettingService->get(AppSetting::EMAILS_PROVIDERS_KEY, App::DEFAULT_EMAIL_PROVIDERS);
         $domainName = null;
 
         try {

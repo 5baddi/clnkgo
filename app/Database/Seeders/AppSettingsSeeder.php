@@ -26,6 +26,6 @@ class AppSettingsSeeder extends Seeder
      */
     public function run()
     {
-        $this->appSettingService->set(AppSetting::EMAILS_PROVIDERS_KEY, App::EMAIL_PROVIDERS);
+        $this->appSettingService->set(AppSetting::EMAILS_PROVIDERS_KEY, App::DEFAULT_EMAIL_PROVIDERS);
     }
 }

@@ -22,6 +22,7 @@ class AppSetting extends ModelEntity
     public const OBJECT_TYPE = 3;
 
     public const EMAILS_PROVIDERS_KEY = 'emails_providers';
+    public const MAIN_HASHTAGS_KEY = 'main_hashtags';
 
     protected $primaryKey = self::KEY_COLUMN;
 

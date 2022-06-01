@@ -2,10 +2,13 @@
 
 namespace App\Console\Commands\Twitter;
 
+use BADDIServices\SourceeApp\App;
 use Throwable;
 use Illuminate\Console\Command;
 use BADDIServices\SourceeApp\AppLogger;
 use BADDIServices\SourceeApp\Domains\TwitterService;
+use BADDIServices\SourceeApp\Models\AppSetting;
+use BADDIServices\SourceeApp\Services\AppSettingService;
 
 class FetchLatestTweets extends Command
 {
@@ -23,19 +26,16 @@ class FetchLatestTweets extends Command
      */
     protected $description = 'Fetch latest tweets by hashtags';
 
-    /** @var TwitterService */
-    private $twitterService;
-
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(TwitterService $twitterService)
-    {
+    public function __construct(
+        private TwitterService $twitterService,
+        private AppSettingService $appSettingService,
+    ) {
         parent::__construct();
-
-        $this->twitterService = $twitterService;
     }
 
     /**
@@ -49,7 +49,7 @@ class FetchLatestTweets extends Command
         $startTime = microtime(true);
 
         try {
-            $hashtags = collect(config('twitter.hashtags'), []);
+            $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
 
             $hashtags->each(function ($hashtag) {
                 $this->twitterService->fetchTweetsByHashtags($hashtag);

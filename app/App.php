@@ -18,12 +18,19 @@ class App
 
     public const APP_MOST_USED_KEYWORDS = 'app_most_used_keywords';
 
-    public const EMAIL_PROVIDERS = [
+    public const DEFAULT_EMAIL_PROVIDERS = [
         'gmail',
         'outlook',
         'yahoo',
         'hotmail',
         'icloud',
         'live'
+    ];
+    
+    public const DEFAULT_MAIN_HASHTAGS = [
+        'journorequest',
+        'journorequests',
+        'prrequest',
+        'prrequests'
     ];
 }
