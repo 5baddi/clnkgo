@@ -109,7 +109,7 @@ if (! function_exists('extractWebsite')) {
             
             preg_match('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $matches);
     
-            $domainName = $matches[0] ?? null;
+            $domainName = $matches[0] ?? ($parsedDomainName ?? null);
 
             if (is_string($domainName) && filter_var($domainName, FILTER_VALIDATE_URL)) {
                 $parsedDomainName = parse_url($domainName);
