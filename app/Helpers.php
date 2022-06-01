@@ -132,6 +132,6 @@ if (! function_exists('extractWebsite')) {
             // TODO: implement logger
         }
 
-        return $domainName;
+        return ! is_null($domainName) ? strtolower($domainName) : $domainName;
     }
 }
