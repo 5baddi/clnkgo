@@ -176,7 +176,7 @@ class TwitterService extends Service
         collect(isset($tweets['includes']['users']) ? $tweets['includes']['users'] : [])
             ->each(function ($user) {
                 $website = extractWebsite($user['description'] ?? '');
-                preg_match("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $user['description'] ?? '', $emailMatches);
+                preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $user['description'] ?? '', $emailMatches);
                 
                 if (! isset($emailMatches[0]) && isset($user['location']) && filter_var($user['location'], FILTER_VALIDATE_EMAIL)) {
                     $emailMatches[0] = $user['location'];
