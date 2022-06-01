@@ -8,12 +8,8 @@
 
 namespace BADDIServices\SourceeApp\Services;
 
-use App\Models\User;
-use BADDIServices\SourceeApp\App;
 use BADDIServices\SourceeApp\Http\Filters\Tweet\TweetQueryFilter;
-use BADDIServices\SourceeApp\Models\RequestAnswer;
 use BADDIServices\SourceeApp\Models\Tweet;
-use BADDIServices\SourceeApp\Models\UserFavoriteTweet;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Repositories\TweetRespository;
 

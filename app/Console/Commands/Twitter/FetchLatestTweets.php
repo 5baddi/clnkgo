@@ -51,7 +51,7 @@ class FetchLatestTweets extends Command
         try {
             $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
 
-            $hashtags->each(function ($hashtag) {
+            collect($hashtags ?? [])->each(function ($hashtag) {
                 $this->twitterService->fetchTweetsByHashtags($hashtag);
 
                 sleep(3);
