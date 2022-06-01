@@ -117,7 +117,7 @@ class TwitterService extends Service
             ->map(function ($tweet) use ($hashtag, $tweets) {
                 $dueAt = extractDate($tweet['text']);
 
-                preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/igm', $tweet['text'] ?? '', $emailMatches);
+                preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $tweet['text'] ?? '', $emailMatches);
 
                 if (isset($tweet['attachments'], $tweet['attachments']['media_keys'])) {
                     collect($tweet['attachments']['media_keys'])
