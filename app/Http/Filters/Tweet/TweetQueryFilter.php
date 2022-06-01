@@ -121,7 +121,8 @@ class TweetQueryFilter extends QueryFilter
             }
 
             $this->builder
-                ->orWhereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$keyword}%"]);
+                ->orWhereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$keyword}%"])
+                ->orWhereNull(Tweet::DUE_AT_COLUMN);
         }
     }
 }
