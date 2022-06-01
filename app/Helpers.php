@@ -121,10 +121,10 @@ if (! function_exists('extractWebsite')) {
 
             if (isset($parsedDomainName)) {
                 $isEmailProvider = array_filter($emailsProviders, function ($value) use ($parsedDomainName) {
-                    return strpos($parsedDomainName, $value) !== false;
+                    return strpos($parsedDomainName, $value) === false;
                 });
 
-                if (is_string($parsedDomainName) && count($isEmailProvider) === 0) {
+                if (is_string($parsedDomainName) && count($isEmailProvider) > 0) {
                     $domainName = $parsedDomainName;
                 }
             }
