@@ -135,7 +135,7 @@
                 'normalize': true
             },
             'color': {
-                'start': '#257CFF',
+                'start': '#202837',
                 'end': '#311847'
             },
             'options': {
