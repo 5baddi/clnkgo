@@ -105,14 +105,6 @@ if (! function_exists('extractWebsite')) {
             if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
                 $domainsNames = explode('@', $text);
                 $parsedDomainName = end($domainsNames);
-
-                $isEmailProvider = array_filter($emailsProviders, function ($value) use ($parsedDomainName) {
-                    return strpos($parsedDomainName, $value) !== false;
-                });
-
-                if (is_string($parsedDomainName) && ! $isEmailProvider) {
-                    $domainName = $parsedDomainName;
-                }
             }
             
             preg_match('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $matches);
@@ -123,7 +115,17 @@ if (! function_exists('extractWebsite')) {
                 $parsedDomainName = parse_url($domainName);
 
                 if (Arr::has($parsedDomainName, ['host', 'path'])) {
-                    $domainName = $parsedDomainName['host'] . $parsedDomainName['path'];
+                    $parsedDomainName = $parsedDomainName['host'] . $parsedDomainName['path'];
+                }
+            }
+
+            if (isset($parsedDomainName)) {
+                $isEmailProvider = array_filter($emailsProviders, function ($value) use ($parsedDomainName) {
+                    return strpos($parsedDomainName, $value) !== false;
+                });
+
+                if (is_string($parsedDomainName) && count($isEmailProvider) === 0) {
+                    $domainName = $parsedDomainName;
                 }
             }
         } catch (Throwable $e) {
