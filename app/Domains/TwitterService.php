@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SourceeApp\Domains;
 
+use BADDIServices\SourceeApp\App;
 use Exception;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -40,21 +41,13 @@ class TwitterService extends Service
     /** @var Client */
     private $client;
 
-    /** @var TweetService */
-    private $tweetService;
+    public function __construct(
+        private TweetService $tweetService, 
+        private TwitterUserService $twitterUserService, 
+        private TwitterMediaService $twitterMediaService
+    ) {
+        parent::__construct();
 
-    /** @var TwitterUserService */
-    private $twitterUserService;
-
-    /** @var TwitterMediaService */
-    private $twitterMediaService;
-
-    public function __construct(TweetService $tweetService, TwitterUserService $twitterUserService, TwitterMediaService $twitterMediaService)
-    {
-        $this->tweetService = $tweetService;
-        $this->twitterUserService = $twitterUserService;
-        $this->twitterMediaService = $twitterMediaService;
-        
         $this->client = new Client([
             'base_uri'      => self::BASE_URL,
             'debug'         => false,
@@ -75,6 +68,10 @@ class TwitterService extends Service
      */
     public function fetchTweetsByHashtags(string $hashtag): Collection
     {
+        if (! $this->featureService->isEnabled(App::FETCH_TWEETS_FEATURE)) {
+            return collect();
+        }
+
         try {
             if (strlen($hashtag) === 0 || $hashtag === "") {
                 return collect();

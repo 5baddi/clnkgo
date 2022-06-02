@@ -11,4 +11,8 @@ return [
         'enabled'       => env('EXTRACT_DUE_DATE_FEATURE_ENABLED', false),
         'for'           => env('EXTRACT_DUE_DATE_FEATURE_ENABLED_FOR'),
     ],
+    'fetch_tweets'      =>  [
+        'enabled'       => env('FETCH_TWEETS_FEATURE_ENABLED', false),
+        'for'           => env('FETCH_TWEETS_FEATURE_ENABLED_FOR'),
+    ],
 ];

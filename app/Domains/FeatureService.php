@@ -10,11 +10,10 @@ namespace BADDIServices\SourceeApp\Domains;
 
 use App\Models\User;
 use BADDIServices\SourceeApp\Services\AppSettingService;
-use BADDIServices\SourceeApp\Services\Service;
 use BADDIServices\SourceeApp\Services\UserService;
 use Illuminate\Auth\AuthManager;
 
-class FeatureService extends Service
+class FeatureService
 {
     public function __construct(
         private AppSettingService $appSettingService,

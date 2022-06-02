@@ -8,7 +8,14 @@
 
 namespace BADDIServices\SourceeApp\Services;
 
+use BADDIServices\SourceeApp\Domains\FeatureService;
+
 abstract class Service
 {
-    
+    protected FeatureService $featureService;
+
+    public function __construct()
+    {
+        $this->featureService = app(FeatureService::class);
+    }
 }
