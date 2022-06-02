@@ -8,7 +8,7 @@
 
 namespace BADDIServices\SourceeApp\Services;
 
-class Service
+abstract class Service
 {
     
 }
