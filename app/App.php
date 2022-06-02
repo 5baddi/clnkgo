@@ -34,4 +34,6 @@ class App
         'prrequest',
         'prrequests'
     ];
+
+    public const EXTRACT_DUE_DATE_FEATURE = 'extract_due_date';
 }

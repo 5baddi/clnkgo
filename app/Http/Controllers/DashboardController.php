@@ -9,11 +9,14 @@
 namespace BADDIServices\SourceeApp\Http\Controllers;
 
 use App\Models\User;
-use BADDIServices\SourceeApp\Models\Pack;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use BADDIServices\SourceeApp\Models\Pack;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use BADDIServices\SourceeApp\Models\Subscription;
 use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Domains\FeatureService;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -21,6 +24,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class DashboardController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    /** @var FeatureService */
+    protected $featureService;
+
+    /** @var UserService */
+    protected $userService;
 
     /** @var User */
     protected $user;
@@ -28,15 +37,15 @@ class DashboardController extends BaseController
     /** @var Subscription */
     protected $subscription;
 
-    /** @var UserService */
-    protected $userService;
-
     /** @var Pack */
     protected $pack;
 
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
+            /** @var FeatureService */
+            $this->featureService = app(FeatureService::class);
+            
             /** @var UserService */
             $this->userService = app(UserService::class);
 
@@ -54,5 +63,20 @@ class DashboardController extends BaseController
 
             return $next($request);
         });
+    }
+
+    public function render(string $name, array $data = []): View|Factory
+    {
+        return view($name, array_merge($this->defaultData(), $data));
+    }
+
+    private function defaultData(): array
+    {
+        return [
+            'featureService'    => $this->featureService,
+            'user'              => $this->user,
+            'subscription'      => $this->subscription,
+            'pack'              => $this->pack,
+        ];
     }
 }

@@ -29,7 +29,7 @@ class IndexController extends DashboardController
     {
         $tweets = $this->tweetService->paginate($queryFilter);
 
-        return view('dashboard.index', [
+        return $this->render('dashboard.index', [
             'title'                             => 'Dashboard',
             'user'                              => $this->user,
             'category'                          => $request->query('category'),

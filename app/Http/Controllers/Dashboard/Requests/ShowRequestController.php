@@ -45,7 +45,7 @@ class ShowRequestController extends DashboardController
         $answer = $this->requestAnswerService->find($this->user, $tweet);
         $inFavorite = $this->user->favorite->where(UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof UserFavoriteTweet;
 
-        return view('dashboard.requests.show', [
+        return $this->render('dashboard.requests.show', [
             'title'             => 'Respond to request',
             'tweet'             => $tweet,
             'answer'            => $answer,
