@@ -121,17 +121,17 @@ if (! function_exists('extractWebsite')) {
 
             if (isset($parsedDomainName)) {
                 $isEmailProvider = array_filter($emailsProviders, function ($value) use ($parsedDomainName) {
-                    return strpos($parsedDomainName, $value) === false;
+                    return strpos(strtolower($parsedDomainName), strtolower($value)) !== false;
                 });
 
-                if (is_string($parsedDomainName) && count($isEmailProvider) > 0) {
-                    $domainName = $parsedDomainName;
+                if (! empty($parsedDomainName) && count($isEmailProvider) === 0) {
+                    return strtolower($parsedDomainName);
                 }
             }
         } catch (Throwable $e) {
             // TODO: implement logger
         }
 
-        return ! empty($domainName) ? strtolower($domainName) : $domainName;
+        return null;
     }
 }
