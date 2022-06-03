@@ -104,28 +104,28 @@ if (! function_exists('extractWebsite')) {
 
             if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
                 $domainsNames = explode('@', $text);
-                $parsedDomainName = end($domainsNames);
+                $domainName = end($domainsNames);
             }
             
             preg_match('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $matches);
     
-            $domainName = $matches[0] ?? ($parsedDomainName ?? null);
+            $domainName = $matches[0] ?? $domainName;
 
             if (is_string($domainName) && filter_var($domainName, FILTER_VALIDATE_URL)) {
-                $parsedDomainName = parse_url($domainName);
+                $domainName = parse_url($domainName);
 
-                if (Arr::has($parsedDomainName, ['host', 'path'])) {
-                    $parsedDomainName = $parsedDomainName['host'] . $parsedDomainName['path'];
+                if (Arr::has($domainName, ['host', 'path'])) {
+                    $domainName = $domainName['host'] . $domainName['path'];
                 }
             }
 
-            if (isset($parsedDomainName)) {
-                $isEmailProvider = array_filter($emailsProviders, function ($value) use ($parsedDomainName) {
-                    return strpos(strtolower($parsedDomainName), strtolower($value)) !== false;
+            if (is_string($domainName)) {
+                $isEmailProvider = array_filter($emailsProviders, function ($value) use ($domainName) {
+                    return strpos(strtolower($value), strtolower($domainName)) !== false;
                 });
 
-                if (! empty($parsedDomainName) && count($isEmailProvider) === 0) {
-                    return strtolower($parsedDomainName);
+                if (count($isEmailProvider) === 0) {
+                    return strtolower($domainName);
                 }
             }
         } catch (Throwable $e) {
