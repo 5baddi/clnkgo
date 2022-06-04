@@ -92,7 +92,7 @@
     @endif
     @if(! $answer || ! $answer->isAnswered())
     <div class="col-12 mt-4">
-        <div class="card-tabs ">
+        <div class="card-tabs">
             <ul class="nav nav-tabs">
                 <li class="nav-item" style="border-bottom: 1px solid rgba(98,105,118,.16);">
                     <a href="#direct" class="nav-link card-title active" data-bs-toggle="tab">Draft your Response</a>

@@ -10,25 +10,23 @@
 
 @section('content')
 <div class="row row-cards">
-    <div class="col">
-        <div class="card">
-            <ul class="nav nav-tabs" style="border-bottom: unset !important;">
-              <li class="nav-item">
-                <a href="{{ route('dashboard.account', ['tab' => 'settings']) }}" class="nav-link {{ $tab === 'settings' ? 'active' : '' }}">Account Info</a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('dashboard.account', ['tab' => 'password']) }}" class="nav-link {{ $tab === 'password' ? 'active' : '' }}">Account Password</a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('dashboard.account', ['tab' => 'emails']) }}" class="nav-link {{ $tab === 'emails' ? 'active' : '' }}">Email preferences</a>
-              </li>
-              @if(! $user->isSuperAdmin())
-              <li class="nav-item">
-                <a href="{{ route('dashboard.account', ['tab' => 'plan']) }}" class="nav-link {{ $tab === 'plan' ? 'active' : '' }}">Your plan</a>
-              </li>
-              @endif
-            </ul>
-        </div>
+    <div class="card-tabs">
+        <ul class="nav nav-tabs" style="border-bottom: unset !important;">
+            <li class="nav-item" style="border-bottom: 1px solid rgba(98,105,118,.16);">
+            <a href="{{ route('dashboard.account', ['tab' => 'settings']) }}" class="nav-link card-title {{ $tab === 'settings' ? 'active' : '' }}">General info</a>
+            </li>
+            <li class="nav-item" style="border-bottom: 1px solid rgba(98,105,118,.16);">
+            <a href="{{ route('dashboard.account', ['tab' => 'password']) }}" class="nav-link card-title {{ $tab === 'password' ? 'active' : '' }}">Account Password</a>
+            </li>
+            <li class="nav-item" style="border-bottom: 1px solid rgba(98,105,118,.16);">
+            <a href="{{ route('dashboard.account', ['tab' => 'emails']) }}" class="nav-link card-title {{ $tab === 'emails' ? 'active' : '' }}">Email preferences</a>
+            </li>
+            @if(! $user->isSuperAdmin())
+            <li class="nav-item" style="border-bottom: 1px solid rgba(98,105,118,.16);">
+            <a href="{{ route('dashboard.account', ['tab' => 'plan']) }}" class="nav-link card-title {{ $tab === 'plan' ? 'active' : '' }}">Your plan</a>
+            </li>
+            @endif
+        </ul>
     </div>
 
     <form action="{{ route('dashboard.account.save', ['tab' => $tab]) }}" method="POST" style="margin-top: 0 !important;" id="main-form">
@@ -37,19 +35,6 @@
 
         <div class="col">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">
-                        @if ($tab === 'settings')
-                        General info
-                        @elseif ($tab === 'password')
-                        Account password
-                        @elseif($tab === 'plan' && ! $user->isSuperAdmin())
-                        Your current plan
-                        @else
-                        Email preferences
-                        @endif
-                    </h4>
-                </div>
                 <div class="card-body">
                     @if ($tab === 'settings')
                     <div class="row">
