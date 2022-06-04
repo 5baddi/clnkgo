@@ -8,6 +8,7 @@
 
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Admin\Clients\IndexController;
+use BADDIServices\SourceeApp\Http\Controllers\Admin\Clients\ResetClientController;
 
 Route::middleware(['auth', 'is.super-admin'])
     ->name('admin.clients')
@@ -15,5 +16,5 @@ Route::middleware(['auth', 'is.super-admin'])
     ->group(function() {
         Route::get('/', IndexController::class);
         
-        Route::post('/{id}/reset/password', IndexController::class)->name('.password.reset');
+        Route::post('/{id}/reset/password', ResetClientController::class)->name('.password.reset');
     });
