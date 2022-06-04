@@ -10,6 +10,8 @@ namespace BADDIServices\SourceeApp\Repositories;
 
 use Carbon\Carbon;
 use App\Models\User;
+use BADDIServices\SourceeApp\App;
+use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
 use BADDIServices\SourceeApp\Models\UserLinkedEmail;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -19,12 +21,20 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserRespository
 {
+    public function paginate(QueryFilter $queryFilter): LengthAwarePaginator
+    {
+        return User::query()
+            ->with([])
+            ->filter($queryFilter)
+            ->paginate(App::PAGINATION_LIMIT, ['*'], "page", $queryFilter->getPage());
+    }
+    
     public function paginateWithRelations(?int $page = null): LengthAwarePaginator
     {
         return User::query()
-                    ->with(['store'])
-                    ->where(User::ID_COLUMN, '!=', Auth::id())
-                    ->paginate(10, ['*'], 'ap', $page);
+                ->with(['store'])
+                ->where(User::ID_COLUMN, '!=', Auth::id())
+                ->paginate(10, ['*'], 'ap', $page);
     }
 
     public function exists(int $customerId): ?User

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
+use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
 use BADDIServices\SourceeApp\Repositories\UserRespository;
 
 class UserService extends Service
@@ -48,6 +49,11 @@ class UserService extends Service
         });
 
         return $keywrods->unique();
+    }
+
+    public function paginate(QueryFilter $queryFilter): LengthAwarePaginator
+    {
+        return $this->userRepository->paginate($queryFilter);
     }
 
     public function paginateWithRelations(?int $page = null): LengthAwarePaginator
@@ -117,6 +123,7 @@ class UserService extends Service
             User::PHONE_COLUMN,
             User::PASSWORD_COLUMN,
             User::LAST_LOGIN_COLUMN,
+            User::ROLE_COLUMN,
             User::VERIFIED_AT_COLUMN,
             User::KEYWORDS_COLUMN
         ])->filter(function($value, $key) {

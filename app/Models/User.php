@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use BADDIServices\SourceeApp\Models\Authenticatable;
 use BADDIServices\SourceeApp\Models\UserLinkedEmail;
 use BADDIServices\SourceeApp\Models\UserFavoriteTweet;
+use BADDIServices\SourceeApp\Traits\Filterable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Filterable;
 
     /** @var string */
     public const EMAIL_COLUMN = 'email';
@@ -28,11 +29,14 @@ class User extends Authenticatable
     public const ROLE_COLUMN = 'role';
     public const IS_SUPERADMIN_COLUMN = 'is_superadmin';
     public const BANNED_COLUMN = 'banned';
+
     public const DEFAULT_ROLE = 'client';
+    public const JOURNALIST_ROLE = 'journalist';
 
     /** @var array */
     public const ROLES = [
-        self::DEFAULT_ROLE
+        self::DEFAULT_ROLE,
+        self::JOURNALIST_ROLE,
     ];
 
     /** @var array */

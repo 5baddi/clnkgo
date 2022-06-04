@@ -8,16 +8,24 @@
               <span class="avatar avatar-sm" style="background-image: url({{ $avatar }})"></span>
               <div class="d-none d-xl-block ps-2">
                 <div>{{ $user->getFullName() }}</div>
-                <div class="mt-1 small text-muted">{{ $user->isSuperAdmin() ? 'Super Admin' : '&nbsp;' }}</div>
+                <div class="mt-1 small text-muted">{{ $user->isSuperAdmin() ? 'Super Admin' : 'Journalist' }}</div>
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
               <a href="{{ route('dashboard.account') }}" class="dropdown-item {{ request()->routeIs('dashboard.account') ? 'active' : '' }}">Account</a>
               @if($user->isSuperAdmin() && ! request()->routeIs(['admin', 'admin.*']))
               <a href="{{ route('admin') }}" class="dropdown-item">Admin area</a>
-              @elseif($user->isSuperAdmin() && request()->routeIs(['admin', 'admin.*']))
-              <a href="{{ route('dashboard') }}" class="dropdown-item">Source area</a>
+              <div class="dropdown-divider"></div>
               @endif
+              
+              @if(! request()->routeIs(['dashboard', 'dashboard.*']))
+              <a href="{{ route('dashboard') }}" class="dropdown-item">Source area</a>
+              @elseif(! request()->routeIs(['journalist', 'journalist.*']))
+              <a href="{{ route('journalist') }}" class="dropdown-item">Journalist area</a>
+              @endif
+
+              <div class="dropdown-divider"></div>
+
               @if(! $user->isSuperAdmin())
               <a href="{{ route('dashboard.plan.upgrade') }}" class="dropdown-item {{ request()->routeIs('dashboard.plan.*') ? 'active' : '' }}">Upgrade</a>
               @endif
@@ -44,9 +52,9 @@
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
                 <li class="breadcrumb-item">
                   @if(request()->routeIs(['admin', 'admin.*']))
-                  <a href="{{ route('admin.*') }}">Admin</a>
+                  <a href="{{ route('admin') }}">Admin</a>
                   @else
-                  <a href="{{ route('dashboard.*') }}">Dashboard</a>
+                  <a href="{{ route('dashboard') }}">Dashboard</a>
                   @endif
                 </li>
                 @foreach (request()->segments() as $key => $segment)

@@ -96,7 +96,13 @@ abstract class QueryFilter
     protected function fields(): array
     {
         return array_filter(
-            array_map('trim', $this->request->all())
+            array_map(function ($value) {
+                if (is_string($value)) {
+                    return trim($value);
+                }
+
+                return $value;
+            }, $this->request->all())
         );
     }
 }

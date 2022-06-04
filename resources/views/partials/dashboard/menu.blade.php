@@ -10,6 +10,7 @@
       </h1>
       <div class="collapse navbar-collapse" id="navbar-menu">
         <ul class="navbar-nav pt-lg-3">
+          @if(request()->routeIs(['dashboard', 'dashboard.*']))
           <li class="nav-item {{ request()->routeIs(['dashboard', 'dashboard.requests', 'dashboard.requests.*']) ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -48,6 +49,34 @@
                 <span class="nav-link-title">Templates</span>
             </a>
           </li>
+          @else
+          <li class="nav-item {{ request()->routeIs(['dashboard', 'dashboard.requests', 'dashboard.requests.*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
+                    <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
+                  </svg>
+                </span>
+                <span class="nav-link-title">My Queries</span>
+            </a>
+          </li>
+          <li class="nav-item {{ request()->routeIs(['dashboard', 'dashboard.requests', 'dashboard.requests.*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-news" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11"></path>
+                    <line x1="8" y1="8" x2="12" y2="8"></line>
+                    <line x1="8" y1="12" x2="12" y2="12"></line>
+                    <line x1="8" y1="16" x2="12" y2="16"></line>
+                  </svg>
+                </span>
+                <span class="nav-link-title">Submit Request</span>
+            </a>
+          </li>
+          @endif
           @if(! $user->isSuperAdmin())
           <li class="nav-item {{ request()->routeIs('dashboard.plan.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.plan.upgrade') }}">
@@ -79,6 +108,11 @@
         <div class="row mb-4">
             <div class="col-12">
                 <div class="col-auto align-self-center mt-1 text-center">
+                    @if(request()->routeIs(['dashboard', 'dashboard.*']))
+                    <a href="{{ env('SUPPORT_URL', '#') }}" target="_blank" class="btn btn-icon btn-without-bg w-100">
+                      Become A Journalist
+                    </a>
+                    @endif
                     <a href="{{ env('SUPPORT_URL', '#') }}" target="_blank" class="btn btn-icon btn-without-bg w-100">
                       Report A Bug
                     </a>
