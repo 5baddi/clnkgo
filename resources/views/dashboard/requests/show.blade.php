@@ -92,109 +92,101 @@
     @endif
     @if(! $answer || ! $answer->isAnswered())
     <div class="col-12 mt-4">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Draft your Response</h3>
-            </div>
-            <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST">
-                @csrf
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 mt-2">
-                            <label class="form-label">Use a canned response</label>
-                            <select class="form-select" id="canned-responses">
-                                @foreach ($cannedResponses as $cannedResponse)
-                                <option value="{{ $cannedResponse->content }}">{{ $cannedResponse->title }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-12 mt-4">
-                            <label class="form-label required">Your response</label>
-                            <textarea id="direct-content" rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') ?? ($answer ? $answer->content : '') }}</textarea>
-                            @if($errors->has('content'))
-                                <div class="invalid-feedback d-block">
-                                    {{ $errors->first('content') }}
-                                </div>
-                            @endif
-                            <p class="small text-muted mt-2">Reply via Twitter</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="col-12 text-end">
-                        <button type="submit" class="btn btn-twitter ms-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                                <path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"></path>
-                            </svg>
-                            &nbsp;Send as a Direct Message
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="col-12 mt-4">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Send your response as an email</h3>
-            </div>
-            <form action="{{ route('dashboard.requests.mail', ['id' => $tweet->getId()]) }}" method="POST">
-            @csrf
-            <input type="hidden" name="content" id="mail-content"/>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <label class="form-label">Subject</label>
-                        <input type="text" name="subject" class="form-control @if($errors->has('subject')) is-invalid @endif" value="{{ old('subject', ! is_null($answer) ? $answer->subject : null) }}" placeholder="Subject"/>
-                        @if($errors->has('subject'))
-                            <div class="invalid-feedback d-block">
-                                {{ $errors->first('subject') }}
-                            </div>
-                        @endif
-                    </div>
-                    <div class="col-12 mt-2">
-                        <label class="form-label">From</label>                        
-                        <select class="form-select @if($errors->has('from')) is-invalid @endif" id="emails">
-                            <option value="{{ $user->email }}" @if(! old('from')) selected @endif>{{ $user->email }}</option>
+        <div class="card-tabs ">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" style="border-bottom: 1px solid rgba(98,105,118,.16);">
+                    <a href="#direct" class="nav-link card-title active" data-bs-toggle="tab">Draft your Response</a>
+                </li>
+                <li class="nav-item" style="border-bottom: 1px solid rgba(98,105,118,.16);">
+                    <a href="#mail" class="nav-link card-title" data-bs-toggle="tab">Send your response as an email</a>
+                </li>
+            </ul>
 
-                            @foreach ($emails as $email)
-                            <option value="{{ $email }}" @if(old('from') === $email) selected @endif>{{ $email }}</option>
-                            @endforeach
-                        </select>
-                        @if($errors->has('from'))
-                            <div class="invalid-feedback d-block">
-                                {{ $errors->first('from') }}
+            <div class="tab-content">
+                <div id="direct" class="card tab-pane show active">
+                    <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST">
+                        @csrf
+                        <div class="card-body">
+                            <div class="row">
+                                @include('dashboard.requests.partials.content-form')
                             </div>
-                        @endif
-                    </div>
-                    <div class="col-12 mt-2">
-                        <label class="form-label">Detected email</label>
-                        <input type="email" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? ($answer->email ?? ($tweet->email ?? $tweet->author->email)) }}" placeholder="Email address"/>
-                        @if($errors->has('email'))
-                            <div class="invalid-feedback d-block">
-                                {{ $errors->first('email') }}
+                        </div>
+                        <div class="card-footer">
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-twitter ms-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        <path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"></path>
+                                    </svg>
+                                    &nbsp;Send as a Direct Message
+                                </button>
                             </div>
-                        @endif
-                    </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="mail" class="card tab-pane">
+                    <form action="{{ route('dashboard.requests.mail', ['id' => $tweet->getId()]) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="content" id="mail-content"/>
+                        <div class="card-body">
+                            <div class="row">
+                                @include('dashboard.requests.partials.content-form')
+
+                                <div class="col-12 mt-2">
+                                    <label class="form-label">Subject</label>
+                                    <input type="text" name="subject" class="form-control @if($errors->has('subject')) is-invalid @endif" value="{{ old('subject', ! is_null($answer) ? $answer->subject : null) }}" placeholder="Subject"/>
+                                    @if($errors->has('subject'))
+                                        <div class="invalid-feedback d-block">
+                                            {{ $errors->first('subject') }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <label class="form-label">From</label>                        
+                                    <select class="form-select @if($errors->has('from')) is-invalid @endif" id="emails">
+                                        <option value="{{ $user->email }}" @if(! old('from')) selected @endif>{{ $user->email }}</option>
+            
+                                        @foreach ($emails as $email)
+                                        <option value="{{ $email }}" @if(old('from') === $email) selected @endif>{{ $email }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('from'))
+                                        <div class="invalid-feedback d-block">
+                                            {{ $errors->first('from') }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <label class="form-label">{{ ($tweet->email ?? $tweet->author->email) ? 'Detected' : '' }} E-mail</label>
+                                    <input type="email" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? ($answer->email ?? ($tweet->email ?? $tweet->author->email)) }}" placeholder="Email address"/>
+                                    @if($errors->has('email'))
+                                        <div class="invalid-feedback d-block">
+                                            {{ $errors->first('email') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-twitter ms-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                                        <polyline points="3 7 12 13 21 7"></polyline>
+                                    </svg>
+                                    &nbsp;Send as an email
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="col-12 text-end">
-                    <button type="submit" class="btn btn-secondary ms-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                            <polyline points="3 7 12 13 21 7"></polyline>
-                        </svg>
-                        &nbsp;Send
-                    </button>
-                </div>
-            </div>
-            </form>
         </div>
     </div>
+
     <div class="col-12 mt-4">
         <h2>Journalist's Bio</h2>
         <div class="card card-link">
