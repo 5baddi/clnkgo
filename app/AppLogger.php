@@ -8,17 +8,17 @@
 
 namespace BADDIServices\SourceeApp;
 
+use App\Models\User;
 use Throwable;
 use Bugsnag\Client;
 use Bugsnag\Configuration;
 use Bugsnag\Breadcrumbs\Breadcrumb;
 use Illuminate\Support\Facades\Log;
-use BADDIServices\SourceeApp\Models\Store;
 
 class AppLogger
 {
-    /** @var Store|null */
-    private static $store = null;
+    /** @var User|null */
+    private static $user = null;
 
     /** @var AppLogger */
     private static $instance = null;
@@ -44,9 +44,9 @@ class AppLogger
     }
 
 
-    public static function setStore(?Store $store = null): self
+    public static function setUser(?User $user = null): self
     {
-        self::$store = $store;
+        self::$user = $user;
 
         return self::getInstance();
     }
@@ -55,7 +55,7 @@ class AppLogger
     {
         Log::error($exception->getMessage(), [
             'context'   =>  $context,
-            'store'     =>  optional(self::$store)->id,
+            'user'      =>  optional(self::$user)->id,
             'code'      =>  $exception->getCode(),
             'line'      =>  $exception->getLine(),
             'file'      =>  $exception->getFile(),
@@ -74,7 +74,7 @@ class AppLogger
     {
         $infoContext = [
             'context'   =>  $context,
-            'store'     =>  optional(self::$store)->id,
+            'user'      =>  optional(self::$user)->id,
             'extra'     =>  json_encode($extra)
         ];
 

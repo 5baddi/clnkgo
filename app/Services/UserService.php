@@ -150,11 +150,14 @@ class UserService extends Service
         return $this->userRepository->delete($user->id);
     }
     
-    public function ban(User $user): User
+    public function restrict(User $user): User
     {
-        return $this->userRepository->update($user, [
-            User::BANNED_COLUMN => !$user->isBanned()
-        ]);
+        return $this->userRepository->update(
+            $user,
+            [
+                User::BANNED_COLUMN => ! $user->isBanned()
+            ]
+        );
     }
 
     public function generateResetPasswordToken(User $user): ?string

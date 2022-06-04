@@ -9,6 +9,7 @@
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Admin\Clients\IndexController;
 use BADDIServices\SourceeApp\Http\Controllers\Admin\Clients\ResetClientController;
+use BADDIServices\SourceeApp\Http\Controllers\Admin\Clients\RestrictClientAccessController;
 
 Route::middleware(['auth', 'is.super-admin'])
     ->name('admin.clients')
@@ -17,4 +18,5 @@ Route::middleware(['auth', 'is.super-admin'])
         Route::get('/', IndexController::class);
         
         Route::post('/{id}/reset/password', ResetClientController::class)->name('.password.reset');
+        Route::post('/{id}/restrict', RestrictClientAccessController::class)->name('.restrict');
     });

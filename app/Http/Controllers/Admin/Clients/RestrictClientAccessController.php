@@ -17,7 +17,7 @@ use BADDIServices\SourceeApp\Http\Controllers\AdminController;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
-class ResetClientController extends AdminController
+class RestrictClientAccessController extends AdminController
 {
     public function __invoke(string $id, Request $request)
     {
@@ -27,11 +27,7 @@ class ResetClientController extends AdminController
 
             DB::beginTransaction();
 
-            $this->userService->update(
-                $user, 
-                [
-                    User::PASSWORD_COLUMN => $request->input(User::PASSWORD_COLUMN)
-                ]);
+            $this->userService->restrict($user);
     
             DB::commit();
 
@@ -39,19 +35,19 @@ class ResetClientController extends AdminController
                 ->back()
                 ->with(
                     'alert',
-                    new Alert('Client account password has been reseted successfully', 'success')
+                    new Alert(sprintf('Client account %sbanned successfully', $user->isBanned() ? 'un' : ''), 'success')
                 );
         } catch (Throwable $e) {
             DB::rollBack();
 
-            AppLogger::error($e, 'admin:reset-client-password', ['user' => $user ?? $id, 'playload' => $request->all()]);
+            AppLogger::error($e, 'admin:restrict-client', ['user' => $user ?? $id, 'playload' => $request->all()]);
 
             return redirect()
                 ->back()
                 ->withInput()
                 ->with(
                     'alert', 
-                    new Alert('Error during reseting client account password')
+                    new Alert('Error during restricting client account')
                 );
         }
     }
