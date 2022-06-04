@@ -122,6 +122,7 @@ class UpdateAccountController extends DashboardController
         $emails = explode(',', $request->input('emails', ''));
 
         $validator = Validator::make($emails, ['*' => 'email']);
+
         if ($validator->fails()) {
             return redirect()
                 ->route('dashboard.account', ['tab' => $request->query('tab', 'emails')])

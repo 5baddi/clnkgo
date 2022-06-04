@@ -32,12 +32,16 @@ class AnswerMail
     /** @var RequestAnswer */
     public $answer;
 
-    public function __construct(string $email, User $user, Tweet $tweet, RequestAnswer $answer)
+    /** @var string|null */
+    public $from;
+
+    public function __construct(string $email, User $user, Tweet $tweet, RequestAnswer $answer, ?string $from = null)
     {
         $this->email = $email;
         $this->user = $user;
         $this->tweet = $tweet;
         $this->answer = $answer;
+        $this->from = $from;
     }
 
     /**

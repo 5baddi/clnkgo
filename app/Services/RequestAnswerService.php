@@ -40,6 +40,7 @@ class RequestAnswerService extends Service
                 RequestAnswer::CONTENT_COLUMN,
                 RequestAnswer::EMAIL_COLUMN,
                 RequestAnswer::SUBJECT_COLUMN,
+                RequestAnswer::FROM_COLUMN,
                 RequestAnswer::ANSWERED_COLUMN,
                 RequestAnswer::MAIL_SENT_AT_COLUMN,
             ]);

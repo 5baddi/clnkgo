@@ -155,6 +155,21 @@
                         @endif
                     </div>
                     <div class="col-12 mt-2">
+                        <label class="form-label">From</label>                        
+                        <select class="form-select @if($errors->has('from')) is-invalid @endif" id="emails">
+                            <option value="{{ $user->email }}" @if(! old('from')) selected @endif>{{ $user->email }}</option>
+
+                            @foreach ($emails as $email)
+                            <option value="{{ $email }}" @if(old('from') === $email) selected @endif>{{ $email }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('from'))
+                            <div class="invalid-feedback d-block">
+                                {{ $errors->first('from') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-12 mt-2">
                         <label class="form-label">Detected email</label>
                         <input type="email" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? ($answer->email ?? ($tweet->email ?? $tweet->author->email)) }}" placeholder="Email address"/>
                         @if($errors->has('email'))
@@ -247,6 +262,21 @@
         window.Choices && (new Choices(cannedResponses, {
             classNames: {
                 containerInner: cannedResponses.className,
+                input: 'form-control',
+                inputCloned: 'form-control-sm',
+                listDropdown: 'dropdown-menu',
+                itemChoice: 'dropdown-item',
+                activeState: 'show',
+                selectedState: 'active',
+            },
+            shouldSort: true,
+            searchEnabled: true,
+        }));
+        
+        var emails = document.getElementById('emails');
+        window.Choices && (new Choices(emails, {
+            classNames: {
+                containerInner: emails.className,
                 input: 'form-control',
                 inputCloned: 'form-control-sm',
                 listDropdown: 'dropdown-menu',

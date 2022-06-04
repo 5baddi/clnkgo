@@ -68,6 +68,8 @@ class TwitterService extends Service
      */
     public function fetchTweetsByHashtags(string $hashtag, ?string $nextToken = null): Collection
     {
+        sleep(60);
+
         if (! $this->featureService->isEnabled(App::FETCH_TWEETS_FEATURE)) {
             return collect();
         }
@@ -79,7 +81,7 @@ class TwitterService extends Service
 
             $query = [
                 'query'         => sprintf('#%s -is:retweet', $hashtag),
-                'start_time'    => date(DATE_RFC3339, strtotime('-15 minutes')),
+                // 'start_time'    => date(DATE_RFC3339, strtotime('-15 minutes')),
                 'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
                 'user.fields'   => 'created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
                 'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
@@ -89,6 +91,7 @@ class TwitterService extends Service
 
             if (! empty($nextToken)) {
                 $query['next_token'] = $nextToken;
+                dd($nextToken);
             }
 
             $response = $this->client->request('GET', self::RECENT_SEARCH_ENDPOINT, 

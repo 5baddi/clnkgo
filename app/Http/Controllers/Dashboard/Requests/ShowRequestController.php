@@ -50,7 +50,8 @@ class ShowRequestController extends DashboardController
             'tweet'             => $tweet,
             'answer'            => $answer,
             'inFavorite'        => $inFavorite,
-            'cannedResponses'   => $cannedResponses
+            'cannedResponses'   => $cannedResponses,
+            'emails'            => $this->user->linkedEmails->pluck('email')->toArray()
         ]);
     }
 }

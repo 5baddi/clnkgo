@@ -167,6 +167,10 @@ class UserService extends Service
 
     public function saveLinkedEmails(User $user, array $emails): bool
     {
+        $emails = array_map(function ($email) {
+            return strtolower($email);
+        }, $emails);
+        
         return $this->userRepository->saveLinkedEmails($user->getId(), $emails);
     }
 }

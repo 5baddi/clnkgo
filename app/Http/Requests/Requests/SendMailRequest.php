@@ -14,8 +14,9 @@ class SendMailRequest extends SendDMRequest
         return array_merge(
             parent::rules(),
             [
-                'email'   => ['required', 'email'],
-                'subject' => ['required', 'string', 'min:1']
+                'email'     => ['required', 'email'],
+                'subject'   => ['required', 'string', 'min:1'],
+                'from'      => ['nullable', 'email']
             ]
         );
     }
