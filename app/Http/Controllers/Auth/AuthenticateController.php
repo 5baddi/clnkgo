@@ -45,6 +45,12 @@ class AuthenticateController extends Controller
                     ->withInput($request->only([User::EMAIL_COLUMN]))
                     ->with('error', 'Incorrect credentials, try again...');
             }
+            
+            if ($user->isBanned()) {
+                return redirect()
+                    ->route('signin')
+                    ->with('error', 'Account banned! please contact the support...');
+            }
 
             $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $request->input(User::PASSWORD_COLUMN)]);
             if (! $authenticateUser) {
