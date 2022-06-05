@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Filters\User;
+namespace BADDIServices\SourceeApp\Http\Filters\Admin\User;
 
 use App\Models\User;
 use BADDIServices\SourceeApp\Http\Filters\QueryFilter;

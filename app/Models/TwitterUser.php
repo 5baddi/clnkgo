@@ -9,6 +9,7 @@
 namespace BADDIServices\SourceeApp\Models;
 
 use BADDIServices\SourceeApp\Entities\ModelEntity;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TwitterUser extends ModelEntity
 {   
@@ -29,4 +30,9 @@ class TwitterUser extends ModelEntity
     public const PINNED_TWEET_ID_COLUMN = 'pinned_tweet_id';
     public const PUBLIC_METRICS_COLUMN = 'public_metrics';
     public const WITHHELD_COLUMN = 'withheld';
+
+    public function tweets(): HasMany
+    {
+        return $this->hasMany(Tweet::class, Tweet::AUTHOR_ID_COLUMN, self::ID_COLUMN);
+    }
 }

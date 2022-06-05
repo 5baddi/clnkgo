@@ -9,7 +9,7 @@
 namespace BADDIServices\SourceeApp\Repositories;
 
 use BADDIServices\SourceeApp\App;
-use BADDIServices\SourceeApp\Http\Filters\Tweet\TweetQueryFilter;
+use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
 use Carbon\Carbon;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
@@ -17,7 +17,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TweetRespository
 {
-    public function paginate(TweetQueryFilter $queryFilter): LengthAwarePaginator
+    public function paginate(QueryFilter $queryFilter): LengthAwarePaginator
     {
         return Tweet::query()
             ->with(["author", "answers"])

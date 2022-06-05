@@ -8,9 +8,9 @@
 
 namespace BADDIServices\SourceeApp\Services;
 
-use BADDIServices\SourceeApp\Http\Filters\Tweet\TweetQueryFilter;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Pagination\LengthAwarePaginator;
+use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
 use BADDIServices\SourceeApp\Repositories\TweetRespository;
 
 class TweetService extends Service
@@ -19,7 +19,7 @@ class TweetService extends Service
         private TweetRespository $tweetRespository
     ) {}
 
-    public function paginate(TweetQueryFilter $queryFilter): LengthAwarePaginator
+    public function paginate(QueryFilter $queryFilter): LengthAwarePaginator
     {
         return $this->tweetRespository->paginate($queryFilter);
     }

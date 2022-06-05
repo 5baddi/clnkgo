@@ -77,7 +77,14 @@ abstract class QueryFilter
 
     public function getPage(): int
     {
-        return $this->request->query("page", 1);
+        return $this->request->query("page") ?? 1;
+    }
+    
+    public function setPage(?int $page = null): self
+    {
+        $this->request->merge(["page" => $page]);
+
+        return $this;
     }
     
     public function getSortField(): ?string

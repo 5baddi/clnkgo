@@ -33,6 +33,9 @@ class Tweet extends ModelEntity
     public const GEO_COLUMN = 'geo';
     public const DUE_AT_COLUMN = 'due_at';
     public const EMAIL_COLUMN = 'email';
+    
+    public const TWITTER_SOURCE = 'twitter';
+    public const INTERNAL_SOURCE = 'internal';
 
     /** @var array */
     protected $casts = [

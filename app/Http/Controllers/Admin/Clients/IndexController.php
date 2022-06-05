@@ -9,9 +9,9 @@
 namespace BADDIServices\SourceeApp\Http\Controllers\Admin\Clients;
 
 use App\Models\User;
-use BADDIServices\SourceeApp\Http\Controllers\AdminController;
-use BADDIServices\SourceeApp\Http\Filters\User\ClientQueryFilter;
 use Illuminate\Http\Request;
+use BADDIServices\SourceeApp\Http\Controllers\AdminController;
+use BADDIServices\SourceeApp\Http\Filters\Admin\User\ClientQueryFilter;
 
 class IndexController extends AdminController
 {
