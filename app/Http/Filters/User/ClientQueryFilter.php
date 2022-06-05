@@ -13,13 +13,15 @@ use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
 
 class ClientQueryFilter extends QueryFilter
 {
-    public function roles(?array $roles = null) 
+    public function role(?string $role = null) 
     {
-        if (is_null($roles) || count($roles) === 0) {
+        if (is_null($role)) {
             return;
         }
 
         $this->builder
-            ->whereIn(User::ROLE_COLUMN, $roles);
+            ->where(User::IS_SUPERADMIN_COLUMN, false)
+            ->where(User::ROLE_COLUMN, $role)
+            ->whereNotNull(User::ROLE_COLUMN);
     }
 }

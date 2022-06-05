@@ -17,7 +17,7 @@ class IndexController extends AdminController
 {
     public function __invoke(Request $request, ClientQueryFilter $queryFilter)
     {
-        $request->merge(['roles', [User::DEFAULT_ROLE, User::JOURNALIST_ROLE]]);
+        $request->merge(['role' => [User::DEFAULT_ROLE, User::JOURNALIST_ROLE]]);
 
         $clients = $this->userService->paginate($queryFilter);
 
