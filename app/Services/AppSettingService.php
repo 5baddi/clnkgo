@@ -24,6 +24,10 @@ class AppSettingService extends Service
             return $default;
         }
 
+        if (in_array($appSetting->getType(), [AppSetting::ARRAY_TYPE, AppSetting::OBJECT_TYPE])) {
+            return json_decode($appSetting->getValue(), true);
+        }
+
         return $appSetting;
     }
 

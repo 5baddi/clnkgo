@@ -114,7 +114,7 @@ if (! function_exists('extractWebsite')) {
                 $domainName = $matches[0] ?? $domainName;
             }
 
-            if (is_string($domainName) && filter_var($domainName, FILTER_VALIDATE_URL)) {
+            if (filter_var($domainName, FILTER_VALIDATE_URL)) {
                 $domainName = parse_url($domainName);
 
                 if (Arr::has($domainName, ['host', 'path'])) {
