@@ -1,6 +1,7 @@
 <?php
 
 use BADDIServices\SourceeApp\App;
+use BADDIServices\SourceeApp\AppLogger;
 use BADDIServices\SourceeApp\Models\AppSetting;
 use BADDIServices\SourceeApp\Services\AppSettingService;
 use Carbon\Carbon;
@@ -103,13 +104,15 @@ if (! function_exists('extractWebsite')) {
             }
 
             if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
-                $domainsNames = explode('@', $text);
+                $domainsNames = explode('@', 'stabahriti@insider.com');
                 $domainName = end($domainsNames);
             }
             
-            preg_match('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $matches);
+            if (! filter_var($text, FILTER_VALIDATE_EMAIL)) {
+                preg_match('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $matches);
     
-            $domainName = $matches[0] ?? $domainName;
+                $domainName = $matches[0] ?? $domainName;
+            }
 
             if (is_string($domainName) && filter_var($domainName, FILTER_VALIDATE_URL)) {
                 $domainName = parse_url($domainName);
@@ -119,17 +122,19 @@ if (! function_exists('extractWebsite')) {
                 }
             }
 
-            if (is_string($domainName)) {
-                $isEmailProvider = array_filter($emailsProviders, function ($value) use ($domainName) {
-                    return strpos(strtolower($domainName), strtolower($value)) !== false;
-                });
+            if (empty($domainName) || ! is_string($domainName)) {
+                return null;
+            }
 
-                if (count($isEmailProvider) === 0) {
-                    return strtolower($domainName);
-                }
+            $isEmailProvider = array_filter($emailsProviders, function ($value) use ($domainName) {
+                return strpos(strtolower($domainName), strtolower($value)) !== false;
+            });
+
+            if (count($isEmailProvider) === 0) {
+                return strtolower($domainName);
             }
         } catch (Throwable $e) {
-            // TODO: implement logger
+            AppLogger::error($e, 'extract:website', ['text' => $text, 'domain' => $domainName]);
         }
 
         return null;
