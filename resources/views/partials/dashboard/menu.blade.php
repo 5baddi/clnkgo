@@ -26,6 +26,19 @@
           <li class="nav-item {{ request()->routeIs(['dashboard', 'dashboard.requests', 'dashboard.requests.*']) ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <desc>Download more icon variants from https://tabler-icons.io/i/send</desc>
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                    <path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"></path>
+                  </svg>
+                </span>
+                <span class="nav-link-title">Sent</span>
+            </a>
+          </li>
+          <li class="nav-item {{ request()->routeIs(['dashboard', 'dashboard.requests', 'dashboard.requests.*']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bookmarks" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <desc>Download more icon variants from https://tabler-icons.io/i/bookmarks</desc>
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -33,7 +46,7 @@
                     <path d="M9.265 4a2 2 0 0 1 1.735 -1h6a2 2 0 0 1 2 2v12l-1 -.6"></path>
                   </svg>
                 </span>
-                <span class="nav-link-title">Favorites</span>
+                <span class="nav-link-title">Saved</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('dashboard.keywords') ? 'active' : '' }}">
