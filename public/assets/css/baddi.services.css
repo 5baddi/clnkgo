@@ -70,7 +70,9 @@
 }
 
 .navbar-expand-md .navbar-light .nav-item.active:after, .navbar-expand-md.navbar-light .nav-item.active:after {
-    border: 0 solid #202837 !important;
+    background-color: #4C525E;
+    border-radius: unset !important;
+    border: 0 solid #4C525E !important;
     border-bottom-width: 2px !important;
 }
 
