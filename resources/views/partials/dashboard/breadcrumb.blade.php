@@ -24,9 +24,8 @@
               <a href="{{ route('journalist') }}" class="dropdown-item">Journalist area</a>
               @endif
 
-              <div class="dropdown-divider"></div>
-
               @if(! $user->isSuperAdmin())
+              <div class="dropdown-divider"></div>
               <a href="{{ route('dashboard.plan.upgrade') }}" class="dropdown-item {{ request()->routeIs('dashboard.plan.*') ? 'active' : '' }}">Upgrade</a>
               @endif
               <div class="dropdown-divider"></div>
