@@ -100,7 +100,7 @@ if (! function_exists('extractWebsite')) {
 
         try {
             if (! filter_var($text, FILTER_VALIDATE_EMAIL)) {
-                preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $text ?? '', $emailMatches);
+                preg_match('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text ?? '', $emailMatches);
 
                 if (isset($emailMatches[0]) && filter_var($emailMatches[0], FILTER_VALIDATE_EMAIL)) {
                     $text = $emailMatches[0];
