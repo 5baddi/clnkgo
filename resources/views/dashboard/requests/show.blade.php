@@ -204,15 +204,15 @@
             <div class="card-footer d-flex justify-content-between">
                 <div class="d-flex align-items-center">
                     @if($tweet->author->location)
-                    <svg style="margin-right: 2rem !important;" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <circle cx="12" cy="11" r="3"></circle>
                         <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
                     </svg>&nbsp;
-                    <span title="Location">{{ $tweet->author->location }}</span>
+                    <span style="margin-right: 2rem !important;" title="Location">{{ $tweet->author->location }}</span>
                     @endif
                     @if($tweet->author->website)
-                    <svg style="margin-right: 2rem !important;" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <circle cx="12" cy="12" r="9"></circle>
                         <line x1="3.6" y1="9" x2="20.4" y2="9"></line>
@@ -220,15 +220,15 @@
                         <path d="M11.5 3a17 17 0 0 0 0 18"></path>
                         <path d="M12.5 3a17 17 0 0 1 0 18"></path>
                     </svg>&nbsp;
-                    <a href="//{{ $tweet->author->website }}" target="_blank" title="Website">{{ $tweet->author->website }}</a>
+                    <a style="margin-right: 2rem !important;" href="//{{ $tweet->author->website }}" target="_blank" title="Website">{{ $tweet->author->website }}</a>
                     @endif
                     @if($tweet->author->email)
-                    <svg style="margin-right: 2rem !important;" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <rect x="3" y="5" width="18" height="14" rx="2"></rect>
                         <polyline points="3 7 12 13 21 7"></polyline>
                     </svg>&nbsp;
-                    <span title="Email">{{ $tweet->author->email }}</span>
+                    <span style="margin-right: 2rem !important;" title="Email">{{ $tweet->author->email }}</span>
                     @endif
                 </div>
             </div>
