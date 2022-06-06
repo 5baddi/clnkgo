@@ -5,49 +5,17 @@
 @endsection
 
 @section('content')
-    <div class="row row-deck row-cards">
-        <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body analytics-card">
-                <div class="d-flex align-items-center">
-                  <div class="subheader">Live Requests</div>
-                </div>
-                <div class="h1 mt-3 mb-3 text-center">{{ $liveRequests }}</div>
-              </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body analytics-card">
-                <div class="d-flex align-items-center">
-                  <div class="subheader">Last 24 Hours</div>
-                </div>
-                <div class="h1 mt-3 mb-3 text-center">{{ $last24hRequests }}</div>
-              </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body analytics-card">
-                <div class="d-flex align-items-center">
-                  <div class="subheader">Keyword Match</div>
-                </div>
-                <div class="h1 mt-3 mb-3 text-center">{{ $keywordsMatch }}</div>
-              </div>
-            </div>
-        </div>
-    </div>
     <div class="card mt-4">
       <div class="card-body filters-card">
         <form id="search-form" class="row" action="{{ route('dashboard') }}" method="GET">
-          <div class="col-6">
+          <div class="col-8">
             <div class="form-group mb-2">
               <label class="form-label">Search</label>
               <input id="term" type="text" name="term" value="{{ old('term') ?? $term }}" class="form-control @if ($errors->has('term')) is-invalid @endif" placeholder="Enter search term..." onblur="this.form.submit()"/>  
             </div>
             <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> to search by term</span>
           </div>
-          <div class="col-3 form-group">
+          <div class="col-4 form-group">
             <label class="form-label">Category</label>
             <select name="category" class="form-select @if ($errors->has('category')) is-invalid @endif" placeholder="Category" id="category" onchange="this.form.submit()">
               <option @if (old('category') === 'all' || $category === 'all' || is_null($category)) selected @endif value="all">All</option>
@@ -63,24 +31,6 @@
               <option @if (old('category') === 'podcast' || $category === 'podcast') selected @endif value="podcast">Podcast</option>
             </select>
           </div>
-          <div class="col-3 form-group">
-            <label class="form-label">Sort by</label>
-            <select name="sort" class="form-select @if ($errors->has('sort')) is-invalid @endif" placeholder="Sort by" id="sort-by" onchange="this.form.submit()">
-              <option @if (old('sort') === 'published_at' || $sort === 'published_at') selected @endif value="published_at">Oldest</option>
-              <option @if (old('sort') === '-published_at' || $sort === '-published_at' || is_null($sort)) selected @endif value="-published_at">Newest</option>
-              <option @if (old('sort') === 'last24hrs' || $sort === 'last24hrs') selected @endif value="last24hrs">Last 24 hrs</option>
-              <option @if (old('sort') === 'keywordmatch' || $sort === 'keywordmatch') selected @endif value="keywordmatch">Keyword Match</option>
-            </select>
-          </div>
-          {{-- <div class="col-2 form-group">
-            <label class="form-label">Filter by</label>
-            <select name="filter" class="form-select @if ($errors->has('filter')) is-invalid @endif" placeholder="Filter by" id="filter-by" onchange="this.form.submit()">
-              <option selected value="-1">Choose a filter</option>
-              <option @if (old('filter') === 'keyword' || $filter === 'keyword') selected @endif value="keyword">Keyword Match</option>
-              <option @if (old('filter') === 'bookmarked' || $filter === 'bookmarked') selected @endif value="bookmarked">Saved Queries</option>
-              <option @if (old('filter') === 'answered' || $filter === 'answered') selected @endif value="answered">Answered Requests</option>
-            </select>
-          </div> --}}
         </form>
       </div>
     </div>
@@ -128,36 +78,6 @@
         shouldSort: true,
         searchEnabled: true,
     }));
-    
-    var sortByEl = document.getElementById('sort-by');
-    window.Choices && (new Choices(sortByEl, {
-        classNames: {
-            containerInner: sortByEl.className,
-            input: 'form-control',
-            inputCloned: 'form-control-sm',
-            listDropdown: 'dropdown-menu',
-            itemChoice: 'dropdown-item',
-            activeState: 'show',
-            selectedState: 'active',
-        },
-        shouldSort: false,
-        searchEnabled: false,
-    }));
-    
-    {{-- var filterByEl = document.getElementById('filter-by');
-    window.Choices && (new Choices(filterByEl, {
-        classNames: {
-            containerInner: filterByEl.className,
-            input: 'form-control',
-            inputCloned: 'form-control-sm',
-            listDropdown: 'dropdown-menu',
-            itemChoice: 'dropdown-item',
-            activeState: 'show',
-            selectedState: 'active',
-        },
-        shouldSort: false,
-        searchEnabled: false,
-    })); --}}
 
     $("#term").keyup(function(event) {
       if (event.keyCode === 13) {

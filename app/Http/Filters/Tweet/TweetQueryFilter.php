@@ -68,17 +68,12 @@ class TweetQueryFilter extends QueryFilter
         if ($filter === "answered") {
             $this->builder->whereHas("answers", function ($answer) use ($user) {
                 return $answer
-                    ->where(RequestAnswer::USER_ID_COLUMN, $user->getId())
-                    ->first();
+                    ->where(RequestAnswer::USER_ID_COLUMN, $user->getId());
             });
         }
 
         if ($filter === "bookmarked") {
-            $this->builder->whereHas("favorite", function ($favorite) use ($user) {
-                return $favorite
-                    ->where(UserFavoriteTweet::USER_ID_COLUMN, $user->getId())
-                    ->first();
-            });
+            $this->builder->whereIn(Tweet::ID_COLUMN, $user->favorites->pluck(UserFavoriteTweet::TWEET_ID_COLUMN)->toArray());
         }
     }
 

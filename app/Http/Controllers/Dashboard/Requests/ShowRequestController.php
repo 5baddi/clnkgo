@@ -43,7 +43,7 @@ class ShowRequestController extends DashboardController
 
         $cannedResponses = $this->savedResponseService->getByUser($this->user);
         $answer = $this->requestAnswerService->find($this->user, $tweet);
-        $inFavorite = $this->user->favorite->where(UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof UserFavoriteTweet;
+        $inFavorite = $this->user->favorites->where(UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof UserFavoriteTweet;
 
         return $this->render('dashboard.requests.show', [
             'title'             => 'Respond to request',

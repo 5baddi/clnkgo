@@ -63,7 +63,7 @@ class User extends Authenticatable
         return $this->hasOne(Subscription::class, 'user_id');
     }
     
-    public function favorite(): HasMany
+    public function favorites(): HasMany
     {
         return $this->hasMany(UserFavoriteTweet::class, 'user_id');
     }

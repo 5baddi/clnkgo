@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-2 text-end">
                         @php
-                            $inFavorite = $user->favorite->where(\BADDIServices\SourceeApp\Models\UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof \BADDIServices\SourceeApp\Models\UserFavoriteTweet;
+                            $inFavorite = $user->favorites->where(\BADDIServices\SourceeApp\Models\UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof \BADDIServices\SourceeApp\Models\UserFavoriteTweet;
                         @endphp
                         @include('dashboard.bookmark-button')
                     </div>

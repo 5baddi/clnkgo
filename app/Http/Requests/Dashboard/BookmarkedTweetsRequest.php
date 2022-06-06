@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Validation\Rules\In;
+use App\Http\Requests\PaginationRequest;
 
-class AnalyticsRequest extends PaginationRequest
+class BookmarkedTweetsRequest extends PaginationRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +33,7 @@ class AnalyticsRequest extends PaginationRequest
                 'pp'            =>  ['nullable', 'integer'],
                 'term'          =>  ['nullable', 'string', 'min:1'],
                 'sort'          =>  ['nullable', 'string', new In(['published_at', '-published_at', 'last24hrs', 'keywordmatch'])],
-                'match'         =>  ['nullable', 'string', new In([-1, 'keyword', 'bookmarked', 'answered'])],
+                'match'         =>  ['string', new In(['bookmarked'])],
                 'category'      =>  ['nullable', 'string', 'min:1'],
             ]
         );

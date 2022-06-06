@@ -23,8 +23,8 @@
                 <span class="nav-link-title">Queries</span>
             </a>
           </li>
-          <li class="nav-item {{ request()->routeIs(['dashboard', 'dashboard.requests', 'dashboard.requests.*']) ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+          <li class="nav-item {{ request()->routeIs(['dashboard.answered']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.answered', ['match' => 'answered']) }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <desc>Download more icon variants from https://tabler-icons.io/i/send</desc>
@@ -36,8 +36,8 @@
                 <span class="nav-link-title">Sent</span>
             </a>
           </li>
-          <li class="nav-item {{ request()->routeIs(['dashboard', 'dashboard.requests', 'dashboard.requests.*']) ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+          <li class="nav-item {{ request()->routeIs(['dashboard.bookmarked']) ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.bookmarked', ['match' => 'bookmarked']) }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bookmarks" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <desc>Download more icon variants from https://tabler-icons.io/i/bookmarks</desc>
