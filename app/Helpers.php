@@ -88,6 +88,10 @@ if (! function_exists('extractDate')) {
 if (! function_exists('extractWebsite')) {
     function extractWebsite(string $text): ?string 
     {
+        if (empty($text)) {
+            return null;
+        }
+
         /** @var AppSettingService */
         $appSettingService = app(AppSettingService::class);
 
@@ -104,25 +108,10 @@ if (! function_exists('extractWebsite')) {
             }
 
             if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
-                $domainsNames = explode('@', $text);
-                $domainName = end($domainsNames);
-            }
-            
-            if (! filter_var($text, FILTER_VALIDATE_EMAIL)) {
-                preg_match('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $text, $matches);
-    
-                $domainName = $matches[0] ?? $domainName;
+                $domainName = array_pop(explode('@', $text));
             }
 
-            if (filter_var($domainName, FILTER_VALIDATE_URL)) {
-                $domainName = parse_url($domainName);
-
-                if (Arr::has($domainName, ['host', 'path'])) {
-                    $domainName = $domainName['host'] . $domainName['path'];
-                }
-            }
-
-            if (empty($domainName) || ! is_string($domainName)) {
+            if (! is_string($domainName) || empty($domainName)) {
                 return null;
             }
 
