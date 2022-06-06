@@ -104,7 +104,7 @@ if (! function_exists('extractWebsite')) {
             }
 
             if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
-                $domainsNames = explode('@', 'stabahriti@insider.com');
+                $domainsNames = explode('@', $text);
                 $domainName = end($domainsNames);
             }
             
