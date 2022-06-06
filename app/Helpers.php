@@ -108,7 +108,8 @@ if (! function_exists('extractWebsite')) {
             }
 
             if (filter_var($text, FILTER_VALIDATE_EMAIL)) {
-                $domainName = array_pop(explode('@', $text));
+                $domainNames = explode('@', $text);
+                $domainName = end($domainNames);
             }
 
             if (! is_string($domainName) || empty($domainName)) {
