@@ -121,6 +121,7 @@ class TwitterService extends Service
 
     public function saveTweets(string $hashtag, array $tweets = []): Collection
     {
+        dd($tweets);
         $parsedTweets = collect($tweets['data'])
             ->map(function ($tweet) use ($hashtag, $tweets) {
                 $dueAt = extractDate($tweet['text']);
