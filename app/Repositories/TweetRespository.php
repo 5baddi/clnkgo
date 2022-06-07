@@ -91,8 +91,10 @@ class TweetRespository
         return Tweet::query()
             ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '>', Carbon::now()->subHours(24))
             ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '<=', Carbon::now())
-            ->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
-            ->orWhereNull(Tweet::DUE_AT_COLUMN)
+            ->where(function ($query) {
+                $query->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
+                    ->orWhereNull(Tweet::DUE_AT_COLUMN);
+            })
             ->count();
     }
     
