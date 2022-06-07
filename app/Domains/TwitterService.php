@@ -68,8 +68,6 @@ class TwitterService extends Service
      */
     public function fetchTweetsByHashtags(string $hashtag, ?string $startTime = null, ?string $nextToken = null): Collection
     {
-        sleep(60);
-
         if (! $this->featureService->isEnabled(App::FETCH_TWEETS_FEATURE)) {
             return collect();
         }
@@ -94,6 +92,8 @@ class TwitterService extends Service
             
             if (! empty($nextToken)) {
                 $query['next_token'] = $nextToken;
+
+                sleep(15);
             }
 
             $response = $this->client->request('GET', self::RECENT_SEARCH_ENDPOINT, 
