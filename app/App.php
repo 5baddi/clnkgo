@@ -38,4 +38,5 @@ class App
     // Featues names
     public const EXTRACT_DUE_DATE_FEATURE = 'extract_due_date';
     public const FETCH_TWEETS_FEATURE = 'fetch_tweets';
+    public const MARK_AS_ANSWERED_FEATURE = 'mark_as_answered';
 }

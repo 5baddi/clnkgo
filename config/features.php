@@ -15,4 +15,8 @@ return [
         'enabled'       => env('FETCH_TWEETS_FEATURE_ENABLED', false),
         'for'           => env('FETCH_TWEETS_FEATURE_ENABLED_FOR'),
     ],
+    'mark_as_answered'  =>  [
+        'enabled'       => env('MARK_AS_ANSWERED_FEATURE_ENABLED', false),
+        'for'           => env('MARK_AS_ANSWERED_FEATURE_ENABLED_FOR'),
+    ],
 ];

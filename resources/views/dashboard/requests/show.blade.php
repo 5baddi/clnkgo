@@ -41,7 +41,7 @@
                   <span title="Due on" style="margin-left: 2rem !important;">Due {{ $tweet->due_at->diffForHumans() }}</span>
                   @endif
                 </div>
-                @if(! $answer || ! $answer->isAnswered())
+                @if(@if($featureService->isEnabled(\BADDIServices\SourceeApp\App::MARK_AS_ANSWERED_FEATURE) && (! $answer || ! $answer->isAnswered()))
                 <div class="card-actions">
                     <form action="{{ route('dashboard.requests.answered', ['id' => $tweet->getId()]) }}" method="POST">
                         @csrf
@@ -104,7 +104,7 @@
 
             <div class="tab-content">
                 <div id="direct" class="card tab-pane show active">
-                    <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST">
+                    <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank">
                         @csrf
                         <div class="card-body">
                             <div class="row">
