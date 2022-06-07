@@ -107,7 +107,6 @@ class TwitterService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
-            dd($data, $startTime);
             if (isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
                 return $this->saveTweets($hashtag, $data);
             }
@@ -122,7 +121,6 @@ class TwitterService extends Service
 
     public function saveTweets(string $hashtag, array $tweets = []): Collection
     {
-        dd($tweets);
         $parsedTweets = collect($tweets['data'])
             ->map(function ($tweet) use ($hashtag, $tweets) {
                 $dueAt = extractDate($tweet['text']);
