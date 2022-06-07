@@ -88,8 +88,11 @@ class TweetQueryFilter extends QueryFilter
             return $this->builder
                 ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '>', Carbon::now()->subHours(24))
                 ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '<=', Carbon::now())
-                ->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
-                ->orWhereNull(Tweet::DUE_AT_COLUMN);
+                ->where(function ($query) {
+                    $query->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
+                        ->orWhereNull(Tweet::DUE_AT_COLUMN);
+                })
+                ->orderBy(Tweet::PUBLISHED_AT_COLUMN, 'DESC');
         }
         
         if ($value === "keywordmatch") {
