@@ -107,7 +107,7 @@ class TwitterService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
-            dd($data);
+            dd($data, $startTime);
             if (isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
                 return $this->saveTweets($hashtag, $data);
             }
