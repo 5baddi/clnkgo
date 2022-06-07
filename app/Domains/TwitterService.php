@@ -66,7 +66,7 @@ class TwitterService extends Service
     /**
      * @throws FetchByHashtagFailed
      */
-    public function fetchTweetsByHashtags(string $hashtag, ?string $nextToken = null): Collection
+    public function fetchTweetsByHashtags(string $hashtag, ?string $startTime = null, ?string $nextToken = null): Collection
     {
         sleep(60);
 
@@ -81,7 +81,6 @@ class TwitterService extends Service
 
             $query = [
                 'query'         => sprintf('#%s -is:retweet', $hashtag),
-                'start_time'    => date(DATE_RFC3339, strtotime('-15 minutes')),
                 'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
                 'user.fields'   => 'created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
                 'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
@@ -89,6 +88,10 @@ class TwitterService extends Service
                 'expansions'    => 'attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id'
             ];
 
+            if (! empty($startTime)) {
+                $query['start_time'] = date(DATE_RFC3339, strtotime($startTime));
+            }
+            
             if (! empty($nextToken)) {
                 $query['next_token'] = $nextToken;
             }
@@ -216,7 +219,7 @@ class TwitterService extends Service
             });
 
         if (! empty($tweets['meta']['next_token'])) {
-            return $this->fetchTweetsByHashtags($hashtag, $tweets['meta']['next_token']);
+            return $this->fetchTweetsByHashtags($hashtag, null, $tweets['meta']['next_token']);
         }
         
         return $parsedTweets;

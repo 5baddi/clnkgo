@@ -17,7 +17,7 @@ class FetchLatestTweets extends Command
      *
      * @var string
      */
-    protected $signature = 'twitter:latest-tweets';
+    protected $signature = 'twitter:latest-tweets {startTime="-15 minutes"}';
 
     /**
      * The console command description.
@@ -47,12 +47,13 @@ class FetchLatestTweets extends Command
     {
         $this->info("Start fetching latest tweets");
         $startTime = microtime(true);
+        $startTimeArgument = $this->argument('startTime');
 
         try {
             $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
 
-            collect($hashtags ?? [])->each(function ($hashtag) {
-                $this->twitterService->fetchTweetsByHashtags($hashtag);
+            collect($hashtags ?? [])->each(function ($hashtag) use ($startTimeArgument) {
+                $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeArgument);
 
                 sleep(3);
             });
