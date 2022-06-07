@@ -17,7 +17,7 @@ class FetchLatestTweets extends Command
      *
      * @var string
      */
-    protected $signature = 'twitter:latest-tweets {--start-time?}';
+    protected $signature = 'twitter:latest-tweets {--start-time=}';
 
     /**
      * The console command description.
