@@ -128,5 +128,8 @@ class TweetQueryFilter extends QueryFilter
             $this->builder
                 ->orWhereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$keyword}%"]);
         }
+
+        $this->builder
+            ->orderBy(Tweet::PUBLISHED_AT_COLUMN, 'DESC');
     }
 }
