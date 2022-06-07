@@ -47,13 +47,13 @@ class FetchLatestTweets extends Command
     {
         $this->info("Start fetching latest tweets");
         $startTime = microtime(true);
-        $startTimeArgument = $this->option('--start-time');
+        $startTimeOption = $this->option('start-time');
 
         try {
             $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
 
-            collect($hashtags ?? [])->each(function ($hashtag) use ($startTimeArgument) {
-                $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeArgument);
+            collect($hashtags ?? [])->each(function ($hashtag) use ($startTimeOption) {
+                $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption);
 
                 sleep(3);
             });
