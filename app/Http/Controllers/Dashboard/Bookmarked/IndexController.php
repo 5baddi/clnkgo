@@ -26,7 +26,7 @@ class IndexController extends DashboardController
         $tweets = $this->tweetService->paginate($queryFilter);
 
         return $this->render('dashboard.answered.index', [
-            'title'                             => 'Dashboard',
+            'title'                             => 'Saved',
             'user'                              => $this->user,
             'category'                          => $request->query('category'),
             'term'                              => $request->query('term'),
