@@ -104,7 +104,7 @@
 
             <div class="tab-content">
                 <div id="direct" class="card tab-pane show active">
-                    <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank">
+                    <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank" onsubmit="window.location.reload();">
                         @csrf
                         <div class="card-body">
                             <div class="row">
@@ -186,6 +186,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <div class="col-12 mt-4">
         <h2>Journalist's Bio</h2>
@@ -235,7 +236,6 @@
             @endif
         </div>
     </div>
-    @endif
 </div>
 @endsection
 
