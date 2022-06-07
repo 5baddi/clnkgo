@@ -93,7 +93,7 @@ class TwitterService extends Service
             if (! empty($nextToken)) {
                 $query['next_token'] = $nextToken;
 
-                sleep(15);
+                sleep(10);
             }
 
             $response = $this->client->request('GET', self::RECENT_SEARCH_ENDPOINT, 
