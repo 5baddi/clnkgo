@@ -101,9 +101,11 @@ class TweetRespository
     public function liveRequests(): int
     {
         return Tweet::query()
-        ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '>', Carbon::now()->subDays(10))
-            ->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
-            ->orWhereNull(Tweet::DUE_AT_COLUMN)
+            ->whereDate(Tweet::PUBLISHED_AT_COLUMN, '>', Carbon::now()->subDays(10))
+            ->where(function ($query) {
+                $query->whereDate(Tweet::DUE_AT_COLUMN, '>=', Carbon::now())
+                    ->orWhereNull(Tweet::DUE_AT_COLUMN);
+            })
             ->count();
     }
     
