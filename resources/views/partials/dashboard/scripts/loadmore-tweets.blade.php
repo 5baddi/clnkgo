@@ -1,6 +1,6 @@
 @section('script')
   $(document).ready(function() {
-    $(document).scrollTop();
+    $(document).scrollTop(0);
 
     var categoryEl = document.getElementById('category');
     if (categoryEl) {
