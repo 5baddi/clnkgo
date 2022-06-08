@@ -35,7 +35,7 @@
                     @endforeach
                 </ul>
                 <div class="text-center mt-4">
-                    <a href="{{ ($currentPack && $currentPack->id === $pack->id && ($subscription->isActive() && ! $subscription->isTrial())) ? '#' : route('subscription.pack.billing', ['pack' => $pack->id]) }}" class="btn {{ ($currentPack && $currentPack->id === $pack->id) ? 'btn-twitter' : '' }} w-100">{{ $currentPack && $currentPack->id === $pack->id && ($subscription->isActive() && ! $subscription->isTrial()) ? 'Current Plan' : 'Choose ' . ucwords($pack->name) }}</a>
+                    <a href="{{ ($currentPack && $currentPack->id === $pack->id && ($subscription->isActive() && ! $subscription->isTrial())) ? '#' : route('subscription.pack.billing', ['pack' => $pack->id]) }}" class="btn {{ ($currentPack && $currentPack->id === $pack->id) ? 'btn-clnkgo' : '' }} w-100">{{ $currentPack && $currentPack->id === $pack->id && ($subscription->isActive() && ! $subscription->isTrial()) ? 'Current Plan' : 'Choose ' . ucwords($pack->name) }}</a>
                 </div>
             </div>
         </div>

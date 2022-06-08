@@ -92,7 +92,7 @@
                 @endif
                 </div>
                 <div class="mt-2">
-                <button id="pay-with-card-btn" type="submit" class="btn btn-twitter w-100" disabled>
+                <button id="pay-with-card-btn" type="submit" class="btn btn-clnkgo w-100" disabled>
                     {{ __('dashboard.buttons.pay', ['amount' => $pack->price, 'symbol' => $pack->symbol ?? '$']) }}
                 </button>
                 </div>
