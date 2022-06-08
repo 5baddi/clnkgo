@@ -61,7 +61,7 @@
 }
 
 .navbar-dark {
-    background-color: #202837 !important;
+    background-color: #54595F !important;
     font-size: 14pt;
 }
 
@@ -103,7 +103,7 @@ svg {
 
 .bootstrap-tagsinput .tag {
     padding: .5rem !important;
-    background-color: #202837 !important;
+    background-color: #54595F !important;
     border-radius: 4px !important;
     margin-top: .2rem !important;
     margin-bottom: .2rem !important;
@@ -127,7 +127,7 @@ svg {
 }
 .custom-loader {
     display: none;
-    color: #202837;
+    color: #54595F;
     font-size: 10px;
     margin: 80px auto;
     position: relative;
@@ -174,11 +174,11 @@ svg {
 }
 
 .btn-twitter {
-    background-color: #202837 !important;
+    background-color: #54595F !important;
 }
 
 .btn-twitter:hover {
-    background-color: #202837 !important;
+    background-color: #54595F !important;
 }
 
 .btn-without-bg {
@@ -203,7 +203,7 @@ svg {
 }
 
 .analytics-card {
-    background-color: #202837 !important;
+    background-color: #54595F !important;
     color: white !important;
 }
 
@@ -212,7 +212,7 @@ svg {
 }
 
 .filters-card {
-    background-color: #202837 !important;
+    background-color: #54595F !important;
     color: white !important;
 }
 
