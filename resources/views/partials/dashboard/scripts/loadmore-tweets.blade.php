@@ -1,5 +1,7 @@
 @section('script')
   $(document).ready(function() {
+    $(document).scrollTop();
+
     var categoryEl = document.getElementById('category');
     if (categoryEl) {
         window.Choices && (new Choices(categoryEl, {
