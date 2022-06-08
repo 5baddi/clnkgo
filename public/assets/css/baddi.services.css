@@ -238,3 +238,11 @@ svg {
 .filters-card input[type=text]:focus {
     color: #000000 !important;
 }
+
+.nav-link {
+    color: white !important;
+}
+
+.nav-link svg {
+    color: white !important;
+}
