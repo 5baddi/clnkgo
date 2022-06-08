@@ -244,6 +244,7 @@ svg {
 }
 
 .help-url {
+    font-size: .875rem !important;
     color: white !important;
     text-decoration: none !important;
 }
