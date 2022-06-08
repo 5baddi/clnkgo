@@ -82,7 +82,7 @@
     $(document).ready(function() {
       $(window).on('scroll', function() {
         var position = $(this).scrollTop();
-        var bottom = $(this).height();
+        var bottom = $(this).height() - 200;
 
         if (position < bottom) { 
           $('.back-top').fadeOut();
