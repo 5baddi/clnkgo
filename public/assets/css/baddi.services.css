@@ -255,8 +255,8 @@ svg {
 
 .back-top {
     position: fixed;
-    bottom: 12px;
-    right: 12px;
+    bottom: 32px;
+    right: 16px;
     z-index: 9999999999999999999999999999;
     max-width: 22px;
     text-align: center !important;
