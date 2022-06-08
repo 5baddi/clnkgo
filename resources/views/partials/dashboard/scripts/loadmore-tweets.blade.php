@@ -75,7 +75,7 @@
    };
 
     @if($tweets->total() > 0)
-    $(window).scroll(debounce(function(){
+    $(window).scroll(function(){
         var position = $(this).scrollTop();
         var bottom = $(document).height() - $(this).height();
         var lastPage = parseInt('{{ $tweets->lastPage() }}');
@@ -84,7 +84,8 @@
           $('.custom-loader').css('display', 'block');
           ++page;
   
-          $.ajax({
+          debounce(function () {
+            $.ajax({
               url: `{{ route('dashboard.paginate.tweets') }}?{{ count(Request()->query()) === 0 ? '' : http_build_query(Request()->query()) . '&' }}page=${page}`,
               type: 'get',
               success: function(response){
@@ -95,11 +96,12 @@
               error: function (req, status, error) {
                 $('.custom-loader').css('display', 'none');
               }
-          });
+            });
+          }, 300);
         } else {
           $('.custom-loader').css('display', 'none');
         }
-      }, 300));
+      });
     @endif
   });
 @endsection
