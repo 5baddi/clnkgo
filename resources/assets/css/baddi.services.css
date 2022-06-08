@@ -242,7 +242,3 @@ svg {
 .nav-link:hover {
     background-color: rgba(0, 0, 0, .1) !important;
 }
-
-.nav-link-icon:hover {
-    background-color: rgba(0, 0, 0, .1) !important;
-}
