@@ -239,10 +239,10 @@ svg {
     color: #000000 !important;
 }
 
-.nav-link {
-    color: white !important;
+.nav-link:hover {
+    background-color: rgba(0, 0, 0, .1) !important;
 }
 
-.nav-link svg {
-    color: white !important;
+.nav-link-icon:hover {
+    background-color: rgba(0, 0, 0, .1) !important;
 }
