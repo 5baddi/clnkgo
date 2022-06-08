@@ -75,7 +75,7 @@
    };
 
     @if($tweets->total() > 0)
-    $(window).scroll(debounce(function(){
+    $(window).on( 'scroll', debounce(function(){
         var position = $(this).scrollTop();
         var bottom = $(document).height() - $(this).height();
         var lastPage = parseInt('{{ $tweets->lastPage() }}');
