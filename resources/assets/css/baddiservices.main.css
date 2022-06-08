@@ -80,3 +80,22 @@ hr {
 .top-logo img {
     width: 75%;
 }
+
+.btn-clnkgo {
+    background-color: #04AF90 !important;
+    border-color: #04AF90 !important;
+    color: white !important;
+}
+
+.btn-clnkgo svg {
+    color: white !important;
+}
+
+.btn-clnkgo:hover {
+    background-color: #15b2af !important;
+    border-color: #15b2af !important;
+}
+
+.btn-clnkgo svg:hover {
+    color: white !important;
+}

@@ -41,7 +41,7 @@
             @endif
         </div>
         <div class="mt-4">
-            <button type="submit" class="btn btn-block btn-primary">Reset password</button>
+            <button type="submit" class="btn btn-block btn-clnkgo">Reset password</button>
         </div>
     </form> 
 </div>

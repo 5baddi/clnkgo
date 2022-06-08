@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <button type="submit" class="btn btn-block btn-primary">Continue signup</button>
+                <button type="submit" class="btn btn-block btn-clnkgo">Continue signup</button>
             </div>
         </form>
     </div>

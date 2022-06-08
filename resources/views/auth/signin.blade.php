@@ -72,7 +72,7 @@
             </div>
             @include('partials.h-captcha')
             <div class="mt-4">
-                <button type="submit" class="btn btn-block btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-block btn-clnkgo">Sign in</button>
             </div>
         </form>
     </div>
