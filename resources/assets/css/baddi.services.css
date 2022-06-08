@@ -5,7 +5,7 @@
 .navbar-brand-image{
     height: auto !important;
     width: 100% !important;
-    max-width: 110px !important;
+    max-width: 142px !important;
     max-height: 32px !important;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .navbar-vertical.navbar-expand-lg .navbar-brand {
-    padding: 2.3rem 0 !important;
+    padding: 4rem 0 !important;
 }
 
 .navbar-expand-md .navbar-light .nav-item.active:after, .navbar-expand-md.navbar-light .nav-item.active:after {
