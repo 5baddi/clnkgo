@@ -60,7 +60,7 @@ class FeatureService
         /** @var Subscription|null */
         $subscription = $user->subscription;
 
-        if (! $this->subscription instanceof Subscription) {
+        if (! $subscription instanceof Subscription) {
             return false;
         }
 
