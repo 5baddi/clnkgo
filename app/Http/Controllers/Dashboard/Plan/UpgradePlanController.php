@@ -33,7 +33,7 @@ class UpgradePlanController extends DashboardController
                 ->with('alert', new Alert('Don\'t forget you\'re using super admin account!'));
         }
 
-        return view('dashboard.plan.upgrade', [
+        return $this->render('dashboard.plan.upgrade', [
             'title'                 => 'Upgrade your plan',
             'subscription'          => $this->subscription,
             'isTrial'               => ($this->user->isSuperAdmin() || $this->subscription->isTrial()),
