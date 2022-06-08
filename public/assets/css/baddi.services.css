@@ -191,6 +191,12 @@ svg {
 .btn-clnkgo svg:hover {
     color: white !important;
 }
+.btn-without-bg {
+    background-color: unset !important;
+    color: white !important;
+    font-size: 13pt;
+    border: none !important;
+}
 
 .btn-without-bg .icon {
     color: white !important;
