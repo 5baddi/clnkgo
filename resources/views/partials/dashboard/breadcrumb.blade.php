@@ -1,8 +1,8 @@
 <div class="container-xl">
     <!-- Page title -->
     <div class="page-header d-print-none">
-      <div class="row align-items-center">
-        <div class="col-md-10">
+      <div class="row align-items-center mb-4">
+        <div class="col-md-10 d-flex justify-content-start">
           <!-- Page pre-title -->
           <div class="page-pretitle">
             &nbsp;
