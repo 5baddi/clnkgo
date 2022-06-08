@@ -64,12 +64,12 @@
         </footer>
       </div>
 
-      <a href="javascript:void(0)" class="btn btn-clnkgo btn-icon back-top" aria-label="Back to top">
+      <button class="btn btn-clnkgo btn-icon back-top" aria-label="Back to top">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
           <polyline points="6 15 12 9 18 15"></polyline>
         </svg>
-      </a>
+      </button>
     </div>
 
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
@@ -79,11 +79,9 @@
     <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key={{ config('baddi.zendesk_key') }}"></script>
     @endif
     <script type="text/javascript">
-    $(document).ready(function(){
-      $(window).scroll(function(){
-        var showAfter = 100;
-
-        if ( $(this).scrollTop() > showAfter ) { 
+    $(document).ready(function() {
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 100 ) { 
           $('.back-top').fadeIn();
         } else { 
           $('.back-top').fadeOut();
