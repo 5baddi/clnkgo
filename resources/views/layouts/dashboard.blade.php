@@ -83,7 +83,7 @@
       $(window).scroll(function() {
         var bottom = $(document).height() - $(this).height();
 
-        if ($(this).scrollTop() > bottom) { 
+        if ($(this).scrollTop() < bottom) { 
           $('.back-top').fadeIn();
         } else { 
           $('.back-top').fadeOut();
