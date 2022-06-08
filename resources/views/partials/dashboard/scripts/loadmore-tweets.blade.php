@@ -99,7 +99,7 @@
         } else {
           $('.custom-loader').css('display', 'none');
         }
-      }, 1000));
+      }, 300));
     @endif
   });
 @endsection
