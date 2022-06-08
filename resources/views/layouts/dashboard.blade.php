@@ -84,7 +84,7 @@
         var position = $(this).scrollTop();
         var bottom = $(this).height();
 
-        if (position >= bottom) { 
+        if (position < bottom) { 
           $('.back-top').fadeOut();
         } else { 
           $('.back-top').fadeIn();
