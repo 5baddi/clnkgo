@@ -31,7 +31,7 @@
                             <div class="invalid-feedback">{{ $errors::first('keywords') }}</div>
                             @endif
                         </div>
-                        <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> or <kbd>comma</kbd> to add a keyword</span>
+                        <span class="text-muted text-sm" style="color: white !important;">Hit <kbd>ENTER</kbd> or <kbd>comma</kbd> to add a keyword</span>
                     </div>
                 </div>
             </div>

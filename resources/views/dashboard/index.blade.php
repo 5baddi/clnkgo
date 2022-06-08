@@ -45,7 +45,7 @@
               <label class="form-label">Search</label>
               <input id="term" type="text" name="term" value="{{ old('term') ?? $term }}" class="form-control @if ($errors->has('term')) is-invalid @endif" placeholder="Enter search term..." onblur="this.form.submit()"/>  
             </div>
-            <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> to search by term</span>
+            <span class="text-muted text-sm" style="color: white !important;">Hit <kbd>ENTER</kbd> to search by term</span>
           </div>
           <div class="col-3 form-group">
             <label class="form-label">Category</label>

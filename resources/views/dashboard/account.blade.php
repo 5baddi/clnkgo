@@ -129,7 +129,7 @@
                                 <div class="invalid-feedback">{{ $errors::first('emails') }}</div>
                                 @endif
                             </div>
-                            <span class="text-muted text-sm">Hit <kbd>ENTER</kbd> or <kbd>comma</kbd> to add an email</span>
+                            <span class="text-muted text-sm" style="color: white !important;">Hit <kbd>ENTER</kbd> or <kbd>comma</kbd> to add an email</span>
                         </div>
                     </div>
                     @endif
