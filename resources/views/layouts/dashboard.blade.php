@@ -81,7 +81,9 @@
     <script type="text/javascript">
     $(document).ready(function() {
       $(window).scroll(function() {
-        if ($(this).scrollTop() > 100 ) { 
+        var bottom = $(document).height() - $(this).height();
+
+        if ($(this).scrollTop() > bottom) { 
           $('.back-top').fadeIn();
         } else { 
           $('.back-top').fadeOut();
