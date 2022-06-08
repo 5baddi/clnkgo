@@ -252,3 +252,13 @@ svg {
 .help-url:hover {
     color: #ffffff99 !important;
 }
+
+.back-top {
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    z-index: 9999999999999999999999999999;
+    max-width: 22px;
+    text-align: center !important;
+    font-size: 9pt !important;
+}
