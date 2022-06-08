@@ -1,7 +1,5 @@
 @section('script')
   $(document).ready(function() {
-    $(document).scrollTop(0);
-
     var categoryEl = document.getElementById('category');
     if (categoryEl) {
         window.Choices && (new Choices(categoryEl, {
@@ -77,31 +75,33 @@
    };
 
     @if($tweets->total() > 0)
-    $(window).on( 'scroll', debounce(function(){
+    $(window).on( 'scroll', function(){
         var position = $(this).scrollTop();
         var bottom = $(document).height() - $(this).height();
         var lastPage = parseInt('{{ $tweets->lastPage() }}');
   
-        if(position == bottom && page < lastPage){
-          $('.custom-loader').css('display', 'block');
-          ++page;
-  
-          $.ajax({
-              url: `{{ route('dashboard.paginate.tweets') }}?{{ count(Request()->query()) === 0 ? '' : http_build_query(Request()->query()) . '&' }}page=${page}`,
-              type: 'get',
-              success: function(response){
-                $('.custom-loader').css('display', 'none');
+        debounce(function () {
+          if(position == bottom && page < lastPage){
+            $('.custom-loader').css('display', 'block');
+            ++page;
     
-                $(response).insertBefore('.custom-loader');
-              },
-              error: function (req, status, error) {
-                $('.custom-loader').css('display', 'none');
-              }
-          });
-        } else {
-          $('.custom-loader').css('display', 'none');
-        }
-      }, 300, false));
+            $.ajax({
+                url: `{{ route('dashboard.paginate.tweets') }}?{{ count(Request()->query()) === 0 ? '' : http_build_query(Request()->query()) . '&' }}page=${page}`,
+                type: 'get',
+                success: function(response){
+                  $('.custom-loader').css('display', 'none');
+      
+                  $(response).insertBefore('.custom-loader');
+                },
+                error: function (req, status, error) {
+                  $('.custom-loader').css('display', 'none');
+                }
+            });
+          } else {
+            $('.custom-loader').css('display', 'none');
+          }
+        }, 300);
+      });
     @endif
   });
 @endsection
