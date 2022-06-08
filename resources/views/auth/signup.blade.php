@@ -5,7 +5,7 @@
 @section('form')
     <div class="card-body px-md-5 py-5">
         <div class="mb-5">
-            <h6 class="h3">Welcome to {{ config('app.name') }}</h6>
+            <h6 class="h3" style="color: inherit !important;">Welcome to {{ config('app.name') }}</h6>
             <p class="text-muted mb-0">Let's get started by creating your account</p>
             @if(Session::has('error'))
                 <div class="invalid-feedback">

@@ -5,7 +5,7 @@
 @section('form')
     <div class="card-body px-md-5 py-5">
         <div class="mb-5">
-            <h6 class="h3">Welcome back</h6>
+            <h6 class="h3" style="color: inherit !important;">Welcome back</h6>
             <p class="text-muted mb-0">Sign in to your account to continue</p>
             @if(Session::has('success'))
                 <div class="valid-feedback">

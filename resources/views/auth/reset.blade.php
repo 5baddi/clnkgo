@@ -5,7 +5,7 @@
 @section('form')
 <div class="card-body px-md-5 py-5">
     <div class="mb-5">
-        <h6 class="h3">Forgot password?</h6>
+        <h6 class="h3" style="color: inherit !important;">Forgot password?</h6>
         <p class="text-muted mb-0">Enter your email and we’ll send you a reset link</p>
         @if(Session::has('error'))
             <div class="invalid-feedback">
