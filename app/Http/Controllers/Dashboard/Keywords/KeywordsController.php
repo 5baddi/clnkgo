@@ -20,7 +20,7 @@ class KeywordsController extends DashboardController
         $hashtags = AppSetting::where(AppSetting::KEY_COLUMN, App::APP_MOST_USED_KEYWORDS)->first();
         $hashtags = $hashtags instanceof AppSetting ? json_decode($hashtags->value ?? '[]') : [];
 
-        return view('dashboard.keywords', [
+        return $this->render('dashboard.keywords', [
             'title'             => 'Your Keywords 🔑',
             'keywords'          => $this->user->getKeywordsAsString(),
             'hashtags'          => $hashtags,

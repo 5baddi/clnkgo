@@ -27,7 +27,7 @@ class NewResponseController extends DashboardController
     
     public function __invoke()
     {
-        return view('dashboard.responses.new', [
+        return $this->render('dashboard.responses.new', [
             'title'     => 'New Canned Response',
             'count'     => $this->savedResponseService->count($this->user),
             'max'       => collect($this->pack->features ?? [])->where('key', Pack::CANNED_RESPONSES)->first()['limit'] ?? App::MAX_CANNED_RESPONSES

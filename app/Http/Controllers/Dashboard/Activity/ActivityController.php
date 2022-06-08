@@ -20,7 +20,7 @@ class ActivityController extends Controller
         /** @var User */
         $user = Auth::user();
 
-        return view('dashboard.activity', [
+        return $this->render('dashboard.activity', [
             'title'                             =>  'Activity',
             'unreadNotifications'               =>  $user->unreadNotifications,
             'markAsReadNotifications'           =>  $user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30))

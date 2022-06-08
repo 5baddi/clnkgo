@@ -32,7 +32,7 @@ class EditResponseController extends DashboardController
         $response = $this->savedResponseService->findById($id);
         abort_unless($response instanceof SavedResponse, Response::HTTP_NOT_FOUND);
 
-        return view('dashboard.responses.edit', [
+        return $this->render('dashboard.responses.edit', [
             'title'     => 'Edit Canned Response',
             'count'     => $this->savedResponseService->count($this->user),
             'response'  => $response,
