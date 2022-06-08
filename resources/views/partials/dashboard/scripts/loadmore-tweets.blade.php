@@ -1,49 +1,55 @@
 @section('script')
   $('document').ready(function() {
     var categoryEl = document.getElementById('category');
-    window.Choices && (new Choices(categoryEl, {
-        classNames: {
-            containerInner: categoryEl.className,
-            input: 'form-control',
-            inputCloned: 'form-control-sm',
-            listDropdown: 'dropdown-menu',
-            itemChoice: 'dropdown-item',
-            activeState: 'show',
-            selectedState: 'active',
-        },
-        shouldSort: true,
-        searchEnabled: true,
-    }));
+    if (categoryEl) {
+        window.Choices && (new Choices(categoryEl, {
+            classNames: {
+                containerInner: categoryEl.className,
+                input: 'form-control',
+                inputCloned: 'form-control-sm',
+                listDropdown: 'dropdown-menu',
+                itemChoice: 'dropdown-item',
+                activeState: 'show',
+                selectedState: 'active',
+            },
+            shouldSort: true,
+            searchEnabled: true,
+        }));
+    }
     
     var sortByEl = document.getElementById('sort-by');
-    window.Choices && (new Choices(sortByEl, {
-        classNames: {
-            containerInner: sortByEl.className,
-            input: 'form-control',
-            inputCloned: 'form-control-sm',
-            listDropdown: 'dropdown-menu',
-            itemChoice: 'dropdown-item',
-            activeState: 'show',
-            selectedState: 'active',
-        },
-        shouldSort: false,
-        searchEnabled: false,
-    }));
+    if (sortByEl) {
+        window.Choices && (new Choices(sortByEl, {
+            classNames: {
+                containerInner: sortByEl.className,
+                input: 'form-control',
+                inputCloned: 'form-control-sm',
+                listDropdown: 'dropdown-menu',
+                itemChoice: 'dropdown-item',
+                activeState: 'show',
+                selectedState: 'active',
+            },
+            shouldSort: false,
+            searchEnabled: false,
+        }));
+    }
     
-    {{-- var filterByEl = document.getElementById('filter-by');
-    window.Choices && (new Choices(filterByEl, {
-        classNames: {
-            containerInner: filterByEl.className,
-            input: 'form-control',
-            inputCloned: 'form-control-sm',
-            listDropdown: 'dropdown-menu',
-            itemChoice: 'dropdown-item',
-            activeState: 'show',
-            selectedState: 'active',
-        },
-        shouldSort: false,
-        searchEnabled: false,
-    })); --}}
+    var filterByEl = document.getElementById('filter-by');
+    if (filterByEl) {
+        window.Choices && (new Choices(filterByEl, {
+            classNames: {
+                containerInner: filterByEl.className,
+                input: 'form-control',
+                inputCloned: 'form-control-sm',
+                listDropdown: 'dropdown-menu',
+                itemChoice: 'dropdown-item',
+                activeState: 'show',
+                selectedState: 'active',
+            },
+            shouldSort: false,
+            searchEnabled: false,
+        }));
+    }
 
     $("#term").keyup(function(event) {
       if (event.keyCode === 13) {
