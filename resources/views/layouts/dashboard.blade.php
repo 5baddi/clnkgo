@@ -79,6 +79,23 @@
     <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key={{ config('baddi.zendesk_key') }}"></script>
     @endif
     <script type="text/javascript">
+    $(document).ready(function(){
+      $(window).scroll(function(){
+        var showAfter = 100;
+
+        if ( $(this).scrollTop() > showAfter ) { 
+          $('.back-top').fadeIn();
+        } else { 
+          $('.back-top').fadeOut();
+        }
+      });
+
+      $('.back-top').click(function() {
+          $('html, body').animate({scrollTop : 0}, 800);
+          return false;
+      });
+    });
+
     @yield('script')
     </script>
   </body>
