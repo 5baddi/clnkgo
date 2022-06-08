@@ -134,10 +134,10 @@
         <div class="row mb-4">
             <div class="col-12">
                 <div class="col-auto align-self-center mt-1 text-center">
-                    {{-- <a href="{{ env('SUPPORT_URL', '#') }}" target="_blank" class="btn btn-icon btn-without-bg w-100">
+                    <a href="javascript:void(0)" onclick="Gleap.open();" target="_blank" class="btn btn-icon btn-without-bg w-100">
                       Report A Bug
                     </a>
-                    <a href="{{ env('SUPPORT_URL', '#') }}" target="_blank" class="btn btn-icon btn-without-bg w-100">
+                    {{-- <a href="{{ env('SUPPORT_URL', '#') }}" target="_blank" class="btn btn-icon btn-without-bg w-100">
                       Support
                     </a> --}}
                     <a href="{{ route('signout') }}" class="btn btn-icon w-100 mt-3">
