@@ -19,6 +19,10 @@ return [
         'enabled'       => env('MARK_AS_ANSWERED_FEATURE_ENABLED', false),
         'for'           => env('MARK_AS_ANSWERED_FEATURE_ENABLED_FOR'),
     ],
+    'journalist_area'   =>  [
+        'enabled'       => env('JOURNALIST_AREA_FEATURE_ENABLED', false),
+        'for'           => env('JOURNALIST_AREA_FEATURE_ENABLED_FOR'),
+    ],
     'report_bugs_with_gleap'    =>  [
         'enabled'               => env('REPORT_BUGS_WITH_GLEAP_FEATURE_ENABLED', false),
         'for'                   => env('REPORT_BUGS_WITH_GLEAP_FEATURE_ENABLED_FOR'),
