@@ -143,7 +143,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                @if($featureService->isPackFeatureEnabled(\BADDIServices\SourceeApp\Pack::MULTIPLE_EMAILS_SENDER))
+                                @if($featureService->isPackFeatureEnabled(\BADDIServices\SourceeApp\Models\Pack::MULTIPLE_EMAILS_SENDER))
                                 <div class="col-12 mt-2">
                                     <label class="form-label">From</label>                        
                                     <select class="form-select @if($errors->has('from')) is-invalid @endif" id="emails">
