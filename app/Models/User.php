@@ -80,6 +80,16 @@ class User extends Authenticatable
         return $this;
     }
 
+    public function getEmail(): string
+    {
+        return $this->getAttribute(self::EMAIL_COLUMN);
+    }
+    
+    public function getFirstName(): string
+    {
+        return $this->getAttribute(self::FIRST_NAME_COLUMN);
+    }
+
     public function getFullName(): ?string
     {
         return ucwords($this->getAttribute(self::FIRST_NAME_COLUMN) . ' ' . $this->getAttribute(self::LAST_NAME_COLUMN));

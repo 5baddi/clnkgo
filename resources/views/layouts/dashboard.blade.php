@@ -19,6 +19,19 @@
     <link href="{{ asset('assets/css/daterangepicker.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/bootstrap-tagsinput.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/baddi.services.css') }}" rel="stylesheet"/>
+
+    @if($featureService->isEnabled(\BADDIServices\SourceeApp\App::REPORT_BUGS_WITH_GLEAP_FEATURE))
+    <script>
+      !function(Gleap,t,i){if(!(Gleap=window.Gleap=window.Gleap||[]).invoked){for(window.GleapActions=[],Gleap.invoked=!0,Gleap.methods=["identify","clearIdentity","attachCustomData","setCustomData","removeCustomData","clearCustomData","registerCustomAction","logEvent","sendSilentCrashReport","startFeedbackFlow","setAppBuildNumber","setAppVersionCode","preFillForm","setApiUrl","setFrameUrl","isOpened","open","hide","on","setLanguage","setOfflineMode","initialize"],Gleap.f=function(e){return function(){var t=Array.prototype.slice.call(arguments);window.GleapActions.push({e:e,a:t})}},t=0;t<Gleap.methods.length;t++)Gleap[i=Gleap.methods[t]]=Gleap.f(i);Gleap.load=function(){var t=document.getElementsByTagName("head")[0],i=document.createElement("script");i.type="text/javascript",i.async=!0,i.src="https://js.gleap.io/latest/index.js",t.appendChild(i)},Gleap.load(),
+          Gleap.initialize("erUGwHefPvAYu9v3IRRdgI9ao5GcC9zX"),
+
+          Gleap.identify("{{ hash('sha256', $user->getId()) }}", {
+            name: "{{ $user->getFirstName() }}",
+            email: "{{ $user->getEmail() }}",
+          })
+      }}();
+    </script>
+    @endif
   </head>
   <body class="antialiased">
     <div class="wrapper">
