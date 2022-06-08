@@ -85,9 +85,9 @@
         var bottom = $(document).height() - $(this).height();
 
         if (position >= bottom) { 
-          $('.back-top').fadeIn();
-        } else { 
           $('.back-top').fadeOut();
+        } else { 
+          $('.back-top').fadeIn();
         }
       });
 
