@@ -188,7 +188,7 @@
                                         <line x1="10" y1="14" x2="21" y2="3"></line>
                                         <path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"></path>
                                     </svg>
-                                    &nbsp;Send as an email
+                                    &nbsp;Send as an E-Mail
                                 </button>
                             </div>
                         </div>
