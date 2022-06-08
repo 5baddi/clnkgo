@@ -18,6 +18,8 @@ class StripeService extends Service
 {
     public function __construct()
     {
+        parent::__construct();
+
         Stripe::setApiKey(config('stripe.secret_key'));
     }
 

@@ -18,6 +18,8 @@ class TwoCheckoutService extends Service
 {
     public function __construct()
     {
+        parent::__construct();
+
         Twocheckout::privateKey(config('2checkout.private_key'));
         Twocheckout::sellerId(config('2checkout.seller_id'));
 
