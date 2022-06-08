@@ -59,45 +59,47 @@
 
     var page = 1;
 
-    function throttle(fn, wait) {
-      var time = Date.now();
-      return function() {
-        if ((time + wait - Date.now()) < 0) {
-          fn();
-          time = Date.now();
-        }
-      }
-    }
+    var debounce = function (func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+   };
 
     @if($tweets->total() > 0)
-    $(window).scroll(function(){
-      var position = $(this).scrollTop();
-      var bottom = $(document).height() - $(this).height();
-      var lastPage = parseInt('{{ $tweets->lastPage() }}');
-
-      if(position == bottom && page < lastPage){
-        $('.custom-loader').css('display', 'block');
-
-        throttle(function () {
-            ++page;
-
-            $.ajax({
-                url: `{{ route('dashboard.paginate.tweets') }}?{{ count(Request()->query()) === 0 ? '' : http_build_query(Request()->query()) . '&' }}page=${page}`,
-                type: 'get',
-                success: function(response){
-                  $('.custom-loader').css('display', 'none');
-      
-                  $(response).insertBefore('.custom-loader');
-                },
-                error: function (req, status, error) {
-                  $('.custom-loader').css('display', 'none');
-                }
-            });
-        }, 3000);
-      } else {
-        $('.custom-loader').css('display', 'none');
-      }
-    });
+    $(window).scroll(debounce(function(){
+        var position = $(this).scrollTop();
+        var bottom = $(document).height() - $(this).height();
+        var lastPage = parseInt('{{ $tweets->lastPage() }}');
+  
+        if(position == bottom && page < lastPage){
+          $('.custom-loader').css('display', 'block');
+          ++page;
+  
+          $.ajax({
+              url: `{{ route('dashboard.paginate.tweets') }}?{{ count(Request()->query()) === 0 ? '' : http_build_query(Request()->query()) . '&' }}page=${page}`,
+              type: 'get',
+              success: function(response){
+                $('.custom-loader').css('display', 'none');
+    
+                $(response).insertBefore('.custom-loader');
+              },
+              error: function (req, status, error) {
+                $('.custom-loader').css('display', 'none');
+              }
+          });
+        } else {
+          $('.custom-loader').css('display', 'none');
+        }
+      }, 1000));
     @endif
   });
 @endsection
