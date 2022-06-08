@@ -59,6 +59,11 @@ class PacksSeeder extends Seeder
                     'name'      => 'Cancel Anytime',
                     'enabled'   => true,
                 ],
+                [
+                    'key'       => Pack::MULTIPLE_EMAILS_SENDER,
+                    'name'      => 'Custom sender',
+                    'enabled'   => false,
+                ],
             ]
         ]);
     }
