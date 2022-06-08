@@ -77,20 +77,23 @@
 
       if(position == bottom && page < lastPage){
         $('.custom-loader').css('display', 'block');
-        ++page;
 
-        throttle($.ajax({
-          url: `{{ route('dashboard.paginate.tweets') }}?{{ count(Request()->query()) === 0 ? '' : http_build_query(Request()->query()) . '&' }}page=${page}`,
-          type: 'get',
-          success: function(response){
-            $('.custom-loader').css('display', 'none');
+        throttle(function () {
+            ++page;
 
-            $(response).insertBefore('.custom-loader');
-          },
-          error: function (req, status, error) {
-            $('.custom-loader').css('display', 'none');
-          }
-        }), 1000);
+            $.ajax({
+                url: `{{ route('dashboard.paginate.tweets') }}?{{ count(Request()->query()) === 0 ? '' : http_build_query(Request()->query()) . '&' }}page=${page}`,
+                type: 'get',
+                success: function(response){
+                  $('.custom-loader').css('display', 'none');
+      
+                  $(response).insertBefore('.custom-loader');
+                },
+                error: function (req, status, error) {
+                  $('.custom-loader').css('display', 'none');
+                }
+            });
+        }, 3000);
       } else {
         $('.custom-loader').css('display', 'none');
       }
