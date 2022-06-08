@@ -134,7 +134,7 @@
         <div class="row mb-4">
             <div class="col-12">
                 <div class="col-auto align-self-center mt-1 text-center">
-                    <a href="javascript:Gleap.open();" class="btn btn-icon btn-without-bg w-100">
+                    <a href="javascript:Gleap.open();" class="help-url w-100">
                       Report A Bug
                     </a>
                     {{-- <a href="{{ env('SUPPORT_URL', '#') }}" target="_blank" class="btn btn-icon btn-without-bg w-100">

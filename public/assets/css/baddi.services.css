@@ -242,3 +242,12 @@ svg {
 .nav-link:hover {
     background-color: rgba(0, 0, 0, .1) !important;
 }
+
+.help-url {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.help-url:hover {
+    color: #ffffff99 !important;
+}
