@@ -22,7 +22,7 @@ class PacksSeeder extends Seeder
     {
         Pack::create([
             'name'          => 'The plan',
-            'price'         => 12,
+            'price'         => 7,
             'type'          => Pack::RECURRING_TYPE,
             'is_popular'    => true,
             'trial_days'    => 3,
