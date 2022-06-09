@@ -14,20 +14,17 @@ abstract class Service
 {
     protected FeatureService $featureService;
 
-    protected AppSettingService $appSettingService;
-
     public function __construct()
     {
         $this->featureService = app(FeatureService::class);
-        $this->appSettingService = app(AppSettingService::class);
     }
 
-    public function appSetting(): ?AppSettingService
+    public function appSetting(): AppSettingService
     {
-        return $this->appSettingService;
+        return $this->featureService->appSettingService;
     }
     
-    public function features(): ?FeatureService
+    public function features(): FeatureService
     {
         return $this->featureService;
     }
