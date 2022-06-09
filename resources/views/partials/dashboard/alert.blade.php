@@ -2,7 +2,7 @@
 @php
     $alert = Session::get('alert');
 @endphp
-<div class="alert alert-@if ($alert->type == 'error')danger @elseif($alert->type == 'success')success @endif alert-dismissible" role="alert">
+<div class="alert alert-@if ($alert->type == 'error')danger @elseif($alert->type == 'success')success @endif alert-dismissible mb-4" role="alert">
     <div class="d-flex">
         <div>
             @if ($alert->type == 'error')

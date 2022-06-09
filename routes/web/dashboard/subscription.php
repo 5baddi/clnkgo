@@ -9,6 +9,7 @@
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\CancelController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\BillingConfirmationController;
+use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\PayPal\PayPalSubscriptionConfirmationController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\CheckoutController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\CancelCheckoutController;
 
@@ -17,6 +18,8 @@ Route::middleware(['auth', 'has.subscription'])
     ->prefix('subscription')
     ->group(function() {
         Route::get('/billing/{pack}', CheckoutController::class)->name('.pack.billing');
+        Route::get('/paypal/{packId}/confirmation', PayPalSubscriptionConfirmationController::class)->name('.paypal.confirmation');
+
         Route::get('/billing/{pack}/confirmation', BillingConfirmationController::class)->name('.billing.confirmation');
         Route::get('/billing/{pack}/cancel', CancelCheckoutController::class)->name('.billing.cancel');
 

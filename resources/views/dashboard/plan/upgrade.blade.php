@@ -38,11 +38,32 @@
                     @endforeach
                 </ul>
                 <div class="text-center mt-4">
-                    <a href="{{ ($currentPack && $currentPack->id === $pack->id && ($subscription->isActive() && ! $subscription->isTrial())) ? '#' : route('subscription.pack.billing', ['pack' => $pack->id]) }}" class="btn {{ ($currentPack && $currentPack->id === $pack->id) ? 'btn-clnkgo' : '' }} w-100">{{ $currentPack && $currentPack->id === $pack->id && ($subscription->isActive() && ! $subscription->isTrial()) ? 'Current Plan' : 'Choose ' . ucwords($pack->name) }}</a>
+                    @if($currentPack && $currentPack->id === $pack->id && ($subscription->isActive() && ! $subscription->isTrial()))
+                    <button disabled class="btn btn-clnkgo w-100">Current Plan</button>
+                    @else
+                    <div id="payment-buttons-container-{{ $pack->id }}"></div>
+                    @section('script')
+                    paypal.Buttons({
+                        createSubscription: function(data, actions) {
+                        return actions.subscription.create({
+                            'plan_id': 'P-1UL82159N1336124DMKQE4BY' // Creates the subscription
+                        });
+                        },
+                        onApprove: function(data, actions) {
+                            window.location.replace(`{{ route('subscription.paypal.confirmation', ['packId' => $pack->id]) }}?subscription=${data.subscriptionID}`)
+                        }
+                    })
+                    .render('#payment-buttons-container-{{ $pack->id }}');
+                    @endsection
+                    @endif
                 </div>
             </div>
         </div>
     </div>
     @endforeach
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://www.paypal.com/sdk/js?client-id={{ $paypalClientId }}&vault=true&intent=subscription"></script>
 @endsection
