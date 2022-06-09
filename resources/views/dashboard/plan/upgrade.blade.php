@@ -46,7 +46,7 @@
                     paypal.Buttons({
                         createSubscription: function(data, actions) {
                         return actions.subscription.create({
-                            'plan_id': 'P-1UL82159N1336124DMKQE4BY' // Creates the subscription
+                            'plan_id': '{{ $paypalPlanId }}'
                         });
                         },
                         onApprove: function(data, actions) {

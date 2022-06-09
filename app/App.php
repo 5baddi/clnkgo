@@ -18,6 +18,7 @@ class App
 
     public const APP_MOST_USED_KEYWORDS = 'app_most_used_keywords';
     public const PAYPAL_CLIENT_ID = 'paypal_client_id';
+    public const PAYPAL_PLAN_ID = 'paypal_PLAN_id';
 
     public const DEFAULT_EMAIL_PROVIDERS = [
         'gmail.com',
