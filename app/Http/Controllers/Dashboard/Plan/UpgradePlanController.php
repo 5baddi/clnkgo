@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Plan;
 
+use BADDIServices\SourceeApp\App;
 use BADDIServices\SourceeApp\Entities\Alert;
 use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,7 @@ class UpgradePlanController extends DashboardController
             'isTrial'               => ($this->user->isSuperAdmin() || $this->subscription->isTrial()),
             'packs'                 => $this->packService->all(),
             'currentPack'           => $this->packService->loadCurrentPack(Auth::user()),
-            'paypalClientId'        => 'AW_01BLjqvu-K0enhW8bHhjdsVdCbus6BmB_2Iul5ULMrx3Upk2xIIhALr7CDEc4f_MHfsi-wbbGQ7O0'
+            'paypalClientId'        => $this->userService->appSetting()->get(App::PAYPAL_CLIENT_ID, config('paypal.client_id'))
         ]);
     }
 }

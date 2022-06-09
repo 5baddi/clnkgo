@@ -20,11 +20,11 @@ use BADDIServices\SourceeApp\Repositories\UserRespository;
 
 class UserService extends Service
 {
-    /** @var UserRespository */
-    private $userRepository;
+    public function __construct(
+        private UserRespository $userRepository
+    ) {
+        parent::__construct();
 
-    public function __construct(UserRespository $userRepository)
-    {
         $this->userRepository = $userRepository;
     }
 
