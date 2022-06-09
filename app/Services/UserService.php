@@ -18,13 +18,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
 use BADDIServices\SourceeApp\Repositories\UserRespository;
 
-class UserService extends Service
+class UserService
 {
     public function __construct(
         private UserRespository $userRepository
     ) {
-        parent::__construct();
-
         $this->userRepository = $userRepository;
     }
 
