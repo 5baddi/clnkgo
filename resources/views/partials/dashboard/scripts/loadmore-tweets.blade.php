@@ -59,8 +59,6 @@
       }
     });
 
-    var page = 1;
-
     var debounce = function (func, wait, immediate) {
         var timeout;
         return function() {
@@ -74,16 +72,26 @@
             timeout = setTimeout(later, wait);
             if (callNow) func.apply(context, args);
         };
-   };
+    };
+
+    var page = 1;
+    var lastPage = parseInt('{{ $tweets->lastPage() }}');
+
+    $(window).on( 'scroll', function () {
+      var position = $(this).scrollTop();
+      var bottom = $(document).height() - $(this).height();
+  
+      if(position == bottom && page < lastPage) {
+        $('.custom-loader').css('display', 'block');
+      }
+    });
 
     @if($tweets->total() > 0)
-    $(window).on( 'scroll', debounce(function(){
+    $(window).on( 'scroll', debounce(function () {
         var position = $(this).scrollTop();
         var bottom = $(document).height() - $(this).height();
-        var lastPage = parseInt('{{ $tweets->lastPage() }}');
   
-        if(position == bottom && page < lastPage){
-          $('.custom-loader').css('display', 'block');
+        if(position == bottom && page < lastPage) {
           ++page;
   
           $.ajax({
