@@ -22,13 +22,13 @@ abstract class Service
         $this->appSettingService = app(AppSettingService::class);
     }
 
-    // public function appSetting(): ?AppSettingService
-    // {
-    //     return $this->appSettingService;
-    // }
+    public function appSetting(): ?AppSettingService
+    {
+        return $this->appSettingService;
+    }
     
-    // public function features(): ?FeatureService
-    // {
-    //     return $this->featureService;
-    // }
+    public function features(): ?FeatureService
+    {
+        return $this->featureService;
+    }
 }

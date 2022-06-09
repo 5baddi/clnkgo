@@ -11,7 +11,7 @@ namespace BADDIServices\SourceeApp\Services;
 use BADDIServices\SourceeApp\Models\AppSetting;
 use BADDIServices\SourceeApp\Repositories\AppSettingRepository;
 
-class AppSettingService extends Service
+class AppSettingService
 {
     public function __construct(
         private AppSettingRepository $appSettingRepository
