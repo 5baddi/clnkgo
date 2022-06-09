@@ -10,6 +10,7 @@ namespace BADDIServices\SourceeApp\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class IsPayPalWebhook
 {
@@ -22,6 +23,8 @@ class IsPayPalWebhook
      */
     public function handle(Request $request, Closure $next)
     {
+        abort(Response::HTTP_NOT_FOUND);
+
         return $next($request);
     }
 }
