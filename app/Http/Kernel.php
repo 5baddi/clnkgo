@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified'              => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'has.subscription'      => \BADDIServices\SourceeApp\Http\Middleware\HasSubscription::class,
         'is.super-admin'        => \BADDIServices\SourceeApp\Http\Middleware\IsSuperAdmin::class,
+        'is.paypal-webhook'     => \BADDIServices\SourceeApp\Http\Middleware\IsPayPalWebhook::class,
         'basic.auth'            => \Sven\SuperBasicAuth\SuperBasicAuth::class,
     ];
 
