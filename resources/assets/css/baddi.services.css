@@ -263,6 +263,11 @@ svg {
     font-size: 9pt !important;
 }
 
+.ribbon {
+    background-color: #04AF90 !important;
+    border-color: #04AF90 !important;
+}
+
 .bg-clnkgo {
     background-color: #04AF90 !important;
 }
