@@ -18,14 +18,4 @@ abstract class Service
     {
         $this->featureService = app(FeatureService::class);
     }
-
-    public function appSetting(): AppSettingService
-    {
-        return $this->featureService->appSettingService;
-    }
-    
-    public function features(): FeatureService
-    {
-        return $this->featureService;
-    }
 }

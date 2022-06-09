@@ -9,8 +9,8 @@
 namespace BADDIServices\SourceeApp\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\Factory;
 use BADDIServices\SourceeApp\Models\Pack;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -19,11 +19,15 @@ use BADDIServices\SourceeApp\Services\UserService;
 use BADDIServices\SourceeApp\Domains\FeatureService;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use BADDIServices\SourceeApp\Services\AppSettingService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class DashboardController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    /** @var AppSettingService */
+    protected $appSettingService;
     
     /** @var FeatureService */
     protected $featureService;
@@ -45,6 +49,9 @@ class DashboardController extends BaseController
         $this->middleware(function ($request, $next) {
             /** @var FeatureService */
             $this->featureService = app(FeatureService::class);
+            
+            /** @var AppSettingService */
+            $this->appSettingService = app(AppSettingService::class);
             
             /** @var UserService */
             $this->userService = app(UserService::class);

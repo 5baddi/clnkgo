@@ -40,7 +40,7 @@ class UpgradePlanController extends DashboardController
             'isTrial'               => ($this->user->isSuperAdmin() || $this->subscription->isTrial()),
             'packs'                 => $this->packService->all(),
             'currentPack'           => $this->packService->loadCurrentPack(Auth::user()),
-            'paypalClientId'        => $this->userService->appSetting()->get(App::PAYPAL_CLIENT_ID, config('paypal.client_id'))
+            'paypalClientId'        => $this->appSettingService->get(App::PAYPAL_CLIENT_ID, config('paypal.client_id'))
         ]);
     }
 }

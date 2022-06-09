@@ -19,7 +19,7 @@ use Illuminate\Support\Arr;
 class FeatureService
 {
     public function __construct(
-        public AppSettingService $appSettingService,
+        private AppSettingService $appSettingService,
         private AuthManager $authManager,
         private UserService $userService
     ) {}
