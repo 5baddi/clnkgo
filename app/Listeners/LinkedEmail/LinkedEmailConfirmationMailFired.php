@@ -9,9 +9,9 @@
 namespace BADDIServices\SourceeApp\Listeners\LinkedEmail;
 
 use App\Models\User;
+use BADDIServices\SourceeApp\Events\LinkedEmail\LinkedEmailConfirmationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SourceeApp\Events\WelcomeMail;
 use BADDIServices\SourceeApp\Models\UserLinkedEmail;
 use BADDIServices\SourceeApp\Services\UserService;
 
@@ -22,7 +22,7 @@ class LinkedEmailConfirmationMailFired implements ShouldQueue
 
     public function __construct(private UserService $userService) {}
 
-    public function handle(WelcomeMail $event)
+    public function handle(LinkedEmailConfirmationMail $event)
     {
         /** @var UserLinkedEmail|null */
         $linkedEmail = $this->userService->findLinkedEmailById($event->linkedEmailId);
