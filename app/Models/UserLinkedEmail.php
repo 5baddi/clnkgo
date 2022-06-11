@@ -17,4 +17,9 @@ class UserLinkedEmail extends ModelEntity
     public const EMAIL_COLUMN = 'email';
     public const CONFIRMATION_TOKEN_COLUMN = 'confirmation_token';
     public const CONFIRMED_AT_COLUMN = 'confirmed_at';
+
+    public function isConfirmed(): bool
+    {
+        return ! blank($this->getAttribute(self::CONFIRMED_AT_COLUMN));
+    }
 }

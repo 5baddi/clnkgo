@@ -71,6 +71,19 @@ class UserRespository
                     ])
                     ->first();
     }
+    
+    public function findLinkedEmailById(string $linkedEmailId): ?UserLinkedEmail
+    {
+        return UserLinkedEmail::query()
+            ->find($linkedEmailId);
+    }
+    
+    public function removeLinkedEmailById(string $linkedEmailId): bool
+    {
+        return (bool) UserLinkedEmail::query()
+            ->find($linkedEmailId)
+            ->delete();
+    }
 
     public function create(array $attributes): User
     {
@@ -102,7 +115,7 @@ class UserRespository
     
     public function delete(string $id): bool
     {
-        return User::query()
+        return (bool) User::query()
                     ->find($id)
                     ->delete();
     }

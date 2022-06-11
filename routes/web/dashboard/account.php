@@ -9,6 +9,7 @@
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\AccountController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\UpdateAccountController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\RemoveLinkedEmailController;
     
 Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.account')
@@ -16,4 +17,5 @@ Route::middleware(['auth', 'has.subscription'])
     ->group(function() {
         Route::get('/', AccountController::class);
         Route::post('/', UpdateAccountController::class)->name('.save');
+        Route::get('/linked/email/{id}', RemoveLinkedEmailController::class)->name('.linked-emails.remove');
     });

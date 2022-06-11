@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
+use BADDIServices\SourceeApp\Models\UserLinkedEmail;
 use BADDIServices\SourceeApp\Repositories\UserRespository;
 
 class UserService
@@ -82,6 +83,16 @@ class UserService
     public function findByCustomerId(int $customerId): ?User
     {
         return $this->userRepository->findByCustomerId($customerId);
+    }
+    
+    public function findLinkedEmailById(string $linkedEmailId): ?UserLinkedEmail
+    {
+        return $this->userRepository->findLinkedEmailById($linkedEmailId);
+    }
+    
+    public function removeLinkedEmail(UserLinkedEmail $linkedEmail): bool
+    {
+        return $this->userRepository->removeLinkedEmailById($linkedEmail->getId());
     }
 
     public function create(array $attributes): User
