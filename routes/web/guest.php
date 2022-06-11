@@ -16,7 +16,7 @@ use BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword as ResetPasswor
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
 
-Route::route('/', function () {
+Route::get('/', function () {
     return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT);
 })->name('home');
 
