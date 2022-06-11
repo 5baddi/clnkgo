@@ -32,7 +32,6 @@ class UpdateAccountController extends DashboardController
 
             return $this->updateAccountInfo($request);
         } catch (Throwable $e){
-            dd($e);
             return redirect()->route('dashboard.account', ['tab' => $request->query('tab', 'settings')])
                 ->with(
                     'alert', 
