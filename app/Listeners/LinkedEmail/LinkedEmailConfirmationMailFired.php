@@ -9,11 +9,11 @@
 namespace BADDIServices\SourceeApp\Listeners\LinkedEmail;
 
 use App\Models\User;
-use BADDIServices\SourceeApp\Events\LinkedEmail\LinkedEmailConfirmationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SourceeApp\Models\UserLinkedEmail;
 use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Models\UserLinkedEmail;
+use BADDIServices\SourceeApp\Events\LinkedEmail\LinkedEmailConfirmationMail;
 
 class LinkedEmailConfirmationMailFired implements ShouldQueue
 {
