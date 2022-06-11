@@ -61,7 +61,7 @@ class CreateUserController extends Controller
 
             DB::commit();
 
-            Event::dispatch(new WelcomeMail($user));
+            Event::dispatch(new WelcomeMail($user->getId()));
 
             $authenticateUser = Auth::loginUsingId($user->getId());
             if (! $authenticateUser) {

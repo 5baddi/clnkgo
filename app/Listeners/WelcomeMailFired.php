@@ -10,28 +10,37 @@ namespace BADDIServices\SourceeApp\Listeners;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use BADDIServices\SourceeApp\Models\Store;
-use BADDIServices\SourceeApp\Events\WelcomeMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use BADDIServices\SourceeApp\Events\WelcomeMail;
+use BADDIServices\SourceeApp\Services\UserService;
 
 class WelcomeMailFired implements ShouldQueue
 {
     /** @var string */
-    public const SUBJECT = "Welcome to ";
+    public const SUBJECT = "Welcome to";
+
+    public function __construct(private UserService $userService) {}
 
     public function handle(WelcomeMail $event)
     {
-        /** @var Store */
-        $store = $event->store;
+        /** @var User|null */
+        $user = $this->userService->findById($event->userId);
 
-        /** @var User */
-        $user = $event->user;
+        if (! $user instanceof User) {
+            return;
+        }
 
         $template = 'emails.welcome';
+        $subject = sprintf('%s %s', self::SUBJECT, config('app.name'));
 
-        Mail::send($template, ['store' => $store, 'user' => $user, 'subject' => self::SUBJECT . config('app.name')], function($message) use ($user) {
+        $data = [
+            'user'      => $user,
+            'subject'   => $subject
+        ];
+
+        Mail::send($template, $data, function($message) use ($user, $subject) {
             $message->to($user->email);
-            $message->subject(self::SUBJECT . config('app.name'));
+            $message->subject($subject);
         });
     }
 }

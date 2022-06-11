@@ -19,6 +19,7 @@ use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
 use BADDIServices\SourceeApp\Models\UserLinkedEmail;
 use BADDIServices\SourceeApp\Repositories\UserRespository;
 use BADDIServices\SourceeApp\Events\LinkedEmail\LinkedEmailConfirmationMail;
+use Illuminate\Support\Facades\Event;
 
 class UserService
 {
@@ -199,7 +200,7 @@ class UserService
     {   
         $linkedEmail = $this->userRepository->saveLinkedEmail($user->getId(), strtolower($email));
 
-        event(new LinkedEmailConfirmationMail($linkedEmail->getId()));
+        Event::dispatch(new LinkedEmailConfirmationMail($linkedEmail->getId()));
 
         return $linkedEmail;
     }

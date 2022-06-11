@@ -8,33 +8,14 @@
 
 namespace BADDIServices\SourceeApp\Events;
 
-use App\Models\User;
+use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
-use BADDIServices\SourceeApp\Models\Store;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Bus\Queueable;
 
 class WelcomeMail
 {
     use Dispatchable, InteractsWithSockets, SerializesModels, Queueable;
 
-    /** @var Store */
-    public $store;
-    
-    /** @var User */
-    public $user;
-
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * @return array
-     */
-    public function broadcastOn()
-    {
-        return [];
-    }
+    public function __construct(public string $userId) {}
 }
