@@ -17,9 +17,6 @@ use BADDIServices\SourceeApp\Events\LinkedEmail\LinkedEmailConfirmationMail;
 
 class LinkedEmailConfirmationMailFired implements ShouldQueue
 {
-    /** @var string */
-    public const SUBJECT = "New Email linked ready for confirmation!";
-
     public function __construct(private UserService $userService) {}
 
     public function handle(LinkedEmailConfirmationMail $event)
@@ -39,16 +36,17 @@ class LinkedEmailConfirmationMailFired implements ShouldQueue
         }
 
         $template = 'emails.linked-email.confirmation';
+        $subject = 'New Email linked ready for confirmation!';
 
         $data = [
             'user'          => $user,
             'linkedEmail'   => $linkedEmail,
-            'subject'       => self::SUBJECT
+            'subject'       => $subject
         ];
 
-        Mail::send($template, $data, function($message) use ($linkedEmail) {
+        Mail::send($template, $data, function($message) use ($linkedEmail, $subject) {
             $message->to($linkedEmail->email);
-            $message->subject(self::SUBJECT);
+            $message->subject($subject);
         });
     }
 }

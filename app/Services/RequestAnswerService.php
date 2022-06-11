@@ -23,6 +23,11 @@ class RequestAnswerService extends Service
         $this->requestAnswerRepository = $requestAnswerRepository;
     }
 
+    public function findById(string $id): ?RequestAnswer
+    {
+        return $this->requestAnswerRepository->findById($id);
+    }
+    
     public function find(User $user, Tweet $tweet): ?RequestAnswer
     {
         return $this->requestAnswerRepository->find($user->getId(), $tweet->getId());

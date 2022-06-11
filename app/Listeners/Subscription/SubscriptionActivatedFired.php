@@ -12,24 +12,42 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\SourceeApp\Services\SubscriptionService;
 use BADDIServices\SourceeApp\Events\Subscription\SubscriptionActivated;
 
 class SubscriptionActivatedFired implements ShouldQueue
 {
-    /** @var string */
-    public const SUBJECT = "Your subscription to %s plan has been activated!";
-
+    public function __construct(
+        private UserService $userService,
+        private SubscriptionService $subscriptionService
+    ) {}
+    
     public function handle(SubscriptionActivated $event)
     {
-        /** @var User */
-        $user = $event->user;
+        /** @var User|null */
+        $user = $this->userService->findById($event->userId);
 
-        /** @var Subscription */
-        $subscription = $event->subscription;
+        if (! $user instanceof User) {
+            return;
+        }
 
-        $subject = sprintf(self::SUBJECT, ucwords($subscription->pack->name));
+        /** @var Subscription|null */
+        $subscription = $this->subscriptionService->findById($event->subscriptionId);
 
-        Mail::send('emails.subscription.activated', ['user' => $user, 'subscription' => $subscription], function($message) use ($user, $subject) {
+        if (! $subscription instanceof Subscription) {
+            return;
+        }
+
+        $template = 'emails.subscription.activated';
+        $subject = sprintf('Your subscription to %s plan has been activated!', ucwords($subscription->pack->name));
+
+        $data = [
+            'user'          => $user,
+            'subscription'  => $subscription
+        ];
+
+        Mail::send($template, $data, function($message) use ($user, $subject) {
             $message->to($user->email);
             $message->subject($subject);
         });

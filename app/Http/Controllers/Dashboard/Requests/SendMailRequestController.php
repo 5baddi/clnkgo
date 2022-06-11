@@ -58,7 +58,9 @@ class SendMailRequestController extends DashboardController
 
             DB::commit();
 
-            Event::dispatch(new AnswerMail($request->input('email'), $this->user, $tweet, $answer));
+            Event::dispatch(
+                new AnswerMail($request->input('email'), $this->user->getId(), $tweet->getId(), $answer->getId())
+            );
 
             return redirect()
                 ->back()

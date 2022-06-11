@@ -36,6 +36,11 @@ class SubscriptionService extends Service
         return $subscription;
     }
     
+    public function findById(string $id): ?Subscription
+    {
+        return $this->subscriptionRepository->findById($id);
+    }
+    
     public function getUsageBills(): Collection
     {
         return $this->subscriptionRepository->getUsageBills();
@@ -88,7 +93,7 @@ class SubscriptionService extends Service
 
         $user->notify(new SubscriptionCancelled($subscription));
 
-        Event::dispatch(new SubscriptionCancelledEvent($user, $subscription));
+        Event::dispatch(new SubscriptionCancelledEvent($user->getId(), $subscription->getId()));
     }
 
     public function paginateWithRelations(?int $page = null): LengthAwarePaginator

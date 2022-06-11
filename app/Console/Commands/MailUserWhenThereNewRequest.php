@@ -67,7 +67,7 @@ class MailUserWhenThereNewRequest extends Command
 
                         $tweets->get()
                             ->each(function (Tweet $tweet) use ($user) {
-                                Event::dispatch(new NewRequestMail($user, $tweet));
+                                Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
                             });
                     });
                 });

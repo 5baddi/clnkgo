@@ -16,9 +16,6 @@ use BADDIServices\SourceeApp\Services\UserService;
 
 class WelcomeMailFired implements ShouldQueue
 {
-    /** @var string */
-    public const SUBJECT = "Welcome to";
-
     public function __construct(private UserService $userService) {}
 
     public function handle(WelcomeMail $event)
@@ -31,7 +28,7 @@ class WelcomeMailFired implements ShouldQueue
         }
 
         $template = 'emails.welcome';
-        $subject = sprintf('%s %s', self::SUBJECT, config('app.name'));
+        $subject = sprintf('Welcome to %s', config('app.name'));
 
         $data = [
             'user'      => $user,

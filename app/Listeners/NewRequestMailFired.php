@@ -12,26 +12,45 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use BADDIServices\SourceeApp\Models\Tweet;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use BADDIServices\SourceeApp\Services\UserService;
 use BADDIServices\SourceeApp\Events\NewRequestMail;
+use BADDIServices\SourceeApp\Services\TweetService;
 
 class NewRequestMailFired implements ShouldQueue
 {
-    /** @var string */
-    public const SUBJECT = "New request from ";
+    public function __construct(
+        private UserService $userService,
+        private TweetService $tweetService
+    ) {}
 
     public function handle(NewRequestMail $event)
     {
-        /** @var User */
-        $user = $event->user;
+        /** @var User|null */
+        $user = $this->userService->findById($event->userId);
+
+        if (! $user instanceof User) {
+            return;
+        }
         
-        /** @var Tweet */
-        $tweet = $event->tweet;
+        /** @var Tweet|null */
+        $tweet = $event->tweetId;
+
+        if (! $tweet instanceof Tweet) {
+            return;
+        }
 
         $template = 'emails.new-request';
+        $subject = sprintf('New request from %s', ($tweet->author->name ?? '@' . $tweet->author->username));
 
-        Mail::send($template, ['user' => $user, 'tweet' => $tweet, 'subject' => self::SUBJECT . $tweet->name ?? '@' . $tweet->username], function($message) use ($user, $tweet) {
+        $data = [
+            'user'      => $user,
+            'tweet'     => $tweet,
+            'subject'   => $subject
+        ];
+
+        Mail::send($template, $data, function($message) use ($user, $subject) {
             $message->to($user->email);
-            $message->subject(self::SUBJECT . $tweet->name ?? '@' . $tweet->username);
+            $message->subject($subject);
         });
     }
 }
