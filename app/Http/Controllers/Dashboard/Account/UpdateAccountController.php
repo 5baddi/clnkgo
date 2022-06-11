@@ -146,7 +146,7 @@ class UpdateAccountController extends DashboardController
             ->route('dashboard.account', ['tab' => $request->query('tab', 'emails')])
             ->with(
                 'alert', 
-                new Alert('Account Email preferences has been successfully updated', 'success')
+                new Alert('Email successfully linked to your account! Please check your mailbox...', 'success')
             );
     }
 }
