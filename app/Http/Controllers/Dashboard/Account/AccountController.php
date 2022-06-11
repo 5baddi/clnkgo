@@ -26,7 +26,7 @@ class AccountController extends DashboardController
     
     public function __invoke(Request $request)
     {
-        return $this->render('dashboard.account', [
+        return $this->render('dashboard.account.index', [
             'title'         => 'Account',
             'tab'           => $request->query('tab', 'settings'),
             'user'          => $this->user,
