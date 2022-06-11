@@ -40,13 +40,13 @@ class LinkedEmailConfirmationMailFired implements ShouldQueue
 
         $template = 'emails.linked-email.confirmation';
 
-        $attributes = [
+        $data = [
             'user'          => $user,
             'linkedEmail'   => $linkedEmail,
             'subject'       => self::SUBJECT
         ];
 
-        Mail::send($template, $attributes, function($message) use ($linkedEmail) {
+        Mail::send($template, $data, function($message) use ($linkedEmail) {
             $message->to($linkedEmail->email);
             $message->subject(self::SUBJECT);
         });
