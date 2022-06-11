@@ -17,7 +17,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
 
 Route::route('/', function () {
-    return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT)
+    return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT);
 })->name('home');
 
 Route::middleware('basic.auth')
