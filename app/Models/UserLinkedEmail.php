@@ -22,4 +22,19 @@ class UserLinkedEmail extends ModelEntity
     {
         return ! blank($this->getAttribute(self::CONFIRMED_AT_COLUMN));
     }
+    
+    public function getUserId(): string
+    {
+        return $this->getAttribute(self::USER_ID_COLUMN);
+    }
+    
+    public function getEmail(): string
+    {
+        return $this->getAttribute(self::EMAIL_COLUMN);
+    }
+    
+    public function getConfirmationToken(): ?string
+    {
+        return $this->getAttribute(self::CONFIRMATION_TOKEN_COLUMN);
+    }
 }

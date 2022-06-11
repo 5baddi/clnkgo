@@ -13,9 +13,12 @@ use BADDIServices\SourceeApp\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword as ResetPassword;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
 
-Route::redirect('/', 'dashboard');
+Route::route('/', function () {
+    return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT)
+})->name('home');
 
 Route::middleware('basic.auth')
     ->group(function () {

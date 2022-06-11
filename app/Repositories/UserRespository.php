@@ -195,24 +195,18 @@ class UserRespository
             ->delete() > 0;
     }
 
-    public function saveLinkedEmails(string $userId, array $emails): bool
+    public function saveLinkedEmail(string $userId, string $email): UserLinkedEmail
     {
-        $linkedEmails = 0;
-
-        foreach($emails as $email) {
-            UserLinkedEmail::query()
-                ->updateOrCreate(
-                    [
-                        UserLinkedEmail::EMAIL_COLUMN               => $email
-                    ],
-                    [
-                        UserLinkedEmail::EMAIL_COLUMN               => $email,
-                        UserLinkedEmail::USER_ID_COLUMN             => $userId,
-                        UserLinkedEmail::CONFIRMATION_TOKEN_COLUMN  => Str::substr(md5($email), 0, 60)
-                    ]
-                );
-        }
-
-        return $linkedEmails > 0;
+        return UserLinkedEmail::query()
+            ->updateOrCreate(
+                [
+                    UserLinkedEmail::EMAIL_COLUMN               => $email
+                ],
+                [
+                    UserLinkedEmail::EMAIL_COLUMN               => $email,
+                    UserLinkedEmail::USER_ID_COLUMN             => $userId,
+                    UserLinkedEmail::CONFIRMATION_TOKEN_COLUMN  => Str::substr(md5($email), 0, 60)
+                ]
+            );
     }
 }

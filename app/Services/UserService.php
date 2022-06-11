@@ -18,6 +18,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
 use BADDIServices\SourceeApp\Models\UserLinkedEmail;
 use BADDIServices\SourceeApp\Repositories\UserRespository;
+use BADDIServices\SourceeApp\Events\LinkedEmail\LinkedEmailConfirmationMail;
 
 class UserService
 {
@@ -194,12 +195,12 @@ class UserService
         return $this->userRepository->removeResetPasswordToken($token);
     }
 
-    public function saveLinkedEmails(User $user, array $emails): bool
-    {
-        $emails = array_map(function ($email) {
-            return strtolower($email);
-        }, $emails);
-        
-        return $this->userRepository->saveLinkedEmails($user->getId(), $emails);
+    public function saveLinkedEmail(User $user, string $email): UserLinkedEmail
+    {   
+        $linkedEmail = $this->userRepository->saveLinkedEmail($user->getId(), strtolower($email));
+
+        event(new LinkedEmailConfirmationMail($linkedEmail->getId()));
+
+        return $linkedEmail;
     }
 }
