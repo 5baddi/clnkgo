@@ -129,7 +129,15 @@ class UpdateAccountController extends DashboardController
             return redirect()
                 ->route('dashboard.account', ['tab' => $request->query('tab', 'emails')])
                 ->withErrors($validator->errors())
+                ->withInput()
                 ->with('alert', new Alert('You must enter valid emails in Email preferences!'));
+        }
+        
+        if ($this->user->getEmail() == $request->input('new_email')) {
+            return redirect()
+                ->route('dashboard.account', ['tab' => $request->query('tab', 'emails')])
+                ->withInput()
+                ->with('alert', new Alert('This Email already used as your main one!'));
         }
         
         $this->userService->saveLinkedEmail($this->user, $request->input('new_email'));
