@@ -48,6 +48,7 @@
                 </div>
             </div>
             
+            @if ($tab !== 'emails')
             <div class="row mt-4">
                 <div class="col-12 text-end">
                     <div class="d-flex justify-content-end">
@@ -79,6 +80,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </form>
 </div>
