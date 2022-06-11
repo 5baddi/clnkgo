@@ -22,7 +22,7 @@
                     <input type="text" name="first_name" class="form-control @if($errors->has('first_name')) is-invalid @endif" placeholder="First name" autofocus required/>
                     @if($errors->has('first_name'))
                     <div class="invalid-feedback">
-                        {{ $errors::first('first_name') }}
+                        {{ $errors->first('first_name') }}
                     </div>
                     @endif
                 </div>
@@ -33,7 +33,7 @@
                     <input type="text" name="last_name" class="form-control @if($errors->has('last_name')) is-invalid @endif" placeholder="Last name" required/>
                     @if($errors->has('last_name'))
                     <div class="invalid-feedback">
-                        {{ $errors::first('last_name') }}
+                        {{ $errors->first('last_name') }}
                     </div>
                     @endif
                 </div>
@@ -44,7 +44,7 @@
                     <input type="email" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" placeholder="name@example.com" required/>
                     @if($errors->has('email'))
                     <div class="invalid-feedback">
-                        {{ $errors::first('email') }}
+                        {{ $errors->first('email') }}
                     </div>
                     @endif
                 </div>
@@ -55,7 +55,7 @@
                     <input type="password" name="password" class="form-control @if($errors->has('password')) is-invalid @endif" placeholder="password" required/>
                     @if($errors->has('password'))
                     <div class="invalid-feedback">
-                        {{ $errors::first('password') }}
+                        {{ $errors->first('password') }}
                     </div>
                     @endif
                 </div>

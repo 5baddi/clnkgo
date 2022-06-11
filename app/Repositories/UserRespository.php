@@ -173,11 +173,12 @@ class UserRespository
             UserLinkedEmail::query()
                 ->updateOrCreate(
                     [
-                        'email'     => $email
+                        UserLinkedEmail::EMAIL_COLUMN               => $email
                     ],
                     [
-                        'email'     => $email,
-                        'user_id'   => $userId,
+                        UserLinkedEmail::EMAIL_COLUMN               => $email,
+                        UserLinkedEmail::USER_ID_COLUMN             => $userId,
+                        UserLinkedEmail::CONFIRMATION_TOKEN_COLUMN  => Str::substr(md5($email), 0, 60)
                     ]
                 );
         }

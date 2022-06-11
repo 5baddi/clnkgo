@@ -36,7 +36,7 @@
                     <input name="email" value="{{ old('email') }}" type="email" class="form-control @if($errors->has('email')) is-invalid @endif" placeholder="name@example.com" autofocus required/>
                     @if($errors->has('email'))
                     <div class="invalid-feedback">
-                        {{ $errors::first('email') }}
+                        {{ $errors->first('email') }}
                     </div>
                     @endif
                 </div>
@@ -65,7 +65,7 @@
                     <input type="password" name="password" class="form-control @if($errors->has('password')) is-invalid @endif" placeholder="password" required/>
                     @if($errors->has('password'))
                     <div class="invalid-feedback">
-                        {{ $errors::first('password') }}
+                        {{ $errors->first('password') }}
                     </div>
                     @endif
                 </div>

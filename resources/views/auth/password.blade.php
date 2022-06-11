@@ -27,7 +27,7 @@
             <input id="password" name="password" type="password" class="form-control @if($errors->has('password')) is-invalid @endif" placeholder="Enter new password" autofocus required/>
             @if($errors->has('password'))
             <div class="invalid-feedback">
-                {{ $errors::first('password') }}
+                {{ $errors->first('password') }}
             </div>
             @endif
         </div>
@@ -36,7 +36,7 @@
             <input id="confirm_password" name="confirm_password" type="password" class="form-control @if($errors->has('confirm_password')) is-invalid @endif" placeholder="Confirm new password" required/>
             @if($errors->has('confirm_password'))
             <div class="invalid-feedback">
-                {{ $errors::first('confirm_password') }}
+                {{ $errors->first('confirm_password') }}
             </div>
             @endif
         </div>

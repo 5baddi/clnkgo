@@ -119,9 +119,12 @@ class UpdateAccountController extends DashboardController
 
     private function updateAccountLinkedEmails(Request $request) 
     {
-        $emails = explode(',', $request->input('emails', ''));
-
-        $validator = Validator::make($emails, ['*' => 'email']);
+        $validator = Validator::make(
+            $request->input(),
+            [
+                'new_email'         => 'required|email',
+            ]
+        );
 
         if ($validator->fails()) {
             return redirect()
@@ -130,7 +133,7 @@ class UpdateAccountController extends DashboardController
                 ->with('alert', new Alert('You must enter valid emails in Email preferences!'));
         }
 
-        $this->userService->saveLinkedEmails($this->user, $emails);
+        $this->userService->saveLinkedEmails($this->user, [$request->input('new_email')]);
 
         return redirect()
             ->route('dashboard.account', ['tab' => $request->query('tab', 'emails')])
