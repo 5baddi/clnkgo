@@ -14,26 +14,26 @@ use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
 use BADDIServices\SourceeApp\Models\UserLinkedEmail;
 use Illuminate\Http\Response;
 
-class RemoveLinkedEmailController extends DashboardController
+class ConfirmLinkedEmailController extends DashboardController
 {    
-    public function __invoke(string $id)
+    public function __invoke(string $token)
     {
         try {
-            $linkedEmail = $this->userService->findLinkedEmailById($id);
+            $linkedEmail = $this->userService->findLinkedEmailByToken($token);
             abort_unless($linkedEmail instanceof UserLinkedEmail, Response::HTTP_NOT_FOUND);
 
-            $this->userService->removeLinkedEmail($linkedEmail);
+            $this->userService->confirmLinkedEmail($linkedEmail);
 
             return redirect()->route('dashboard.account', ['tab' => 'emails'])
                 ->with(
                     'alert', 
-                    new Alert('Linked email successfully removed.', 'success')
+                    new Alert('Linked email successfully confirmed.', 'success')
                 );
         } catch (Throwable $e){
             return redirect()->route('dashboard.account', ['tab' => 'emails'])
                 ->with(
                     'alert', 
-                    new Alert('An occurred error while removing linked email!')
+                    new Alert('An occurred error while confirming linked email!')
                 );
         }
     }

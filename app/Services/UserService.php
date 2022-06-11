@@ -90,9 +90,19 @@ class UserService
         return $this->userRepository->findLinkedEmailById($linkedEmailId);
     }
     
+    public function findLinkedEmailByToken(string $linkedEmailToken): ?UserLinkedEmail
+    {
+        return $this->userRepository->findLinkedEmailByToken($linkedEmailToken);
+    }
+    
     public function removeLinkedEmail(UserLinkedEmail $linkedEmail): bool
     {
         return $this->userRepository->removeLinkedEmailById($linkedEmail->getId());
+    }
+    
+    public function confirmLinkedEmail(UserLinkedEmail $linkedEmail): bool
+    {
+        return $this->userRepository->confirmLinkedEmailById($linkedEmail->getId());
     }
 
     public function create(array $attributes): User

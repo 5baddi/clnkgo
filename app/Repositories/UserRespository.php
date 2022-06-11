@@ -78,6 +78,23 @@ class UserRespository
             ->find($linkedEmailId);
     }
     
+    public function findLinkedEmailByToken(string $linkedEmailToken): ?UserLinkedEmail
+    {
+        return UserLinkedEmail::query()
+            ->where([UserLinkedEmail::CONFIRMATION_TOKEN_COLUMN => $linkedEmailToken])
+            ->first();
+    }
+    
+    public function confirmLinkedEmailById(string $linkedEmailId): bool
+    {
+        return UserLinkedEmail::query()
+            ->find($linkedEmailId)
+            ->update([
+                UserLinkedEmail::CONFIRMATION_TOKEN_COLUMN  => null,
+                UserLinkedEmail::CONFIRMED_AT_COLUMN        => Carbon::now(),
+            ]) === 1;
+    }
+    
     public function removeLinkedEmailById(string $linkedEmailId): bool
     {
         return (bool) UserLinkedEmail::query()
