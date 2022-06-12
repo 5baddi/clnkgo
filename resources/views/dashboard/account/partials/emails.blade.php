@@ -45,7 +45,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('dashboard.account.linked-emails.remove', ['id' => $linkedEmail->id]) }}" class="btn btn-danger" title="Remove" onclick="return confirm('Are you sure you want to remove this linked email?')">
+                                <a href="{{ route('dashboard.account.linked-emails.remove', ['id' => $linkedEmail->id]) }}" class="btn btn-danger btn-sm" title="Remove" onclick="return confirm('Are you sure you want to remove this linked email?')">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <line x1="4" y1="7" x2="20" y2="7"></line>
