@@ -191,6 +191,7 @@ svg {
 .btn-clnkgo svg:hover {
     color: white !important;
 }
+
 .btn-without-bg {
     background-color: unset !important;
     color: white !important;
@@ -233,7 +234,6 @@ svg {
 .filters-card input[type=text] {
     color: #000000 !important;
 }
-
 
 .filters-card input[type=text]:focus {
     color: #000000 !important;
