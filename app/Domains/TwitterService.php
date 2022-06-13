@@ -119,7 +119,7 @@ class TwitterService extends Service
 
             $data = json_decode($response->getBody(), true);
             if (isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
-                return $data;
+                return collect($data);
             }
 
             return collect();
