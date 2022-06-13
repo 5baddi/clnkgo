@@ -25,25 +25,16 @@ class TwitterService extends Service
     const MAX_RESULTS_PER_RESPONSE = 10;
 
     /** @var string */
-    const BASE_URL = "https://api.twitter.com/2/";
+    const BASE_API_V1_URL = "https://api.twitter.com/1.1/";
+    const BASE_API_V2_URL = "https://api.twitter.com/2/";
     const RECENT_SEARCH_ENDPOINT = "tweets/search/recent";
+    const DIRECT_MESSAGE_ENDPOINT = "direct_messages/events/new.json";
     const TWEET_URL = "https://twitter.com/{authorId}/status/{tweetId}";
     const USER_URL = "https://twitter.com/{username}";
     const DM_URL = "https://twitter.com/messages/compose?recipient_id={userId}&text={text}";
 
     /** @var Client */
     private $client;
-
-    public function __construct() 
-    {
-        parent::__construct();
-
-        $this->client = new Client([
-            'base_uri'      => self::BASE_URL,
-            'debug'         => false,
-            'http_errors'   => false,
-        ]);
-    }
 
     public function getDMLink(string $userId, string $text): string
     {
@@ -101,15 +92,16 @@ class TwitterService extends Service
                 sleep(10);
             }
 
-            $response = $this->client->request('GET', self::RECENT_SEARCH_ENDPOINT, 
-                [
-                    'headers'   => [
-                        'Accept'        => 'application/json',
-                        'Authorization' => sprintf('Bearer %s', config('twitter.bearer_token'))
-                    ],
-                    'query'     => $query
-                ]
-            );
+            $response = $this->getClient()
+                ->request('GET', self::RECENT_SEARCH_ENDPOINT, 
+                    [
+                        'headers'   => [
+                            'Accept'        => 'application/json',
+                            'Authorization' => sprintf('Bearer %s', config('twitter.bearer_token'))
+                        ],
+                        'query'     => $query
+                    ]
+                );
 
             $data = json_decode($response->getBody(), true);
             if (isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
@@ -126,6 +118,17 @@ class TwitterService extends Service
 
     public function sendDirectMessage(string $recipientId, string $senderId, string $message): void
     {
+        // TODO: implement send direct message
+    }
 
+    private function getClient(?int $version = 2): Client
+    {
+        $baseUri = (is_null($version) || $version === 2) ? self::BASE_API_V2_URL : self::BASE_API_V1_URL;
+
+        return new Client([
+            'base_uri'      => $baseUri,
+            'debug'         => false,
+            'http_errors'   => false,
+        ]);
     }
 }
