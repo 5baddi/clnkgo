@@ -71,7 +71,6 @@ class TwitterService extends Service
             }
 
             $query = [
-                'query'         => sprintf('#%s -is:retweet', $hashtag),
                 'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
                 'user.fields'   => 'created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
                 'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
@@ -85,6 +84,12 @@ class TwitterService extends Service
             
             if (! empty($nextToken)) {
                 $query['next_token'] = $nextToken;
+
+                sleep(10);
+            }
+            
+            if (empty($nextToken)) {
+                $query['query'] = sprintf('#%s -is:retweet', $hashtag);
 
                 sleep(10);
             }
