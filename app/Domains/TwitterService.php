@@ -78,18 +78,16 @@ class TwitterService extends Service
                 'expansions'    => 'attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id'
             ];
 
+            if (is_null($nextToken)) {
+                $query['query'] = sprintf('#%s -is:retweet', $hashtag);
+            }
+
             if (! empty($startTime)) {
                 $query['start_time'] = date(DATE_RFC3339, strtotime($startTime));
             }
             
             if (! empty($nextToken)) {
                 $query['next_token'] = $nextToken;
-
-                sleep(10);
-            }
-            
-            if (empty($nextToken)) {
-                $query['query'] = sprintf('#%s -is:retweet', $hashtag);
 
                 sleep(10);
             }
