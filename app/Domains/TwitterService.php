@@ -93,7 +93,9 @@ class TwitterService extends Service
             }
 
             $response = $this->getClient()
-                ->request('GET', self::RECENT_SEARCH_ENDPOINT, 
+                ->request(
+                    'GET',
+                    self::RECENT_SEARCH_ENDPOINT, 
                     [
                         'headers'   => [
                             'Accept'        => 'application/json',
@@ -116,9 +118,48 @@ class TwitterService extends Service
         }
     }
 
-    public function sendDirectMessage(string $recipientId, string $senderId, string $message): void
+    public function sendDirectMessage(string $recipientId, string $message, ?string $senderId = null): void
     {
-        // TODO: implement send direct message
+        try{
+            $body = [
+                'event' => [
+                    'type'  => 'message_create',
+                    'message_create'    => [
+                        'target'        => [
+                            'recipient_id'  => $recipientId
+                        ],
+                        'message_data'  => [
+                            'text'      => $message
+                        ]
+                    ]
+                ]
+            ];
+
+            if (! empty($senderId)) {
+                $body = array_merge(
+                    $body,
+                    [
+                        'event'                     => [
+                            'message_create'        => [
+                                'custom_profile_id' => $senderId
+                            ]
+                        ]
+                    ]
+                );
+            }
+
+            $response = $this->getClient(1)
+                ->request(
+                    'POST',
+                    self::DIRECT_MESSAGE_ENDPOINT,
+                    $body
+                );
+
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::error($e, 'twitter:send-direct-message');
+
+            throw new FetchByHashtagFailed();
+        }
     }
 
     private function getClient(?int $version = 2): Client

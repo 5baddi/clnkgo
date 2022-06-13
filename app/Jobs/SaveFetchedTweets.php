@@ -45,7 +45,7 @@ class SaveFetchedTweets implements ShouldQueue
      */
     public function __construct(
         private string $hashtag,
-        private Collection $tweets
+        private array $tweets = []
     ) {
         $this->tweetService = app(TweetService::class);
         $this->tweetService = app(TweetService::class);
@@ -60,13 +60,17 @@ class SaveFetchedTweets implements ShouldQueue
      */
     public function handle()
     {
+        if (count($this->tweets) === 0) {
+            return;
+        }
+
         try {
-            $this->saveTweets($this->hashtag, $this->tweets->toArray());
+            $this->saveTweets($this->hashtag, $this->tweets);
 
             if (! empty($this->tweets['meta']['next_token'])) {
                 $tweets = $this->twitterService->fetchTweetsByHashtags($this->hashtag, null, $this->tweets['meta']['next_token']);
 
-                self::dispatch($this->hashtag, $tweets);
+                self::dispatch($this->hashtag, $tweets->toArray());
             }
         } catch (Throwable $e) {
             AppLogger::error($e, 'job:save:latest-tweets');

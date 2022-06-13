@@ -62,7 +62,7 @@ class FetchLatestTweets extends Command
             collect($hashtags ?? [])->each(function ($hashtag) use ($startTimeOption) {
                 $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption);
 
-                SaveFetchedTweets::dispatch($hashtag, $tweets);
+                SaveFetchedTweets::dispatch($hashtag, $tweets->toArray());
 
                 sleep(3);
             });
