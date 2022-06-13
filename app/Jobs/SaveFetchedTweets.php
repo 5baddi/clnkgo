@@ -60,7 +60,6 @@ class SaveFetchedTweets implements ShouldQueue
      */
     public function handle()
     {
-        dd($this->tweets);
         if (count($this->tweets) === 0) {
             return;
         }
