@@ -59,17 +59,8 @@ class FetchLatestTweets extends Command
 
             collect($hashtags ?? [])->each(function ($hashtag) use ($startTimeOption) {
                 $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption);
-                $saveTweets = function ($hashtag, $tweets) {
-                    $this->saveTweets($hashtag, $tweets);
-                };
-                
-                $saveTweetsCallback = function ($hashtag, $tweets) use ($saveTweets) {
-                    if (! empty($tweets['meta']['next_token'])) {
-                        return $saveTweets($hashtag, null, $tweets['meta']['next_token']);
-                    }
-                };
 
-                $saveTweetsCallback($hashtag, $tweets);
+                $this->saveTweets($hashtag, $tweets->toArray());
 
                 sleep(3);
             });
@@ -181,5 +172,11 @@ class FetchLatestTweets extends Command
                     ]
                 );
             });
+
+        if (! empty($tweets['meta']['next_token'])) {
+            $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, null, $tweets['meta']['next_token']);
+            
+            return $this->saveTweets($hashtag, $tweets->toArray());
+        }
     }
 }
