@@ -17,9 +17,6 @@ use BADDIServices\SourceeApp\AppLogger;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use BADDIServices\SourceeApp\Services\Service;
-use BADDIServices\SourceeApp\Services\TweetService;
-use BADDIServices\SourceeApp\Services\TwitterUserService;
-use BADDIServices\SourceeApp\Services\TwitterMediaService;
 use BADDIServices\SourceeApp\Exceptions\Twitter\FetchByHashtagFailed;
 
 class TwitterService extends Service
@@ -37,11 +34,8 @@ class TwitterService extends Service
     /** @var Client */
     private $client;
 
-    public function __construct(
-        private TweetService $tweetService, 
-        private TwitterUserService $twitterUserService, 
-        private TwitterMediaService $twitterMediaService
-    ) {
+    public function __construct() 
+    {
         parent::__construct();
 
         $this->client = new Client([
