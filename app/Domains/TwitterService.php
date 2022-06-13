@@ -33,9 +33,6 @@ class TwitterService extends Service
     const USER_URL = "https://twitter.com/{username}";
     const DM_URL = "https://twitter.com/messages/compose?recipient_id={userId}&text={text}";
 
-    /** @var Client */
-    private $client;
-
     public function getDMLink(string $userId, string $text): string
     {
         $url = (string)Str::replace("{userId}", $userId, self::DM_URL);
