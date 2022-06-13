@@ -22,7 +22,7 @@ use BADDIServices\SourceeApp\Exceptions\Twitter\FetchByHashtagFailed;
 class TwitterService extends Service
 {
     /** @var int */
-    const MAX_RESULTS_PER_RESPONSE = 10;
+    const MAX_RESULTS_PER_RESPONSE = 100;
 
     /** @var string */
     const BASE_API_V1_URL = "https://api.twitter.com/1.1/";

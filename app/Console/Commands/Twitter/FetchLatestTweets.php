@@ -181,7 +181,7 @@ class FetchLatestTweets extends Command
 
         if (! empty($tweets['meta']['next_token'])) {
             $newTweets = $this->twitterService->fetchTweetsByHashtags($hashtag, null, $tweets['meta']['next_token']);
-            print_r($newTweets['meta']['next_token']);
+print_r($newTweets['meta']['next_token'] . PHP_EOL);
             $this->saveTweets($hashtag, $newTweets->toArray());
         }
     }
