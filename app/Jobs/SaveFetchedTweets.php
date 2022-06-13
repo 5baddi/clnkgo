@@ -45,12 +45,7 @@ class SaveFetchedTweets implements ShouldQueue
     public function __construct(
         private string $hashtag,
         private array $tweets = []
-    ) {
-        $this->twitterService = app(TwitterService::class);
-        $this->tweetService = app(TweetService::class);
-        $this->twitterUserService = app(TwitterUserService::class);
-        $this->twitterMediaService = app(TwitterMediaService::class);
-    }
+    ) {}
 
     /**
      * Execute the job.
@@ -64,6 +59,11 @@ class SaveFetchedTweets implements ShouldQueue
         }
 
         try {
+            $this->twitterService = app(TwitterService::class);
+            $this->tweetService = app(TweetService::class);
+            $this->twitterUserService = app(TwitterUserService::class);
+            $this->twitterMediaService = app(TwitterMediaService::class);
+
             $this->saveTweets($this->hashtag, $this->tweets);
 
             if (! empty($this->tweets['meta']['next_token'])) {
