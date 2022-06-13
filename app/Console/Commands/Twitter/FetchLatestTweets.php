@@ -68,6 +68,12 @@ class FetchLatestTweets extends Command
 
                 $this->saveTweets($hashtag, $tweets->toArray());
 
+                while (! empty($tweets['meta']['next_token'])) {
+                    $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, null, $tweets['meta']['next_token']);
+
+                    $this->saveTweets($hashtag, $tweets->toArray());
+                }
+
                 sleep(3);
             });
         } catch (Throwable $e) {
@@ -178,11 +184,5 @@ class FetchLatestTweets extends Command
                     ]
                 );
             });
-
-        if (! empty($tweets['meta']['next_token'])) {
-            $newTweets = $this->twitterService->fetchTweetsByHashtags($hashtag, null, $tweets['meta']['next_token']);
-
-            $this->saveTweets($hashtag, $newTweets->toArray());
-        }
     }
 }
