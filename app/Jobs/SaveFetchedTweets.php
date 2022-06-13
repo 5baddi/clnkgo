@@ -22,6 +22,7 @@ use BADDIServices\SourceeApp\Models\TwitterUser;
 use BADDIServices\SourceeApp\Models\TwitterMedia;
 use BADDIServices\SourceeApp\Services\TweetService;
 use BADDIServices\SourceeApp\Domains\TwitterService;
+use BADDIServices\SourceeApp\Helpers\EmojiParser;
 use BADDIServices\SourceeApp\Services\TwitterUserService;
 use BADDIServices\SourceeApp\Services\TwitterMediaService;
 
@@ -36,6 +37,8 @@ class SaveFetchedTweets implements ShouldQueue
     private TwitterUserService $twitterUserService;
 
     private TwitterMediaService $twitterMediaService;
+
+    private EmojiParser $emojiParser;
 
     /**
      * Create a new job instance.
@@ -63,6 +66,7 @@ class SaveFetchedTweets implements ShouldQueue
             $this->tweetService = app(TweetService::class);
             $this->twitterUserService = app(TwitterUserService::class);
             $this->twitterMediaService = app(TwitterMediaService::class);
+            $this->emojiParser = app(EmojiParser::class);
 
             $this->saveTweets($this->hashtag, $this->tweets);
 
@@ -81,6 +85,7 @@ class SaveFetchedTweets implements ShouldQueue
         collect($tweets['data'])
             ->map(function ($tweet) use ($hashtag, $tweets) {
                 $dueAt = extractDate($tweet['text']);
+                $dueAt = $this->emojiParser->replace($dueAt ?? null, '');
 
                 preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $tweet['text'] ?? '', $emailMatches);
 
@@ -151,6 +156,9 @@ class SaveFetchedTweets implements ShouldQueue
                 if (is_null($website) && isset($emailMatches[0])) {
                     $website = extractWebsite($emailMatches[0] ?? '');
                 }
+
+                $emailMatches[0] = $this->emojiParser->replace($emailMatches[0] ?? null, '');
+                $website = $this->emojiParser->replace($website ?? null, '');
 
                 $this->twitterUserService->save(
                     [
