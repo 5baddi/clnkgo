@@ -240,7 +240,8 @@ svg {
 }
 
 .nav-link:hover {
-    background-color: unset !important;
+    background-color: rgba(0, 0, 0, .1) !important;
+    border-radius: unset !important;
 }
 
 .help-url {
