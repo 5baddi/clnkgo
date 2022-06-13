@@ -46,7 +46,7 @@ class SaveFetchedTweets implements ShouldQueue
         private string $hashtag,
         private array $tweets = []
     ) {
-        $this->tweetService = app(TweetService::class);
+        $this->twitterService = app(TwitterService::class);
         $this->tweetService = app(TweetService::class);
         $this->twitterUserService = app(TwitterUserService::class);
         $this->twitterMediaService = app(TwitterMediaService::class);
@@ -78,7 +78,6 @@ class SaveFetchedTweets implements ShouldQueue
 
     private function saveTweets(string $hashtag, array $tweets = []): void
     {
-        dd($tweets['data']);
         collect($tweets['data'])
             ->map(function ($tweet) use ($hashtag, $tweets) {
                 $dueAt = extractDate($tweet['text']);
