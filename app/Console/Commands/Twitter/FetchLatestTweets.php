@@ -12,6 +12,7 @@ use BADDIServices\SourceeApp\Models\Tweet;
 use BADDIServices\SourceeApp\Models\AppSetting;
 use BADDIServices\SourceeApp\Models\TwitterUser;
 use BADDIServices\SourceeApp\Models\TwitterMedia;
+use BADDIServices\SourceeApp\Services\TweetService;
 use BADDIServices\SourceeApp\Domains\TwitterService;
 use BADDIServices\SourceeApp\Services\AppSettingService;
 
@@ -38,6 +39,7 @@ class FetchLatestTweets extends Command
      */
     public function __construct(
         private TwitterService $twitterService,
+        private TweetService $tweetService,
         private AppSettingService $appSettingService,
     ) {
         parent::__construct();
