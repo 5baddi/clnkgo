@@ -63,8 +63,6 @@ class FetchLatestTweets extends Command
                 $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption);
 
                 SaveFetchedTweets::dispatch($hashtag, $tweets->toArray());
-
-                sleep(3);
             });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:twitter:latest-tweets', ['execution_time' => (microtime(true) - $startTime)]);
