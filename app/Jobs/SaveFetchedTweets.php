@@ -12,7 +12,6 @@ use Throwable;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Collection;
 use Illuminate\Queue\SerializesModels;
 use BADDIServices\SourceeApp\AppLogger;
 use Illuminate\Queue\InteractsWithQueue;
@@ -79,6 +78,7 @@ class SaveFetchedTweets implements ShouldQueue
 
     private function saveTweets(string $hashtag, array $tweets = []): void
     {
+        dd($tweets['data']);
         collect($tweets['data'])
             ->map(function ($tweet) use ($hashtag, $tweets) {
                 $dueAt = extractDate($tweet['text']);
