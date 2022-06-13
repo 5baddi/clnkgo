@@ -179,11 +179,10 @@ class FetchLatestTweets extends Command
                 );
             });
 
-        // FIXME:
-        // if (! empty($tweets['meta']['next_token'])) {
-        //     $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, null, $tweets['meta']['next_token']);
-            
-        //     $this->saveTweets($hashtag, $tweets->toArray());
-        // }
+        if (! empty($tweets['meta']['next_token'])) {
+            $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, null, $tweets['meta']['next_token']);
+            dd($tweets);
+            $this->saveTweets($hashtag, $tweets->toArray());
+        }
     }
 }
