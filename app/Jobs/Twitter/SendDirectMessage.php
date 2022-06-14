@@ -27,9 +27,9 @@ class SendDirectMessage implements ShouldQueue
      * @return void
      */
     public function __construct(
-        private string $recipientId,
-        private string $message,
-        private ?string $senderId = null
+        public string $recipientId,
+        public string $message,
+        public ?string $senderId = null
     ) {}
 
     /**

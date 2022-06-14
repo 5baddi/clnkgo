@@ -12,7 +12,6 @@ use Throwable;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Queue\SerializesModels;
 use BADDIServices\SourceeApp\AppLogger;
 use Illuminate\Queue\InteractsWithQueue;
@@ -47,8 +46,8 @@ class SaveFetchedTweets implements ShouldQueue
      * @return void
      */
     public function __construct(
-        private string $hashtag,
-        private array $tweets = []
+        public string $hashtag,
+        public array $tweets = []
     ) {}
 
     /**
@@ -74,7 +73,7 @@ class SaveFetchedTweets implements ShouldQueue
             if (! empty($this->tweets['meta']['next_token'])) {
                 $tweets = $this->twitterService->fetchTweetsByHashtags($this->hashtag, null, $this->tweets['meta']['next_token']);
 
-                Event::dispatch(new self($this->hashtag, $tweets->toArray()));
+                self::dispatch($this->hashtag, $tweets->toArray());
             }
         } catch (Throwable $e) {
             AppLogger::error($e, 'job:save:latest-tweets');
