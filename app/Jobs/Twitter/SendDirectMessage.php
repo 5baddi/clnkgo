@@ -43,7 +43,8 @@ class SendDirectMessage implements ShouldQueue
             /** @var TwitterService $twitterService */
             $twitterService = app(TwitterService::class);
 
-            $twitterService->sendDirectMessage($this->recipientId, $this->message, $this->senderId);
+            // FIXME:
+            // $twitterService->sendDirectMessage($this->recipientId, $this->message, $this->senderId);
         } catch (Throwable $e) {
             AppLogger::error($e, 'twitter:send-direct-message-job', get_object_vars($this));
         }

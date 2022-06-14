@@ -120,8 +120,10 @@ class TwitterService extends Service
         }
     }
 
-    public static function sendDirectMessage(string $recipientId, string $message, ?string $senderId = null): void
+    public function sendDirectMessage(string $recipientId, string $message, ?string $senderId = null): void
     {
+        // FIXME:
+        return;
         try{
             $body = [
                 'event' => [
@@ -150,27 +152,21 @@ class TwitterService extends Service
                 );
             }
 
-            $response = (new Client([
-                'base_uri'      => self::BASE_API_V1_URL,
-                'debug'         => false,
-                'http_errors'   => false,
-            ]))
+            $response = $this->getClient(1)
                 ->request(
                     'POST',
                     self::DIRECT_MESSAGE_ENDPOINT,
                     [
                         'headers'   => [
                             'Accept'        => 'application/json',
-                            'Authorization' => sprintf('Bearer %s', config('twitter.bearer_token'))
+                            'Authorization' => sprintf('Bearer %s', config('twitter.bearer_token')) // FIXME: OAuth 2
                         ],
                         'body'      => json_encode($body)
                     ]
                 );
             
             $data = json_decode($response->getBody(), true);
-            dd($data);
         } catch (Exception | ClientException | RequestException $e) {
-            dd($e);
             AppLogger::error($e, 'twitter:send-direct-message');
 
             throw new FetchByHashtagFailed();
