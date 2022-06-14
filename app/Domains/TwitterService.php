@@ -163,7 +163,7 @@ class TwitterService extends Service
                             'Accept'        => 'application/json',
                             'Authorization' => sprintf('Bearer %s', config('twitter.bearer_token'))
                         ],
-                        'body'      => $body
+                        'body'      => json_encode($body)
                     ]
                 );
             
