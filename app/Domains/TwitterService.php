@@ -158,7 +158,13 @@ class TwitterService extends Service
                 ->request(
                     'POST',
                     self::DIRECT_MESSAGE_ENDPOINT,
-                    $body
+                    [
+                        'headers'   => [
+                            'Accept'        => 'application/json',
+                            'Authorization' => sprintf('Bearer %s', config('twitter.bearer_token'))
+                        ],
+                        'body'      => $body
+                    ]
                 );
             
             $data = json_decode($response->getBody(), true);
