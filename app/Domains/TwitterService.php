@@ -158,7 +158,7 @@ class TwitterService extends Service
                 );
             
             $data = json_decode($response->getBody(), true);
-            dd($data);
+            AppLogger::error(new \Exception(), 'twitter:send-direct-message', $data);
         } catch (Exception | ClientException | RequestException $e) {
             AppLogger::error($e, 'twitter:send-direct-message');
 
