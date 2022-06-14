@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Jobs;
+namespace BADDIServices\SourceeApp\Jobs\Twitter;
 
 use Throwable;
 use Carbon\Carbon;

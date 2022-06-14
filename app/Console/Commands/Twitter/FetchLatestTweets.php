@@ -9,7 +9,7 @@ use BADDIServices\SourceeApp\AppLogger;
 use BADDIServices\SourceeApp\Models\AppSetting;
 use BADDIServices\SourceeApp\Services\TweetService;
 use BADDIServices\SourceeApp\Domains\TwitterService;
-use BADDIServices\SourceeApp\Jobs\SaveFetchedTweets;
+use BADDIServices\SourceeApp\Jobs\Twitter\SaveFetchedTweets;
 use BADDIServices\SourceeApp\Services\AppSettingService;
 use BADDIServices\SourceeApp\Services\TwitterUserService;
 use BADDIServices\SourceeApp\Services\TwitterMediaService;

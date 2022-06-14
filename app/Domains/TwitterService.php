@@ -23,6 +23,8 @@ class TwitterService extends Service
 {
     /** @var int */
     const MAX_RESULTS_PER_RESPONSE = 100;
+    const CLNKGO_USER_ID = 1366518168160731145;
+    const OWNER_USER_ID = 1421214978;
 
     /** @var string */
     const BASE_API_V1_URL = "https://api.twitter.com/1.1/";
@@ -154,7 +156,9 @@ class TwitterService extends Service
                     self::DIRECT_MESSAGE_ENDPOINT,
                     $body
                 );
-
+            
+            $data = json_decode($response->getBody(), true);
+            dd($data);
         } catch (Exception | ClientException | RequestException $e) {
             AppLogger::error($e, 'twitter:send-direct-message');
 
