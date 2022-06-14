@@ -120,7 +120,7 @@ class TwitterService extends Service
         }
     }
 
-    public function sendDirectMessage(string $recipientId, string $message, ?string $senderId = null): void
+    public static function sendDirectMessage(string $recipientId, string $message, ?string $senderId = null): void
     {
         try{
             $body = [
@@ -150,7 +150,11 @@ class TwitterService extends Service
                 );
             }
 
-            $response = $this->getClient(1)
+            $response = (new Client([
+                'base_uri'      => self::BASE_API_V1_URL,
+                'debug'         => false,
+                'http_errors'   => false,
+            ]))
                 ->request(
                     'POST',
                     self::DIRECT_MESSAGE_ENDPOINT,
@@ -158,8 +162,9 @@ class TwitterService extends Service
                 );
             
             $data = json_decode($response->getBody(), true);
-            AppLogger::error(new \Exception(), 'twitter:send-direct-message', $data);
+            dd($data);
         } catch (Exception | ClientException | RequestException $e) {
+            dd($e);
             AppLogger::error($e, 'twitter:send-direct-message');
 
             throw new FetchByHashtagFailed();
