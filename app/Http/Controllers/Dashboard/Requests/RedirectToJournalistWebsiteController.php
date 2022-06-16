@@ -17,6 +17,6 @@ class RedirectToJournalistWebsiteController extends DashboardController
     public function __invoke(RedirectToWebsiteRequest $request)
     {
         return redirect()
-            ->to($request->query('url', '/'), Response::HTTP_TEMPORARY_REDIRECT);
+            ->away($request->query('url', '/'), Response::HTTP_TEMPORARY_REDIRECT);
     }
 }
