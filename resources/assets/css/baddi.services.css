@@ -272,3 +272,13 @@ svg {
 .bg-clnkgo {
     background-color: #04AF90 !important;
 }
+
+::-moz-selection {
+    color: white;
+    background: #FFBE3D;
+}
+
+::selection {
+    color: white;
+    background: #FFBE3D;
+}
