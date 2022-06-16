@@ -16,7 +16,13 @@ class RedirectToJournalistWebsiteController extends DashboardController
 {   
     public function __invoke(RedirectToWebsiteRequest $request)
     {
+        $url = $request->query('url', '/');
+
+        if (! preg_match("~^(?:f|ht)tps?://~i", $url)) {
+            $url = sprintf('http://%s', $url);
+        }
+
         return redirect()
-            ->away(url($request->query('url', '/')), Response::HTTP_TEMPORARY_REDIRECT);
+            ->away($url, Response::HTTP_TEMPORARY_REDIRECT);
     }
 }
