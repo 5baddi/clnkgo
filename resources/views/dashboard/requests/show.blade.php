@@ -240,7 +240,7 @@
                         <rect x="3" y="5" width="18" height="14" rx="2"></rect>
                         <polyline points="3 7 12 13 21 7"></polyline>
                     </svg>&nbsp;
-                    <span style="margin-right: 2rem !important;" title="Email">{{ $tweet->author->email }}</span>
+                    <a style="margin-right: 2rem !important;" title="Email" href="mailto:{{ $tweet->author->email }}" target="_blank">{{ $tweet->author->email }}</a>
                     @endif
                 </div>
             </div>
