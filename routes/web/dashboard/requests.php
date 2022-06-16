@@ -20,8 +20,8 @@ Route::middleware(['auth', 'has.subscription'])
     ->group(function() {
         Route::redirect('/', '/dashboard');
 
-        Route::get('/{id}', ShowRequestController::class)->name('.show');
         Route::get('/redirect', RedirectToJournalistWebsiteController::class)->name('.redirect');
+        Route::get('/{id}', ShowRequestController::class)->name('.show');
 
         Route::post('/dm/{id}', SendDMRequestController::class)->name('.dm');
         Route::post('/mail/{id}', SendMailRequestController::class)->name('.mail');
