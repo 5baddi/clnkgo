@@ -7,7 +7,7 @@
 
 Get in the press 📰 Be the source a journalist is looking for.
 
-![screenshot](./screenshots/dashboard.png)
+![screenshot](./screenshot.png)
 
 ## Requirements
 
