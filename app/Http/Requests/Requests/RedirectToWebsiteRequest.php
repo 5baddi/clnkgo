@@ -24,7 +24,7 @@ class RedirectToWebsiteRequest extends FormRequest
     public function rules()
     {
         return [
-            'url'   => ['nullable', 'url']
+            'url'   => ['required', 'url']
         ];
     }
 }
