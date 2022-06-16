@@ -244,7 +244,7 @@ svg {
     border-radius: unset !important;
 }
 
-.nav-item .dropdown .nav-link:hover {
+.dropdown .nav-link:hover {
     background-color: unset !important;
 }
 
