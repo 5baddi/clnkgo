@@ -21,8 +21,8 @@ class RedirectToJournalistWebsiteController extends DashboardController
         if (! preg_match("~^(?:f|ht)tps?://~i", $url)) {
             $url = sprintf('http://%s', $url);
         }
-
+dd($url);
         return redirect()
-            ->away($url, Response::HTTP_TEMPORARY_REDIRECT);
+            ->to($url, Response::HTTP_TEMPORARY_REDIRECT);
     }
 }
