@@ -232,7 +232,7 @@
                         <path d="M11.5 3a17 17 0 0 0 0 18"></path>
                         <path d="M12.5 3a17 17 0 0 1 0 18"></path>
                     </svg>&nbsp;
-                    <a style="margin-right: 2rem !important;" href="//{{ $tweet->author->website }}" target="_blank" title="Website">{{ $tweet->author->website }}</a>
+                    <a style="margin-right: 2rem !important;" href="{{ route('dashboard.requests.redirect', ['url' => $tweet->author->website]) }}" target="_blank" title="Website">{{ $tweet->author->website }}</a>
                     @endif
                     @if($tweet->author->email)
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -240,7 +240,7 @@
                         <rect x="3" y="5" width="18" height="14" rx="2"></rect>
                         <polyline points="3 7 12 13 21 7"></polyline>
                     </svg>&nbsp;
-                    <span style="margin-right: 2rem !important;" title="Email">{{ $tweet->author->email }}</span>
+                    <a style="margin-right: 2rem !important;" title="Email" href="mailto:{{ $tweet->author->email }}">{{ $tweet->author->email }}</a>
                     @endif
                 </div>
             </div>

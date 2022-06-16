@@ -12,6 +12,7 @@ use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\SendDMRequestCo
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\SendMailRequestController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\MarkAsAnsweredController;
 use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\MarkAsUnansweredController;
+use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\RedirectToJournalistWebsiteController;
     
 Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.requests')
@@ -19,7 +20,9 @@ Route::middleware(['auth', 'has.subscription'])
     ->group(function() {
         Route::redirect('/', '/dashboard');
 
+        Route::get('/redirect', RedirectToJournalistWebsiteController::class)->name('.redirect');
         Route::get('/{id}', ShowRequestController::class)->name('.show');
+
         Route::post('/dm/{id}', SendDMRequestController::class)->name('.dm');
         Route::post('/mail/{id}', SendMailRequestController::class)->name('.mail');
         Route::post('/answered/{id}', MarkAsAnsweredController::class)->name('.answered');
