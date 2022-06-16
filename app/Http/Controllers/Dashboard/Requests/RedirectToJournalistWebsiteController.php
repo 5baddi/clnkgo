@@ -18,13 +18,13 @@ class RedirectToJournalistWebsiteController extends DashboardController
     {
         $url = $request->query('url');
 
+        if (! preg_match("~^(?:f|ht)tps?://~i", $url)) {
+            $url = sprintf('http://%s', $url);
+        }
+
         if (! filter_var($url, FILTER_VALIDATE_URL)) {
             return redirect()
                 ->back();
-        }
-
-        if (! preg_match("~^(?:f|ht)tps?://~i", $url)) {
-            $url = sprintf('http://%s', $url);
         }
 
         return redirect()
