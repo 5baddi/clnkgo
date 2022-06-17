@@ -4,15 +4,15 @@ namespace App\Console\Commands\Twitter;
 
 use Throwable;
 use Illuminate\Console\Command;
-use BADDIServices\SourceeApp\App;
-use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Models\AppSetting;
-use BADDIServices\SourceeApp\Services\TweetService;
-use BADDIServices\SourceeApp\Domains\TwitterService;
-use BADDIServices\SourceeApp\Jobs\Twitter\SaveFetchedTweets;
-use BADDIServices\SourceeApp\Services\AppSettingService;
-use BADDIServices\SourceeApp\Services\TwitterUserService;
-use BADDIServices\SourceeApp\Services\TwitterMediaService;
+use BADDIServices\ClnkGO\App;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\AppSetting;
+use BADDIServices\ClnkGO\Services\TweetService;
+use BADDIServices\ClnkGO\Domains\TwitterService;
+use BADDIServices\ClnkGO\Jobs\Twitter\SaveFetchedTweets;
+use BADDIServices\ClnkGO\Services\AppSettingService;
+use BADDIServices\ClnkGO\Services\TwitterUserService;
+use BADDIServices\ClnkGO\Services\TwitterMediaService;
 
 class FetchLatestTweets extends Command
 {

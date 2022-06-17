@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Database\Seeders;
+namespace BADDIServices\ClnkGO\Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\ClnkGO\Services\UserService;
 
 class UsersSeeder extends Seeder
 {

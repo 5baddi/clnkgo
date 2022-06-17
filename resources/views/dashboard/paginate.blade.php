@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-2 text-end">
                         @php
-                            $inFavorite = $user->favorites->where(\BADDIServices\SourceeApp\Models\UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof \BADDIServices\SourceeApp\Models\UserFavoriteTweet;
+                            $inFavorite = $user->favorites->where(\BADDIServices\ClnkGO\Models\UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof \BADDIServices\ClnkGO\Models\UserFavoriteTweet;
                         @endphp
                         @include('dashboard.bookmark-button')
                     </div>
@@ -32,7 +32,7 @@
                         </svg>&nbsp;
                         <span title="Published at">{{ $tweet->published_at->format('d M - h:i A') }}</span>
                     </div>
-                    @if($featureService->isEnabled(\BADDIServices\SourceeApp\App::EXTRACT_DUE_DATE_FEATURE) && $tweet->due_at && $tweet->due_at->greaterThan(now()))
+                    @if($featureService->isEnabled(\BADDIServices\ClnkGO\App::EXTRACT_DUE_DATE_FEATURE) && $tweet->due_at && $tweet->due_at->greaterThan(now()))
                     <span title="Due on">Due {{ $tweet->due_at->diffForHumans() }}</span>
                     @endif
                 </div>

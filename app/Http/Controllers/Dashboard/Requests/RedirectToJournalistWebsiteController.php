@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests;
 
 use Illuminate\Http\Response;
 use App\Http\Requests\Requests\RedirectToWebsiteRequest;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class RedirectToJournalistWebsiteController extends DashboardController
 {   

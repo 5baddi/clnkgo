@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Keywords;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Keywords;
 
 use Throwable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\KeywordsRequest;
 use App\Models\User;
-use BADDIServices\SourceeApp\Entities\Alert;
+use BADDIServices\ClnkGO\Entities\Alert;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class SaveKeywordsController extends DashboardController
 {

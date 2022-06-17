@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\IndexController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\PaginateController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\BookmarkTweetController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\UnbookmarkTweetController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\IndexController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\PaginateController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\BookmarkTweetController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\UnbookmarkTweetController;
 
 Route::middleware(['auth', 'has.subscription'])
     ->prefix('dashboard')

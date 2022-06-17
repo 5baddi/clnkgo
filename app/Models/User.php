@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\ClnkGO\Models\Subscription;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use BADDIServices\SourceeApp\Models\Authenticatable;
-use BADDIServices\SourceeApp\Models\UserLinkedEmail;
-use BADDIServices\SourceeApp\Models\UserFavoriteTweet;
-use BADDIServices\SourceeApp\Traits\Filterable;
+use BADDIServices\ClnkGO\Models\Authenticatable;
+use BADDIServices\ClnkGO\Models\UserLinkedEmail;
+use BADDIServices\ClnkGO\Models\UserFavoriteTweet;
+use BADDIServices\ClnkGO\Traits\Filterable;
 
 class User extends Authenticatable
 {

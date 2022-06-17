@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Middleware;
+namespace BADDIServices\ClnkGO\Http\Middleware;
 
 use Closure;
 use App\Models\User;
-use BADDIServices\SourceeApp\Entities\Alert;
+use BADDIServices\ClnkGO\Entities\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\ClnkGO\Models\Subscription;
 
 class HasSubscription
 {

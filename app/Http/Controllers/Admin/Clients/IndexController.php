@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Admin\Clients;
+namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Clients;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use BADDIServices\SourceeApp\Http\Controllers\AdminController;
-use BADDIServices\SourceeApp\Http\Filters\Admin\User\ClientQueryFilter;
+use BADDIServices\ClnkGO\Http\Controllers\AdminController;
+use BADDIServices\ClnkGO\Http\Filters\Admin\User\ClientQueryFilter;
 
 class IndexController extends AdminController
 {

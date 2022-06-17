@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
-use BADDIServices\SourceeApp\Models\RequestAnswer;
-use BADDIServices\SourceeApp\Models\Tweet;
-use BADDIServices\SourceeApp\Repositories\RequestAnswerRepository;
+use BADDIServices\ClnkGO\Models\RequestAnswer;
+use BADDIServices\ClnkGO\Models\Tweet;
+use BADDIServices\ClnkGO\Repositories\RequestAnswerRepository;
 
 class RequestAnswerService extends Service
 {

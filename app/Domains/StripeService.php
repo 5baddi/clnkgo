@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Domains;
+namespace BADDIServices\ClnkGO\Domains;
 
 use App\Models\User;
-use BADDIServices\SourceeApp\Models\Pack;
-use BADDIServices\SourceeApp\Services\Service;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Services\Service;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Auth;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 

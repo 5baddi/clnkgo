@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Admin\Clients;
+namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Clients;
 
 use Throwable;
 use App\Models\User;
 use Illuminate\Http\Request;
-use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Entities\Alert;
-use BADDIServices\SourceeApp\Http\Controllers\AdminController;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Http\Controllers\AdminController;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 

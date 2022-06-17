@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Requests;
+namespace BADDIServices\ClnkGO\Http\Requests;
 
-use BADDIServices\SourceeApp\App;
-use BADDIServices\SourceeApp\Models\SavedResponse;
+use BADDIServices\ClnkGO\App;
+use BADDIServices\ClnkGO\Models\SavedResponse;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SaveResponseRequest extends FormRequest

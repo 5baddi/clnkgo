@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Responses;
 
 use Throwable;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use BADDIServices\SourceeApp\Entities\Alert;
-use BADDIServices\SourceeApp\Models\SavedResponse;
-use BADDIServices\SourceeApp\Services\SavedResponseService;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Models\SavedResponse;
+use BADDIServices\ClnkGO\Services\SavedResponseService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class DeleteResponseController extends DashboardController
 {

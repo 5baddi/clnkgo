@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Rules;
+namespace BADDIServices\ClnkGO\Rules;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;

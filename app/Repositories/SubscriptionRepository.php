@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Repositories;
+namespace BADDIServices\ClnkGO\Repositories;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\ClnkGO\Models\Subscription;
 
 class SubscriptionRepository
 {

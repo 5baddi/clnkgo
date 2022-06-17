@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Services;
+namespace BADDIServices\ClnkGO\Services;
 
-use BADDIServices\SourceeApp\Models\Tweet;
+use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
-use BADDIServices\SourceeApp\Repositories\TweetRespository;
+use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
+use BADDIServices\ClnkGO\Repositories\TweetRespository;
 
 class TweetService extends Service
 {

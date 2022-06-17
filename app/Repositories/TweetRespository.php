@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Repositories;
+namespace BADDIServices\ClnkGO\Repositories;
 
-use BADDIServices\SourceeApp\App;
-use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
+use BADDIServices\ClnkGO\App;
+use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
 use Carbon\Carbon;
-use BADDIServices\SourceeApp\Models\Tweet;
+use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 

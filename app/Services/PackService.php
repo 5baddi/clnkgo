@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
-use BADDIServices\SourceeApp\Models\Pack;
+use BADDIServices\ClnkGO\Models\Pack;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SourceeApp\Models\Subscription;
-use BADDIServices\SourceeApp\Repositories\PackRepository;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Repositories\PackRepository;
 
 class PackService extends Service
 {

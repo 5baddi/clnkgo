@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Domains;
+namespace BADDIServices\ClnkGO\Domains;
 
 use App\Models\User;
-use BADDIServices\SourceeApp\Models\Pack;
+use BADDIServices\ClnkGO\Models\Pack;
 use Illuminate\Auth\AuthManager;
-use BADDIServices\SourceeApp\Models\Subscription;
-use BADDIServices\SourceeApp\Services\UserService;
-use BADDIServices\SourceeApp\Services\AppSettingService;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Services\AppSettingService;
 use Illuminate\Support\Arr;
 
 class FeatureService

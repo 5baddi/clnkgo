@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Entities;
+namespace BADDIServices\ClnkGO\Entities;
 
-use BADDIServices\SourceeApp\Traits\Filterable;
+use BADDIServices\ClnkGO\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
-use BADDIServices\SourceeApp\Traits\HasUUID;
+use BADDIServices\ClnkGO\Traits\HasUUID;
 use Carbon\Carbon;
 
 class ModelEntity extends EloquentModel

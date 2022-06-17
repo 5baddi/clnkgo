@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use BADDIServices\SourceeApp\Database\Seeders\AppSettingsSeeder;
+use BADDIServices\ClnkGO\Database\Seeders\AppSettingsSeeder;
 use Illuminate\Database\Seeder;
-use BADDIServices\SourceeApp\Database\Seeders\PacksSeeder;
-use BADDIServices\SourceeApp\Database\Seeders\UsersSeeder;
+use BADDIServices\ClnkGO\Database\Seeders\PacksSeeder;
+use BADDIServices\ClnkGO\Database\Seeders\UsersSeeder;
 
 class DatabaseSeeder extends Seeder
 {

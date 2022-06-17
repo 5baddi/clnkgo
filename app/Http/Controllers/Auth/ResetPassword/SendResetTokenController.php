@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword;
 
 use Throwable;
 use Carbon\Carbon;
@@ -15,12 +15,12 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SourceeApp\Services\UserService;
-use BADDIServices\SourceeApp\Events\Auth\ResetPassword;
-use BADDIServices\SourceeApp\Http\Requests\Auth\ResetTokenRequest;
-use BADDIServices\SourceeApp\Exceptions\Auth\FailedToGenerateToken;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Events\Auth\ResetPassword;
+use BADDIServices\ClnkGO\Http\Requests\Auth\ResetTokenRequest;
+use BADDIServices\ClnkGO\Exceptions\Auth\FailedToGenerateToken;
 
 class SendResetTokenController extends Controller
 {

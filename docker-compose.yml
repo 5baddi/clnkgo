@@ -1,14 +1,14 @@
 # For more information: https://laravel.com/docs/sail
 version: '3'
 services:
-    presspitch:
+    clnkgo:
         build:
             context: ./dev-tools/docker/php81
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.1/app
-        container_name: presspitch
+        container_name: clnkgo
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:

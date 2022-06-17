@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Admin\Clients\IndexController;
-use BADDIServices\SourceeApp\Http\Controllers\Admin\Clients\ResetClientController;
-use BADDIServices\SourceeApp\Http\Controllers\Admin\Clients\RestrictClientAccessController;
+use BADDIServices\ClnkGO\Http\Controllers\Admin\Clients\IndexController;
+use BADDIServices\ClnkGO\Http\Controllers\Admin\Clients\ResetClientController;
+use BADDIServices\ClnkGO\Http\Controllers\Admin\Clients\RestrictClientAccessController;
 
 Route::middleware(['auth', 'is.super-admin'])
     ->name('admin.clients')

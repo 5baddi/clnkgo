@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Repositories;
+namespace BADDIServices\ClnkGO\Repositories;
 
-use BADDIServices\SourceeApp\Models\TwitterMedia;
+use BADDIServices\ClnkGO\Models\TwitterMedia;
 use Illuminate\Database\Eloquent\Collection;
 
 class TwitterMediaRepository
