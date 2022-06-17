@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'path' => 'maileclipse',
+    'path' => 'admin/mails/templates',
 
     /*
     |--------------------------------------------------------------------------
@@ -74,7 +74,7 @@ return [
     |
     */
 
-    'allowed_environments' => ['local', 'development', 'staging', 'testing'],
+    'allowed_environments' => ['local', 'development', 'staging', 'testing', 'production'],
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
 
     'middlewares' => [
         'web',
-        //'auth',
+        'auth',
+        'is.super-admin'
     ],
 
     /*
@@ -120,7 +121,7 @@ return [
     |
     */
 
-    'test_mail' => 'your-test@email.com',
+    'test_mail' => 'project@baddi.info',
 
     /*
     |--------------------------------------------------------------------------
