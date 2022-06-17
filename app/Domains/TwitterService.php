@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Domains;
+namespace BADDIServices\ClnkGO\Domains;
 
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
-use BADDIServices\SourceeApp\App;
+use BADDIServices\ClnkGO\App;
 use Illuminate\Support\Collection;
-use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
-use BADDIServices\SourceeApp\Services\Service;
-use BADDIServices\SourceeApp\Exceptions\Twitter\FetchByHashtagFailed;
+use BADDIServices\ClnkGO\Services\Service;
+use BADDIServices\ClnkGO\Exceptions\Twitter\FetchByHashtagFailed;
 
 class TwitterService extends Service
 {

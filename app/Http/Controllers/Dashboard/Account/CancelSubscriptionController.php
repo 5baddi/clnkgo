@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account;
 
 use Throwable;
-use BADDIServices\SourceeApp\Entities\Alert;
-use BADDIServices\SourceeApp\Services\SubscriptionService;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
-use BADDIServices\SourceeApp\Exceptions\Shopify\CancelSubscriptionFailed;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CancelSubscriptionFailed;
 
 class CancelSubscriptionController extends DashboardController
 {

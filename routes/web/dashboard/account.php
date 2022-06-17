@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\AccountController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\UpdateAccountController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\RemoveLinkedEmailController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account\ConfirmLinkedEmailController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account\AccountController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account\UpdateAccountController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account\RemoveLinkedEmailController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account\ConfirmLinkedEmailController;
     
 Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.account')

@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Database\Seeders;
+namespace BADDIServices\ClnkGO\Database\Seeders;
 
-use BADDIServices\SourceeApp\App;
-use BADDIServices\SourceeApp\Models\AppSetting;
-use BADDIServices\SourceeApp\Services\AppSettingService;
+use BADDIServices\ClnkGO\App;
+use BADDIServices\ClnkGO\Models\AppSetting;
+use BADDIServices\ClnkGO\Services\AppSettingService;
 use Illuminate\Database\Seeder;
 
 class AppSettingsSeeder extends Seeder

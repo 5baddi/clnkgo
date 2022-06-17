@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests;
 
 use Throwable;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use BADDIServices\SourceeApp\Models\Tweet;
-use BADDIServices\SourceeApp\Entities\Alert;
-use BADDIServices\SourceeApp\Services\TweetService;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
-use BADDIServices\SourceeApp\Models\RequestAnswer;
-use BADDIServices\SourceeApp\Services\RequestAnswerService;
+use BADDIServices\ClnkGO\Models\Tweet;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Services\TweetService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Models\RequestAnswer;
+use BADDIServices\ClnkGO\Services\RequestAnswerService;
 
 class MarkAsAnsweredController extends DashboardController
 {

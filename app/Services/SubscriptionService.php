@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SourceeApp\Models\Pack;
+use BADDIServices\ClnkGO\Models\Pack;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SourceeApp\Models\Subscription;
-use BADDIServices\SourceeApp\Repositories\SubscriptionRepository;
-use BADDIServices\SourceeApp\Notifications\Subscription\SubscriptionCancelled;
-use BADDIServices\SourceeApp\Events\Subscription\SubscriptionCancelled as SubscriptionCancelledEvent;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Repositories\SubscriptionRepository;
+use BADDIServices\ClnkGO\Notifications\Subscription\SubscriptionCancelled;
+use BADDIServices\ClnkGO\Events\Subscription\SubscriptionCancelled as SubscriptionCancelledEvent;
 
 class SubscriptionService extends Service
 {

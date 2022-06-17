@@ -48,7 +48,7 @@
               <div class="dropdown-divider"></div>
               @endif
               
-              @if($featureService->isEnabled(\BADDIServices\SourceeApp\App::JOURNALIST_AREA_FEATURE))
+              @if($featureService->isEnabled(\BADDIServices\ClnkGO\App::JOURNALIST_AREA_FEATURE))
               @if(! request()->routeIs(['dashboard', 'dashboard.*']))
               <a href="{{ route('dashboard') }}" class="dropdown-item">Source area</a>
               @elseif(! request()->routeIs(['journalist', 'journalist.*']))

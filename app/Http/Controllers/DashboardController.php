@@ -1,25 +1,25 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers;
+namespace BADDIServices\ClnkGO\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\Factory;
-use BADDIServices\SourceeApp\Models\Pack;
+use BADDIServices\ClnkGO\Models\Pack;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use BADDIServices\SourceeApp\Models\Subscription;
-use BADDIServices\SourceeApp\Services\UserService;
-use BADDIServices\SourceeApp\Domains\FeatureService;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Domains\FeatureService;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use BADDIServices\SourceeApp\Services\AppSettingService;
+use BADDIServices\ClnkGO\Services\AppSettingService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class DashboardController extends BaseController

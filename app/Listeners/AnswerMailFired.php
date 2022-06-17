@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Listeners;
+namespace BADDIServices\ClnkGO\Listeners;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use BADDIServices\SourceeApp\Models\Tweet;
+use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SourceeApp\Events\AnswerMail;
-use BADDIServices\SourceeApp\Models\RequestAnswer;
-use BADDIServices\SourceeApp\Services\RequestAnswerService;
-use BADDIServices\SourceeApp\Services\TweetService;
-use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\ClnkGO\Events\AnswerMail;
+use BADDIServices\ClnkGO\Models\RequestAnswer;
+use BADDIServices\ClnkGO\Services\RequestAnswerService;
+use BADDIServices\ClnkGO\Services\TweetService;
+use BADDIServices\ClnkGO\Services\UserService;
 
 class AnswerMailFired implements ShouldQueue
 {

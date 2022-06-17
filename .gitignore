@@ -13,3 +13,5 @@ yarn-error.log
 /.vscode
 .DS_Store
 .env
+app/Mail/
+error_log

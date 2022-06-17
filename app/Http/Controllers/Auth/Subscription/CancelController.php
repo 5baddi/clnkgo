@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription;
 
 use Throwable;
-use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
-use BADDIServices\SourceeApp\Services\SubscriptionService;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
 
 class CancelController extends DashboardController
 {

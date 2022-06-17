@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Services;
+namespace BADDIServices\ClnkGO\Services;
 
-use BADDIServices\SourceeApp\Models\TwitterUser;
-use BADDIServices\SourceeApp\Repositories\TwitterUserRespository;
+use BADDIServices\ClnkGO\Models\TwitterUser;
+use BADDIServices\ClnkGO\Repositories\TwitterUserRespository;
 
 class TwitterUserService extends Service
 {

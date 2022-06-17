@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Keywords\KeywordsController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Keywords\SaveKeywordsController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Keywords\KeywordsController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Keywords\SaveKeywordsController;
     
 Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.keywords')

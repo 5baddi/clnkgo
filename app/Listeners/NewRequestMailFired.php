@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Listeners;
+namespace BADDIServices\ClnkGO\Listeners;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use BADDIServices\SourceeApp\Models\Tweet;
+use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SourceeApp\Services\UserService;
-use BADDIServices\SourceeApp\Events\NewRequestMail;
-use BADDIServices\SourceeApp\Services\TweetService;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Events\NewRequestMail;
+use BADDIServices\ClnkGO\Services\TweetService;
 
 class NewRequestMailFired implements ShouldQueue
 {

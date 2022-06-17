@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Bookmarked;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Bookmarked;
 
-use BADDIServices\SourceeApp\Services\TweetService;
+use BADDIServices\ClnkGO\Services\TweetService;
 use App\Http\Requests\Dashboard\BookmarkedTweetsRequest;
-use BADDIServices\SourceeApp\Http\Filters\Tweet\TweetQueryFilter;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Http\Filters\Tweet\TweetQueryFilter;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class IndexController extends DashboardController
 {

@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account;
 
 use Throwable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use BADDIServices\SourceeApp\Entities\Alert;
-use BADDIServices\SourceeApp\Rules\ValidateCurrentPassword;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Rules\ValidateCurrentPassword;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class UpdateAccountController extends DashboardController
 {    

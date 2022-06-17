@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\SignInController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\SignUpController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\SignOutController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\CreateUserController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\AuthenticateController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword as ResetPassword;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\SignInController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\SignUpController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\SignOutController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\CreateUserController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\AuthenticateController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword as ResetPassword;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
 

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Listeners;
+namespace BADDIServices\ClnkGO\Listeners;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SourceeApp\Events\WelcomeMail;
-use BADDIServices\SourceeApp\Services\UserService;
+use BADDIServices\ClnkGO\Events\WelcomeMail;
+use BADDIServices\ClnkGO\Services\UserService;
 
 class WelcomeMailFired implements ShouldQueue
 {

@@ -1,4 +1,4 @@
-# Presspitch.io
+# ClnkGO
 
 <p align="center">
     <img alt="PHP" src="https://img.shields.io/badge/php-%23777BB4.svg?&style=for-the-badge&logo=php&logoColor=white"/> <img alt="MySQL" src="https://img.shields.io/badge/mysql-%2300f.svg?&style=for-the-badge&logo=mysql&logoColor=white"/> <img alt="Laravel" src="https://img.shields.io/badge/laravel%20-%23FF2D20.svg?&style=for-the-badge&logo=laravel&logoColor=white"/>
@@ -21,7 +21,7 @@ Get in the press 📰 Be the source a journalist is looking for.
 1. Clone the repository into `~/dev`
 
 ```bash
-git clone git@github.com:baddiservices/presspitch.io.git
+git clone git@github.com:baddiservices/clnkgo.io.git
 ```
 
 2. To avoid user/group permissions issues, let's export your user ID & group ID
@@ -51,12 +51,12 @@ docker-compose ps
 | NAME          |        COMMAND         |       SERVICE |            STATUS |                                          PORTS |
 |---------------|:----------------------:|--------------:|------------------:|-----------------------------------------------:|
 | mysql | "tini -- /docker-ent…" | mysql-server | running (healthy) |                         0.0.0.0:3306->3306/tcp |
-| presspitch   |   "start-container"    |         php71 |           running |                             0.0.0.0:80->80/tcp |
+| clnkgo   |   "start-container"    |         php71 |           running |                             0.0.0.0:80->80/tcp |
 
 6. Connect to app container via SSH
 
 ```bash
-docker-compose exec presspitch /bin/bash
+docker-compose exec clnkgo /bin/bash
 ```
 
 7. Install project dependencies

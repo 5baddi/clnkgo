@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
 use Illuminate\Support\Arr;
@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
-use BADDIServices\SourceeApp\Models\UserLinkedEmail;
-use BADDIServices\SourceeApp\Repositories\UserRespository;
-use BADDIServices\SourceeApp\Events\LinkedEmail\LinkedEmailConfirmationMail;
+use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
+use BADDIServices\ClnkGO\Models\UserLinkedEmail;
+use BADDIServices\ClnkGO\Repositories\UserRespository;
+use BADDIServices\ClnkGO\Events\LinkedEmail\LinkedEmailConfirmationMail;
 use Illuminate\Support\Facades\Event;
 
 class UserService

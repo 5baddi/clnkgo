@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Requests;
+namespace BADDIServices\ClnkGO\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use BADDIServices\SourceeApp\Rules\ValidateHCaptcha;
+use BADDIServices\ClnkGO\Rules\ValidateHCaptcha;
 
 class SignInRequest extends FormRequest
 {

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Bookmarked\IndexController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Bookmarked\IndexController;
 
 Route::middleware(['is.paypal-webhook'])
     ->prefix('webhooks/paypal')

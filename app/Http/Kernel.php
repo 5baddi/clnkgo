@@ -21,7 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \BADDIServices\SourceeApp\Http\Middleware\BlockRobotsMiddleware::class,
+        \BADDIServices\ClnkGO\Http\Middleware\BlockRobotsMiddleware::class,
     ];
 
     /**
@@ -64,9 +64,9 @@ class Kernel extends HttpKernel
         'signed'                => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'              => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'              => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'has.subscription'      => \BADDIServices\SourceeApp\Http\Middleware\HasSubscription::class,
-        'is.super-admin'        => \BADDIServices\SourceeApp\Http\Middleware\IsSuperAdmin::class,
-        'is.paypal-webhook'     => \BADDIServices\SourceeApp\Http\Middleware\IsPayPalWebhook::class,
+        'has.subscription'      => \BADDIServices\ClnkGO\Http\Middleware\HasSubscription::class,
+        'is.super-admin'        => \BADDIServices\ClnkGO\Http\Middleware\IsSuperAdmin::class,
+        'is.paypal-webhook'     => \BADDIServices\ClnkGO\Http\Middleware\IsPayPalWebhook::class,
         'basic.auth'            => \Sven\SuperBasicAuth\SuperBasicAuth::class,
     ];
 

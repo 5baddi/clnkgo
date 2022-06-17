@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Models;
+namespace BADDIServices\ClnkGO\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use BADDIServices\SourceeApp\Entities\ModelEntity;
+use BADDIServices\ClnkGO\Entities\ModelEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

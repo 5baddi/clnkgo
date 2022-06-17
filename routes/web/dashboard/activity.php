@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Activity\ActivityController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Activity\ActivityMarkAsReadController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Activity\ActivityMarkAllAsReadController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Activity\ActivityController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Activity\ActivityMarkAsReadController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Activity\ActivityMarkAllAsReadController;
     
 Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.activity')

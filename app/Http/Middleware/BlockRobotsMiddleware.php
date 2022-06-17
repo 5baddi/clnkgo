@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Middleware;
+namespace BADDIServices\ClnkGO\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Spatie\RobotsMiddleware\RobotsMiddleware;

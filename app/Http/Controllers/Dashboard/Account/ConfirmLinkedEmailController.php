@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account;
 
 use Throwable;
-use BADDIServices\SourceeApp\Entities\Alert;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
-use BADDIServices\SourceeApp\Models\UserLinkedEmail;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Models\UserLinkedEmail;
 use Illuminate\Http\Response;
 
 class ConfirmLinkedEmailController extends DashboardController

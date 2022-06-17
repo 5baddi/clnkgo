@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Models;
+namespace BADDIServices\ClnkGO\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use BADDIServices\SourceeApp\Entities\ModelEntity;
+use BADDIServices\ClnkGO\Entities\ModelEntity;
 
 class Pack extends ModelEntity
 {

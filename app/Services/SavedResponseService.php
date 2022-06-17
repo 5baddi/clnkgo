@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SourceeApp\Models\SavedResponse;
-use BADDIServices\SourceeApp\Repositories\SavedResponseRepository;
+use BADDIServices\ClnkGO\Models\SavedResponse;
+use BADDIServices\ClnkGO\Repositories\SavedResponseRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 

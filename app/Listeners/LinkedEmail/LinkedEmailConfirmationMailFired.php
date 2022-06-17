@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Listeners\LinkedEmail;
+namespace BADDIServices\ClnkGO\Listeners\LinkedEmail;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SourceeApp\Services\UserService;
-use BADDIServices\SourceeApp\Models\UserLinkedEmail;
-use BADDIServices\SourceeApp\Events\LinkedEmail\LinkedEmailConfirmationMail;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Models\UserLinkedEmail;
+use BADDIServices\ClnkGO\Events\LinkedEmail\LinkedEmailConfirmationMail;
 
 class LinkedEmailConfirmationMailFired implements ShouldQueue
 {

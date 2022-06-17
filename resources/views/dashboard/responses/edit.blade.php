@@ -28,8 +28,8 @@
                         </div>
                         <div class="col-12 mt-2">
                             <label class="form-label">@lang('Content')</label>
-                            <textarea rows="5" maxlength="{{ \BADDIServices\SourceeApp\App::TWEET_CHARACTERS_LIMIT }}" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Canned response content">{{ old('content') ?? $response->getContent() }}</textarea>
-                            <p class="small text-muted mt-1">The optimal length of a tweet — <strong>70</strong> to <strong>{{ \BADDIServices\SourceeApp\App::TWEET_CHARACTERS_LIMIT }}</strong> characters</p>
+                            <textarea rows="5" maxlength="{{ \BADDIServices\ClnkGO\App::TWEET_CHARACTERS_LIMIT }}" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Canned response content">{{ old('content') ?? $response->getContent() }}</textarea>
+                            <p class="small text-muted mt-1">The optimal length of a tweet — <strong>70</strong> to <strong>{{ \BADDIServices\ClnkGO\App::TWEET_CHARACTERS_LIMIT }}</strong> characters</p>
                             @if($errors->has('content'))
                                 <div class="invalid-feedback d-block">
                                     {{ $errors->first('content') }}

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Responses;
 
 use Illuminate\Http\Response;
-use BADDIServices\SourceeApp\App;
-use BADDIServices\SourceeApp\Models\Pack;
-use BADDIServices\SourceeApp\Models\SavedResponse;
-use BADDIServices\SourceeApp\Services\SavedResponseService;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\App;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Models\SavedResponse;
+use BADDIServices\ClnkGO\Services\SavedResponseService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class EditResponseController extends DashboardController
 {
