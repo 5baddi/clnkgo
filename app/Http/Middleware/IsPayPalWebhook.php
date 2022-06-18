@@ -45,7 +45,6 @@ class IsPayPalWebhook
                 PayPalService::HEADERS
             );
 
-dd($headers);
             if (! Arr::has($headers, PayPalService::HEADERS)) {
                 return response()
                     ->json(null, Response::HTTP_BAD_GATEWAY);
