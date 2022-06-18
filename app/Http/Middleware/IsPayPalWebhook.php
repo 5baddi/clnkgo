@@ -32,6 +32,7 @@ class IsPayPalWebhook
     public function handle(Request $request, Closure $next)
     {
         try {
+            dd($request->header());
             if (! Arr::has($request->header(), PayPalService::HEADERS)) {
                 return response()
                     ->json(null, Response::HTTP_BAD_GATEWAY);
@@ -58,6 +59,9 @@ class IsPayPalWebhook
                 'middleware:is-paypal-webhook',
                 ['payload' => $request->all(), 'headers' => $request->header()]
             );
+
+            return response()
+                ->json(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
