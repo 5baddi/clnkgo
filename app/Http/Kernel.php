@@ -43,7 +43,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            'cors'
+            \Barryvdh\Cors\Middleware\HandleCors::class,
         ],
     ];
 
@@ -68,7 +68,6 @@ class Kernel extends HttpKernel
         'is.super-admin'        => \BADDIServices\ClnkGO\Http\Middleware\IsSuperAdmin::class,
         'is.paypal-webhook'     => \BADDIServices\ClnkGO\Http\Middleware\IsPayPalWebhook::class,
         'basic.auth'            => \Sven\SuperBasicAuth\SuperBasicAuth::class,
-        'cors'                  => \Barryvdh\Cors\Middleware\HandleCors::class,
     ];
 
     protected function bootstrappers()
