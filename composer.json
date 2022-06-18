@@ -15,7 +15,6 @@
         "php": "^7.3|^8.0|^8.1",
         "2checkout/2checkout-php": "^0.4.0",
         "baddiservices/safehtml": "^0.0.6",
-        "barryvdh/laravel-cors": "^3.0",
         "bugsnag/bugsnag-laravel": "^2.0",
         "creativeorange/gravatar": "^1.0",
         "donatello-za/rake-php-plus": "^1.0",
