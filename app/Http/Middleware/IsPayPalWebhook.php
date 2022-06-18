@@ -55,6 +55,7 @@ dd($headers);
     
             return $next($request);
         } catch (Throwable $e) {
+            dd($e);
             AppLogger::error(
                 $e,
                 'middleware:is-paypal-webhook',
