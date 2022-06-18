@@ -32,11 +32,16 @@ class IsPayPalWebhook
     public function handle(Request $request, Closure $next)
     {
         try {
-            $headers = array_map(function ($header) use ($request) {
-                return $request->header($header) ? strtoupper($request->header($header)) : null;
+            $headers = [];
+
+            array_walk(function ($header) use ($request, $headers) {
+                if (! $request->headers->has($header)) {
+                    return;
+                }
+
+                $headers[$header] = strtoupper($request->header($header));
             }, PayPalService::HEADERS);
 
-            $headers = array_filter($headers, fn ($header) => ! is_null($header));
 dd($headers);
             if (! Arr::has($headers, PayPalService::HEADERS)) {
                 return response()
