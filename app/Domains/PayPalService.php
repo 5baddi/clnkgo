@@ -83,6 +83,7 @@ class PayPalService extends Service
                 );
 
             $data = json_decode($response->getBody(), true);
+            dd($data);
             if (isset($data['verification_status']) && $data['verification_status'] === 'SUCCESS') {
                 return true;
             }
