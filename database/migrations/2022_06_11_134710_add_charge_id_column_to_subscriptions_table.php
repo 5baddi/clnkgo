@@ -14,7 +14,7 @@ class AddChargeIdColumnToSubscriptionsTable extends Migration
     public function up()
     {
         Schema::table('subscriptions', function (Blueprint $table) {
-            $table->string('charge_id')->nullable();
+            $table->string('charge_id')->nullable()->after('status');
         });
     }
 
