@@ -33,11 +33,13 @@ class IsPayPalWebhook
     {
         try {
             if (! Arr::has($request->header(), PayPalService::HEADERS)) {
-                abort(Response::HTTP_BAD_GATEWAY);
+                return response()
+                    ->json(null, Response::HTTP_BAD_GATEWAY);
             }
             
             if (! Arr::has($request->input(), ['event_type', 'id'])) {
-                abort(Response::HTTP_BAD_REQUEST);
+                return response()
+                    ->json(null, Response::HTTP_BAD_REQUEST);
             }
     
             if (! $this->payPalService->verifySignature(
@@ -45,7 +47,8 @@ class IsPayPalWebhook
                 $request->input('event_type'),
                 $request->input('id')
             )) {
-                abort(Response::HTTP_UNAUTHORIZED);
+                return response()
+                    ->json(null, Response::HTTP_UNAUTHORIZED);
             }
     
             return $next($request);
