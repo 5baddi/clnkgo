@@ -65,6 +65,7 @@ class SubscriptionService extends Service
 
         $billing = $billing->only([
             Subscription::PACK_ID_COLUMN,
+            Subscription::CHARGE_ID_COLUMN,
             Subscription::STATUS_COLUMN,
             Subscription::BILLING_ON_COLUMN,
             Subscription::ACTIVATED_ON_COLUMN,

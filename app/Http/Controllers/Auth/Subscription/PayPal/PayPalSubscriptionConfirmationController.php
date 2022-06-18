@@ -19,6 +19,7 @@ use BADDIServices\ClnkGO\Services\PackService;
 use BADDIServices\ClnkGO\Services\SubscriptionService;
 use BADDIServices\ClnkGO\Notifications\Subscription\SubscriptionActivated;
 use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Http\Requests\Subscription\PayPal\ConfirmSubscriptionRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 
@@ -38,7 +39,7 @@ class PayPalSubscriptionConfirmationController extends DashboardController
         $this->subscriptionService = $subscriptionService;
     }
 
-    public function __invoke(string $packId)
+    public function __invoke(string $packId, ConfirmSubscriptionRequest $request)
     {
         try {
             $pack = $this->packService->findById($packId);
@@ -48,6 +49,7 @@ class PayPalSubscriptionConfirmationController extends DashboardController
                 $this->user,
                 [
                     Subscription::PACK_ID_COLUMN        => $pack->getId(),
+                    Subscription::CHARGE_ID_COLUMN      => $request->query('subscription'),
                     Subscription::STATUS_COLUMN         => Subscription::CHARGE_ACCEPTED,
                     Subscription::BILLING_ON_COLUMN     => Carbon::now(),
                     Subscription::ACTIVATED_ON_COLUMN   => Carbon::now(),
