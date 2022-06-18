@@ -38,10 +38,16 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
+            Route::middleware('api')
                 ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
+                ->group(function () {
+                    $apiFiles = glob(__DIR__ . '/../../routes/api/**/*.php');
+                    $signleApiFiles = glob(__DIR__ . '/../../routes/api/*.php');
+
+                    foreach (array_merge($apiFiles, $signleApiFiles) as $routeFile) {
+                        require $routeFile;
+                    }
+                });
 
             Route::middleware('web')
                 ->namespace($this->namespace)
