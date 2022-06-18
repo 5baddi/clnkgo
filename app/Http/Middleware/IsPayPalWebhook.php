@@ -40,7 +40,7 @@ class IsPayPalWebhook
                         return;
                     }
     
-                    $headers[$header] = strtoupper($request->header($header));
+                    $headers[$header] = $request->header($header);
                 },
                 PayPalService::HEADERS
             );
