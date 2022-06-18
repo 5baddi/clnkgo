@@ -32,8 +32,8 @@ class IsPayPalWebhook
     public function handle(Request $request, Closure $next)
     {
         try {
-            $headers = array_map(fn ($header) => strtoupper($header), $request->header());
-dd($headers);
+            // $headers = array_map(fn ($header) => strtoupper($header), $request->header());
+dd($request->header());
             if (! Arr::has($headers, PayPalService::HEADERS)) {
                 return response()
                     ->json(null, Response::HTTP_BAD_GATEWAY);
@@ -55,7 +55,6 @@ dd($headers);
     
             return $next($request);
         } catch (Throwable $e) {
-            dd($e);
             AppLogger::error(
                 $e,
                 'middleware:is-paypal-webhook',
