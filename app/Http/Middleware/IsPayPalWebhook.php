@@ -32,8 +32,9 @@ class IsPayPalWebhook
     public function handle(Request $request, Closure $next)
     {
         try {
-            dd($request->header());
-            if (! Arr::has($request->header(), PayPalService::HEADERS)) {
+            $headers = array_map(fn ($header) => strtoupper($header), $request->header());
+dd($headers);
+            if (! Arr::has($headers, PayPalService::HEADERS)) {
                 return response()
                     ->json(null, Response::HTTP_BAD_GATEWAY);
             }
@@ -44,7 +45,7 @@ class IsPayPalWebhook
             }
     
             if (! $this->payPalService->verifySignature(
-                Arr::only($request->header(), PayPalService::HEADERS),
+                Arr::only($headers, PayPalService::HEADERS),
                 $request->input('event_type'),
                 $request->input('id')
             )) {
@@ -57,7 +58,7 @@ class IsPayPalWebhook
             AppLogger::error(
                 $e,
                 'middleware:is-paypal-webhook',
-                ['payload' => $request->all(), 'headers' => $request->header()]
+                ['payload' => $request->all(), 'headers' => $headers]
             );
 
             return response()
