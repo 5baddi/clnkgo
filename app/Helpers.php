@@ -1,14 +1,13 @@
 <?php
 
-use BADDIServices\SourceeApp\App;
-use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Models\AppSetting;
-use BADDIServices\SourceeApp\Services\AppSettingService;
+use BADDIServices\ClnkGO\App;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\AppSetting;
+use BADDIServices\ClnkGO\Services\AppSettingService;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */

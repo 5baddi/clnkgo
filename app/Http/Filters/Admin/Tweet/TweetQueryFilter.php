@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Filters\Admin\Tweet;
+namespace BADDIServices\ClnkGO\Http\Filters\Admin\Tweet;
 
-use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
-use BADDIServices\SourceeApp\Models\Tweet;
+use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
+use BADDIServices\ClnkGO\Models\Tweet;
 
 class TweetQueryFilter extends QueryFilter
 {

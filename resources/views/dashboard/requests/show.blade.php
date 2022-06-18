@@ -37,11 +37,11 @@
                     <rect x="8" y="15" width="2" height="2"></rect>
                   </svg>&nbsp;
                   <span title="Published at">{{ $tweet->published_at->format('d M - h:i A') }}</span>
-                  @if($featureService->isEnabled(\BADDIServices\SourceeApp\App::EXTRACT_DUE_DATE_FEATURE) && $tweet->due_at && $tweet->due_at->greaterThan(now()))
+                  @if($featureService->isEnabled(\BADDIServices\ClnkGO\App::EXTRACT_DUE_DATE_FEATURE) && $tweet->due_at && $tweet->due_at->greaterThan(now()))
                   <span title="Due on" style="margin-left: 2rem !important;">Due {{ $tweet->due_at->diffForHumans() }}</span>
                   @endif
                 </div>
-                @if($featureService->isEnabled(\BADDIServices\SourceeApp\App::MARK_AS_ANSWERED_FEATURE) && (! $answer || ! $answer->isAnswered()))
+                @if($featureService->isEnabled(\BADDIServices\ClnkGO\App::MARK_AS_ANSWERED_FEATURE) && (! $answer || ! $answer->isAnswered()))
                 <div class="card-actions">
                     <form action="{{ route('dashboard.requests.answered', ['id' => $tweet->getId()]) }}" method="POST">
                         @csrf
@@ -147,7 +147,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                @if($featureService->isPackFeatureEnabled(\BADDIServices\SourceeApp\Models\Pack::MULTIPLE_EMAILS_SENDER))
+                                @if($featureService->isPackFeatureEnabled(\BADDIServices\ClnkGO\Models\Pack::MULTIPLE_EMAILS_SENDER))
                                 <div class="col-12 mt-2">
                                     <label class="form-label">From</label>                        
                                     <select class="form-select @if($errors->has('from')) is-invalid @endif" id="emails">

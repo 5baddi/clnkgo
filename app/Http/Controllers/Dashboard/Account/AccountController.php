@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Account;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account;
 
 use Illuminate\Http\Request;
-use BADDIServices\SourceeApp\Services\PackService;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Services\PackService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class AccountController extends DashboardController
 {

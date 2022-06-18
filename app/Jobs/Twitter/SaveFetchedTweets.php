@@ -1,30 +1,30 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Jobs\Twitter;
+namespace BADDIServices\ClnkGO\Jobs\Twitter;
 
 use Throwable;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
-use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Queue\InteractsWithQueue;
-use BADDIServices\SourceeApp\Models\Tweet;
+use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use BADDIServices\SourceeApp\Models\TwitterUser;
-use BADDIServices\SourceeApp\Models\TwitterMedia;
-use BADDIServices\SourceeApp\Services\TweetService;
-use BADDIServices\SourceeApp\Domains\TwitterService;
-use BADDIServices\SourceeApp\Helpers\EmojiParser;
-use BADDIServices\SourceeApp\Services\TwitterUserService;
-use BADDIServices\SourceeApp\Services\TwitterMediaService;
+use BADDIServices\ClnkGO\Models\TwitterUser;
+use BADDIServices\ClnkGO\Models\TwitterMedia;
+use BADDIServices\ClnkGO\Services\TweetService;
+use BADDIServices\ClnkGO\Domains\TwitterService;
+use BADDIServices\ClnkGO\Helpers\EmojiParser;
+use BADDIServices\ClnkGO\Services\TwitterUserService;
+use BADDIServices\ClnkGO\Services\TwitterMediaService;
 
 class SaveFetchedTweets implements ShouldQueue
 {

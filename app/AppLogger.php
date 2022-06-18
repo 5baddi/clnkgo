@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp;
+namespace BADDIServices\ClnkGO;
 
 use App\Models\User;
 use Throwable;

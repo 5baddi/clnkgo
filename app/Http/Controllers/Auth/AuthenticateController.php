@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Auth;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth;
 
 use Throwable;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SourceeApp\Services\UserService;
-use BADDIServices\SourceeApp\Http\Requests\SignInRequest;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Http\Requests\SignInRequest;
 
 class AuthenticateController extends Controller
 {

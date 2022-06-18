@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Domains;
+namespace BADDIServices\ClnkGO\Domains;
 
 use GuzzleHttp\Client;
-use BADDIServices\SourceeApp\Services\Service;
+use BADDIServices\ClnkGO\Services\Service;
 
 class PayPalService extends Service
 {

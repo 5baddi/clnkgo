@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\CancelController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\BillingConfirmationController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\PayPal\PayPalSubscriptionConfirmationController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\CheckoutController;
-use BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\CancelCheckoutController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription\CancelController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription\BillingConfirmationController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription\PayPal\PayPalSubscriptionConfirmationController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription\CheckoutController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription\CancelCheckoutController;
 
 Route::middleware(['auth', 'has.subscription'])
     ->name('subscription')

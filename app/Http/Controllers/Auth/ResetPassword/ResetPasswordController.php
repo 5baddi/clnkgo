@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Auth\ResetPassword;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Services\UserService;
-use BADDIServices\SourceeApp\Http\Requests\Auth\ResetPasswordRequest;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Http\Requests\Auth\ResetPasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 

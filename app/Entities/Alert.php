@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Entities;
+namespace BADDIServices\ClnkGO\Entities;
 
 class Alert
 {

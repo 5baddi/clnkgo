@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Admin\Tweets;
+namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Tweets;
 
 use Illuminate\Http\Request;
-use BADDIServices\SourceeApp\Http\Controllers\AdminController;
-use BADDIServices\SourceeApp\Http\Filters\Admin\Tweet\TweetQueryFilter;
-use BADDIServices\SourceeApp\Models\Tweet;
-use BADDIServices\SourceeApp\Services\TweetService;
+use BADDIServices\ClnkGO\Http\Controllers\AdminController;
+use BADDIServices\ClnkGO\Http\Filters\Admin\Tweet\TweetQueryFilter;
+use BADDIServices\ClnkGO\Models\Tweet;
+use BADDIServices\ClnkGO\Services\TweetService;
 
 class IndexController extends AdminController
 {

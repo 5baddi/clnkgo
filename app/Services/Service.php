@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Services;
+namespace BADDIServices\ClnkGO\Services;
 
-use BADDIServices\SourceeApp\Domains\FeatureService;
+use BADDIServices\ClnkGO\Domains\FeatureService;
 
 abstract class Service
 {

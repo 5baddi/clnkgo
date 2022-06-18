@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\ShowRequestController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\SendDMRequestController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\SendMailRequestController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\MarkAsAnsweredController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\MarkAsUnansweredController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Requests\RedirectToJournalistWebsiteController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\ShowRequestController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\SendDMRequestController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\SendMailRequestController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\MarkAsAnsweredController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\MarkAsUnansweredController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\RedirectToJournalistWebsiteController;
     
 Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.requests')

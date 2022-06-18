@@ -1,24 +1,24 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription\PayPal;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription\PayPal;
 
 use Throwable;
-use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Models\Pack;
-use BADDIServices\SourceeApp\Entities\Alert;
-use BADDIServices\SourceeApp\Events\Subscription\SubscriptionActivated as SubscriptionSubscriptionActivated;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Events\Subscription\SubscriptionActivated as SubscriptionSubscriptionActivated;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SourceeApp\Models\Subscription;
-use BADDIServices\SourceeApp\Services\PackService;
-use BADDIServices\SourceeApp\Services\SubscriptionService;
-use BADDIServices\SourceeApp\Notifications\Subscription\SubscriptionActivated;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Services\PackService;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
+use BADDIServices\ClnkGO\Notifications\Subscription\SubscriptionActivated;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 

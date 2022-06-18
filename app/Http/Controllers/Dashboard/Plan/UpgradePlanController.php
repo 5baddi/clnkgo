@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Plan;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Plan;
 
-use BADDIServices\SourceeApp\App;
-use BADDIServices\SourceeApp\Entities\Alert;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\App;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SourceeApp\Services\PackService;
+use BADDIServices\ClnkGO\Services\PackService;
 
 class UpgradePlanController extends DashboardController
 {

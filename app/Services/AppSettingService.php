@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Services;
+namespace BADDIServices\ClnkGO\Services;
 
-use BADDIServices\SourceeApp\Models\AppSetting;
-use BADDIServices\SourceeApp\Repositories\AppSettingRepository;
+use BADDIServices\ClnkGO\Models\AppSetting;
+use BADDIServices\ClnkGO\Repositories\AppSettingRepository;
 
 class AppSettingService
 {

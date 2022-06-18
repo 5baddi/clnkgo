@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\ResponsesController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\NewResponseController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\CreateResponseController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\EditResponseController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\UpdateResponseController;
-use BADDIServices\SourceeApp\Http\Controllers\Dashboard\Responses\DeleteResponseController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Responses\ResponsesController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Responses\NewResponseController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Responses\CreateResponseController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Responses\EditResponseController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Responses\UpdateResponseController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Responses\DeleteResponseController;
     
 Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.responses')

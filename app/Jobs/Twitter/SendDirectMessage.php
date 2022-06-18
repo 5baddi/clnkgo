@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Jobs\Twitter;
+namespace BADDIServices\ClnkGO\Jobs\Twitter;
 
 use Throwable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
-use BADDIServices\SourceeApp\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use BADDIServices\SourceeApp\Domains\TwitterService;
+use BADDIServices\ClnkGO\Domains\TwitterService;
 
 class SendDirectMessage implements ShouldQueue
 {

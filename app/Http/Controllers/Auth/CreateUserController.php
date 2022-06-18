@@ -1,25 +1,25 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Auth;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Events\WelcomeMail;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Events\WelcomeMail;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SourceeApp\Services\UserService;
-use BADDIServices\SourceeApp\Http\Requests\SignUpRequest;
-use BADDIServices\SourceeApp\Models\Pack;
-use BADDIServices\SourceeApp\Services\PackService;
-use BADDIServices\SourceeApp\Services\SubscriptionService;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Http\Requests\SignUpRequest;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Services\PackService;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;

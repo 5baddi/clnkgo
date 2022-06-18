@@ -6,11 +6,11 @@ use Throwable;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Console\Command;
-use BADDIServices\SourceeApp\App;
+use BADDIServices\ClnkGO\App;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Events\NewRequestMail;
-use BADDIServices\SourceeApp\Models\Tweet;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Events\NewRequestMail;
+use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
 
 class MailUserWhenThereNewRequest extends Command

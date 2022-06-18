@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Filters\Admin\User;
+namespace BADDIServices\ClnkGO\Http\Filters\Admin\User;
 
 use App\Models\User;
-use BADDIServices\SourceeApp\Http\Filters\QueryFilter;
+use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
 
 class ClientQueryFilter extends QueryFilter
 {

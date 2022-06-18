@@ -2,14 +2,14 @@
 
 namespace App\Console\Commands;
 
-use BADDIServices\SourceeApp\App;
+use BADDIServices\ClnkGO\App;
 use Throwable;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use DonatelloZa\RakePlus\RakePlus;
-use BADDIServices\SourceeApp\AppLogger;
-use BADDIServices\SourceeApp\Models\AppSetting;
-use BADDIServices\SourceeApp\Models\Tweet;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\AppSetting;
+use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
 
 class UpdateMostUsedKeywords extends Command

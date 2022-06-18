@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Dashboard\Keywords;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Keywords;
 
-use BADDIServices\SourceeApp\App;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
-use BADDIServices\SourceeApp\Models\AppSetting;
-use BADDIServices\SourceeApp\Models\Pack;
+use BADDIServices\ClnkGO\App;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Models\AppSetting;
+use BADDIServices\ClnkGO\Models\Pack;
 
 class KeywordsController extends DashboardController
 {

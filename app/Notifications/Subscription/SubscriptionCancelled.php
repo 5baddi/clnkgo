@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Notifications\Subscription;
+namespace BADDIServices\ClnkGO\Notifications\Subscription;
 
-use BADDIServices\SourceeApp\Models\Subscription;
+use BADDIServices\ClnkGO\Models\Subscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 

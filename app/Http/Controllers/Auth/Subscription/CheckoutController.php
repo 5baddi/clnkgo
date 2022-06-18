@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Presspitch.io
+ * ClnkGO
  *
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SourceeApp\Http\Controllers\Auth\Subscription;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription;
 
 use Illuminate\Http\Response;
-use BADDIServices\SourceeApp\Models\Pack;
-use BADDIServices\SourceeApp\Services\PackService;
-use BADDIServices\SourceeApp\Domains\StripeService;
-use BADDIServices\SourceeApp\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Services\PackService;
+use BADDIServices\ClnkGO\Domains\StripeService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class CheckoutController extends DashboardController
 {
