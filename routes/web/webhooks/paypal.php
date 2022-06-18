@@ -7,12 +7,11 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Bookmarked\IndexController;
+use BADDIServices\ClnkGO\Http\Controllers\Webhooks\PayPal\HandlePayPalWebhookController;
 
 Route::middleware(['is.paypal-webhook'])
     ->prefix('webhooks/paypal')
     ->name('webhooks.paypal')
     ->group(function() {
-        Route::get('/', IndexController::class);
-        Route::post('/', IndexController::class)->name('.filtered');
+        Route::post('/', HandlePayPalWebhookController::class);
     });

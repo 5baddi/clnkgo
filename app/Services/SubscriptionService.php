@@ -41,6 +41,11 @@ class SubscriptionService extends Service
         return $this->subscriptionRepository->findById($id);
     }
     
+    public function findByChargeId(string $chargeId): ?Subscription
+    {
+        return $this->subscriptionRepository->findByChargeId($chargeId);
+    }
+    
     public function getUsageBills(): Collection
     {
         return $this->subscriptionRepository->getUsageBills();

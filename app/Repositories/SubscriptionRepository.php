@@ -22,6 +22,14 @@ class SubscriptionRepository
             ->find($id);
     }
     
+    public function findByChargeId(string $chargeId): ?Subscription
+    {
+        return Subscription::query()
+            ->with(['user'])
+            ->where(Subscription::CHARGE_ID_COLUMN, $chargeId)
+            ->first();
+    }
+    
     public function paginateWithRelations(?int $page = null): LengthAwarePaginator
     {
         return Subscription::query()
