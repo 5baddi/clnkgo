@@ -35,7 +35,7 @@ class IsPayPalWebhook
             $headers = [];
 
             array_map(
-                function ($header) use ($request, $headers) {
+                function ($header) use ($request, &$headers) {
                     if (! $request->headers->has($header)) {
                         return;
                     }
