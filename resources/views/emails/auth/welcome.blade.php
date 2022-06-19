@@ -9,8 +9,8 @@
     <td bgcolor="#ffffff" align="left"
         style="padding: 20px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
         <p style="margin: 0;">Hi! {{ ucwords($user->first_name) }} 👋</p>
-        <p style="margin: 0;">Thanks you for joining <strong>{{ config('app.name') }}</strong>!/p>
-        <p style="margin: 0;padding: 20px 0px">Your free trial is active for next three days, to discover our platform.</p>
+        <p style="margin: 0;">Thank you for joining <strong>{{ config('app.name') }}</strong>!</p>
+        <p style="margin: 0;padding: 20px 0px;">Your free trial is active for next three days, to discover our platform.</p>
     </td>
 </tr>
 <tr>

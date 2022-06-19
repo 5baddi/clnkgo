@@ -56,7 +56,7 @@ class AnswerMailFired implements ShouldQueue
         /** @var string|null */
         $from = $event->from;
 
-        $template = 'emails.answer';
+        $template = 'emails.notifications.answer';
         $subject = sprintf('New request answer from %s', $user->getFullName());
 
         $data = [

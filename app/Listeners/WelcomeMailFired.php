@@ -27,7 +27,7 @@ class WelcomeMailFired implements ShouldQueue
             return;
         }
 
-        $template = 'emails.welcome';
+        $template = 'emails.auth.welcome';
         $subject = sprintf('Welcome to %s', config('app.name'));
 
         $data = [

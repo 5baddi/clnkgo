@@ -174,7 +174,8 @@
                         <tr>
                             <td bgcolor="#ffffff" align="left"
                                 style="padding: 0px 30px 20px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                                <p style="margin: 0;">Cheers,<br>{{ ucwords(config('app.name')) }} Team</p>
+                                <p style="margin: 0;">Cheers,<br><a href="{{ route('home') }}" target="_blank"
+                                    style="color: #04AF90; text-decoration: none;">{{ ucwords(config('app.name')) }}</a> Team</p>
                             </td>
                         </tr>
                     </table>

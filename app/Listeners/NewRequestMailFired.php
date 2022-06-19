@@ -39,7 +39,7 @@ class NewRequestMailFired implements ShouldQueue
             return;
         }
 
-        $template = 'emails.new-request';
+        $template = 'emails.notifications.request';
         $subject = sprintf('New request from %s', ($tweet->author->name ?? '@' . $tweet->author->username));
 
         $data = [
