@@ -40,6 +40,7 @@ class ValidateHCaptcha implements Rule
     public function passes($attribute, $value)
     {
         try {
+            dd(app()->environment() !== 'production', ! config('baddi.hcaptcha_enabled'), in_array(null, [config('baddi.hcaptcha_verify_endpoint'), config('baddi.hcaptcha_secret')]));
             if (
                 app()->environment() !== 'production' ||
                 ! config('baddi.hcaptcha_enabled') ||
