@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.mini.png') }}"/>
         <style type="text/css">
             @media screen {
                 @font-face {
@@ -134,7 +135,7 @@
                             <td bgcolor="#04AF90" align="center" valign="top"
                                 style="padding: 20px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
                                 <a href="{{ route('home') }}" target="_blank">
-                                    <img src="https://app.clnkgo.com/assets/img/logo-white.png" width="200" height="auto"
+                                    <img src="{{ asset('assets/img/logo-white.png') }}" width="200" height="auto"
                                         style="display: block; border: 0px;" />
                                 </a>
                             </td>
