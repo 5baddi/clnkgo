@@ -78,12 +78,11 @@ class PayPalService extends Service
                         'Accept'        => 'application/json',
                     ],
                     'auth'              => $auth,
-                    'body'              => $body
+                    'body'              => json_encode($body)
                 ]
             );
 
         $data = json_decode($response->getBody(), true);
-        dd($data);
         if ($response->getStatusCode() === Response::HTTP_OK && isset($data['access_token'])) {
             return $data['access_token'];
         }
