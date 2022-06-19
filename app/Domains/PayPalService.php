@@ -17,6 +17,7 @@ use GuzzleHttp\Exception\ClientException;
 use BADDIServices\ClnkGO\Services\Service;
 use BADDIServices\ClnkGO\Services\SubscriptionService;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Http\Response;
 
 class PayPalService extends Service
 {
@@ -82,8 +83,7 @@ class PayPalService extends Service
             );
 
         $data = json_decode($response->getBody(), true);
-        dd($data);
-        if (isset($data['access_token'])) {
+        if ($response->getStatusCode() === Response::HTTP_OK && isset($data['access_token'])) {
             return $data['access_token'];
         }
 
@@ -119,7 +119,7 @@ class PayPalService extends Service
                 );
 
             $data = json_decode($response->getBody(), true);
-            if (isset($data['verification_status']) && $data['verification_status'] === 'SUCCESS') {
+            if ($response->getStatusCode() === Response::HTTP_OK && isset($data['verification_status']) && $data['verification_status'] === 'SUCCESS') {
                 return true;
             }
         } catch (Exception | ClientException | RequestException $e) {

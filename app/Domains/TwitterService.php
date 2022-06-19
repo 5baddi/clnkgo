@@ -12,11 +12,12 @@ use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 use BADDIServices\ClnkGO\App;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use BADDIServices\ClnkGO\AppLogger;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
 use BADDIServices\ClnkGO\Services\Service;
+use GuzzleHttp\Exception\RequestException;
 use BADDIServices\ClnkGO\Exceptions\Twitter\FetchByHashtagFailed;
 
 class TwitterService extends Service
@@ -108,7 +109,7 @@ class TwitterService extends Service
                 );
 
             $data = json_decode($response->getBody(), true);
-            if (isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
+            if ($response->getStatusCode() === Response::HTTP_OK && isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
                 return collect($data);
             }
 
