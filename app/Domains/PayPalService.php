@@ -65,7 +65,7 @@ class PayPalService extends Service
             config('paypal.secret_key'),
         ];
 
-        $form = [
+        $body = [
             'grant_type'    => 'client_credentials'
         ];
 
@@ -75,10 +75,10 @@ class PayPalService extends Service
                 self::AUTHENTICATION_ENDPOINT, 
                 [
                     'headers'           => [
-                        'Accept'        => 'application/x-www-form-urlencoded',
+                        'Accept'        => 'application/json',
                     ],
                     'auth'              => $auth,
-                    'form'              => $form
+                    'body'              => json_encode($body)
                 ]
             );
 
