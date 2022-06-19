@@ -41,9 +41,9 @@ class ValidateHCaptcha implements Rule
     {
         try {
             if (
-                config('app.env') !== 'production' ||
+                app()->environment() !== 'production' ||
                 ! config('baddi.hcaptcha_enabled') ||
-                in_array(null, config('baddi.hcaptcha_verify_endpoint'), config('baddi.hcaptcha_secret'))
+                in_array(null, [config('baddi.hcaptcha_verify_endpoint'), config('baddi.hcaptcha_secret')])
             ) {
                 return true;
             }
