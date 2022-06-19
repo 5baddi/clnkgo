@@ -59,39 +59,34 @@ class PayPalService extends Service
 
     public function authenticate(): ?string
     {
-        try {
-            $auth = [
-                config('paypal.client_id'),
-                config('paypal.secret_key'),
-            ];
+        $auth = [
+            config('paypal.client_id'),
+            config('paypal.secret_key'),
+        ];
 
-            $body = [
-                'grant_type'    => 'client_credentials'
-            ];
+        $body = [
+            'grant_type'    => 'client_credentials'
+        ];
 
-            $response = $this->client
-                ->request(
-                    'POST',
-                    self::AUTHENTICATION_ENDPOINT, 
-                    [
-                        'headers'           => [
-                            'Accept'        => 'application/json',
-                        ],
-                        'auth'              => $auth,
-                        'body'              => json_encode($body)
-                    ]
-                );
-
-            $data = json_decode($response->getBody(), true);
-            if (isset($data['access_token'])) {
-                return $data['access_token'];
-            }
-        } catch (Exception | ClientException | RequestException $e) {
-            AppLogger::error(
-                $e,
-                'paypal:authenticate'
+        $response = $this->client
+            ->request(
+                'POST',
+                self::AUTHENTICATION_ENDPOINT, 
+                [
+                    'headers'           => [
+                        'Accept'        => 'application/json',
+                    ],
+                    'auth'              => $auth,
+                    'body'              => json_encode($body)
+                ]
             );
+
+        $data = json_decode($response->getBody(), true);
+        if (isset($data['access_token'])) {
+            return $data['access_token'];
         }
+
+        return null;
     }
 
     public function verifySignature(array $headers, string $eventType, string $webhookId): bool
