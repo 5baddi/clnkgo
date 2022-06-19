@@ -22,7 +22,8 @@ class PayPalService extends Service
 {
     const BASE_URL = "https://api-m.sandbox.paypal.com/";
     const SANDBOX_BASE_URL = "https://api-m.sandbox.paypal.com/";
-    const VERIFY_SIGNATURE_ENDPOINT = "/v1/notifications/verify-webhook-signature";
+    const AUTHENTICATION_ENDPOINT = "v1/oauth2/token";
+    const VERIFY_SIGNATURE_ENDPOINT = "v1/notifications/verify-webhook-signature";
 
     public const AUTH_ALGO_HEADER = 'PAYPAL-AUTH-ALGO';
     public const CERT_URL_HEADER = 'PAYPAL-CERT-URL';
@@ -56,9 +57,48 @@ class PayPalService extends Service
         ]);
     }
 
+    public function authenticate(): ?string
+    {
+        try {
+            $auth = [
+                config('paypal.client_id'),
+                config('paypal.secret_key'),
+            ];
+
+            $body = [
+                'grant_type'    => 'client_credentials'
+            ];
+
+            $response = $this->client
+                ->request(
+                    'POST',
+                    self::VERIFY_SIGNATURE_ENDPOINT, 
+                    [
+                        'headers'           => [
+                            'Accept'        => 'application/json',
+                        ],
+                        'auth'              => $auth,
+                        'body'              => json_encode($body)
+                    ]
+                );
+
+            $data = json_decode($response->getBody(), true);
+            if (isset($data['access_token'])) {
+                return $data['access_token'];
+            }
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::error(
+                $e,
+                'paypal:authenticate'
+            );
+        }
+    }
+
     public function verifySignature(array $headers, string $eventType, string $webhookId): bool
     {
         try {
+            $accessToken = $this->authenticate();
+
             $body = [
                 'auth_algo'             => $headers[self::AUTH_ALGO_HEADER], 
                 'cert_url'              => $headers[self::CERT_URL_HEADER], 
@@ -76,7 +116,7 @@ class PayPalService extends Service
                     [
                         'headers'           => [
                             'Accept'        => 'application/json',
-                            'Authorization' => sprintf('Bearer %s', config('paypal.access_token'))
+                            'Authorization' => sprintf('Bearer %s', $accessToken)
                         ],
                         'body'              => json_encode($body)
                     ]
