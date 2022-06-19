@@ -76,6 +76,6 @@ class ValidateHCaptcha implements Rule
      */
     public function message()
     {
-        return __('message.invalid_captcha');
+        return __('errors.invalid_captcha');
     }
 }
