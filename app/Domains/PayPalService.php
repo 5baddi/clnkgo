@@ -72,7 +72,7 @@ class PayPalService extends Service
             $response = $this->client
                 ->request(
                     'POST',
-                    self::VERIFY_SIGNATURE_ENDPOINT, 
+                    self::AUTHENTICATION_ENDPOINT, 
                     [
                         'headers'           => [
                             'Accept'        => 'application/json',
