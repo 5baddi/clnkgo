@@ -83,6 +83,7 @@ class PayPalService extends Service
             );
 
         $data = json_decode($response->getBody(), true);
+        dd($data);
         if ($response->getStatusCode() === Response::HTTP_OK && isset($data['access_token'])) {
             return $data['access_token'];
         }
