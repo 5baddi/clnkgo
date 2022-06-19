@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <div class="row mt-4">
+        {{-- <div class="row mt-4">
             <div class="col-12">
                 <div class="d-flex justify-content-center">
                     <div id="words-cloud">
@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection
@@ -127,7 +127,7 @@
             $('#keywords').val(tags.join(','));
         });
 
-        $('#words-cloud').awesomeCloud({
+        {{-- $('#words-cloud').awesomeCloud({
             'shape' : 'circle',
             'size' : {
                 'grid' : 16,
@@ -144,6 +144,6 @@
                 'color': 'gradient',
                 'sort': 'highest'
             }
-        });
+        }); --}}
     });
 @endsection
