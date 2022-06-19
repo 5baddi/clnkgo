@@ -58,45 +58,9 @@ class PayPalService extends Service
         ]);
     }
 
-    public function authenticate(): ?string
-    {
-        $auth = [
-            config('paypal.client_id'),
-            config('paypal.secret_key'),
-        ];
-
-        $form = [
-            'grant_type'    => 'client_credentials'
-        ];
-
-        $response = $this->client
-            ->request(
-                'POST',
-                self::AUTHENTICATION_ENDPOINT, 
-                [
-                    'headers'           => [
-                        'Accept'        => 'application/json',
-                        'Content-Type'  => 'application/x-www-form-urlencoded',
-                    ],
-                    'auth'              => $auth,
-                    'from'              => $form
-                ]
-            );
-
-        $data = json_decode($response->getBody(), true);
-        dd($data);
-        if ($response->getStatusCode() === Response::HTTP_OK && isset($data['access_token'])) {
-            return $data['access_token'];
-        }
-
-        return null;
-    }
-
     public function verifySignature(array $headers, string $eventType, string $webhookId): bool
     {
         try {
-            $accessToken = $this->authenticate();
-
             $body = [
                 'auth_algo'             => $headers[self::AUTH_ALGO_HEADER], 
                 'cert_url'              => $headers[self::CERT_URL_HEADER], 
@@ -114,7 +78,7 @@ class PayPalService extends Service
                     [
                         'headers'           => [
                             'Accept'        => 'application/json',
-                            'Authorization' => sprintf('Bearer %s', $accessToken)
+                            'Authorization' => sprintf('Bearer %s', config('paypal.access_token'))
                         ],
                         'body'              => json_encode($body)
                     ]
