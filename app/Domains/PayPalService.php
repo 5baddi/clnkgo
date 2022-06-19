@@ -78,7 +78,7 @@ class PayPalService extends Service
                         'Accept'        => 'application/json',
                     ],
                     'auth'              => $auth,
-                    'body'              => json_encode($body)
+                    'body'              => $body
                 ]
             );
 
