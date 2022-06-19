@@ -46,13 +46,15 @@ class ShowRequestController extends DashboardController
         $answer = $this->requestAnswerService->find($this->user, $tweet);
         $inFavorite = $this->user->favorites->where(UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof UserFavoriteTweet;
 
+        $emails = $this->user->linkedEmails->whereNotNull(UserLinkedEmail::CONFIRMED_AT_COLUMN)->pluck('email')->toArray();
+
         return $this->render('dashboard.requests.show', [
             'title'             => 'Respond to request',
             'tweet'             => $tweet,
             'answer'            => $answer,
             'inFavorite'        => $inFavorite,
             'cannedResponses'   => $cannedResponses,
-            'emails'            => $this->user->linkedEmails->whereNotNull(UserLinkedEmail::CONFIRMED_AT_COLUMN)->pluck('email')->toArray()
+            'emails'            => $emails
         ]);
     }
 }
