@@ -14,6 +14,7 @@ use BADDIServices\ClnkGO\Services\TweetService;
 use BADDIServices\ClnkGO\Models\UserFavoriteTweet;
 use BADDIServices\ClnkGO\Services\RequestAnswerService;
 use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Models\UserLinkedEmail;
 use BADDIServices\ClnkGO\Services\SavedResponseService;
 
 class ShowRequestController extends DashboardController
@@ -51,7 +52,7 @@ class ShowRequestController extends DashboardController
             'answer'            => $answer,
             'inFavorite'        => $inFavorite,
             'cannedResponses'   => $cannedResponses,
-            'emails'            => $this->user->linkedEmails->pluck('email')->toArray()
+            'emails'            => $this->user->linkedEmails->whereNotNull(UserLinkedEmail::CONFIRMED_AT_COLUMN)->pluck('email')->toArray()
         ]);
     }
 }
