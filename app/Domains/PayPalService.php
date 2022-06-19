@@ -68,7 +68,7 @@ class PayPalService extends Service
         $body = [
             'grant_type'    => 'client_credentials'
         ];
-
+dd($body);
         $response = $this->client
             ->request(
                 'POST',
