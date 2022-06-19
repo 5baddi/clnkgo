@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\ClnkGO\Domains;
+namespace App\Domains;
 
 use App\Models\User;
 use Exception;
@@ -85,7 +85,7 @@ class PayPalService extends Service
                 );
 
             $data = json_decode($response->getBody(), true);
-            dd($data);
+            AppLogger::info('verify signature', 'paypal:verify-signature', compact($data, $headers, $eventType, $webhookId));
             if ($response->getStatusCode() === Response::HTTP_OK && isset($data['verification_status']) && $data['verification_status'] === 'SUCCESS') {
                 return true;
             }
