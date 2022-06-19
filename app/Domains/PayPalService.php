@@ -21,8 +21,8 @@ use Illuminate\Http\Response;
 
 class PayPalService extends Service
 {
-    const BASE_URL = "https://api-m.sandbox.paypal.com/";
-    const SANDBOX_BASE_URL = "https://api-m.sandbox.paypal.com/";
+    const PRODUCATION_URL = "https://api-m.paypal.com/";
+    const SANDBOX_URL = "https://api-m.sandbox.paypal.com/";
     const AUTHENTICATION_ENDPOINT = "v1/oauth2/token";
     const VERIFY_SIGNATURE_ENDPOINT = "v1/notifications/verify-webhook-signature";
 
@@ -52,7 +52,7 @@ class PayPalService extends Service
         private SubscriptionService $subscriptionService
     ) {
         $this->client = new Client([
-            'base_uri'      => app()->environment() !== 'production' ? self::SANDBOX_BASE_URL : self::BASE_URL,
+            'base_uri'      => app()->environment() !== 'production' ? self::SANDBOX_URL : self::PRODUCATION_URL,
             'debug'         => false,
             'http_errors'   => false,
         ]);
