@@ -6,7 +6,7 @@
                     style="padding: 30px 30px 30px 30px; border-radius: 4px 4px 4px 4px; color: #ffffff; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                     <h2 style="font-size: 20px; font-weight: 400; color: #ffffff; margin: 0;">Follow us</h2>
                     <div style="padding-top: 10px;">
-                        <a href="#" target="_blank" style="text-decoration: none; color: #ffffff;">
+                        <a href="https://twitter.com/{{ config('baddi.social.twitter') }}" target="_blank" style="text-decoration: none; color: #ffffff;">
                             <svg style="padding: 0px 10px;" xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-brand-twitter" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -17,7 +17,7 @@
                                 </path>
                             </svg>
                         </a>
-                        <a href="#" target="_blank" style="text-decoration: none; color: #ffffff;">
+                        <a href="https://linkedin.com/in/{{ config('baddi.social.linkedin') }}" target="_blank" style="text-decoration: none; color: #ffffff;">
                             <svg style="padding: 0px 10px;" xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-brand-linkedin" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -31,7 +31,7 @@
                                 <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
                             </svg>
                         </a>
-                        <a href="#" target="_blank" style="text-decoration: none; color: #ffffff;">
+                        <a href="https://instagram.com/{{ config('baddi.social.instagram') }}" target="_blank" style="text-decoration: none; color: #ffffff;">
                             <svg style="padding: 0px 10px;" xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-brand-instagram" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"

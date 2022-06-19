@@ -12,6 +12,11 @@ return [
     'setup_guide'       => env('SETUP_GUIDE'),
     'zendesk_key'       => env('ZENDESK_KEY'),
     'version'           => env('APP_VERSION', '1.0.0'),
+    'social'            => [
+        'twitter'       => env('APP_TWITTER_USERNAME', 'clnkgo'),
+        'instagram'     => env('APP_INSTAGRAM_USERNAME', 'clnkgo'),
+        'linked'        => env('APP_LINKEDIN_USERNAME', 'clnkgo'),
+    ],
     'hcaptcha_verify_endpoint'           => env('HCAPTCHA_VERIFY_ENDPOINT'),
     'hcaptcha_js_endpoint'               => env('HCAPTCHA_JS_ENDPOINT'),
     'hcaptcha_secret'                    => env('HCAPTCHA_SECRET'),
