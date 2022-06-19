@@ -65,25 +65,25 @@ class PayPalService extends Service
             config('paypal.secret_key'),
         ];
 
-        $body = [
+        $form = [
             'grant_type'    => 'client_credentials'
         ];
-dd($body);
+
         $response = $this->client
             ->request(
                 'POST',
                 self::AUTHENTICATION_ENDPOINT, 
                 [
                     'headers'           => [
-                        'Accept'        => 'application/json',
+                        'Accept'        => 'application/x-www-form-urlencoded',
                     ],
                     'auth'              => $auth,
-                    'body'              => json_encode($body)
+                    'form'              => $form
                 ]
             );
 
         $data = json_decode($response->getBody(), true);
-        dd($data);
+        dd($response->);
         if ($response->getStatusCode() === Response::HTTP_OK && isset($data['access_token'])) {
             return $data['access_token'];
         }
