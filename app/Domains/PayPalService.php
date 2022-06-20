@@ -85,7 +85,7 @@ class PayPalService extends Service
                 );
 
             $data = json_decode($response->getBody(), true);
-            AppLogger::info('verify signature', 'paypal:verify-signature', compact($data, $headers, $eventType, $webhookId));
+            dd($data);
             if ($response->getStatusCode() === Response::HTTP_OK && isset($data['verification_status']) && $data['verification_status'] === 'SUCCESS') {
                 return true;
             }
