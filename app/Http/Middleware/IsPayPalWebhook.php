@@ -78,7 +78,7 @@ class IsPayPalWebhook
             AppLogger::error(
                 $e,
                 'middleware:is-paypal-webhook',
-                ['payload' => $request->all(), 'headers' => $headers]
+                ['payload' => $request->all(), 'headers' => $request->headers]
             );
 
             return response()
