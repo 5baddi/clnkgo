@@ -25,6 +25,7 @@ class HandlePayPalWebhookController extends WebhookController
 
     public function __invoke(PayPalWebhookRequest $request)
     {
+        dd($request);
         try {
             if ($request->input('event_type') === PayPalService::SUBSCRIPTION_CANCELLED_EVENT) {
                 $this->payPalService->handleCancelledSubscription($request->input('resource'));
