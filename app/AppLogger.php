@@ -38,6 +38,7 @@ class AppLogger
             );
 
             self::$client->setAppVersion(config('baddi.version'));
+            self::$client->setReleaseStage(app()->environment() === 'production' ? 'production' : 'development');
         }
 
         return self::$instance;
