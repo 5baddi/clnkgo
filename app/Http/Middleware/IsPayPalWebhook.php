@@ -8,13 +8,13 @@
 
 namespace BADDIServices\ClnkGO\Http\Middleware;
 
-use BADDIServices\ClnkGO\AppLogger;
-use BADDIServices\ClnkGO\Domains\PayPalService;
 use Closure;
+use Throwable;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Arr;
-use Throwable;
+use BADDIServices\ClnkGO\Domains\PayPalService;
+use BADDIServices\ClnkGO\AppLogger;
 
 class IsPayPalWebhook
 {
@@ -66,6 +66,7 @@ class IsPayPalWebhook
     
             return $next($request);
         } catch (Throwable $e) {
+            dd($e);
             AppLogger::error(
                 $e,
                 'middleware:is-paypal-webhook',

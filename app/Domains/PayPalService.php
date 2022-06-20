@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
-namespace App\Domains;
+namespace BADDIServices\ClnkGO\Domains;
 
 use App\Models\User;
 use Exception;
@@ -90,6 +90,7 @@ class PayPalService extends Service
                 return true;
             }
         } catch (Exception | ClientException | RequestException $e) {
+            dd($e);
             AppLogger::error(
                 $e,
                 'paypal:verify-signature',
