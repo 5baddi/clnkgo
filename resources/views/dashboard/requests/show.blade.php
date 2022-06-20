@@ -102,13 +102,37 @@
                 </li>
             </ul>
 
-            <div class="tab-content">
-                <div id="direct" class="card tab-pane show active">
+            <div class="card tab-content">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 mt-2">
+                            <label class="form-label">Use a canned response</label>
+                            <select class="form-select" @if($cannedResponses->count() === 0) disabled @else id="canned-responses" @endif>
+                                @foreach ($cannedResponses as $cannedResponse)
+                                <option value="{{ $cannedResponse->content }}">{{ $cannedResponse->title }}</option>
+                                @endforeach
+                            </select>
+                            <p class="small text-muted mt-2">
+                                <a href="{{ route('dashboard.responses.new') }}">Create new canned response</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="direct" class="tab-pane show active">
                     <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank" onsubmit="window.location.reload();">
                         @csrf
                         <div class="card-body">
                             <div class="row">
-                                @include('dashboard.requests.partials.content-form')
+                                <div class="col-12 mt-2">
+                                    <label class="form-label required">Your response</label>
+                                    <textarea id="direct-content" rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') ?? ($answer ? $answer->content : '') }}</textarea>
+                                    @if($errors->has('content'))
+                                        <div class="invalid-feedback d-block">
+                                            {{ $errors->first('content') }}
+                                        </div>
+                                    @endif
+                                    <p class="small text-muted mt-2">Reply via Twitter</p>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">
@@ -130,13 +154,22 @@
                     </form>
                 </div>
 
-                <div id="mail" class="card tab-pane">
+                <div id="mail" class="tab-pane">
                     <form action="{{ route('dashboard.requests.mail', ['id' => $tweet->getId()]) }}" method="POST">
                         @csrf
                         <input type="hidden" name="content" id="mail-content"/>
                         <div class="card-body">
                             <div class="row">
-                                @include('dashboard.requests.partials.content-form')
+                                <div class="col-12 mt-2">
+                                    <label class="form-label required">Your response</label>
+                                    <textarea id="mail-content-text" rows="5" name="content" class="form-control @if($errors->has('content')) is-invalid @endif" placeholder="Write your response here..." required>{{ old('content') ?? ($answer ? $answer->content : '') }}</textarea>
+                                    @if($errors->has('content'))
+                                        <div class="invalid-feedback d-block">
+                                            {{ $errors->first('content') }}
+                                        </div>
+                                    @endif
+                                    <p class="small text-muted mt-2">Reply via Twitter</p>
+                                </div>
 
                                 <div class="col-12 mt-2">
                                     <label class="form-label">Subject</label>
@@ -255,10 +288,10 @@
 @endsection
 @section('script')
     $('document').ready(function() {
-        $('#mail-content').val($('#direct-content').val());
+        $('#mail-content-text').val($('#mail-content').val());
 
-        $('#direct-content').on('change', function (event) {
-            $('#mail-content').val($('#direct-content').val());
+        $('#direct-content-text').on('change', function (event) {
+            $('#mail-content-text').val($('#mail-content').val());
         });
 
         var cannedResponses = document.getElementById('canned-responses');
@@ -297,6 +330,7 @@
                 if (typeof event.detail.choice.value !== "undefined") {
                     $('#direct-content').val(event.detail.choice.value);
                     $('#mail-content').val(event.detail.choice.value);
+                    $('#mail-content-text').val(event.detail.choice.value);
                 }
             },
             false,
