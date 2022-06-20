@@ -32,6 +32,15 @@ class IsPayPalWebhook
     public function handle(Request $request, Closure $next)
     {
         try {
+            AppLogger::info(
+                'verify paypal webhook',
+                'middleware:is-paypal-webhook',
+                [
+                    'payload' => $request->all(),
+                    'headers' => $request->headers
+                ]
+            );
+
             $headers = [];
 
             array_map(
@@ -66,7 +75,6 @@ class IsPayPalWebhook
     
             return $next($request);
         } catch (Throwable $e) {
-            dd($e);
             AppLogger::error(
                 $e,
                 'middleware:is-paypal-webhook',

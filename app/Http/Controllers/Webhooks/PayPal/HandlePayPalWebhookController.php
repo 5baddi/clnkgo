@@ -33,7 +33,6 @@ class HandlePayPalWebhookController extends WebhookController
             return response()
                 ->json(['success' => true]);
         } catch (Throwable $e) {
-            dd($e);
             AppLogger::error(
                 $e,
                 'webhooks:paypal', 
