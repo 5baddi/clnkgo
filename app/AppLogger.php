@@ -80,6 +80,10 @@ class AppLogger
 
         Log::info($message, $infoContext);
 
+        if (! self::$client) {
+            self::getInstance();
+        }
+
         self::$client->leaveBreadcrumb(
             $message,
             Breadcrumb::LOG_TYPE,
