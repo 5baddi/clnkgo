@@ -27,7 +27,7 @@ class PayPalWebhookRequest extends FormRequest
     {
         return [
             'event_type'    => ['required', 'string', new In(PayPalService::EVENTS)],
-            'webhook_id'    => ['required', 'string']
+            'id'            => ['required', 'string']
         ];
     }
 }
