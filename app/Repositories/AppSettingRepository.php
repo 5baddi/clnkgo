@@ -21,27 +21,12 @@ class AppSettingRepository
 
     public function set(string $key, int $type, mixed $value): ?AppSetting
     {
-        $parsedValue = $value;
-        $type = "string";
-
-        if (is_array($value) || is_object($value)) {
-            $parsedValue = json_encode($value);
-        }
-
-        if (is_array($value)) {
-            $type = AppSetting::ARRAY_TYPE;
-        }
-        
-        if (is_object($value)) {
-            $type = AppSetting::OBJECT_TYPE;
-        }
-
         return AppSetting::query()
             ->updateOrCreate(
                 [AppSetting::KEY_COLUMN => $key],
                 [
                     AppSetting::TYPE_COLUMN     => $type,
-                    AppSetting::VALUE_COLUMN    => $parsedValue
+                    AppSetting::VALUE_COLUMN    => $value
                 ]
             );
     }
