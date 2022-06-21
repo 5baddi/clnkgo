@@ -37,9 +37,9 @@
     <div class="wrapper">
       @include('partials.dashboard.menu')
       <div class="page-wrapper">
-        @include('partials.dashboard.breadcrumb')
+        {{-- @include('partials.dashboard.breadcrumb') --}}
         <div class="page-body">
-          <div class="container-xl">
+          <div class="container-xl mt-2">
             @include('partials.dashboard.alert')
 
             @yield('content')
