@@ -6,17 +6,17 @@
 
 @section('content')
 <div class="row row-cards">
-    <div class="col-12">
+    <div class="col-8 d-flex">
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Writer Request</h3>
+            <div class="card-header" style="border: none;">
+                {{-- <h3 class="card-title">Writer Request</h3> --}}
                 <div class="card-actions">
                     @include('dashboard.bookmark-button')
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-{{ $tweet->media->first() ? '8' : '12' }} d-flex align-items-center">
+                <div class="row h-100">
+                    <div class="col-{{ $tweet->media->first() ? '8' : '12' }} d-flex justify-content-center align-self-center">
                         <p style="line-height: 2rem;">{{ $tweet->getText() }}</p>
                     </div>
                     @if($tweet->media->first())
@@ -59,8 +59,60 @@
             </div>
         </div>
     </div>
+
+    <div class="col-4 d-flex">
+        <div class="card card-link">
+            <div class="card-cover card-cover-blurred text-center">
+              <span class="avatar avatar-xl avatar-thumb avatar-rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? asset('assets/img/default_avatar.png') }})"></span>
+            </div>
+            <div class="card-body text-center">
+                <div class="row">
+                    <div class="card-title mb-1">{{ $tweet->author->name }}</div>
+                    <a href="{{ route('dashboard.requests.redirect.to-profile', ['username' => $tweet->author->username]) }}" target="_blank" class="text-muted">{{ '@' . $tweet->author->username }}</a>
+                    <p class="mt-2">{{ $tweet->author->description }}</p>
+                </div>
+            </div>
+            @if($tweet->author && ($tweet->author->location || $tweet->author->email))
+            <div class="card-footer">
+                @if($tweet->author->location)
+                <div class="mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <circle cx="12" cy="11" r="3"></circle>
+                        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+                    </svg>&nbsp;
+                    <span title="Location">{{ $tweet->author->location }}</span>
+                </div>
+                @endif
+                @if($tweet->author->website)
+                <div class="mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <line x1="3.6" y1="9" x2="20.4" y2="9"></line>
+                        <line x1="3.6" y1="15" x2="20.4" y2="15"></line>
+                        <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+                        <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+                    </svg>&nbsp;
+                    <a href="{{ route('dashboard.requests.redirect', ['url' => $tweet->author->website]) }}" target="_blank" title="Website">{{ $tweet->author->website }}</a>
+                </div>
+                @endif
+                @if($tweet->author->email)
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                        <polyline points="3 7 12 13 21 7"></polyline>
+                    </svg>&nbsp;
+                    <a title="Email" href="mailto:{{ $tweet->author->email }}">{{ $tweet->author->email }}</a>
+                </div>
+                @endif
+            </div>
+            @endif
+        </div>
+    </div>
     @if($answer && $answer->isAnswered())
-    <div class="col-12 mt-4">
+    <div class="col-8 mt-4">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Request marked as answered</h3>
@@ -91,7 +143,7 @@
     </div>
     @endif
     @if(! $answer || ! $answer->isAnswered())
-    <div class="col-12 mt-4">
+    <div class="col-8 mt-4">
         <div class="card-tabs">
             <ul class="nav nav-tabs">
                 <li class="nav-item" style="border-bottom: 1px solid rgba(98,105,118,.16);">
@@ -231,55 +283,6 @@
         </div>
     </div>
     @endif
-
-    <div class="col-12 mt-4">
-        <h2>Journalist's Bio</h2>
-        <div class="card card-link">
-            <div class="card-cover card-cover-blurred text-center">
-              <span class="avatar avatar-xl avatar-thumb avatar-rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? asset('assets/img/default_avatar.png') }})"></span>
-            </div>
-            <div class="card-body text-center">
-                <div class="row">
-                    <div class="card-title mb-1">{{ $tweet->author->name }}</div>
-                    <div class="text-muted">{{ '@' . $tweet->author->username }}</div>
-                    <p class="mt-4">{{ $tweet->author->description }}</p>
-                </div>
-            </div>
-            @if($tweet->author && ($tweet->author->location || $tweet->author->email))
-            <div class="card-footer d-flex justify-content-between">
-                <div class="d-flex align-items-center">
-                    @if($tweet->author->location)
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <circle cx="12" cy="11" r="3"></circle>
-                        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
-                    </svg>&nbsp;
-                    <span style="margin-right: 2rem !important;" title="Location">{{ $tweet->author->location }}</span>
-                    @endif
-                    @if($tweet->author->website)
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <circle cx="12" cy="12" r="9"></circle>
-                        <line x1="3.6" y1="9" x2="20.4" y2="9"></line>
-                        <line x1="3.6" y1="15" x2="20.4" y2="15"></line>
-                        <path d="M11.5 3a17 17 0 0 0 0 18"></path>
-                        <path d="M12.5 3a17 17 0 0 1 0 18"></path>
-                    </svg>&nbsp;
-                    <a style="margin-right: 2rem !important;" href="{{ route('dashboard.requests.redirect', ['url' => $tweet->author->website]) }}" target="_blank" title="Website">{{ $tweet->author->website }}</a>
-                    @endif
-                    @if($tweet->author->email)
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                        <polyline points="3 7 12 13 21 7"></polyline>
-                    </svg>&nbsp;
-                    <a style="margin-right: 2rem !important;" title="Email" href="mailto:{{ $tweet->author->email }}">{{ $tweet->author->email }}</a>
-                    @endif
-                </div>
-            </div>
-            @endif
-        </div>
-    </div>
 </div>
 @endsection
 

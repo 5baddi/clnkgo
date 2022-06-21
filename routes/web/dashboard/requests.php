@@ -13,6 +13,7 @@ use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\SendMailRequestCont
 use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\MarkAsAnsweredController;
 use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\MarkAsUnansweredController;
 use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\RedirectToJournalistWebsiteController;
+use BADDIServices\ClnkGO\Http\Controllers\Dashboard\Requests\RedirectToTwitterController;
     
 Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard.requests')
@@ -21,6 +22,7 @@ Route::middleware(['auth', 'has.subscription'])
         Route::redirect('/', '/dashboard');
 
         Route::get('/redirect', RedirectToJournalistWebsiteController::class)->name('.redirect');
+        Route::get('/redirect/to/profile', RedirectToTwitterController::class)->name('.redirect.to-profile');
         Route::get('/{id}', ShowRequestController::class)->name('.show');
 
         Route::post('/dm/{id}', SendDMRequestController::class)->name('.dm');
