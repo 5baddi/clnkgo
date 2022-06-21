@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-{{ $tweet->media->first() ? '8' : '12' }} @endif d-flex align-items-center">
+                    <div class="col-{{ $tweet->media->first() ? '8' : '12' }} d-flex align-items-center">
                         <p style="line-height: 2rem;">{{ $tweet->getText() }}</p>
                     </div>
                     @if($tweet->media->first())
