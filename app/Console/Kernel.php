@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use App\Console\Commands\Twitter\FetchUserProfile;
 use App\Console\Commands\Twitter\FetchLatestTweets;
 use App\Console\Commands\MailUserWhenThereNewRequest;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -16,6 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         FetchLatestTweets::class,
+        FetchUserProfile::class,
         MailUserWhenThereNewRequest::class,
     ];
 
@@ -28,7 +30,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('queue:work --timeout=2000 --sleep=3 --tries=3 --daemon')->everyMinute()->withoutOverlapping()->runInBackground();
+        
         $schedule->command('twitter:latest-tweets')->everyFifteenMinutes()->withoutOverlapping();
+        $schedule->command('twitter:fetch-user-profile')->hourly()->withoutOverlapping();
+
         $schedule->command('mail:new-request')->hourly()->withoutOverlapping();
         $schedule->command('app:update-most-used-keywords')->weekly();
     }

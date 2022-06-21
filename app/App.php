@@ -11,7 +11,7 @@ namespace BADDIServices\ClnkGO;
 class App
 {
     public const PAGINATION_LIMIT = 10;
-    public const CHUNK_SIZE = 1000;
+    public const CHUNK_SIZE = 25;
     public const TWEET_CHARACTERS_LIMIT = 280;
     public const MAX_KEYWORDS = 30;
     public const MAX_CANNED_RESPONSES = 10;
