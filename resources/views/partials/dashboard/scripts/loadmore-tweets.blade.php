@@ -16,7 +16,6 @@
             },
             shouldSort: true,
             searchEnabled: true,
-            choices: []
         }));
     }
     
@@ -34,7 +33,6 @@
             },
             shouldSort: false,
             searchEnabled: false,
-            choices: []
         }));
     }
     
@@ -52,7 +50,6 @@
             },
             shouldSort: false,
             searchEnabled: false,
-            choices: []
         }));
     }
 
