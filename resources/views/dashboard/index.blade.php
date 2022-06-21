@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="row row-deck row-cards">
-        <div class=" col-sm-4 mt-0">
+        <div class="col-sm-4">
             <div class="card">
               <div class="card-body analytics-card">
                 <div class="d-flex align-items-center">
@@ -16,7 +16,7 @@
               </div>
             </div>
         </div>
-        <div class=" col-sm-4 mt-0">
+        <div class="col-sm-4">
             <div class="card">
               <div class="card-body analytics-card">
                 <div class="d-flex align-items-center">
@@ -26,7 +26,7 @@
               </div>
             </div>
         </div>
-        <div class=" col-sm-4 mt-0">
+        <div class="col-sm-4">
             <div class="card">
               <div class="card-body analytics-card">
                 <div class="d-flex align-items-center">

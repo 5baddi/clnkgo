@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="card mt-4">
+    <div class="card">
       <div class="card-body filters-card">
         <form id="search-form" class="row" action="{{ route('dashboard') }}" method="GET">
           <div class="col-8">
