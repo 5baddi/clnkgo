@@ -175,7 +175,7 @@
                     </div>
                 </div>
                 <div id="direct" class="tab-pane show active">
-                    <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank" onsubmit="window.location.reload();">
+                    <form action="{{ route('dashboard.requests.dm', ['id' => $tweet->getId()]) }}" method="POST" target="_blank">
                         @csrf
                         <div class="card-body">
                             <div class="row">
