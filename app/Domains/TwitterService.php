@@ -19,6 +19,7 @@ use GuzzleHttp\Exception\ClientException;
 use BADDIServices\ClnkGO\Services\Service;
 use GuzzleHttp\Exception\RequestException;
 use BADDIServices\ClnkGO\Exceptions\Twitter\FetchByHashtagFailed;
+use Illuminate\Support\Arr;
 
 class TwitterService extends Service
 {
@@ -32,6 +33,8 @@ class TwitterService extends Service
     const BASE_API_V2_URL = "https://api.twitter.com/2/";
     const RECENT_SEARCH_ENDPOINT = "tweets/search/recent";
     const DIRECT_MESSAGE_ENDPOINT = "direct_messages/events/new.json";
+    const USER_SHOW_ENDPOINT = "users/show.json";
+
     const TWEET_URL = "https://twitter.com/{authorId}/status/{tweetId}";
     const USER_URL = "https://twitter.com/{username}";
     const DM_URL = "https://twitter.com/messages/compose?recipient_id={userId}&text={text}";
@@ -119,6 +122,42 @@ class TwitterService extends Service
 
             throw new FetchByHashtagFailed();
         }
+    }
+
+    public function fetchUserProfile(int $userId, string $userName): Collection
+    {
+        if (! $this->featureService->isEnabled(App::FETCH_TWEETS_FEATURE)) {
+            return collect();
+        }
+
+        try {
+            $query = [
+                'user_id'       => $userId,
+                'screen_name'   => $userName,
+            ];
+
+            $response = $this->getClient(1)
+                ->request(
+                    'GET',
+                    self::USER_SHOW_ENDPOINT, 
+                    [
+                        'headers'   => [
+                            'Accept'        => 'application/json',
+                            'Authorization' => sprintf('Bearer %s', config('twitter.bearer_token'))
+                        ],
+                        'query'     => $query
+                    ]
+                );
+
+            $data = json_decode($response->getBody(), true);
+            if ($response->getStatusCode() === Response::HTTP_OK && ! Arr::has($data, 'errors')) {
+                return collect($data);
+            }
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::error($e, 'twitter:fetch-user-profile', func_get_args());
+        }
+
+        return collect();
     }
 
     public function sendDirectMessage(string $recipientId, string $message, ?string $senderId = null): void

@@ -62,7 +62,11 @@
 
     <div class="col-4 d-flex">
         <div class="card card-link">
-            <div class="card-cover card-cover-blurred text-center">
+            <div class="card-cover card-cover-blurred text-center"
+                @if($tweet->author->profile_banner_url)
+                style="background-image: url({{ $tweet->author->profile_banner_url }})"
+                @endif
+                >
               <span class="avatar avatar-xl avatar-thumb avatar-rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? asset('assets/img/default_avatar.png') }})"></span>
             </div>
             <div class="card-body text-center">
