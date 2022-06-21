@@ -7,7 +7,7 @@ use BADDIServices\ClnkGO\App;
 use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\TwitterUser;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use BADDIServices\ClnkGO\Domains\TwitterService;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 
