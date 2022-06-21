@@ -60,6 +60,15 @@ class FetchUserProfile extends Command
                     $data->keys()->toArray(),
                     [$data->toArray()],
                 );
+
+                $user = TwitterUser::query()
+                    ->select([TwitterUser::ID_COLUMN, TwitterUser::USERNAME_COLUMN])
+                    ->where(TwitterUser::ID_COLUMN, $userId)
+                    ->first();
+
+                if ($user instanceof TwitterUser) {
+                    $this->saveUserProfileBanner($user, $userProfile);
+                }
     
                 $this->info("Done fetching user profile");
     
@@ -73,12 +82,7 @@ class FetchUserProfile extends Command
                     $users->each(function (TwitterUser $user) {
                         $userProfile = $this->twitterService->fetchUserProfile($user->getId(), $user->username);
 
-                        if ($userProfile->has(TwitterUser::PROFILE_BANNER_URL_COLUMN)) {
-                            $this->twitterUserService->save([
-                                TwitterUser::ID_COLUMN                  => $user->getId(),
-                                TwitterUser::PROFILE_BANNER_URL_COLUMN  => $userProfile->get(TwitterUser::PROFILE_BANNER_URL_COLUMN),
-                            ]);
-                        }
+                        $this->saveUserProfileBanner($user, $userProfile);
                     });
                 });
         } catch (Throwable $e) {
@@ -89,5 +93,17 @@ class FetchUserProfile extends Command
         }
 
         $this->info("Done fetching user profile");
+    }
+
+    private function saveUserProfileBanner(TwitterUser $user, Collection $userProfile): void
+    {
+        if (! $userProfile->has(TwitterUser::PROFILE_BANNER_URL_COLUMN)) {
+            return;
+        }
+
+        $this->twitterUserService->save([
+            TwitterUser::ID_COLUMN                  => $user->getId(),
+            TwitterUser::PROFILE_BANNER_URL_COLUMN  => $userProfile->get(TwitterUser::PROFILE_BANNER_URL_COLUMN),
+        ]);
     }
 }
