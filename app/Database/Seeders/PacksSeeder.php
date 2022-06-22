@@ -50,6 +50,11 @@ class PacksSeeder extends Seeder
                     'limit'     => 10
                 ],
                 [
+                    'key'       => Pack::MULTIPLE_EMAILS_SENDER,
+                    'name'      => 'Custom sender',
+                    'enabled'   => true,
+                ],
+                [
                     'key'       => Pack::SUPPORT,
                     'name'      => '24/7 support',
                     'enabled'   => true,
@@ -58,11 +63,6 @@ class PacksSeeder extends Seeder
                     'key'       => Pack::CANCEL_ANYTIME,
                     'name'      => 'Cancel Anytime',
                     'enabled'   => true,
-                ],
-                [
-                    'key'       => Pack::MULTIPLE_EMAILS_SENDER,
-                    'name'      => 'Custom sender',
-                    'enabled'   => false,
                 ],
             ]
         ]);
