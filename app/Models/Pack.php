@@ -45,8 +45,8 @@ class Pack extends ModelEntity
     public const KEYWORDS = 3;
     public const CANNED_RESPONSES = 4;
     public const MULTIPLE_EMAILS_SENDER = 5;
-    public const CANCEL_ANYTIME = 6;
-    public const SUPPORT = 7;
+    public const SUPPORT = 6;
+    public const CANCEL_ANYTIME = 7;
 
     /** @var array */
     public const INTERVAL = [

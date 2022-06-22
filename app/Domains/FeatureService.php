@@ -40,6 +40,14 @@ class FeatureService
             /** @var User|null */
             $user = $this->authManager->user();
 
+            if (! $user instanceof User || $user->isBanned()) {
+                return false;
+            }
+    
+            if ($user->isSuperAdmin()) {
+                return true;
+            }
+
             $allowedUsers = explode($forSetting ?? '', ',');
 
             return in_array($user->getId() ?? null, array_values($allowedUsers));
@@ -53,8 +61,12 @@ class FeatureService
         /** @var User|null */
         $user = $this->authManager->user();
 
-        if (! $user instanceof User) {
+        if (! $user instanceof User || $user->isBanned()) {
             return false;
+        }
+
+        if ($user->isSuperAdmin()) {
+            return true;
         }
 
         /** @var Subscription|null */
