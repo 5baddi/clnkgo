@@ -12,20 +12,21 @@ use Throwable;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 use BADDIServices\ClnkGO\AppLogger;
-use Illuminate\Queue\InteractsWithQueue;
 use BADDIServices\ClnkGO\Models\Tweet;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use BADDIServices\ClnkGO\Models\TwitterUser;
+use BADDIServices\ClnkGO\Helpers\EmojiParser;
 use BADDIServices\ClnkGO\Models\TwitterMedia;
 use BADDIServices\ClnkGO\Services\TweetService;
 use BADDIServices\ClnkGO\Domains\TwitterService;
-use BADDIServices\ClnkGO\Helpers\EmojiParser;
+use Illuminate\Queue\Middleware\WithoutOverlapping;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 use BADDIServices\ClnkGO\Services\TwitterMediaService;
-use Illuminate\Support\Facades\DB;
 
 class SaveFetchedTweets implements ShouldQueue
 {
@@ -50,6 +51,11 @@ class SaveFetchedTweets implements ShouldQueue
         public string $hashtag,
         public array $tweets = []
     ) {}
+
+    public function middleware()
+    {
+        return [(new WithoutOverlapping($this->hashtag))->releaseAfter(30)];
+    }
 
     /**
      * Execute the job.
