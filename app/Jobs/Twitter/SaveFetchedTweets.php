@@ -25,6 +25,7 @@ use BADDIServices\ClnkGO\Domains\TwitterService;
 use BADDIServices\ClnkGO\Helpers\EmojiParser;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 use BADDIServices\ClnkGO\Services\TwitterMediaService;
+use Illuminate\Support\Facades\DB;
 
 class SaveFetchedTweets implements ShouldQueue
 {
@@ -73,7 +74,11 @@ class SaveFetchedTweets implements ShouldQueue
             $this->twitterMediaService = $twitterMediaService;
             $this->emojiParser = $emojiParser;
 
+            DB::beginTransaction();
+
             $this->saveTweets($this->hashtag, $this->tweets);
+
+            DB::commit();
 
             if (! empty($this->tweets['meta']['next_token'])) {
                 $tweets = $this->twitterService->fetchTweetsByHashtags($this->hashtag, null, $this->tweets['meta']['next_token']);
@@ -81,6 +86,8 @@ class SaveFetchedTweets implements ShouldQueue
                 self::dispatch($this->hashtag, $tweets->toArray());
             }
         } catch (Throwable $e) {
+            DB::rollBack();
+
             AppLogger::error(
                 $e,
                 'job:save:latest-tweets',
