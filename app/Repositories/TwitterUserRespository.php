@@ -8,6 +8,7 @@
 
 namespace BADDIServices\ClnkGO\Repositories;
 
+use Illuminate\Support\Arr;
 use BADDIServices\ClnkGO\Models\TwitterUser;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -30,7 +31,7 @@ class TwitterUserRespository
         return TwitterUser::query()
             ->updateOrCreate(
                 [TwitterUser::ID_COLUMN => $attributes[TwitterUser::ID_COLUMN]],
-                $attributes
+                Arr::except($attributes, TwitterUser::ID_COLUMN)
             );
     }
 

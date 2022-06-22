@@ -8,12 +8,13 @@
 
 namespace BADDIServices\ClnkGO\Repositories;
 
-use BADDIServices\ClnkGO\App;
-use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use BADDIServices\ClnkGO\App;
 use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
 
 class TweetRespository
 {
@@ -75,7 +76,7 @@ class TweetRespository
         return Tweet::query()
             ->updateOrCreate(
                 [Tweet::ID_COLUMN => $attributes[Tweet::ID_COLUMN]],
-                $attributes
+                Arr::except($attributes, Tweet::ID_COLUMN)
             );
     }
 

@@ -10,6 +10,7 @@ namespace BADDIServices\ClnkGO\Repositories;
 
 use BADDIServices\ClnkGO\Models\TwitterMedia;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 
 class TwitterMediaRepository
 {
@@ -30,7 +31,7 @@ class TwitterMediaRepository
         return TwitterMedia::query()
             ->updateOrCreate(
                 [TwitterMedia::ID_COLUMN => $attributes[TwitterMedia::ID_COLUMN]],
-                $attributes
+                Arr::except($attributes, TwitterMedia::ID_COLUMN)
             );
     }
 
