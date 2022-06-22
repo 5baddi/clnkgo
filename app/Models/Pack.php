@@ -38,15 +38,15 @@ class Pack extends ModelEntity
     public const PAYOUT_METHODS = 2;
     public const REPORTING = 3;
     public const CUSTOMIZATION = 4;
-    public const SUPPORT = 5;
     public const REVENUE_NOT_SHARED = 5;
 
     public const ALL_REQUESTS_ACCESS = 1;
     public const INSTANT_REQUEST_NOTIFICATIONS = 2;
     public const KEYWORDS = 3;
     public const CANNED_RESPONSES = 4;
-    public const CANCEL_ANYTIME = 5;
-    public const MULTIPLE_EMAILS_SENDER = 6;
+    public const MULTIPLE_EMAILS_SENDER = 5;
+    public const CANCEL_ANYTIME = 6;
+    public const SUPPORT = 7;
 
     /** @var array */
     public const INTERVAL = [
