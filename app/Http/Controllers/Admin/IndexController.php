@@ -14,6 +14,6 @@ class IndexController extends AdminController
 {
     public function __invoke()
     {
-        return view('admin.index');
+        return $this->render('admin.index');
     }
 }
