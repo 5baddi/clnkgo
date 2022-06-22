@@ -9,6 +9,7 @@
 namespace BADDIServices\ClnkGO;
 
 use App\Models\User;
+use BADDIServices\ClnkGO\Entities\ArrayValue;
 use Throwable;
 use Bugsnag\Client;
 use Bugsnag\Configuration;
@@ -54,6 +55,8 @@ class AppLogger
 
     public static function error(Throwable $exception, string $context, array $extra = [])
     {
+        $extraAsJson = new ArrayValue($extra);
+
         Log::error($exception->getMessage(), [
             'context'   =>  $context,
             'user'      =>  optional(self::$user)->id,
@@ -61,7 +64,7 @@ class AppLogger
             'line'      =>  $exception->getLine(),
             'file'      =>  $exception->getFile(),
             'trace'     =>  $exception->getTraceAsString(),
-            'extra'     =>  json_encode($extra)
+            'extra'     =>  json_encode($extraAsJson->jsonSerialize(), JSON_PRETTY_PRINT)
         ]);
 
         if (! self::$client) {
@@ -73,10 +76,12 @@ class AppLogger
     
     public static function info(string $message, string $context, array $extra = [])
     {
+        $extraAsJson = new ArrayValue($extra);
+
         $infoContext = [
             'context'   =>  $context,
             'user'      =>  optional(self::$user)->id,
-            'extra'     =>  json_encode($extra)
+            'extra'     =>  json_encode($extraAsJson->jsonSerialize(), JSON_PRETTY_PRINT)
         ];
 
         Log::info($message, $infoContext);
