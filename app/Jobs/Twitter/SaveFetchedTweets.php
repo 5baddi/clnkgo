@@ -55,18 +55,23 @@ class SaveFetchedTweets implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
-    {
+    public function handle(
+        TwitterService $twitterService,
+        TweetService $tweetService,
+        TwitterUserService $twitterUserService,
+        TwitterMediaService $twitterMediaService,
+        EmojiParser $emojiParser,
+    ) {
         if (count($this->tweets) === 0) {
             return;
         }
 
         try {
-            $this->twitterService = app(TwitterService::class);
-            $this->tweetService = app(TweetService::class);
-            $this->twitterUserService = app(TwitterUserService::class);
-            $this->twitterMediaService = app(TwitterMediaService::class);
-            $this->emojiParser = app(EmojiParser::class);
+            $this->twitterService = $twitterService;
+            $this->tweetService = $tweetService;
+            $this->twitterUserService = $twitterUserService;
+            $this->twitterMediaService = $twitterMediaService;
+            $this->emojiParser = $emojiParser;
 
             $this->saveTweets($this->hashtag, $this->tweets);
 
@@ -76,7 +81,11 @@ class SaveFetchedTweets implements ShouldQueue
                 self::dispatch($this->hashtag, $tweets->toArray());
             }
         } catch (Throwable $e) {
-            AppLogger::error($e, 'job:save:latest-tweets');
+            AppLogger::error(
+                $e,
+                'job:save:latest-tweets',
+                ['hashtag' => $this->hashtag, 'tweets' => $this->tweets]
+            );
         }
     }
 
