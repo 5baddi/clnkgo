@@ -20,6 +20,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use BADDIServices\ClnkGO\Models\TwitterUser;
 use BADDIServices\ClnkGO\Domains\TwitterService;
+use BADDIServices\ClnkGO\Helpers\EmojiParser;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 
@@ -55,7 +56,8 @@ class SaveTweetUser implements ShouldQueue
      */
     public function handle(
         TwitterService $twitterService,
-        TwitterUserService $twitterUserService
+        TwitterUserService $twitterUserService,
+        EmojiParser $emojiParser
     ) {
         try {
             DB::beginTransaction();
@@ -72,8 +74,8 @@ class SaveTweetUser implements ShouldQueue
                 $website = extractWebsite($emailMatches[0] ?? '');
             }
 
-            $emailMatches[0] = $this->emojiParser->replace($emailMatches[0] ?? null, '');
-            $website = $this->emojiParser->replace($website ?? null, '');
+            $emailMatches[0] = $emojiParser->replace($emailMatches[0] ?? null, '');
+            $website = $emojiParser->replace($website ?? null, '');
 
 
             $twitterUserService->save(

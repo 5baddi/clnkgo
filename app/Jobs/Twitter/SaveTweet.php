@@ -57,7 +57,7 @@ class SaveTweet implements ShouldQueue
     public function handle(
         TweetService $tweetService,
         TwitterService $twitterService,
-        EmojiParser $emojiParser,
+        EmojiParser $emojiParser
     ) {
         try {
             DB::beginTransaction();
