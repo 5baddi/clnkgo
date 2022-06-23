@@ -20,6 +20,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use BADDIServices\ClnkGO\Helpers\EmojiParser;
 use BADDIServices\ClnkGO\Services\TweetService;
+use BADDIServices\ClnkGO\Domains\TwitterService;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 
 class SaveTweet implements ShouldQueue
@@ -55,6 +56,7 @@ class SaveTweet implements ShouldQueue
      */
     public function handle(
         TweetService $tweetService,
+        TwitterService $twitterService,
         EmojiParser $emojiParser,
     ) {
         try {
@@ -69,7 +71,7 @@ class SaveTweet implements ShouldQueue
                 $this->hashtag,
                 [
                     Tweet::ID_COLUMN                    => $this->tweet['id'],
-                    Tweet::URL_COLUMN                   => $this->twitterService->getTweetUrl($this->tweet['author_id'], $this->tweet['id']),
+                    Tweet::URL_COLUMN                   => $twitterService->getTweetUrl($this->tweet['author_id'], $this->tweet['id']),
                     Tweet::PUBLISHED_AT_COLUMN          => Carbon::parse($this->tweet['created_at']),
                     Tweet::SOURCE_COLUMN                => $this->tweet['source'] ?? null,
                     Tweet::AUTHOR_ID_COLUMN             => $this->tweet['author_id'],

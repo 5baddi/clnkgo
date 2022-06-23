@@ -19,6 +19,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use BADDIServices\ClnkGO\Models\TwitterUser;
+use BADDIServices\ClnkGO\Domains\TwitterService;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 
@@ -53,6 +54,7 @@ class SaveTweetUser implements ShouldQueue
      * @return void
      */
     public function handle(
+        TwitterService $twitterService,
         TwitterUserService $twitterUserService
     ) {
         try {
@@ -88,7 +90,7 @@ class SaveTweetUser implements ShouldQueue
                     TwitterUser::DESCRIPTION_COLUMN           => $this->user['description'] ?? null,
                     TwitterUser::PINNED_TWEET_ID_COLUMN       => $this->user['pinned_tweet_id'] ?? null,
                     TwitterUser::LOCATION_COLUMN              => $this->user['location'] ?? null,
-                    TwitterUser::URL_COLUMN                   => (is_string($this->user['url']) && strlen($this->user['url']) !== 0)  ? $this->user['url'] : $this->twitterService->getUserUrl($this->user['username']),
+                    TwitterUser::URL_COLUMN                   => (is_string($this->user['url']) && strlen($this->user['url']) !== 0)  ? $this->user['url'] : $twitterService->getUserUrl($this->user['username']),
                     TwitterUser::REGISTERED_AT_COLUMN         => Carbon::parse($this->user['created_at'] ?? now()),
                     TwitterUser::ENTITIES_COLUMN              => json_encode($this->user['entities'] ?? null),
                     TwitterUser::PUBLIC_METRICS_COLUMN        => json_encode($this->user['public_metrics'] ?? null),

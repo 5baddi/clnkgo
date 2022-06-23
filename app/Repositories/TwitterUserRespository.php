@@ -28,8 +28,6 @@ class TwitterUserRespository
 
     public function save(array $attributes): TwitterUser
     {
-        dd([TwitterUser::ID_COLUMN => $attributes[TwitterUser::ID_COLUMN]],
-        Arr::except($attributes, TwitterUser::ID_COLUMN));
         return TwitterUser::query()
             ->updateOrCreate(
                 [TwitterUser::ID_COLUMN => $attributes[TwitterUser::ID_COLUMN]],
