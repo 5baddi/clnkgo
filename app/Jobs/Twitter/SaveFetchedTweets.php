@@ -95,7 +95,7 @@ class SaveFetchedTweets implements ShouldQueue
                 if (Arr::has($tweet, Tweet::ID_COLUMN)) {
                     SaveTweet::dispatch($hashtag, $tweet)
                         ->onQueue('tweets')
-                    ->delay(5);
+                        ->delay(5);
                 }
 
                 if (isset($tweet['attachments'], $tweet['attachments']['media_keys'])) {
@@ -109,7 +109,7 @@ class SaveFetchedTweets implements ShouldQueue
 
                                     SaveTweetMedia::dispatch($tweet[Tweet::ID_COLUMN], $media)
                                         ->onQueue('tweets')
-                    ->delay(5);
+                                        ->delay(5);
                                 });
 
                             
