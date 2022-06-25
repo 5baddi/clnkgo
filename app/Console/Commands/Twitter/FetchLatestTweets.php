@@ -95,5 +95,7 @@ class FetchLatestTweets extends Command
         if (! empty($tweets['meta']['next_token'])) {
             return $this->fetchTweets($hashtag, $startTimeOption, $tweets['meta']['next_token']);
         }
+
+        dd($this->tweets);
     }
 }
