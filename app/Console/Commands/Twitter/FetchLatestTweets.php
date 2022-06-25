@@ -13,6 +13,7 @@ use BADDIServices\ClnkGO\Services\AppSettingService;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 use BADDIServices\ClnkGO\Services\TwitterMediaService;
 use BADDIServices\ClnkGO\Jobs\Twitter\SaveFetchedTweets;
+use Illuminate\Support\Collection;
 
 class FetchLatestTweets extends Command
 {
@@ -30,6 +31,9 @@ class FetchLatestTweets extends Command
      */
     protected $description = 'Fetch latest tweets by hashtags';
 
+    /** @var Collection */
+    private $tweets;
+
     /**
      * Create a new command instance.
      *
@@ -43,6 +47,8 @@ class FetchLatestTweets extends Command
         private AppSettingService $appSettingService
     ) {
         parent::__construct();
+
+        $this->tweets = Collection::make();
     }
 
     /**
@@ -59,13 +65,17 @@ class FetchLatestTweets extends Command
         try {
             $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
 
-            collect($hashtags ?? [])->each(function ($hashtag) use ($startTimeOption) {
-                $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption);
+            collect($hashtags ?? [])
+                ->each(function ($hashtag) use ($startTimeOption) {
+                    $this->fetchTweets($hashtag, $startTimeOption);
 
-                SaveFetchedTweets::dispatch($hashtag, $tweets->toArray())
-                    ->onQueue('tweets')
-                    ->delay(5);
-            });
+                    $this->tweets
+                        ->each(function (Collection $tweets) use ($hashtag) {
+                            SaveFetchedTweets::dispatch($hashtag, $tweets->toArray())
+                                ->onQueue('tweets')
+                                ->delay(15);
+                        });
+                });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:twitter:latest-tweets', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while fetching latest tweets: %s", $e->getMessage()));
@@ -74,5 +84,16 @@ class FetchLatestTweets extends Command
         }
 
         $this->info("Done fetching latest tweets");
+    }
+
+    private function fetchTweets(string $hashtag, string $startTimeOption, ?string $nextToken = null): void
+    {
+        $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption, $nextToken);
+
+        $this->tweets->add($tweets);
+
+        if (! empty($tweets['meta']['next_token'])) {
+            return $this->fetchTweets($hashtag, $startTimeOption, $tweets['meta']['next_token']);
+        }
     }
 }
