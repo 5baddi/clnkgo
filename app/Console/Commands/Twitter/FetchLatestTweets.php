@@ -47,8 +47,6 @@ class FetchLatestTweets extends Command
         private AppSettingService $appSettingService
     ) {
         parent::__construct();
-
-        $this->tweets = Collection::make();
     }
 
     /**
@@ -67,6 +65,8 @@ class FetchLatestTweets extends Command
 
             collect($hashtags ?? [])
                 ->each(function ($hashtag) use ($startTimeOption) {
+                    $this->tweets = Collection::make();
+
                     $this->fetchTweets($hashtag, $startTimeOption);
 
                     $this->tweets

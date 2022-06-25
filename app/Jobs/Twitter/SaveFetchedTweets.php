@@ -18,7 +18,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use BADDIServices\ClnkGO\Domains\TwitterService;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use BADDIServices\ClnkGO\Jobs\Twitter\SaveTweetUser;
 use BADDIServices\ClnkGO\Jobs\Twitter\SaveTweetMedia;
@@ -61,22 +60,11 @@ class SaveFetchedTweets implements ShouldQueue
         }
 
         try {
-            /** @var TwitterService */
-            $twitterService = app(TwitterService::class);
-
             DB::beginTransaction();
 
             $this->saveTweets($this->hashtag, $this->tweets);
 
             DB::commit();
-
-            if (! empty($this->tweets['meta']['next_token'])) {
-                $tweets = $twitterService->fetchTweetsByHashtags($this->hashtag, null, $this->tweets['meta']['next_token']);
-
-                self::dispatch($this->hashtag, $tweets->toArray())
-                    ->onQueue('tweets')
-                    ->delay(5);
-            }
         } catch (Throwable $e) {
             DB::rollBack();
 
