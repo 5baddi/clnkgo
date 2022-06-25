@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('queue:work --timeout=2000 --sleep=3 --tries=3 --daemon')->everyMinute()->withoutOverlapping()->runInBackground();
+        $schedule->command('queue:work --queue=default,emails,tweets --timeout=2000 --sleep=3 --tries=3 --daemon')->everyMinute()->withoutOverlapping()->runInBackground();
         
         $schedule->command('twitter:latest-tweets')->everyFifteenMinutes()->withoutOverlapping();
         $schedule->command('twitter:fetch-user-profile')->hourly()->withoutOverlapping();
