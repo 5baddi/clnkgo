@@ -74,7 +74,8 @@ class SaveFetchedTweets implements ShouldQueue
                 $tweets = $twitterService->fetchTweetsByHashtags($this->hashtag, null, $this->tweets['meta']['next_token']);
 
                 self::dispatch($this->hashtag, $tweets->toArray())
-                    ->onQueue('tweets');
+                    ->onQueue('tweets')
+                    ->delay(5);
             }
         } catch (Throwable $e) {
             DB::rollBack();
@@ -93,7 +94,8 @@ class SaveFetchedTweets implements ShouldQueue
             ->map(function ($tweet) use ($hashtag, $tweets) {
                 if (Arr::has($tweet, Tweet::ID_COLUMN)) {
                     SaveTweet::dispatch($hashtag, $tweet)
-                        ->onQueue('tweets');
+                        ->onQueue('tweets')
+                    ->delay(5);
                 }
 
                 if (isset($tweet['attachments'], $tweet['attachments']['media_keys'])) {
@@ -106,7 +108,8 @@ class SaveFetchedTweets implements ShouldQueue
                                     }
 
                                     SaveTweetMedia::dispatch($tweet[Tweet::ID_COLUMN], $media)
-                                        ->onQueue('tweets');
+                                        ->onQueue('tweets')
+                    ->delay(5);
                                 });
 
                             
@@ -121,7 +124,8 @@ class SaveFetchedTweets implements ShouldQueue
                 }
 
                 SaveTweetUser::dispatch($user)
-                    ->onQueue('tweets');
+                    ->onQueue('tweets')
+                    ->delay(5);
             });
     }
 }

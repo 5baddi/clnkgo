@@ -3,16 +3,16 @@
 namespace App\Console\Commands\Twitter;
 
 use Throwable;
-use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\App;
+use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\AppSetting;
 use BADDIServices\ClnkGO\Services\TweetService;
 use BADDIServices\ClnkGO\Domains\TwitterService;
-use BADDIServices\ClnkGO\Jobs\Twitter\SaveFetchedTweets;
 use BADDIServices\ClnkGO\Services\AppSettingService;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 use BADDIServices\ClnkGO\Services\TwitterMediaService;
+use BADDIServices\ClnkGO\Jobs\Twitter\SaveFetchedTweets;
 
 class FetchLatestTweets extends Command
 {
@@ -62,7 +62,9 @@ class FetchLatestTweets extends Command
             collect($hashtags ?? [])->each(function ($hashtag) use ($startTimeOption) {
                 $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption);
 
-                SaveFetchedTweets::dispatch($hashtag, $tweets->toArray());
+                SaveFetchedTweets::dispatch($hashtag, $tweets->toArray())
+                    ->onQueue('tweets')
+                    ->delay(5);
             });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:twitter:latest-tweets', ['execution_time' => (microtime(true) - $startTime)]);
