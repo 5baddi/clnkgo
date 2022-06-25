@@ -54,12 +54,18 @@ class SaveTweetUser implements ShouldQueue
      *
      * @return void
      */
-    public function handle(
-        TwitterService $twitterService,
-        TwitterUserService $twitterUserService,
-        EmojiParser $emojiParser
-    ) {
+    public function handle()
+    {
         try {
+            /** @var TwitterService */
+            $twitterService = app(TwitterService::class);
+
+            /** @var TwitterUserService */
+            $twitterUserService = app(TwitterUserService::class);
+
+            /** @var EmojiParser */
+            $emojiParser = app(EmojiParser::class);
+
             DB::beginTransaction();
 
             $website = extractWebsite($this->user['description'] ?? '');

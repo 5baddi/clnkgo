@@ -54,14 +54,16 @@ class SaveFetchedTweets implements ShouldQueue
      *
      * @return void
      */
-    public function handle(
-        TwitterService $twitterService
-    ) {
+    public function handle()
+    {
         if (count($this->tweets) === 0) {
             return;
         }
 
         try {
+            /** @var TwitterService */
+            $twitterService = app(TwitterService::class);
+
             DB::beginTransaction();
 
             $this->saveTweets($this->hashtag, $this->tweets);

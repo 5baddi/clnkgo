@@ -54,12 +54,18 @@ class SaveTweet implements ShouldQueue
      *
      * @return void
      */
-    public function handle(
-        TweetService $tweetService,
-        TwitterService $twitterService,
-        EmojiParser $emojiParser
-    ) {
+    public function handle()
+    {
         try {
+            /** @var TweetService */
+            $tweetService = app(TweetService::class);
+
+            /** @var TwitterService */
+            $twitterService = app(TwitterService::class);
+
+            /** @var EmojiParser */
+            $emojiParser = app(EmojiParser::class);
+
             DB::beginTransaction();
 
             $dueAt = extractDate($this->tweet['text']);

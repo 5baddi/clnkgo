@@ -51,10 +51,12 @@ class SaveTweetMedia implements ShouldQueue
      *
      * @return void
      */
-    public function handle(
-        TwitterMediaService $twitterMediaService
-    ) {
+    public function handle()
+    {
         try {
+            /** @var TwitterMediaService */
+            $twitterMediaService = app(TwitterMediaService::class);
+
             DB::beginTransaction();
 
             $twitterMediaService->save(
