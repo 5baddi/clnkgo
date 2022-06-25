@@ -118,6 +118,7 @@ class TwitterService extends Service
 
             return collect();
         } catch (Exception | ClientException | RequestException $e) {
+            dd($e);
             AppLogger::error($e, 'twitter:fetch-by-hashtags');
 
             throw new FetchByHashtagFailed();
