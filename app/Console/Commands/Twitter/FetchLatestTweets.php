@@ -86,7 +86,7 @@ class FetchLatestTweets extends Command
         $this->info("Done fetching latest tweets");
     }
 
-    private function fetchTweets(string $hashtag, string $startTimeOption, ?string $nextToken = null): mixed
+    private function fetchTweets(string $hashtag, string $startTimeOption, ?string $nextToken = null): callable
     {
         $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption, $nextToken);
 
