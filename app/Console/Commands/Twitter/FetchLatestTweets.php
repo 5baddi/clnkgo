@@ -61,7 +61,7 @@ class FetchLatestTweets extends Command
         $this->info("Start fetching latest tweets");
         $startTime = microtime(true);
         $startTimeOption = ! is_null($this->option('start-time')) ? $this->option('start-time') : '-15 minutes';
-dd($startTimeOption);
+
         try {
             $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
 
