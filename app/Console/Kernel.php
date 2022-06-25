@@ -42,12 +42,12 @@ class Kernel extends ConsoleKernel
             ->hourly()
             ->withoutOverlapping();
 
-        $schedule->command('mail:new-request')
-            ->hourly()
-            ->withoutOverlapping();
+        // $schedule->command('mail:new-request')
+        //     ->hourly()
+        //     ->withoutOverlapping();
 
-        $schedule->command('app:update-most-used-keywords')
-            ->weekly();
+        // $schedule->command('app:update-most-used-keywords')
+        //     ->weekly();
     }
 
     /**
