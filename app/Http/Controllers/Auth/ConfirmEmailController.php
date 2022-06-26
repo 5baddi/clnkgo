@@ -38,11 +38,8 @@ class ConfirmEmailController extends Controller
             DB::commit();
 
             return redirect()
-                ->route('dashboard')
-                ->with(
-                    'alert', 
-                    new Alert('Your email successfully confirmed.', 'success')
-                );
+                ->route('signin')
+                ->with('success', 'Your email successfully confirmed.');
         } catch (Throwable $e){
             DB::rollBack();
 
