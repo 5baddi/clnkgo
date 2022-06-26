@@ -36,7 +36,8 @@ class WelcomeMailFired implements ShouldQueue
         $data = [
             'user'      => $user,
             'subject'   => $subject,
-            'token'     => $confirmationToken
+            'token'     => $confirmationToken,
+            'to'        => $user->email
         ];
 
         Mail::send($template, $data, function($message) use ($user, $subject) {
