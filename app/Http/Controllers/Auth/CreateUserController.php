@@ -68,7 +68,6 @@ class CreateUserController extends Controller
                 ->with('success', 'We sent an email link to get started with our platform 🥳');
         } catch (Throwable $e) {
             DB::rollBack();
-            dd($e);
 
             AppLogger::error($e, 'auth:create-account', $request->all());
             
