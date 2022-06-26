@@ -7,7 +7,7 @@
 @section('content')
 <div class="row row-cards">
     <div class="col-8 d-flex">
-        <div class="card">
+        <div class="col-12 card">
             <div class="card-header" style="border: none;">
                 <div class="card-actions">
                     @include('dashboard.bookmark-button')
