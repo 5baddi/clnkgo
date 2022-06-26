@@ -66,16 +66,11 @@ class CreateUserController extends Controller
             return redirect()
                 ->route('signin')
                 ->with('success', 'We sent an email link to get started with our platform 🥳');
-        } catch (ValidationException $ex) {
+        } catch (Throwable $e) {
             DB::rollBack();
+            dd($e);
 
-            AppLogger::error($ex, 'client:create-account', $request->all());
-
-            return redirect('/signup')->withInput()->withErrors($ex->errors());
-        }  catch (Throwable $ex) {
-            DB::rollBack();
-
-            AppLogger::error($ex, 'client:create-account', $request->all());
+            AppLogger::error($e, 'auth:create-account', $request->all());
             
             return redirect()->route('signup')->withInput()->with("error", "Internal server error");
         }

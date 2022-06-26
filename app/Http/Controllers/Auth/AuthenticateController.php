@@ -74,12 +74,7 @@ class AuthenticateController extends Controller
             return redirect()
                 ->route('dashboard')
                 ->with('success', 'Welcome back ' . strtoupper($user->first_name));
-        } catch (ValidationException $e) {
-            return redirect()
-                ->route('signin')
-                ->withInput($request->only([User::EMAIL_COLUMN]))
-                ->withErrors($e->errors());
-        }  catch (Throwable $e) {
+        } catch (Throwable $e) {
             AppLogger::error($e, 'auth:signin', ['playload' => $request->all()]);
 
             return redirect()
