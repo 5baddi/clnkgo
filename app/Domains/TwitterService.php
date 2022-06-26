@@ -112,6 +112,7 @@ class TwitterService extends Service
                 );
 
             $data = json_decode($response->getBody(), true);
+            dd($data);
             if ($response->getStatusCode() === Response::HTTP_OK && isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
                 return collect($data);
             }
