@@ -18,7 +18,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\Middleware\WithoutOverlapping;
 use BADDIServices\ClnkGO\Jobs\Twitter\SaveTweetUser;
 use BADDIServices\ClnkGO\Jobs\Twitter\SaveTweetMedia;
 
@@ -42,11 +41,6 @@ class SaveFetchedTweets implements ShouldQueue
         public string $hashtag,
         public array $tweets = []
     ) {}
-
-    public function middleware()
-    {
-        return [(new WithoutOverlapping($this->hashtag))->releaseAfter(30)];
-    }
 
     /**
      * Execute the job.
