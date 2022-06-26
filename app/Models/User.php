@@ -113,6 +113,10 @@ class User extends Authenticatable
     
     public function isEmailConfirmed(): bool
     {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
         return is_null($this->getAttribute(self::CONFIRMATION_TOKEN_COLUMN))
             && ! is_null($this->getAttribute(self::VERIFIED_AT_COLUMN));
     }
