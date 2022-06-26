@@ -40,7 +40,7 @@
 <tr>
     <td bgcolor="#ffffff" align="left"
         style="padding: 20px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-        <p style="margin: 0;"><a href="{{ route('auth.confirm-email') }}" target="_blank"
+        <p style="margin: 0;"><a href="{{ route('auth.confirm-email', ['token' => $token]) }}" target="_blank"
                 style="color: #04AF90;">{{ route('auth.confirm-email', ['token' => $token]) }}</a></p>
     </td>
 </tr>
