@@ -89,13 +89,13 @@ class FetchLatestTweets extends Command
     private function fetchTweets(string $hashtag, string $startTimeOption, ?string $nextToken = null)
     {
         $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption, $nextToken);
-dd($tweets);
-        $this->tweets->add($tweets);
+
+        if ($tweets->count() > 0) {
+            $this->tweets->add($tweets);
+        }
 
         if (! empty($tweets['meta']['next_token'])) {
             return $this->fetchTweets($hashtag, $startTimeOption, $tweets['meta']['next_token']);
         }
-
-        dd($this->tweets);
     }
 }
