@@ -61,14 +61,11 @@ class CreateUserController extends Controller
 
             DB::commit();
 
-            Event::dispatch(new WelcomeMail($user->getId()));
+            Event::dispatch(new WelcomeMail($user->getId(), $user->getConfirmationToken()));
 
-            $authenticateUser = Auth::loginUsingId($user->getId());
-            if (! $authenticateUser) {
-                return redirect('/signin')->with('error', 'Something going wrong with the authentification');
-            }
-
-            return redirect('/dashboard')->with('success', 'Account created successfully');
+            return redirect()
+                ->route('auth.signin')
+                ->with('success', 'We sent an email link to get started with our platform 🥳');
         } catch (ValidationException $ex) {
             DB::rollBack();
 

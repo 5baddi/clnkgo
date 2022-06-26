@@ -10,16 +10,17 @@ namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
 use BADDIServices\ClnkGO\Models\UserLinkedEmail;
+use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
 use BADDIServices\ClnkGO\Repositories\UserRespository;
 use BADDIServices\ClnkGO\Events\LinkedEmail\LinkedEmailConfirmationMail;
-use Illuminate\Support\Facades\Event;
 
 class UserService
 {
@@ -80,6 +81,16 @@ class UserService
     public function findByEmail(string $email): ?User
     {
         return $this->userRepository->findByEmail($email);
+    }
+    
+    public function findByToken(string $token): ?User
+    {
+        return $this->userRepository->findByToken($token);
+    }
+    
+    public function confirmEmail(User $user): bool
+    {
+        return $this->userRepository->confirmEmail($user->getId());
     }
     
     public function findByCustomerId(int $customerId): ?User
@@ -161,6 +172,10 @@ class UserService
 
         if ($filteredAttributes->has(User::KEYWORDS_COLUMN)) {
             $filteredAttributes->put(User::KEYWORDS_COLUMN, strtolower($filteredAttributes->get(User::KEYWORDS_COLUMN)));
+        }
+        
+        if (! $filteredAttributes->has(User::CONFIRMATION_TOKEN_COLUMN)) {
+            $filteredAttributes->put(User::CONFIRMATION_TOKEN_COLUMN, Str::substr(md5($filteredAttributes->get(User::EMAIL_COLUMN)), 0, 60));
         }
 
         return $this->userRepository->update($user, $filteredAttributes->toArray());

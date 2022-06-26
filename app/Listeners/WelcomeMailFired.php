@@ -27,12 +27,16 @@ class WelcomeMailFired implements ShouldQueue
             return;
         }
 
+        /** @var string */
+        $confirmationToken = $event->confirmationToken;
+
         $template = 'emails.auth.welcome';
         $subject = sprintf('Welcome to %s', config('app.name'));
 
         $data = [
             'user'      => $user,
-            'subject'   => $subject
+            'subject'   => $subject,
+            'token'     => $confirmationToken
         ];
 
         Mail::send($template, $data, function($message) use ($user, $subject) {

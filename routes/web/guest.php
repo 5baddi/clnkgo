@@ -6,15 +6,16 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\SignInController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\SignUpController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\SignOutController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\AuthenticateController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\ConfirmEmailController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword as ResetPassword;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT);
@@ -51,6 +52,8 @@ Route::middleware('guest')
         Route::post('/auth/token', ResetPassword\SendResetTokenController::class)->name('auth.reset.token');
         Route::get('/reset/{token}', ResetPassword\EditController::class)->name('password');
         Route::post('/auth/password', ResetPassword\ResetPasswordController::class)->name('auth.reset.password');
+
+        Route::get('/auth/confirm/{token}', ConfirmEmailController::class)->name('auth.confirm-email');
     });
 
 Route::middleware(['auth'])
