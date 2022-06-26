@@ -49,7 +49,7 @@ class ConfirmEmailController extends Controller
             AppLogger::error($e, 'auth:confirm-email', ['token' => $token]);
 
             return redirect()
-                ->route('auth.signin')
+                ->route('signin')
                 ->with('error', 'An occurred error while confirming your email!');
         }
     }

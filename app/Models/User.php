@@ -110,6 +110,12 @@ class User extends Authenticatable
     {
         return $this->getAttribute(self::BANNED_COLUMN) === true;
     }
+    
+    public function isEmailConfirmed(): bool
+    {
+        return is_null($this->getAttribute(self::CONFIRMATION_TOKEN_COLUMN))
+            && ! is_null($this->getAttribute(self::VERIFIED_AT_COLUMN));
+    }
 
     public function hasPassword(): bool
     {

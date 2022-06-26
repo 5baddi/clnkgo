@@ -39,6 +39,13 @@ class AuthenticateController extends Controller
                     ->with("error", "No account registred with those credentials");
             }
 
+            if (! $user->isEmailConfirmed()) {
+                return redirect()
+                    ->route('signin')
+                    ->withInput($request->only([User::EMAIL_COLUMN]))
+                    ->with('error', 'Please confirm your email first to get started with our platform!');
+            }
+
             if (! $this->userService->verifyPassword($user, $request->input(User::PASSWORD_COLUMN))) {
                 return redirect()
                     ->route('signin')

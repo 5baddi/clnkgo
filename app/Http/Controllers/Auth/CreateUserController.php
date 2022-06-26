@@ -64,7 +64,7 @@ class CreateUserController extends Controller
             Event::dispatch(new WelcomeMail($user->getId(), $user->getConfirmationToken()));
 
             return redirect()
-                ->route('auth.signin')
+                ->route('signin')
                 ->with('success', 'We sent an email link to get started with our platform 🥳');
         } catch (ValidationException $ex) {
             DB::rollBack();
