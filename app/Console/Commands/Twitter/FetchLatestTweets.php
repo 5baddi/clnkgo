@@ -3,8 +3,10 @@
 namespace App\Console\Commands\Twitter;
 
 use Throwable;
+use Illuminate\Support\Str;
 use BADDIServices\ClnkGO\App;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\AppSetting;
 use BADDIServices\ClnkGO\Services\TweetService;
@@ -13,7 +15,6 @@ use BADDIServices\ClnkGO\Services\AppSettingService;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 use BADDIServices\ClnkGO\Services\TwitterMediaService;
 use BADDIServices\ClnkGO\Jobs\Twitter\SaveFetchedTweets;
-use Illuminate\Support\Collection;
 
 class FetchLatestTweets extends Command
 {
@@ -60,6 +61,10 @@ class FetchLatestTweets extends Command
         $startTime = microtime(true);
         $startTimeOption = ! is_null($this->option('start-time')) ? $this->option('start-time') : '-15 minutes';
 
+        if (! Str::startsWith($startTimeOption, '-')) {
+            $startTimeOption = '-' . $startTimeOption;
+        }
+
         try {
             $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
 
@@ -88,7 +93,6 @@ class FetchLatestTweets extends Command
 
     private function fetchTweets(string $hashtag, string $startTimeOption, ?string $nextToken = null)
     {
-        dd($startTimeOption);
         $tweets = $this->twitterService->fetchTweetsByHashtags($hashtag, $startTimeOption, $nextToken);
 
         if ($tweets->count() > 0) {
