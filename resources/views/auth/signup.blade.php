@@ -8,8 +8,13 @@
             <h6 class="h3" style="color: inherit !important;">Welcome to {{ config('app.name') }}</h6>
             <p class="text-muted mb-0">Let's get started by creating your account</p>
             @if(Session::has('error'))
-                <div class="invalid-feedback">
+                <div class="invalid-feedback" style="font-size: 14pt !important;">
                     {{ Session::get('error') }}
+                </div>
+            @endif
+            @if(Session::has('success'))
+                <div class="valid-feedback" style="font-size: 14pt !important;">
+                    {{ Session::get('success') }}
                 </div>
             @endif
         </div>
