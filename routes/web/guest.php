@@ -48,12 +48,12 @@ Route::middleware('guest')
         Route::get('/signin', SignInController::class)->name('signin');
         Route::post('/auth/signin', AuthenticateController::class)->name('auth.signin');
 
+        Route::get('/auth/confirm/{token}', ConfirmEmailController::class)->name('auth.confirm-email');
+
         Route::get('/reset', ResetPassword\IndexController::class)->name('reset');
         Route::post('/auth/token', ResetPassword\SendResetTokenController::class)->name('auth.reset.token');
         Route::get('/reset/{token}', ResetPassword\EditController::class)->name('password');
         Route::post('/auth/password', ResetPassword\ResetPasswordController::class)->name('auth.reset.password');
-
-        Route::get('/auth/confirm/{token}', ConfirmEmailController::class)->name('auth.confirm-email');
     });
 
 Route::middleware(['auth'])
