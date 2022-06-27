@@ -16,7 +16,7 @@
     <link href="{{ asset('assets/css/bootstrap-tagsinput.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/baddi.services.css') }}" rel="stylesheet"/>
   </head>
-  <body class="border-top-wide border-primary d-flex flex-column">
+  <body class="border-top-wide d-flex flex-column">
     <div class="page page-center">
       <div class="container-tight py-4">
         <div class="empty">
