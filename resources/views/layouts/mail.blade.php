@@ -143,20 +143,20 @@
                 </td>
             </tr>
             <tr>
-                <td bgcolor="#f4f4f4" align="center" style="padding: 0px;">
+                <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                        <tr>
+                            <td style="padding: 10px 0px 0px 0px"></td>
+                        </tr>
                         <tr>
                             <td bgcolor="#fff" align="left"
                                 style="padding: 20px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                                 <h1 style="font-weight: 400; font-size: 1.5rem;">@yield('title')</h1>
                             </td>
                         </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                        <tr>
+                            <td style="padding: 10px 0px 0px 0px"></td>
+                        </tr>
                         @yield('content')
                         @if(! isset($showHelpSection) || $showHelpSection !== false)
                         @include('partials.mail.sections.help')
