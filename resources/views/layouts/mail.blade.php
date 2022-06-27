@@ -108,7 +108,6 @@
             We're thrilled to have you here! Get ready to dive into your new account.
         </div>
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <!-- LOGO -->
             <tr>
                 <td bgcolor="#f4f6fa" align="center">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
@@ -119,55 +118,45 @@
                 </td>
             </tr>
             <tr>
-                <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
+                <td bgcolor="#f4f6fa" align="center" style="padding: 0px;">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                         <tr>
-                            <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                                    <tr>
-                                        <td bgcolor="#04AF90" align="left"
-                                            style="padding: 10px 30px 10px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;"></td>
-                                    </tr>
-                                </table>
+                            <td bgcolor="#04AF90" align="center" valign="top"
+                                style="padding: 20px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
+                                <a href="{{ route('home') }}" target="_blank">
+                                    <img src="{{ asset('assets/img/logo-white.png') }}" width="200" height="auto"
+                                        style="display: block; border: 0px;" />
+                                </a>
                             </td>
                         </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor="#f4f4f4" align="center" style="padding: 0px;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                         <tr>
-                            <td bgcolor="#f4f6fa" align="center" style="padding: 0px 10px 0px 10px;">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                                    <tr>
-                                        <td bgcolor="#04AF90" align="center" valign="top"
-                                            style="padding: 20px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                                            <a href="{{ route('home') }}" target="_blank">
-                                                <img src="{{ asset('assets/img/logo-white.png') }}" width="200" height="auto"
-                                                    style="display: block; border: 0px;" />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
+                            <td bgcolor="#04AF90" align="left"
+                                style="padding: 10px 30px 10px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;"></td>
                         </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor="#f4f4f4" align="center" style="padding: 0px;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                         <tr>
-                            <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                                    <tr>
-                                        <td bgcolor="#04AF90" align="left"
-                                            style="padding: 10px 30px 10px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;"></td>
-                                    </tr>
-                                </table>
+                            <td bgcolor="#fff" align="left"
+                                style="padding: 20px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
+                                <h1 style="font-weight: 400; font-size: 1.5rem;">@yield('title')</h1>
                             </td>
                         </tr>
-                        <tr>
-                            <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                                    <tr>
-                                        <td bgcolor="#fff" align="left"
-                                            style="padding: 20px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                                            <h1 style="font-weight: 400; font-size: 1.5rem;">@yield('title')</h1>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                         @yield('content')
                         @if(! isset($showHelpSection) || $showHelpSection !== false)
                         @include('partials.mail.sections.help')
