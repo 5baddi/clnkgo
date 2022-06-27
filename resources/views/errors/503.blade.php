@@ -1,8 +1,8 @@
 @extends('layouts.errors')
 
-@section('code', '404 😭')
+{{-- @section('code', '404 😭')
 
-@section('title', __('Page Not Found'))
+@section('title', __('Temporarily down for maintenance'))
 
 @section('image')
 
@@ -11,4 +11,4 @@
 
 @endsection
 
-@section('message', __('Sorry, the page you are looking for could not be found.'))
+@section('message', __('Sorry, the page you are looking for could not be found.')) --}}
