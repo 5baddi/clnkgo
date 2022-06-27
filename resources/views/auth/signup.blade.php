@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <p class="text-muted">by clicking Sign up, you agree to our Terms of Service and that you have read our <a href="{{ env('POLICY_URL') }}" target="_blank">Privacy Policy</a>.</p>
+                <p class="text-muted">by clicking Sign up, you agree to our <a href="{{ env('TERMS_URL') }}" target="_blank">Terms of Service</a> and that you have read our <a href="{{ env('PRIVACY_URL') }}" target="_blank">Privacy Policy</a>.</p>
             </div>
             <div class="mt-4">
                 <button type="submit" class="btn btn-block btn-clnkgo">Sign up</button>
