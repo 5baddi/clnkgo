@@ -16,6 +16,13 @@ use BADDIServices\ClnkGO\Services\UserService;
 
 class WelcomeMailFired implements ShouldQueue
 {
+    /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 1;
+
     public function __construct(private UserService $userService) {}
 
     public function handle(WelcomeMail $event)

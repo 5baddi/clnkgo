@@ -17,6 +17,13 @@ use BADDIServices\ClnkGO\Events\LinkedEmail\LinkedEmailConfirmationMail;
 
 class LinkedEmailConfirmationMailFired implements ShouldQueue
 {
+    /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 1;
+
     public function __construct(private UserService $userService) {}
 
     public function handle(LinkedEmailConfirmationMail $event)

@@ -108,7 +108,6 @@
             We're thrilled to have you here! Get ready to dive into your new account.
         </div>
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <!-- LOGO -->
             <tr>
                 <td bgcolor="#f4f6fa" align="center">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
