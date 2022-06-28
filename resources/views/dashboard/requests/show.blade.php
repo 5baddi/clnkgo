@@ -60,7 +60,7 @@
     </div>
 
     <div class="col-4 d-flex">
-        <div class="card card-link">
+        <div class="col-12 card card-link">
             <div class="card-cover card-cover-blurred text-center"
                 @if($tweet->author->profile_banner_url)
                 style="background-image: url({{ $tweet->author->profile_banner_url }})"
