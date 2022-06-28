@@ -55,6 +55,7 @@ class MailUserWhenThereNewRequest extends Command
                             return true;
                         }
 
+                        /** @var \Illuminate\Database\Eloquent\Builder */
                         $query = Tweet::query()
                             ->whereDate(Tweet::CREATED_AT_COLUMN, ">=", Carbon::now()->subHour())
                             ->where(Tweet::TEXT_COLUMN, "like", "%{$keywords[0]}%");
@@ -65,9 +66,13 @@ class MailUserWhenThereNewRequest extends Command
                             $query = $query->orWhere(Tweet::TEXT_COLUMN, "like", "%{$keyword}%");
                         }
 
-                        $tweet = $query->first();
+                        $tweet = $query->get()
+                            ->shuffle()
+                            ->first();
 
-                        Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
+                        if ($tweet instanceof Tweet) {
+                            Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
+                        }
                     });
                 });
         } catch (Throwable $e) {
