@@ -67,6 +67,7 @@ class AnswerMailFired implements ShouldQueue
         $subject = sprintf('New request answer from %s', $user->getFullName());
 
         $data = [
+            'user'      => $user,
             'tweet'     => $tweet,
             'answer'    => $answer,
             'subject'   => $subject
