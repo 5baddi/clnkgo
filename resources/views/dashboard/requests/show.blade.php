@@ -41,7 +41,7 @@
                   @endif
                 </div>
                 <div class="card-actions">
-                    <a class="btn btn-clnkgo btn-xs" href="{{ route('dashboard', ['author' => $tweet->getAuthorId()]) }}">Show more</a>
+                    <a class="btn btn-clnkgo btn-xs" href="{{ route('dashboard', ['author' => $tweet->getAuthorId()]) }}">Show more queries</a>
 
                     @if($featureService->isEnabled(\BADDIServices\ClnkGO\App::MARK_AS_ANSWERED_FEATURE) && (! $answer || ! $answer->isAnswered()))
                     <form action="{{ route('dashboard.requests.answered', ['id' => $tweet->getId()]) }}" method="POST">
