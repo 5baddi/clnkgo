@@ -67,6 +67,7 @@ class CreateUserController extends Controller
                 ->route('signin')
                 ->with('success', 'We sent an email link to get started with our platform 🥳');
         } catch (Throwable $e) {
+            dd($e);
             DB::rollBack();
 
             AppLogger::error($e, 'auth:create-account', $request->all());
