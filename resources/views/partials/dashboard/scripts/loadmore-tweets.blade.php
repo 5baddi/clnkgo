@@ -95,7 +95,7 @@
           ++page;
   
           $.ajax({
-              url: `{{ route('dashboard.paginate.tweets') }}?{{ count(Request()->query()) === 0 ? '' : http_build_query(Request()->query()) . '&' }}page=${page}`,
+              url: `{{ route('dashboard.paginate.tweets') }}?page=${page}&{{ http_build_query(Request()->query()) }}`,
               type: 'get',
               success: function(response){
                 $('.custom-loader').css('display', 'none');
