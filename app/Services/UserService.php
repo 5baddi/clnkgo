@@ -145,7 +145,22 @@ class UserService
 
         $attributes[User::PASSWORD_COLUMN] = Hash::make($attributes[User::PASSWORD_COLUMN]);
 
-        return $this->userRepository->create($attributes);
+        $userAttributes = Arr::only(
+            $attributes,
+            [
+                User::FIRST_NAME_COLUMN,
+                User::LAST_NAME_COLUMN,
+                User::EMAIL_COLUMN,
+                User::PHONE_COLUMN,
+                User::PASSWORD_COLUMN,
+                User::ROLE_COLUMN, // TODO: move it to seperate update method
+                User::KEYWORDS_COLUMN,
+                User::CONFIRMATION_TOKEN_COLUMN,
+                User::IS_SUPERADMIN_COLUMN, // TODO: move it to seperate update method
+            ]
+        );
+
+        return $this->userRepository->create($userAttributes);
     }
 
     public function update(User $user, array $attributes): User
