@@ -109,7 +109,7 @@
         } else {
           $('.custom-loader').css('display', 'none');
         }
-      }, 200, false));
+      }, 3000, false));
     @endif
   });
 @endsection
