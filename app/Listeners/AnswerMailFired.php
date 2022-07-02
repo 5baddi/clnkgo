@@ -75,8 +75,8 @@ class AnswerMailFired implements ShouldQueue
 
         Mail::send($template, $data, function($message) use ($user, $email, $from, $subject) {
             $message->to($email);
-            // $message->from($from ?? $user->email, $user->getFullName());
-            $message->replyTo($user->email);
+            $message->from('noreply@clnkgo.com', $user->getFullName());
+            $message->replyTo($from ?? $user->email);
             $message->subject($subject);
         });
     }
