@@ -18,6 +18,16 @@ use BADDIServices\ClnkGO\Models\UserFavoriteTweet;
 
 class TweetQueryFilter extends QueryFilter
 {
+    public function author(?int $authorId = null) 
+    {
+        if (is_null($authorId)) {
+            return;
+        }
+
+        $this->builder
+            ->where(Tweet::AUTHOR_ID_COLUMN, $authorId);
+    }
+    
     public function term(?string $term = null) 
     {
         if (blank($term)) {

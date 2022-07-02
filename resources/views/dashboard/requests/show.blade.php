@@ -40,8 +40,10 @@
                   <span title="Due on" style="margin-left: 2rem !important;">Due {{ $tweet->due_at->diffForHumans() }}</span>
                   @endif
                 </div>
-                @if($featureService->isEnabled(\BADDIServices\ClnkGO\App::MARK_AS_ANSWERED_FEATURE) && (! $answer || ! $answer->isAnswered()))
                 <div class="card-actions">
+                    <a class="btn btn-clnkgo btn-xs" href="{{ route('dashboard', ['author' => $tweet->getAuthorId()]) }}">Show more</a>
+
+                    @if($featureService->isEnabled(\BADDIServices\ClnkGO\App::MARK_AS_ANSWERED_FEATURE) && (! $answer || ! $answer->isAnswered()))
                     <form action="{{ route('dashboard.requests.answered', ['id' => $tweet->getId()]) }}" method="POST">
                         @csrf
                         <button class="btn btn-default btn-xs" type="submit">
@@ -53,8 +55,8 @@
                             </svg>
                         </button>
                     </form>
+                    @endif
                 </div>
-                @endif
             </div>
         </div>
     </div>

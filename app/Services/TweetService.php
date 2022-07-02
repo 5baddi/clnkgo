@@ -43,6 +43,12 @@ class TweetService extends Service
             ->findById($id);
     }
     
+    public function getAuthorTweetsCount(int $authorId, ?int $ignoreTweetId = null): int
+    {
+        return $this->tweetRespository
+            ->getAuthorTweetsCount($authorId, $ignoreTweetId);
+    }
+    
     public function count(): int
     {
         return $this->tweetRespository
