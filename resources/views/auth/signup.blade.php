@@ -68,6 +68,7 @@
             <div class="mt-4">
                 <p class="text-muted">by clicking Sign up, you agree to our <a href="{{ env('TERMS_URL') }}" target="_blank">Terms of Service</a> and that you have read our <a href="{{ env('PRIVACY_URL') }}" target="_blank">Privacy Policy</a>.</p>
             </div>
+            @include('partials.h-captcha')
             <div class="mt-4">
                 <button type="submit" class="btn btn-block btn-clnkgo">Sign up</button>
             </div>
