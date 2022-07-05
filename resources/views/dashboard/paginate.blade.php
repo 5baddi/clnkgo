@@ -3,35 +3,6 @@
     @continue
     @endif
     <div class="col-12">
-        @if($user->isSuperAdmin())
-        <div class="card">
-            <div class="card-header">
-                <div>
-                  <div class="row align-items-center">
-                    <div class="col-auto">
-                      <span class="avatar rounded" style="background-image: url({{ $tweet->author->profile_image_url ?? asset('assets/img/default_avatar.png') }})"></span>
-                    </div>
-                    <div class="col">
-                      <div class="card-title">{{ $tweet->author->name }}</div>
-                      <div class="card-subtitle">{{ '@' . $tweet->author->username }}</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-actions">
-                    @php
-                        $inFavorite = $user->favorites->where(\BADDIServices\ClnkGO\Models\UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof \BADDIServices\ClnkGO\Models\UserFavoriteTweet;
-                    @endphp
-                    @include('dashboard.bookmark-button')
-                </div>
-            </div>
-            <div class="card-body p-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-100" preserveAspectRatio="none" width="400" height="200" viewBox="0 0 400 200" stroke="var(--tblr-border-color, #b8cef1)">
-                    <line x1="0" y1="0" x2="400" y2="200"></line>
-                    <line x1="0" y1="200" x2="400" y2="0"></line>
-                </svg>
-            </div>
-        </div>
-        @else
         <a class="card card-link" href="{{ route('dashboard.requests.show', ['id' => $tweet->getId()]) }}">
             <div class="card-body">
                 <div class="row">
@@ -70,6 +41,5 @@
                 </div>
             </div>
         </a>
-        @endif
     </div>
 @endforeach
