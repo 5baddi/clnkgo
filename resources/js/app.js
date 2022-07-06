@@ -1,8 +1,10 @@
 require('./bootstrap');
 
-import Vue from 'vue';
+let Vue = require('vue');
 
-Vue.component('statistic-card', require('./components/statisticCard.vue'));
+window.Vue = Vue;
+
+Vue.component('statistic-card', require('./components/statisticCard.vue').default);
 
 const app = new Vue({
     el: '#app',
