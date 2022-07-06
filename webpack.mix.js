@@ -12,9 +12,10 @@ const mix = require('laravel-mix');
  */
 
 mix.copyDirectory('resources/assets', 'public/assets')
+    .vue()
     .copyDirectory('node_modules/summernote/dist/font', 'public/assets/css/font')
     .copy('node_modules/summernote/dist/summernote.min.css', 'public/assets/css/summernote.min.css')
     .copy('node_modules/summernote/dist/summernote.min.js', 'public/assets/js/summernote.min.js')
     .js('resources/js/app.js', 'public/js')
-    .vue()
     .version();
+

@@ -1,8 +1,6 @@
 require('./bootstrap');
 
-window.Vue = require('vue').default;
-window.VueResource = require('vue-resource');
-window.Vue.use(window.VueResource);
+window.Vue = require('vue');
 
 Vue.component('statistic-card', require('./components/statisticCard.vue'));
 
