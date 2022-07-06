@@ -1,6 +1,6 @@
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue';
 
 Vue.component('statistic-card', require('./components/statisticCard.vue'));
 
