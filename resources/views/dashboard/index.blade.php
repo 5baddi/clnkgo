@@ -6,11 +6,11 @@
 
 @section('content')
     <div class="row row-deck row-cards">
-      @if($user->isSuperAdmin())
+      {{-- @if($user->isSuperAdmin())
         <div class="col-sm-4">
           <statistic-card :title="test" :value="{{ $liveRequests }}"/>
         </div>
-        @endif
+        @endif --}}
         <div class="col-sm-4">
             <div class="card">
               <div class="card-body analytics-card">

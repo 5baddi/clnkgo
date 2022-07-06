@@ -59,7 +59,7 @@
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     @yield('scripts')
     <script src="{{ asset('assets/js/tabler.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     @if (config('baddi.zendesk_key'))
     <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key={{ config('baddi.zendesk_key') }}"></script>
     @endif
