@@ -35,7 +35,7 @@
   </head>
   <body class="antialiased">
     <div class="wrapper">
-      @include('partials.dashboard.menu')
+      @include('partials.journalist.menu')
       <div class="page-wrapper">
         {{-- @include('partials.dashboard.breadcrumb') --}}
         <div class="page-body">
