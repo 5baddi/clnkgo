@@ -9,7 +9,8 @@
     <td bgcolor="#ffffff" align="left"
         style="padding: 20px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
         <p style="margin: 0;">Hi! {{ ucwords($user->first_name) }} 👋</p>
-        <p style="margin: 0;>You have a new suggested request from {{ $tweet->author->name ?? ('@' . $tweet->author->username) }}.</p>
+        <p style="margin: 0;">You have a new suggested request from {{ $tweet->author->name ?? ('@' . $tweet->author->username) }}.</p>
+        <p style="margin: 0;padding: 20px 0px;">{{ $tweet->text }}</p>
     </td>
 </tr>
 <tr>
@@ -21,7 +22,7 @@
                         <tr>
                             <td align="center" style="border-radius: 3px;" bgcolor="#04AF90"><a
                                     href="{{ route('dashboard.requests.show', ['id' => $tweet->getId()]) }}" target="_blank"
-                                    style="font-size: 1.2rem; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: .7rem 1.5rem; border-radius: 4px; border: 1px solid #04AF90; display: inline-block;">Checkout</a></td>
+                                    style="font-size: 1.2rem; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: .7rem 1.5rem; border-radius: 4px; border: 1px solid #04AF90; display: inline-block;">Send offer</a></td>
                         </tr>
                     </table>
                 </td>
