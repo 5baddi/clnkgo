@@ -80,7 +80,7 @@ class MailUserWhenThereNewRequest extends Command
             'tweet'     => $tweet,
             'subject'   => $subject
         ];
-dd($data, $user, $tweet);
+
         Mail::send($template, $data, function($message) use ($user, $subject) {
             $message->to($user->email);
             $message->subject($subject);
