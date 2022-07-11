@@ -40,7 +40,7 @@ class NewRequestMailFired implements ShouldQueue
         }
         
         /** @var Tweet|null */
-        $tweet = $event->tweetId;
+        $tweet = $this->tweetService->findById($event->tweetId);
 
         if (! $tweet instanceof Tweet) {
             return;
@@ -56,7 +56,7 @@ class NewRequestMailFired implements ShouldQueue
         ];
 
         Mail::send($template, $data, function($message) use ($user, $subject) {
-            $message->to('life5baddi@gmail.com');
+            $message->to($user->email);
             $message->subject($subject);
         });
     }
