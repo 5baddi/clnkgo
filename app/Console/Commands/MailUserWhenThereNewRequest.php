@@ -57,7 +57,7 @@ class MailUserWhenThereNewRequest extends Command
 
                         /** @var \Illuminate\Database\Eloquent\Builder */
                         $query = Tweet::query()
-                            ->whereDate(Tweet::CREATED_AT_COLUMN, ">=", Carbon::now()->subHour())
+                            ->whereDate(Tweet::PUBLISHED_AT_COLUMN, ">=", Carbon::now()->subHour())
                             ->where(Tweet::TEXT_COLUMN, "like", "%{$keywords[0]}%");
 
                         unset($keywords[0]);
