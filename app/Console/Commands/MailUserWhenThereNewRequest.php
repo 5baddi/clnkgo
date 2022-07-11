@@ -5,13 +5,14 @@ namespace App\Console\Commands;
 use Throwable;
 use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\App;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\AppLogger;
-use BADDIServices\ClnkGO\Events\NewRequestMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Event;
 use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
+use BADDIServices\ClnkGO\Events\NewRequestMail;
 
 class MailUserWhenThereNewRequest extends Command
 {
@@ -71,7 +72,20 @@ class MailUserWhenThereNewRequest extends Command
                             ->first();
 
                         if ($tweet instanceof Tweet) {
-                            Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
+                            $template = 'emails.notifications.request';
+        $subject = sprintf('New request from %s', ($tweet->author->name ?? '@' . $tweet->author->username));
+
+        $data = [
+            'user'      => $user,
+            'tweet'     => $tweet,
+            'subject'   => $subject
+        ];
+
+        Mail::send($template, $data, function($message) use ($user, $subject) {
+            $message->to($user->email);
+            $message->subject($subject);
+        });
+                            // Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
                         }
                     });
                 });
