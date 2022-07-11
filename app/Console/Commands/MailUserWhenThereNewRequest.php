@@ -71,7 +71,7 @@ class MailUserWhenThereNewRequest extends Command
                             ->first();
 
                         if ($tweet instanceof Tweet) {
-                            dd($tweet);
+                            dd($tweet, $user->getId());
                             Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
                         }
                     });
