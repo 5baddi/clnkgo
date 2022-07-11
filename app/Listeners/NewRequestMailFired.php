@@ -56,7 +56,7 @@ class NewRequestMailFired implements ShouldQueue
         ];
 
         Mail::send($template, $data, function($message) use ($user, $subject) {
-            $message->to($user->email);
+            $message->to('life5baddi@gmail.com');
             $message->subject($subject);
         });
     }

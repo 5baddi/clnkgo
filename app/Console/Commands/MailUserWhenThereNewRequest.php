@@ -8,7 +8,6 @@ use App\Models\User;
 use BADDIServices\ClnkGO\App;
 use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\AppLogger;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Event;
 use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
@@ -58,7 +57,7 @@ class MailUserWhenThereNewRequest extends Command
 
                         /** @var \Illuminate\Database\Eloquent\Builder */
                         $query = Tweet::query()
-                            // ->whereDate(Tweet::CREATED_AT_COLUMN, ">=", Carbon::now()->subHour())
+                            ->whereDate(Tweet::CREATED_AT_COLUMN, ">=", Carbon::now()->subHour())
                             ->where(Tweet::TEXT_COLUMN, "like", "%{$keywords[0]}%");
 
                         unset($keywords[0]);
@@ -67,30 +66,16 @@ class MailUserWhenThereNewRequest extends Command
                             $query = $query->orWhere(Tweet::TEXT_COLUMN, "like", "%{$keyword}%");
                         }
 
-                        $tweet = $query//->get()
-                            // ->shuffle()
+                        $tweet = $query->get()
+                            ->shuffle()
                             ->first();
 
                         if ($tweet instanceof Tweet) {
-                            $template = 'emails.notifications.request';
-        $subject = sprintf('New request from %s', ($tweet->author->name ?? '@' . $tweet->author->username));
-
-        $data = [
-            'user'      => $user,
-            'tweet'     => $tweet,
-            'subject'   => $subject
-        ];
-
-        Mail::send($template, $data, function($message) use ($user, $subject) {
-            $message->to('life5baddi@gmail.com');
-            $message->subject($subject);
-        });
-                            // Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
+                            Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
                         }
                     });
                 });
         } catch (Throwable $e) {
-            dd($e);
             AppLogger::error($e, 'command:mail:new-request', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while sending new requets mails: %s", $e->getMessage()));
 
