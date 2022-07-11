@@ -71,11 +71,13 @@ class MailUserWhenThereNewRequest extends Command
                             ->first();
 
                         if ($tweet instanceof Tweet) {
+                            dd($tweet);
                             Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
                         }
                     });
                 });
         } catch (Throwable $e) {
+            dd($e);
             AppLogger::error($e, 'command:mail:new-request', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while sending new requets mails: %s", $e->getMessage()));
 
