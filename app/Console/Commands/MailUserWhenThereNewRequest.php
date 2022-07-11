@@ -56,14 +56,14 @@ class MailUserWhenThereNewRequest extends Command
                         }
 
                         /** @var \Illuminate\Database\Eloquent\Builder */
-                        $query = Tweet::query()
-                            ->whereDate(Tweet::PUBLISHED_AT_COLUMN, ">=", Carbon::now()->subHour())
-                            ->where(Tweet::TEXT_COLUMN, "like", "%{$keywords[0]}%");
+                        $query = Tweet::query();
+                            // ->whereDate(Tweet::PUBLISHED_AT_COLUMN, ">=", Carbon::now()->subHour())
+                            // ->where(Tweet::TEXT_COLUMN, "like", "%{$keywords[0]}%");
 
-                        unset($keywords[0]);
+                        // unset($keywords[0]);
 
                         foreach($keywords as $keyword) {
-                            $query = $query->orWhere(Tweet::TEXT_COLUMN, "like", "%{$keyword}%");
+                            // $query = $query->orWhere(Tweet::TEXT_COLUMN, "like", "%{$keyword}%");
                         }
 
                         $tweet = $query->get()
