@@ -58,7 +58,7 @@ class MailUserWhenThereNewRequest extends Command
 
                         /** @var \Illuminate\Database\Eloquent\Builder */
                         $query = Tweet::query()
-                            ->whereDate(Tweet::CREATED_AT_COLUMN, ">=", Carbon::now()->subHour())
+                            // ->whereDate(Tweet::CREATED_AT_COLUMN, ">=", Carbon::now()->subHour())
                             ->where(Tweet::TEXT_COLUMN, "like", "%{$keywords[0]}%");
 
                         unset($keywords[0]);
@@ -90,6 +90,7 @@ class MailUserWhenThereNewRequest extends Command
                     });
                 });
         } catch (Throwable $e) {
+            dd($e);
             AppLogger::error($e, 'command:mail:new-request', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while sending new requets mails: %s", $e->getMessage()));
 
