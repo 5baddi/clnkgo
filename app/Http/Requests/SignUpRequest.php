@@ -10,6 +10,7 @@ namespace BADDIServices\ClnkGO\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use BADDIServices\ClnkGO\Rules\ValidateHCaptcha;
 
 class SignUpRequest extends FormRequest
 {
@@ -35,7 +36,8 @@ class SignUpRequest extends FormRequest
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
             User::PASSWORD_COLUMN      => 'required|string|min:8',
-            User::PHONE_COLUMN         => 'nullable|string|max:25'
+            User::PHONE_COLUMN         => 'nullable|string|max:25',
+            'h-captcha-response'       => [new ValidateHCaptcha()],
         ];
     }
 }

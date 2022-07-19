@@ -110,6 +110,14 @@ class EmojiParser
         }, $string);
     }
 
+    public function has(string $emoji, string $text) 
+    {
+        $emojiUnicode = $this->encodeEmoji($emoji);
+
+        // TODO: check emoji unicode exists
+        return preg_match('/[0-9]+/', $text);
+    }
+
     public function replaceCallback($string, \Closure $closure)
     {
         return preg_replace_callback($this->getPattern(), function ($matches) use ($closure) {
@@ -143,5 +151,13 @@ class EmojiParser
         $result = mb_convert_encoding($result, 'utf-8', 'utf-16');
 
         return $result;
+    }
+
+    public function encodeEmoji($emoji) 
+    {
+        $emoji = mb_convert_encoding($emoji, 'UTF-32', 'UTF-8');
+        $unicode = strtoupper(preg_replace("/^[0]+/", "U+", bin2hex($emoji)));
+        
+        return $unicode;
     }
 }

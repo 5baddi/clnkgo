@@ -48,6 +48,18 @@ class TweetRespository
             ->find($id);
     }
     
+    public function getAuthorTweetsCount(int $authorId, ?int $ignoreTweetId = null): int
+    {
+        $query = Tweet::query()
+            ->where(Tweet::AUTHOR_ID_COLUMN, $authorId);
+
+        if (! is_null($ignoreTweetId)) {
+            $query = $query->where(Tweet::ID_COLUMN, '!=', $ignoreTweetId);
+        }
+
+        return $query->count();
+    }
+    
     public function count(): int
     {
         return Tweet::query()

@@ -48,7 +48,6 @@ class UpdateAccountController extends DashboardController
             [
                 User::FIRST_NAME_COLUMN    => 'required|string|min:1',
                 User::LAST_NAME_COLUMN     => 'required|string|min:1',
-                User::EMAIL_COLUMN         => 'required|email',
                 User::PHONE_COLUMN         => 'nullable|string|max:25',
             ]
         );
@@ -57,15 +56,6 @@ class UpdateAccountController extends DashboardController
             return redirect()
                 ->route('dashboard.account', ['tab' => $request->query('tab', 'settings')])
                 ->withErrors($validator->errors())
-                ->withInput();
-        }
-        
-        if ($request->input(User::EMAIL_COLUMN) !== $this->user->email && $this->userService->findByEmail($request->input(User::EMAIL_COLUMN)) instanceof User) {
-            return redirect()->route('dashboard.account')
-                ->with(
-                    'alert', 
-                    new Alert('E-mail already taken by another account')
-                )
                 ->withInput();
         }
 
@@ -138,6 +128,14 @@ class UpdateAccountController extends DashboardController
                 ->route('dashboard.account', ['tab' => $request->query('tab', 'emails')])
                 ->withInput()
                 ->with('alert', new Alert('This Email already used as your main one!'));
+        }
+
+        $existsUserByEmail = $this->userService->findByEmail($request->input('new_email'));
+        if ($existsUserByEmail instanceof User) {
+            return redirect()
+                ->route('dashboard.account', ['tab' => $request->query('tab', 'emails')])
+                ->withInput()
+                ->with('alert', new Alert('This Email already used!'));
         }
         
         $this->userService->saveLinkedEmail($this->user, $request->input('new_email'));

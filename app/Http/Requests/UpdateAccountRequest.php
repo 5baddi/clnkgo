@@ -34,7 +34,6 @@ class UpdateAccountRequest extends FormRequest
         return [
             User::FIRST_NAME_COLUMN    => 'required|string|min:1',
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
-            User::EMAIL_COLUMN         => 'required|email',
             User::PHONE_COLUMN         => 'nullable|string|max:25',
             'current_password'         => [new ValidateCurrentPassword()],
             User::PASSWORD_COLUMN      => 'nullable|string|min:8|required_with:current_password|same:confirm_password',

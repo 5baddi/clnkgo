@@ -25,6 +25,7 @@ class User extends Authenticatable
     public const CUSTOMER_ID_COLUMN = 'customer_id';
     public const LAST_LOGIN_COLUMN = 'last_login';
     public const VERIFIED_AT_COLUMN = 'verified_at';
+    public const CONFIRMATION_TOKEN_COLUMN = 'confirmation_token';
     public const REMEMBER_TOLEN_COLUMN = 'remember_token';
     public const ROLE_COLUMN = 'role';
     public const IS_SUPERADMIN_COLUMN = 'is_superadmin';
@@ -85,6 +86,11 @@ class User extends Authenticatable
         return $this->getAttribute(self::EMAIL_COLUMN);
     }
     
+    public function getConfirmationToken(): ?string
+    {
+        return $this->getAttribute(self::CONFIRMATION_TOKEN_COLUMN);
+    }
+    
     public function getFirstName(): string
     {
         return $this->getAttribute(self::FIRST_NAME_COLUMN);
@@ -103,6 +109,16 @@ class User extends Authenticatable
     public function isBanned(): bool
     {
         return $this->getAttribute(self::BANNED_COLUMN) === true;
+    }
+    
+    public function isEmailConfirmed(): bool
+    {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        return is_null($this->getAttribute(self::CONFIRMATION_TOKEN_COLUMN))
+            && ! is_null($this->getAttribute(self::VERIFIED_AT_COLUMN));
     }
 
     public function hasPassword(): bool

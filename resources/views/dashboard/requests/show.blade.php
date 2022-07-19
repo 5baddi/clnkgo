@@ -7,7 +7,7 @@
 @section('content')
 <div class="row row-cards">
     <div class="col-8 d-flex">
-        <div class="card">
+        <div class="col-12 card">
             <div class="card-header" style="border: none;">
                 <div class="card-actions">
                     @include('dashboard.bookmark-button')
@@ -40,8 +40,21 @@
                   <span title="Due on" style="margin-left: 2rem !important;">Due {{ $tweet->due_at->diffForHumans() }}</span>
                   @endif
                 </div>
-                @if($featureService->isEnabled(\BADDIServices\ClnkGO\App::MARK_AS_ANSWERED_FEATURE) && (! $answer || ! $answer->isAnswered()))
                 <div class="card-actions">
+                    @if($authorTweetsCount > 0)
+                    <a class="btn btn-clnkgo btn-xs" href="{{ route('dashboard', ['author' => $tweet->getAuthorId()]) }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-circle-horizontal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <line x1="8" y1="12" x2="8" y2="12.01"></line>
+                            <line x1="12" y1="12" x2="12" y2="12.01"></line>
+                            <line x1="16" y1="12" x2="16" y2="12.01"></line>
+                        </svg>
+                        &nbsp;Show more queries
+                    </a>
+                    @endif
+
+                    @if($featureService->isEnabled(\BADDIServices\ClnkGO\App::MARK_AS_ANSWERED_FEATURE) && (! $answer || ! $answer->isAnswered()))
                     <form action="{{ route('dashboard.requests.answered', ['id' => $tweet->getId()]) }}" method="POST">
                         @csrf
                         <button class="btn btn-default btn-xs" type="submit">
@@ -53,14 +66,14 @@
                             </svg>
                         </button>
                     </form>
+                    @endif
                 </div>
-                @endif
             </div>
         </div>
     </div>
 
     <div class="col-4 d-flex">
-        <div class="card card-link">
+        <div class="col-12 card card-link">
             <div class="card-cover card-cover-blurred text-center"
                 @if($tweet->author->profile_banner_url)
                 style="background-image: url({{ $tweet->author->profile_banner_url }})"

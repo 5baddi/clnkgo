@@ -20,6 +20,13 @@ use BADDIServices\ClnkGO\Services\UserService;
 
 class AnswerMailFired implements ShouldQueue
 {
+    /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 1;
+
     public function __construct(
         private UserService $userService,
         private TweetService $tweetService,
@@ -60,6 +67,7 @@ class AnswerMailFired implements ShouldQueue
         $subject = sprintf('New request answer from %s', $user->getFullName());
 
         $data = [
+            'user'      => $user,
             'tweet'     => $tweet,
             'answer'    => $answer,
             'subject'   => $subject
@@ -67,8 +75,8 @@ class AnswerMailFired implements ShouldQueue
 
         Mail::send($template, $data, function($message) use ($user, $email, $from, $subject) {
             $message->to($email);
-            $message->from($from ?? $user->email, $user->getFullName());
-            $message->replyTo($user->email);
+            $message->from('noreply@clnkgo.com', $user->getFullName());
+            $message->replyTo($from ?? $user->email);
             $message->subject($subject);
         });
     }

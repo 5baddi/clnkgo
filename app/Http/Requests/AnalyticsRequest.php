@@ -34,6 +34,7 @@ class AnalyticsRequest extends PaginationRequest
                 'sort'          =>  ['nullable', 'string', new In(['published_at', '-published_at', 'last24hrs', 'keywordmatch'])],
                 'match'         =>  ['nullable', 'string', new In([-1, 'keyword', 'bookmarked', 'answered'])],
                 'category'      =>  ['nullable', 'string', 'min:1'],
+                'author'        =>  ['nullable', 'integer'],
             ]
         );
     }

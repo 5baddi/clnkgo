@@ -18,10 +18,7 @@
 <div class="row mt-4">
     <div class="col-6">
         <label class="form-label">E-mail</label>
-        <input type="email" name="email" class="form-control @if ($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? $user->email }}" placeholder="E-mail"/>
-        @if ($errors->has('email'))
-        <div class="invalid-feedback">{{ $errors->first('email') }}</div>
-        @endif
+        <input type="email" class="form-control" value="{{ $user->email }}" placeholder="E-mail" readonly/>
     </div>
     <div class="col-6">
         <label class="form-label">Phone</label>

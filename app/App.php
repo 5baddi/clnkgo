@@ -34,7 +34,8 @@ class App
         'journorequest',
         'journorequests',
         'prrequest',
-        'prrequests'
+        'prrequests',
+        'clnkgo'
     ];
 
     // Featues names

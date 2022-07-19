@@ -17,5 +17,8 @@ class WelcomeMail
 {
     use Dispatchable, InteractsWithSockets, SerializesModels, Queueable;
 
-    public function __construct(public string $userId) {}
+    public function __construct(
+        public string $userId,
+        public string $confirmationToken
+    ) {}
 }

@@ -62,6 +62,23 @@ class UserRespository
                     ->first();
     }
     
+    public function findByToken(string $token): ?User
+    {
+        return User::query()
+            ->where(User::CONFIRMATION_TOKEN_COLUMN, $token)
+            ->first();
+    }
+    
+    public function confirmEmail(string $id): bool
+    {
+        return User::query()
+            ->where(User::ID_COLUMN, $id)
+            ->update([
+                User::VERIFIED_AT_COLUMN        => Carbon::now(),
+                User::CONFIRMATION_TOKEN_COLUMN => null,
+            ]) === 1;
+    }
+    
     public function findByCustomerId(int $customerId): ?User
     {
         return User::query()

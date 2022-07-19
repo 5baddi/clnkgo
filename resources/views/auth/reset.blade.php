@@ -8,12 +8,12 @@
         <h6 class="h3" style="color: inherit !important;">Forgot password?</h6>
         <p class="text-muted mb-0">Enter your email and we’ll send you a reset link</p>
         @if(Session::has('error'))
-            <div class="invalid-feedback">
+            <div class="invalid-feedback" style="font-size: 14pt !important;">
                 {{ Session::get('error') }}
             </div>
         @endif
         @if(Session::has('success'))
-            <div class="valid-feedback">
+            <div class="valid-feedback" style="font-size: 14pt !important;">
                 {{ Session::get('success') }}
             </div>
         @endif

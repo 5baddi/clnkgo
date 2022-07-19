@@ -8,8 +8,13 @@
             <h6 class="h3" style="color: inherit !important;">Welcome to {{ config('app.name') }}</h6>
             <p class="text-muted mb-0">Let's get started by creating your account</p>
             @if(Session::has('error'))
-                <div class="invalid-feedback">
+                <div class="invalid-feedback" style="font-size: 14pt !important;">
                     {{ Session::get('error') }}
+                </div>
+            @endif
+            @if(Session::has('success'))
+                <div class="valid-feedback" style="font-size: 14pt !important;">
+                    {{ Session::get('success') }}
                 </div>
             @endif
         </div>
@@ -61,7 +66,11 @@
                 </div>
             </div>
             <div class="mt-4">
-                <button type="submit" class="btn btn-block btn-clnkgo">Continue signup</button>
+                <p class="text-muted">by clicking Sign up, you agree to our <a href="{{ env('TERMS_URL') }}" target="_blank">Terms of Service</a> and that you have read our <a href="{{ env('PRIVACY_URL') }}" target="_blank">Privacy Policy</a>.</p>
+            </div>
+            @include('partials.h-captcha')
+            <div class="mt-4">
+                <button type="submit" class="btn btn-block btn-clnkgo">Sign up</button>
             </div>
         </form>
     </div>

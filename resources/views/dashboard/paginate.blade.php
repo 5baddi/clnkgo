@@ -1,4 +1,7 @@
 @foreach ($tweets as $tweet)
+    @if(is_null($tweet->author))
+    @continue
+    @endif
     <div class="col-12">
         <a class="card card-link" href="{{ route('dashboard.requests.show', ['id' => $tweet->getId()]) }}">
             <div class="card-body">

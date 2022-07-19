@@ -10,16 +10,17 @@ namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
 use BADDIServices\ClnkGO\Models\UserLinkedEmail;
+use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
 use BADDIServices\ClnkGO\Repositories\UserRespository;
 use BADDIServices\ClnkGO\Events\LinkedEmail\LinkedEmailConfirmationMail;
-use Illuminate\Support\Facades\Event;
 
 class UserService
 {
@@ -82,6 +83,16 @@ class UserService
         return $this->userRepository->findByEmail($email);
     }
     
+    public function findByToken(string $token): ?User
+    {
+        return $this->userRepository->findByToken($token);
+    }
+    
+    public function confirmEmail(User $user): bool
+    {
+        return $this->userRepository->confirmEmail($user->getId());
+    }
+    
     public function findByCustomerId(int $customerId): ?User
     {
         return $this->userRepository->findByCustomerId($customerId);
@@ -128,9 +139,28 @@ class UserService
             Arr::set($attributes, User::IS_SUPERADMIN_COLUMN, $attributes[User::IS_SUPERADMIN_COLUMN]);
         }
 
+        if (! Arr::has($attributes, User::CONFIRMATION_TOKEN_COLUMN)) {
+            Arr::set($attributes,  User::CONFIRMATION_TOKEN_COLUMN, Str::substr(md5($attributes[User::EMAIL_COLUMN]), 0, 60));
+        }
+
         $attributes[User::PASSWORD_COLUMN] = Hash::make($attributes[User::PASSWORD_COLUMN]);
 
-        return $this->userRepository->create($attributes);
+        $userAttributes = Arr::only(
+            $attributes,
+            [
+                User::FIRST_NAME_COLUMN,
+                User::LAST_NAME_COLUMN,
+                User::EMAIL_COLUMN,
+                User::PHONE_COLUMN,
+                User::PASSWORD_COLUMN,
+                User::ROLE_COLUMN, // TODO: move it to seperate update method
+                User::KEYWORDS_COLUMN,
+                User::CONFIRMATION_TOKEN_COLUMN,
+                User::IS_SUPERADMIN_COLUMN, // TODO: move it to seperate update method
+            ]
+        );
+
+        return $this->userRepository->create($userAttributes);
     }
 
     public function update(User $user, array $attributes): User

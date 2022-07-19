@@ -5,13 +5,13 @@ namespace App\Console\Commands;
 use Throwable;
 use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\App;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\AppLogger;
-use BADDIServices\ClnkGO\Events\NewRequestMail;
+use Illuminate\Support\Facades\Event;
 use BADDIServices\ClnkGO\Models\Tweet;
 use Illuminate\Database\Eloquent\Collection;
+use BADDIServices\ClnkGO\Events\NewRequestMail;
 
 class MailUserWhenThereNewRequest extends Command
 {
@@ -55,20 +55,24 @@ class MailUserWhenThereNewRequest extends Command
                             return true;
                         }
 
-                        $tweets = Tweet::query()
-                            ->whereDate(Tweet::CREATED_AT_COLUMN, ">=", Carbon::now()->subHour())
+                        /** @var \Illuminate\Database\Eloquent\Builder */
+                        $query = Tweet::query()
+                            ->whereDate(Tweet::PUBLISHED_AT_COLUMN, ">=", Carbon::now()->subHour())
                             ->where(Tweet::TEXT_COLUMN, "like", "%{$keywords[0]}%");
 
                         unset($keywords[0]);
 
                         foreach($keywords as $keyword) {
-                            $tweets = $tweets->orWhere(Tweet::TEXT_COLUMN, "like", "%{$keyword}%");
+                            $query = $query->orWhere(Tweet::TEXT_COLUMN, "like", "%{$keyword}%");
                         }
 
-                        $tweets->get()
-                            ->each(function (Tweet $tweet) use ($user) {
-                                Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
-                            });
+                        $tweet = $query->get()
+                            ->shuffle()
+                            ->first();
+
+                        if ($tweet instanceof Tweet) {
+                            Event::dispatch(new NewRequestMail($user->getId(), $tweet->getId()));
+                        }
                     });
                 });
         } catch (Throwable $e) {

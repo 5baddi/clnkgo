@@ -25,7 +25,7 @@ class PacksSeeder extends Seeder
             'price'         => 7,
             'type'          => Pack::RECURRING_TYPE,
             'is_popular'    => true,
-            'trial_days'    => 3,
+            'trial_days'    => 7,
             'features'      => [
                 [
                     'key'       => Pack::ALL_REQUESTS_ACCESS,

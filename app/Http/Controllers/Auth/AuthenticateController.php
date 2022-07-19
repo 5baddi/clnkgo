@@ -39,6 +39,13 @@ class AuthenticateController extends Controller
                     ->with("error", "No account registred with those credentials");
             }
 
+            if (! $user->isEmailConfirmed()) {
+                return redirect()
+                    ->route('signin')
+                    ->withInput($request->only([User::EMAIL_COLUMN]))
+                    ->with('error', 'Please confirm your email first to get started with our platform!');
+            }
+
             if (! $this->userService->verifyPassword($user, $request->input(User::PASSWORD_COLUMN))) {
                 return redirect()
                     ->route('signin')
@@ -67,12 +74,7 @@ class AuthenticateController extends Controller
             return redirect()
                 ->route('dashboard')
                 ->with('success', 'Welcome back ' . strtoupper($user->first_name));
-        } catch (ValidationException $e) {
-            return redirect()
-                ->route('signin')
-                ->withInput($request->only([User::EMAIL_COLUMN]))
-                ->withErrors($e->errors());
-        }  catch (Throwable $e) {
+        } catch (Throwable $e) {
             AppLogger::error($e, 'auth:signin', ['playload' => $request->all()]);
 
             return redirect()

@@ -61,24 +61,15 @@ class CreateUserController extends Controller
 
             DB::commit();
 
-            Event::dispatch(new WelcomeMail($user->getId()));
+            Event::dispatch(new WelcomeMail($user->getId(), $user->getConfirmationToken()));
 
-            $authenticateUser = Auth::loginUsingId($user->getId());
-            if (! $authenticateUser) {
-                return redirect('/signin')->with('error', 'Something going wrong with the authentification');
-            }
-
-            return redirect('/dashboard')->with('success', 'Account created successfully');
-        } catch (ValidationException $ex) {
+            return redirect()
+                ->route('signin')
+                ->with('success', 'We sent an email link to get started with our platform 🥳');
+        } catch (Throwable $e) {
             DB::rollBack();
 
-            AppLogger::error($ex, 'client:create-account', $request->all());
-
-            return redirect('/signup')->withInput()->withErrors($ex->errors());
-        }  catch (Throwable $ex) {
-            DB::rollBack();
-
-            AppLogger::error($ex, 'client:create-account', $request->all());
+            AppLogger::error($e, 'auth:create-account', $request->all());
             
             return redirect()->route('signup')->withInput()->with("error", "Internal server error");
         }

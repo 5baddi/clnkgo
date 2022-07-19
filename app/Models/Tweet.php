@@ -62,4 +62,9 @@ class Tweet extends ModelEntity
     {
         return $this->getAttribute(self::TEXT_COLUMN);
     }
+    
+    public function getAuthorId(): int
+    {
+        return $this->getAttribute(self::AUTHOR_ID_COLUMN);
+    }
 }

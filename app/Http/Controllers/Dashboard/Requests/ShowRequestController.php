@@ -42,6 +42,11 @@ class ShowRequestController extends DashboardController
         $tweet = $this->tweetService->findById($id);
         abort_unless($tweet instanceof Tweet, Response::HTTP_NOT_FOUND);
 
+        $authorTweetsCount = $this->tweetService->getAuthorTweetsCount(
+            $tweet->getAuthorId(),
+            $tweet->getId()
+        );
+
         $cannedResponses = $this->savedResponseService->getByUser($this->user);
         $answer = $this->requestAnswerService->find($this->user, $tweet);
         $inFavorite = $this->user->favorites->where(UserFavoriteTweet::TWEET_ID_COLUMN, $tweet->getId())->first() instanceof UserFavoriteTweet;
@@ -51,6 +56,7 @@ class ShowRequestController extends DashboardController
         return $this->render('dashboard.requests.show', [
             'title'             => 'Respond to request',
             'tweet'             => $tweet,
+            'authorTweetsCount' => $authorTweetsCount,
             'answer'            => $answer,
             'inFavorite'        => $inFavorite,
             'cannedResponses'   => $cannedResponses,
