@@ -29,25 +29,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('queue:work --queue=default,emails,tweets --sleep=3 --once')
-            ->everyMinute()
-            ->withoutOverlapping()
-            ->runInBackground();
-        
-        $schedule->command('twitter:latest-tweets')
-            ->everyFifteenMinutes()
-            ->withoutOverlapping();
-
-        $schedule->command('twitter:fetch-user-profile')
-            ->hourly()
-            ->withoutOverlapping();
-
-        $schedule->command('mail:new-request')
-            ->hourly()
-            ->withoutOverlapping();
-
-        // $schedule->command('app:update-most-used-keywords')
-        //     ->weekly();
+        if (app()->environment() === 'production') {
+            $this->registerProductionCommandsSchedule($schedule);
+        } else {
+            $this->registerDevelopCommandsSchedule($schedule);
+        }
     }
 
     /**
@@ -68,5 +54,27 @@ class Kernel extends ConsoleKernel
             [\Bugsnag\BugsnagLaravel\OomBootstrapper::class],
             parent::bootstrappers(),
         );
+    }
+
+    private function registerProductionCommandsSchedule(Schedule $schedule): void
+    {
+        $schedule->command('queue:work --timeout=2000 --sleep=3 --tries=3 --daemon')->everyMinute()->withoutOverlapping()->runInBackground();
+        
+        $schedule->command('twitter:latest-tweets')->everyFifteenMinutes()->withoutOverlapping();
+        $schedule->command('twitter:fetch-user-profile')->hourly()->withoutOverlapping();
+
+        $schedule->command('mail:new-request')->hourly()->withoutOverlapping();
+        $schedule->command('app:update-most-used-keywords')->weekly();
+    }
+    
+    private function registerDevelopCommandsSchedule(Schedule $schedule): void
+    {
+        $schedule->command('queue:work --timeout=2000 --sleep=3 --tries=3 --daemon')->everyFourHours()->withoutOverlapping()->runInBackground();
+        
+        $schedule->command('twitter:latest-tweets')->daily()->withoutOverlapping();
+        $schedule->command('twitter:fetch-user-profile')->daily()->withoutOverlapping();
+
+        $schedule->command('mail:new-request')->daily()->withoutOverlapping();
+        $schedule->command('app:update-most-used-keywords')->weekly();
     }
 }
