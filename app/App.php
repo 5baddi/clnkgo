@@ -21,13 +21,13 @@ class App
     public const PAYPAL_PLAN_ID = 'paypal_PLAN_id';
 
     public const DEFAULT_EMAIL_PROVIDERS = [
-        'gmail.com',
-        'outlook.com',
-        'yahoo.com',
-        'hotmail.com',
-        'icloud.com',
-        'live.com',
-        'msn.com'
+        'gmail',
+        'outlook',
+        'yahoo',
+        'hotmail',
+        'icloud',
+        'live',
+        'msn'
     ];
     
     public const DEFAULT_MAIN_HASHTAGS = [
