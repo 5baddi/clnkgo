@@ -37,7 +37,7 @@ class ResetPasswordController extends Controller
             $this->userService->update(
                 $user,
                 [
-                    User::PASSWORD_COLUMN => Hash::make($request->input(User::PASSWORD_COLUMN))
+                    User::PASSWORD_COLUMN => $request->input(User::PASSWORD_COLUMN)
                 ]
             );
 
