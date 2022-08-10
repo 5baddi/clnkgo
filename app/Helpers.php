@@ -124,7 +124,7 @@ if (! function_exists('extractWebsite')) {
             $isEmailProvider = array_filter($emailsProviders, function ($value) use ($domainName) {
                 $domainName = '@' . $domainName;
 
-                return strpos(strtolower($domainName), strtolower($value)) !== false;
+                return strpos(strtolower($value), strtolower($domainName)) !== false;
             });
 
             if (count($isEmailProvider) === 0) {
