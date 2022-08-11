@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    @if(count(request()->query()) > 0)
     <div class="row row-deck row-cards">
       {{-- @if($user->isSuperAdmin())
         <div class="col-sm-4">
@@ -42,6 +43,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="card mt-4">
       <div class="card-body filters-card">
         <form id="search-form" class="row" action="{{ route('dashboard') }}" method="GET">
