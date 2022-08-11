@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-@dd(count(request()->query()))
-    @if(count(request()->query()) > 0)
+    @if(count(request()->query()) === 0)
     <div class="row row-deck row-cards">
       {{-- @if($user->isSuperAdmin())
         <div class="col-sm-4">
