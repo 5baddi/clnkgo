@@ -6,6 +6,7 @@ use Throwable;
 use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Domains\CPAleadService;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class FetchCPALeadOffers extends Command
@@ -55,8 +56,14 @@ class FetchCPALeadOffers extends Command
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {
                     $offers->each(function (array $offer) {
+                        if (! Arr::has($offer, 'creatives', 'title', 'description', 'link', 'campid')) {
+                            return true;
+                        }
+
                         // TODO: dipatch send offer mail
                     });
+
+                    sleep(600);
                 });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:cpa:lead-offers', ['execution_time' => (microtime(true) - $startTime)]);
