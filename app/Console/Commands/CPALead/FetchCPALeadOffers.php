@@ -55,7 +55,7 @@ class FetchCPALeadOffers extends Command
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {
                     $offers->each(function (array $offer) {
-                        dd($offer);
+                        // TODO: dipatch send offer mail
                     });
                 });
         } catch (Throwable $e) {
