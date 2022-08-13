@@ -60,18 +60,9 @@ class FetchCPALeadOffers extends Command
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {
                     $offers->each(function (array $offer) {
-                        $emails = TwitterUser::query()
-                            ->select([TwitterUser::EMAIL_COLUMN])
-                            ->whereNotNull(TwitterUser::EMAIL_COLUMN)
-                            ->get();
-
                         dd(
-                            ! Arr::has($offer, 'creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount'),
-                            ! empty($this->offerType) && $offer['category_name'] !== $this->offerType,
-                            ! is_float($offer['amount']) || $offer['amount'] < 0.25,
-                            is_float($offer['amount']),
-                            $offer['amount'] ?? null,
-                            $emails
+                            $offer['category_name'] !== $this->offerType,
+                            $offer['category_name'], $this->offerType,
                         );
                         if (! Arr::has($offer, 'creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount')) {
                             return true;
@@ -81,7 +72,7 @@ class FetchCPALeadOffers extends Command
                             return true;
                         }
 
-                        if (! is_float($offer['amount']) || $offer['amount'] < 0.25) {
+                        if (floatval($offer['amount'] ?? 0) < 0.25) {
                             return true;
                         }
 
