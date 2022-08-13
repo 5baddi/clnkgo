@@ -92,7 +92,7 @@ class FetchCPALeadOffers extends Command
                         //     ->select([TwitterUser::EMAIL_COLUMN])
                         //     ->whereNotNull(TwitterUser::EMAIL_COLUMN)
                         //     ->get();
-dd($offer);
+
                         // TODO: dipatch send offer mail
                         Event::dispatch(new CPALeadOfferMail('clnkgo@baddi.info', $offer));
 
