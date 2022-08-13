@@ -24,7 +24,7 @@ class FetchCPALeadOffers extends Command
      *
      * @var string
      */
-    protected $signature = 'cpa:lead-offers {--offer-type=}';
+    protected $signature = 'cpa:lead-offers';
 
     /**
      * The console command description.
@@ -32,9 +32,6 @@ class FetchCPALeadOffers extends Command
      * @var string
      */
     protected $description = 'Fetch CPA lead offers';
-
-    /** @var string|null */
-    private $offerType;
 
     /**
      * Create a new command instance.
@@ -56,10 +53,9 @@ class FetchCPALeadOffers extends Command
     {
         $this->info("Start fetching CPA lead offers");
         $startTime = microtime(true);
-        $this->offerType = ! empty($this->option('offer-type')) ? $this->option('offer-type') : CPALeadService::EMAIL_SUMIT_OFFER_TYPE;
 
         try {
-            $offers = $this->CPALeadService->fetchCPALeadOffers($this->offerType);
+            $offers = $this->CPALeadService->fetchCPALeadOffers();
 
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {
@@ -67,7 +63,7 @@ class FetchCPALeadOffers extends Command
                         ->filter(function (array $offer) {
                             return (
                                 Arr::has($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
-                                && (! empty($this->offerType) && $offer['category_name'] === $this->offerType)
+                                && in_array($offer['category_name'], CPALeadService::SUPPORTED_OFFER_TYPES)
                                 && count($offer['creatives'] ?? []) > 0
                                 && floatval($offer['amount'] ?? 0) > 0.25
                                 && end($offer['creatives']) !== false

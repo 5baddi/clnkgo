@@ -29,6 +29,14 @@ class CPALeadService extends Service
     const LIST_AVAILABLE_OFFERS_ENDPOINT = "dashboard/reports/campaign_json.php?id={userId}";
 
     const EMAIL_SUMIT_OFFER_TYPE = "email_submit";
+    const APP_INSTALL_OFFER_TYPE = "app_install";
+    const MOBILE_OFFER_TYPE = "mobile";
+
+    const SUPPORTED_OFFER_TYPES = [
+        self::EMAIL_SUMIT_OFFER_TYPE,
+        self::APP_INSTALL_OFFER_TYPE,
+        self::MOBILE_OFFER_TYPE,
+    ];
 
     private Client $client;
 
@@ -43,29 +51,25 @@ class CPALeadService extends Service
         ]);
     }
 
-    public function getListAvailableOffersLink(string $userId = self::USER_ID, string $offerType = self::EMAIL_SUMIT_OFFER_TYPE): string
+    public function getListAvailableOffersLink(string $userId = self::USER_ID): string
     {
         $url = (string)Str::replace("{userId}", $userId, self::LIST_AVAILABLE_OFFERS_ENDPOINT);
-        $url .= sprintf("&offer_type=%s&format=JSON", $offerType);
+        $url .= "&format=JSON&offerwall_offers=false&dating=true";
 
         return $url;
     }
 
-    public function fetchCPALeadOffers(string $offerType = self::EMAIL_SUMIT_OFFER_TYPE): Collection
+    public function fetchCPALeadOffers(): Collection
     {
         if (! $this->featureService->isEnabled(App::FETCH_CPALEAD_OFFERS_FEATURE)) {
             return collect();
         }
 
         try {
-            if (strlen($offerType) === 0 || $offerType === "") {
-                return collect();
-            }
-
             $response = $this->client
                 ->request(
                     'GET',
-                    $this->getListAvailableOffersLink(self::USER_ID, $offerType), 
+                    $this->getListAvailableOffersLink(self::USER_ID), 
                     [
                         'headers'   => [
                             'Accept'        => 'application/json',
