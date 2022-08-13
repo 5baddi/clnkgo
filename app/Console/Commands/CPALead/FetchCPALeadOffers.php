@@ -64,7 +64,7 @@ class FetchCPALeadOffers extends Command
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {
                     $offers->each(function (array $offer) {
-                        if (! Arr::has($offer, 'creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text')) {
+                        if (! Arr::has($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])) {
                             return true;
                         }
 
@@ -94,12 +94,17 @@ class FetchCPALeadOffers extends Command
                         //     ->get();
 
                         // TODO: dipatch send offer mail
-                        Event::dispatch(new CPALeadOfferMail('clnkgo@baddi.info', $offer));
+                        Event::dispatch(new CPALeadOfferMail(
+                            'clnkgo@baddi.info',
+                            Arr::only($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
+                        ));
 
-                        sleep(120);
+                        $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], 'clnkgo@baddi.info'));
+
+                        // sleep(120);
                     });
 
-                    sleep(600);
+                    // sleep(600);
                 });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:cpa:lead-offers', ['execution_time' => (microtime(true) - $startTime)]);
