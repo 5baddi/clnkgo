@@ -8,12 +8,11 @@
 
 namespace BADDIServices\ClnkGO\Listeners\Marketing;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use BADDIServices\ClnkGO\Models\CPALeadTracking;
-use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMail;
-use Carbon\Carbon;
 
 class CPALeadOfferMailFired implements ShouldQueue
 {
@@ -23,8 +22,6 @@ class CPALeadOfferMailFired implements ShouldQueue
      * @var int
      */
     public $tries = 1;
-
-    public function __construct(private CPALeadTrackingService $CPALeadTrackingService) {}
 
     public function handle(CPALeadOfferMail $event)
     {
@@ -47,15 +44,16 @@ class CPALeadOfferMailFired implements ShouldQueue
             'buttonText'    => $offer['button_text'] ?? null,
         ];
 
-        Mail::send($template, $data, function($message) use ($email, $subject) {
+        Mail::send($template, $data, function ($message) use ($email, $subject) {
             $message->to($email);
             $message->subject($subject);
         });
 
-        $this->CPALeadTrackingService->save([
-            CPALeadTracking::CAMPAIGN_ID_COLUMN     => $offer['campid'],
-            CPALeadTracking::EMAIL_COLUMN           => $email,
-            CPALeadTracking::SENT_AT_COLUMN         => Carbon::now(),
-        ]);
+        CPALeadTracking::query()
+            ->create([
+                CPALeadTracking::CAMPAIGN_ID_COLUMN     => $offer['campid'],
+                CPALeadTracking::EMAIL_COLUMN           => $email,
+                CPALeadTracking::SENT_AT_COLUMN         => Carbon::now(),
+            ]);
     }
 }
