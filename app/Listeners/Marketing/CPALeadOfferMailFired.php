@@ -27,12 +27,15 @@ class CPALeadOfferMailFired implements ShouldQueue
         $offer = $event->offer;
 
         $template = 'emails.marketing.cpalead_offer';
-        $subject = 'New Offer for you!';
+        $subject = $offer['title'] ?? 'New Offer for you!';
 
         $data = [
             'email'         => $email,
             'subject'       => $subject,
-            'offer'         => $offer,
+            'link'          => $offer['link'],
+            'featuredImage' => $offer['creatives'][0]['url'] ?? null,
+            'description'   => $offer['description'] ?? '',
+            'buttonText'    => $offer['button_text'] ?? null,
         ];
 
         Mail::send($template, $data, function($message) use ($email, $subject) {

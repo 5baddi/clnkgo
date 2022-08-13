@@ -16,10 +16,13 @@ use BADDIServices\ClnkGO\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\ConfirmEmailController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword as ResetPassword;
+use BADDIServices\ClnkGO\Http\Controllers\CPALead\CPALeadUnsubscribeController;
 
 Route::get('/', function () {
     return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT);
 })->name('home');
+
+Route::get('/offers/unsubscribe', CPALeadUnsubscribeController::class)->name('cpalead.unsubscribe');
 
 Route::middleware('basic.auth')
     ->group(function () {
