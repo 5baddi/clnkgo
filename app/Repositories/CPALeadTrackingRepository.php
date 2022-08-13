@@ -33,6 +33,12 @@ class CPALeadTrackingRepository
             ->first();
     }
 
+    public function create(array $attributes): CPALeadTracking
+    {
+        return CPALeadTracking::query()
+            ->create($attributes);
+    }
+    
     public function save(array $attributes): CPALeadTracking
     {
         if (! Arr::has($attributes, CPALeadTracking::ID_COLUMN)) {

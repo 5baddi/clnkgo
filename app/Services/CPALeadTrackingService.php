@@ -31,6 +31,19 @@ class CPALeadTrackingService extends Service
         return $this->CPALeadTrackingRepository->findByEmail($email);
     }
 
+    public function create(array $attributes): CPALeadTracking
+    {
+        $filteredAttributes = collect($attributes)
+            ->only([
+                CPALeadTracking::CAMPAIGN_ID_COLUMN,
+                CPALeadTracking::EMAIL_COLUMN,
+                CPALeadTracking::SENT_AT_COLUMN,
+                CPALeadTracking::IS_UNSUBSCRIBED_COLUMN,
+            ]);
+
+        return $this->CPALeadTrackingRepository->create($filteredAttributes->toArray());
+    }
+    
     public function save(array $attributes): CPALeadTracking
     {
         $filteredAttributes = collect($attributes)
