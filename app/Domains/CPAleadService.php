@@ -74,6 +74,7 @@ class CPAleadService extends Service
                 );
 
             $data = json_decode($response->getBody(), true);
+            dd($data);
             if ($response->getStatusCode() === Response::HTTP_OK && isset($data['offers'])) {
                 return collect($data['offers']);
             }
