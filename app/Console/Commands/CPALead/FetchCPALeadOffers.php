@@ -28,6 +28,9 @@ class FetchCPALeadOffers extends Command
      */
     protected $description = 'Fetch CPA lead offers';
 
+    /** @var string|null */
+    private $offerType;
+
     /**
      * Create a new command instance.
      *
@@ -48,15 +51,19 @@ class FetchCPALeadOffers extends Command
     {
         $this->info("Start fetching CPA lead offers");
         $startTime = microtime(true);
-        $offerType = ! empty($this->option('offer-type')) ? $this->option('offer-type') : CPAleadService::EMAIL_SUMIT_OFFER_TYPE;
+        $this->offerType = ! empty($this->option('offer-type')) ? $this->option('offer-type') : CPAleadService::EMAIL_SUMIT_OFFER_TYPE;
 
         try {
-            $offers = $this->CPAleadService->fetchCPALeadOffers($offerType);
+            $offers = $this->CPAleadService->fetchCPALeadOffers($this->offerType);
 
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {
                     $offers->each(function (array $offer) {
-                        if (! Arr::has($offer, 'creatives', 'title', 'description', 'link', 'campid')) {
+                        if (! Arr::has($offer, 'creatives', 'title', 'description', 'link', 'campid', 'category_name')) {
+                            return true;
+                        }
+
+                        if (! empty($this->offerType) && $offer['category_name'] !== $this->offerType) {
                             return true;
                         }
 
