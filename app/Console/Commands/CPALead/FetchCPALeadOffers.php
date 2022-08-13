@@ -83,7 +83,7 @@ class FetchCPALeadOffers extends Command
                                 ->get()
                                 ->pluck([CPALeadTracking::EMAIL_COLUMN])
                                 ->toArray();
-
+dd($passedEmails);
                             $email = TwitterUser::query()
                                 ->select([TwitterUser::EMAIL_COLUMN])
                                 ->whereNotNull(TwitterUser::EMAIL_COLUMN)
