@@ -43,7 +43,7 @@ class FetchCPALeadOffers extends Command
     {
         $this->info("Start fetching CPA lead offers");
         $startTime = microtime(true);
-        $offerType = ! empty($this->option('start-time')) ? $this->option('start-time') : CPAleadService::EMAIL_SUMIT_OFFER_TYPE;
+        $offerType = ! empty($this->option('offer-type')) ? $this->option('offer-type') : CPAleadService::EMAIL_SUMIT_OFFER_TYPE;
 
         try {
             $this->CPAleadService->fetchCPALeadOffers($offerType);
