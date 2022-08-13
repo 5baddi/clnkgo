@@ -64,11 +64,6 @@ class FetchCPALeadOffers extends Command
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {
                     $offers->each(function (array $offer) {
-                        dd(
-                            ! Arr::has($offer, 'creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount'),
-                            ! empty($this->offerType) && $offer['category_name'] !== $this->offerType,
-                            floatval($offer['amount'] ?? 0) < 0.25, floatval($offer['amount'])
-                        );
                         if (! Arr::has($offer, 'creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount')) {
                             return true;
                         }
