@@ -16,8 +16,10 @@ use BADDIServices\ClnkGO\Events\Subscription\SubscriptionActivated;
 use BADDIServices\ClnkGO\Events\Subscription\SubscriptionCancelled;
 use BADDIServices\ClnkGO\Events\LinkedEmail\LinkedEmailConfirmationMail;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMail;
+use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasSent;
 use BADDIServices\ClnkGO\Listeners\LinkedEmail\LinkedEmailConfirmationMailFired;
 use BADDIServices\ClnkGO\Listeners\Marketing\CPALeadOfferMailFired;
+use BADDIServices\ClnkGO\Listeners\Marketing\CPALeadOfferMailWasSentFired;
 use BADDIServices\ClnkGO\Listeners\Subscription\SubscriptionActivatedFired;
 use BADDIServices\ClnkGO\Listeners\Subscription\SubscriptionCancelledFired;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -60,6 +62,10 @@ class EventServiceProvider extends ServiceProvider
         
         CPALeadOfferMail::class => [
             CPALeadOfferMailFired::class,
+        ],
+        
+        CPALeadOfferMailWasSent::class => [
+            CPALeadOfferMailWasSentFired::class,
         ],
     ];
 
