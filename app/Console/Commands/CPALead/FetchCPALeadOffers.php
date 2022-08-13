@@ -74,9 +74,8 @@ class FetchCPALeadOffers extends Command
                                 && isset(end($offer['creatives'])['url'])
                             );
                         })
+                        ->sortBy('amount', SORT_DESC)
                         ->each(function (array $offer) {
-                            
-
                             $passedEmails = CPALeadTracking::query()
                                 ->select([CPALeadTracking::EMAIL_COLUMN])
                                 ->whereDate(CPALeadTracking::SENT_AT_COLUMN, "<=", Carbon::now()->subHours(24))
