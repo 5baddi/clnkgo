@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * ClnkGO
+ *
+ * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
+ */
+
+namespace BADDIServices\ClnkGO\Models;
+
+use BADDIServices\ClnkGO\Entities\ModelEntity;
+
+class CPALeadTracking extends ModelEntity
+{   
+    /** @var string */
+    public const CAMPAIGN_ID_COLUMN = 'campaign_id';
+    public const EMAIL_COLUMN = 'email';
+    public const SENT_AT_COLUMN = 'sent_at';
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'cpalead_tracking';
+}
