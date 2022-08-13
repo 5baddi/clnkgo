@@ -59,11 +59,7 @@ class EventServiceProvider extends ServiceProvider
         LinkedEmailConfirmationMail::class => [
             LinkedEmailConfirmationMailFired::class,
         ],
-        
-        CPALeadOfferMail::class => [
-            CPALeadOfferMailFired::class,
-        ],
-        
+
         CPALeadOfferMailWasSent::class => [
             CPALeadOfferMailWasSentFired::class,
         ],

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Event;
 use BADDIServices\ClnkGO\Models\TwitterUser;
 use BADDIServices\ClnkGO\Domains\CPALeadService;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMail;
+use BADDIServices\ClnkGO\Jobs\Marketing\CPALeadOffer;
 use BADDIServices\ClnkGO\Models\CPALeadTracking;
 
 class FetchCPALeadOffers extends Command
@@ -92,7 +93,9 @@ class FetchCPALeadOffers extends Command
                                 return true;
                             }
 
-                            Event::dispatch(new CPALeadOfferMail($email, $offer));
+                            CPALeadOffer::dispatch($email, $offer)
+                                ->onQueue('cpa')
+                                ->delay(120);
 
                             $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], $email));
 
