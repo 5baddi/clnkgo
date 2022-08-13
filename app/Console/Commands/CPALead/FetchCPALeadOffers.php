@@ -70,6 +70,8 @@ class FetchCPALeadOffers extends Command
                                 && (! empty($this->offerType) && $offer['category_name'] === $this->offerType)
                                 && count($offer['creatives'] ?? []) > 0
                                 && floatval($offer['amount'] ?? 0) > 0.25
+                                && end($offer['creatives']) !== false
+                                && isset(end($offer['creatives'])['url'])
                             );
                         })
                         ->each(function (array $offer) {
@@ -89,10 +91,13 @@ class FetchCPALeadOffers extends Command
                             //     ->get();
 
                             // TODO: dipatch send offer mail
-                            Event::dispatch(new CPALeadOfferMail(
-                                'clnkgo@baddi.info',
-                                Arr::only($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
-                            ));
+                            Event::dispatch(
+                                new CPALeadOfferMail(
+                                    'clnkgo@baddi.info',
+                                    $offer
+                                    // Arr::only($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
+                                )
+                            );
 
                             $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], 'clnkgo@baddi.info'));
 die();

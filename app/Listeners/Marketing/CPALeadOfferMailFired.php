@@ -33,7 +33,7 @@ class CPALeadOfferMailFired implements ShouldQueue
             'email'         => $email,
             'subject'       => $subject,
             'link'          => $offer['link'],
-            'featuredImage' => $offer['creatives'][0]['url'] ?? null,
+            'featuredImage' => end($offer['creatives'])['url'] ?? null,
             'description'   => $offer['description'] ?? '',
             'buttonText'    => $offer['button_text'] ?? null,
         ];
