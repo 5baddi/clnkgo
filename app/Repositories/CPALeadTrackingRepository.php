@@ -42,8 +42,7 @@ class CPALeadTrackingRepository
     public function save(array $attributes): CPALeadTracking
     {
         if (! Arr::has($attributes, CPALeadTracking::ID_COLUMN)) {
-            return CPALeadTracking::query()
-                ->create($attributes);
+            return $this->create($attributes);
         }
 
         return CPALeadTracking::query()
