@@ -3,12 +3,16 @@
 namespace App\Console\Commands\CPALead;
 
 use Throwable;
-use Illuminate\Console\Command;
-use BADDIServices\ClnkGO\AppLogger;
-use BADDIServices\ClnkGO\Domains\CPAleadService;
-use BADDIServices\ClnkGO\Models\TwitterUser;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use BADDIServices\ClnkGO\AppLogger;
+use Illuminate\Support\Facades\Event;
+use BADDIServices\ClnkGO\Models\TwitterUser;
+use BADDIServices\ClnkGO\Domains\CPAleadService;
+use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMail;
+use BADDIServices\ClnkGO\Models\CPALeadTracking;
 
 class FetchCPALeadOffers extends Command
 {
@@ -60,10 +64,6 @@ class FetchCPALeadOffers extends Command
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {
                     $offers->each(function (array $offer) {
-                        dd(
-                            $offer['category_name'] !== $this->offerType,
-                            $offer['category_name'], $this->offerType,
-                        );
                         if (! Arr::has($offer, 'creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount')) {
                             return true;
                         }
@@ -76,14 +76,22 @@ class FetchCPALeadOffers extends Command
                             return true;
                         }
 
-                        $emails = TwitterUser::query()
-                            ->select([TwitterUser::EMAIL_COLUMN])
-                            ->whereNotNull(TwitterUser::EMAIL_COLUMN)
-                            ->get();
+                        // $sentEmails = CPALeadTracking::query()
+                        //     ->select([CPALeadTracking::EMAIL_COLUMN])
+                        //     ->whereDate(CPALeadTracking::SENT_AT_COLUMN, "<", Carbon::now()->startOfDay()->toDateTime())
+                        //     ->where(CPALeadTracking::IS_UNSUBSCRIBED_COLUMN, 1)
+                        //     ->get()
+                        //     ->pluck([CPALeadTracking::EMAIL_COLUMN])
+                        //     ->toArray();
 
-                        dd($emails);
+                        // $emails = TwitterUser::query()
+                        //     ->select([TwitterUser::EMAIL_COLUMN])
+                        //     ->whereNotNull(TwitterUser::EMAIL_COLUMN)
+                        //     ->get();
+
 
                         // TODO: dipatch send offer mail
+                        Event::dispatch(new CPALeadOfferMail('clnkgo@baddi.info', $offer));;
                     });
 
                     sleep(600);

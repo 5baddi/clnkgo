@@ -65,7 +65,7 @@ class CPAleadService extends Service
             $response = $this->client
                 ->request(
                     'GET',
-                    self::LIST_AVAILABLE_OFFERS_ENDPOINT, 
+                    $this->getListAvailableOffersLink($offerType), 
                     [
                         'headers'   => [
                             'Accept'        => 'application/json',
