@@ -94,7 +94,7 @@ dd($offer);
                         Event::dispatch(new CPALeadOfferMail('clnkgo@baddi.info', $offer));;
                     });
 
-                    sleep(600);
+                    // sleep(600);
                 });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:cpa:lead-offers', ['execution_time' => (microtime(true) - $startTime)]);
