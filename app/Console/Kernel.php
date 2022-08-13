@@ -45,6 +45,8 @@ class Kernel extends ConsoleKernel
 
             $schedule->command('mail:new-request')->daily()->withoutOverlapping();
             $schedule->command('app:update-most-used-keywords')->weekly();
+
+            $schedule->command('cpa:lead-offers')->daily()->withoutOverlapping();
         }
     }
 
