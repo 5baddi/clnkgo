@@ -78,7 +78,7 @@ class FetchCPALeadOffers extends Command
                         ->each(function (array $offer) {
                             $passedEmails = CPALeadTracking::query()
                                 ->select([CPALeadTracking::EMAIL_COLUMN])
-                                ->whereDate(CPALeadTracking::SENT_AT_COLUMN, "<=", Carbon::now()->subHours(24))
+                                ->whereDate(CPALeadTracking::SENT_AT_COLUMN, ">=", Carbon::now()->subHours(24))
                                 ->orWhere(CPALeadTracking::IS_UNSUBSCRIBED_COLUMN, 1)
                                 ->get()
                                 ->pluck([CPALeadTracking::EMAIL_COLUMN])
