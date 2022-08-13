@@ -15,6 +15,7 @@ class CPALeadUnsubscribeController extends Controller
 {
     public function __invoke(Request $request)
     {
+        dd($request->query('email'));
         return redirect()->route('home');
     }
 }
