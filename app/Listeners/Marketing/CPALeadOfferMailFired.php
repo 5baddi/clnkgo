@@ -52,10 +52,10 @@ class CPALeadOfferMailFired implements ShouldQueue
             $message->subject($subject);
         });
 
-        $CPALeadTrackingService->save([
+        $this->CPALeadTrackingService->save([
             CPALeadTracking::CAMPAIGN_ID_COLUMN     => $offer['campid'],
             CPALeadTracking::EMAIL_COLUMN           => $email,
             CPALeadTracking::SENT_AT_COLUMN         => Carbon::now(),
-        ])
+        ]);
     }
 }
