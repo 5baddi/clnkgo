@@ -32,10 +32,10 @@ class CPALeadOfferMailFired implements ShouldQueue
         $data = [
             'email'         => $email,
             'subject'       => $subject,
-            // 'link'          => $offer['link'],
-            // 'featuredImage' => $offer['creatives'][0]['url'] ?? null,
-            // 'description'   => $offer['description'] ?? '',
-            // 'buttonText'    => $offer['button_text'] ?? null,
+            'link'          => $offer['link'],
+            'featuredImage' => $offer['creatives'][0]['url'] ?? null,
+            'description'   => $offer['description'] ?? '',
+            'buttonText'    => $offer['button_text'] ?? null,
         ];
 
         Mail::send($template, $data, function($message) use ($email, $subject) {

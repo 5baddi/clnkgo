@@ -63,48 +63,43 @@ class FetchCPALeadOffers extends Command
 
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {
-                    $offers->each(function (array $offer) {
-                        if (! Arr::has($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])) {
-                            return true;
-                        }
+                    $offers
+                        ->filter(function (array $offer) {
+                            return (
+                                Arr::has($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
+                                && (! empty($this->offerType) && $offer['category_name'] === $this->offerType)
+                                && count($offer['creatives'] ?? []) > 0
+                                && floatval($offer['amount'] ?? 0) > 0.25
+                            );
+                        })
+                        ->each(function (array $offer) {
+                            
 
-                        if (! empty($this->offerType) && $offer['category_name'] !== $this->offerType) {
-                            return true;
-                        }
+                            // $sentEmails = CPALeadTracking::query()
+                            //     ->select([CPALeadTracking::EMAIL_COLUMN])
+                            //     ->whereDate(CPALeadTracking::SENT_AT_COLUMN, "<", Carbon::now()->startOfDay()->toDateTime())
+                            //     ->where(CPALeadTracking::IS_UNSUBSCRIBED_COLUMN, 1)
+                            //     ->get()
+                            //     ->pluck([CPALeadTracking::EMAIL_COLUMN])
+                            //     ->toArray();
 
-                        if (count($offer['creatives'] ?? []) === 0) {
-                            return true;
-                        }
+                            // $emails = TwitterUser::query()
+                            //     ->select([TwitterUser::EMAIL_COLUMN])
+                            //     ->whereNotNull(TwitterUser::EMAIL_COLUMN)
+                            //     ->get();
 
-                        if (floatval($offer['amount'] ?? 0) < 0.25) {
-                            return true;
-                        }
+                            // TODO: dipatch send offer mail
+                            Event::dispatch(new CPALeadOfferMail(
+                                'clnkgo@baddi.info',
+                                Arr::only($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
+                            ));
 
-                        // $sentEmails = CPALeadTracking::query()
-                        //     ->select([CPALeadTracking::EMAIL_COLUMN])
-                        //     ->whereDate(CPALeadTracking::SENT_AT_COLUMN, "<", Carbon::now()->startOfDay()->toDateTime())
-                        //     ->where(CPALeadTracking::IS_UNSUBSCRIBED_COLUMN, 1)
-                        //     ->get()
-                        //     ->pluck([CPALeadTracking::EMAIL_COLUMN])
-                        //     ->toArray();
+                            $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], 'clnkgo@baddi.info'));
+die();
+                            sleep(120);
+                        });
 
-                        // $emails = TwitterUser::query()
-                        //     ->select([TwitterUser::EMAIL_COLUMN])
-                        //     ->whereNotNull(TwitterUser::EMAIL_COLUMN)
-                        //     ->get();
-
-                        // TODO: dipatch send offer mail
-                        Event::dispatch(new CPALeadOfferMail(
-                            'clnkgo@baddi.info',
-                            Arr::only($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
-                        ));
-
-                        $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], 'clnkgo@baddi.info'));
-
-                        // sleep(120);
-                    });
-
-                    // sleep(600);
+                    sleep(600);
                 });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:cpa:lead-offers', ['execution_time' => (microtime(true) - $startTime)]);
