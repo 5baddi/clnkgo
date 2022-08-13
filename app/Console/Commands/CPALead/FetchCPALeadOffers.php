@@ -77,13 +77,14 @@ class FetchCPALeadOffers extends Command
                         ->each(function (array $offer) {
                             
 
-                            // $sentEmails = CPALeadTracking::query()
-                            //     ->select([CPALeadTracking::EMAIL_COLUMN])
-                            //     ->whereDate(CPALeadTracking::SENT_AT_COLUMN, "<", Carbon::now()->startOfDay()->toDateTime())
-                            //     ->where(CPALeadTracking::IS_UNSUBSCRIBED_COLUMN, 1)
-                            //     ->get()
-                            //     ->pluck([CPALeadTracking::EMAIL_COLUMN])
-                            //     ->toArray();
+                            $sentEmails = CPALeadTracking::query()
+                                ->select([CPALeadTracking::EMAIL_COLUMN])
+                                ->whereDate(CPALeadTracking::SENT_AT_COLUMN, "<", Carbon::now()->startOfDay()->toDateTime())
+                                ->where(CPALeadTracking::IS_UNSUBSCRIBED_COLUMN, 1)
+                                ->get()
+                                ->pluck([CPALeadTracking::EMAIL_COLUMN])
+                                ->toArray();
+                            dd($sentEmails);
 
                             // $emails = TwitterUser::query()
                             //     ->select([TwitterUser::EMAIL_COLUMN])
