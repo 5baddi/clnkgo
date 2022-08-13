@@ -72,7 +72,7 @@ class FetchCPALeadOffers extends Command
                             return true;
                         }
 
-                        if (floatval($offer['amount'] ?? 0) < 0.25) {
+                        if (floatval($offer['amount'] ?? 0) < 0.01) {
                             return true;
                         }
 
