@@ -18,6 +18,7 @@ class CreateCpaleadTrackingTable extends Migration
             $table->bigInteger('campaign_id');
             $table->string('email')->unique();
             $table->timestamp('sent_at')->nullable();
+            $table->tinyInteger('is_unsubscribed')->default(0);
             $table->timestamps();
         });
     }

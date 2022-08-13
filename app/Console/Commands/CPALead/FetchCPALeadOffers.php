@@ -6,6 +6,7 @@ use Throwable;
 use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Domains\CPAleadService;
+use BADDIServices\ClnkGO\Models\TwitterUser;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -70,6 +71,13 @@ class FetchCPALeadOffers extends Command
                         if (! is_float($offer['amount']) || $offer['amount'] < 0.25) {
                             return true;
                         }
+
+                        $emails = TwitterUser::query()
+                            ->select([TwitterUser::EMAIL_COLUMN])
+                            ->whereNotNull(TwitterUser::EMAIL_COLUMN)
+                            ->get();
+
+                        dd($emails);
 
                         // TODO: dipatch send offer mail
                     });

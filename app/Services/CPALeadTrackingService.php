@@ -41,6 +41,7 @@ class CPALeadTrackingService extends Service
                 CPALeadTracking::ID_COLUMN,
                 CPALeadTracking::EMAIL_COLUMN,
                 CPALeadTracking::SENT_AT_COLUMN,
+                CPALeadTracking::IS_UNSUBSCRIBED_COLUMN,
             ]);
 
         return $this->CPALeadTrackingRepository->save($filteredAttributes->toArray());
