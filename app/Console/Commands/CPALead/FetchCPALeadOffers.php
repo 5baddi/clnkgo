@@ -92,7 +92,7 @@ class FetchCPALeadOffers extends Command
                                 ->get()
                                 ->pluck([TwitterUser::EMAIL_COLUMN])
                                 ->toArray();
-dd($mails);
+dd($emails);
                             Event::dispatch(new CPALeadOfferMail('life5baddi@gmail.com', $offer));
 
                             $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], 'clnkgo@baddi.info'));
