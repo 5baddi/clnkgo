@@ -39,9 +39,8 @@ class CPALeadTrackingRepository
             ->updateOrCreate(
                 [
                     CPALeadTracking::ID_COLUMN      => $attributes[CPALeadTracking::ID_COLUMN],
-                    CPALeadTracking::EMAIL_COLUMN   => $attributes[CPALeadTracking::EMAIL_COLUMN]
                 ],
-                Arr::except($attributes, [CPALeadTracking::ID_COLUMN, CPALeadTracking::EMAIL_COLUMN])
+                Arr::except($attributes, [CPALeadTracking::ID_COLUMN])
             );
     }
 

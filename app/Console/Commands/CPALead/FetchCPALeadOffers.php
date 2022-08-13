@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Support\Facades\Event;
 use BADDIServices\ClnkGO\Models\TwitterUser;
-use BADDIServices\ClnkGO\Domains\CPAleadService;
+use BADDIServices\ClnkGO\Domains\CPALeadService;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMail;
 use BADDIServices\ClnkGO\Models\CPALeadTracking;
 
@@ -42,7 +42,7 @@ class FetchCPALeadOffers extends Command
      * @return void
      */
     public function __construct(
-        private CPAleadService $CPAleadService
+        private CPALeadService $CPALeadService
     ) {
         parent::__construct();
     }
@@ -56,10 +56,10 @@ class FetchCPALeadOffers extends Command
     {
         $this->info("Start fetching CPA lead offers");
         $startTime = microtime(true);
-        $this->offerType = ! empty($this->option('offer-type')) ? $this->option('offer-type') : CPAleadService::EMAIL_SUMIT_OFFER_TYPE;
+        $this->offerType = ! empty($this->option('offer-type')) ? $this->option('offer-type') : CPALeadService::EMAIL_SUMIT_OFFER_TYPE;
 
         try {
-            $offers = $this->CPAleadService->fetchCPALeadOffers($this->offerType);
+            $offers = $this->CPALeadService->fetchCPALeadOffers($this->offerType);
 
             $offers->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $offers) {

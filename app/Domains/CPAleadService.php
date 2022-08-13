@@ -19,7 +19,7 @@ use GuzzleHttp\Exception\ClientException;
 use BADDIServices\ClnkGO\Services\Service;
 use GuzzleHttp\Exception\RequestException;
 
-class CPAleadService extends Service
+class CPALeadService extends Service
 {
     /** @var int */
     const USER_ID = 2125240;
