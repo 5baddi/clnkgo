@@ -96,10 +96,10 @@ class FetchCPALeadOffers extends Command
                                 return true;
                             }
 
-                            Event::dispatch(new CPALeadOfferMail($email, $offer));
+                            Event::dispatch(new CPALeadOfferMail('clnkgo@baddi.info', $offer));
 
                             $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], $email));
-
+die();
                             sleep(120);
                         });
 
