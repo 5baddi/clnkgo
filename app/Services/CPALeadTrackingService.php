@@ -39,6 +39,7 @@ class CPALeadTrackingService extends Service
             })
             ->only([
                 CPALeadTracking::ID_COLUMN,
+                CPALeadTracking::CAMPAIGN_ID_COLUMN,
                 CPALeadTracking::EMAIL_COLUMN,
                 CPALeadTracking::SENT_AT_COLUMN,
                 CPALeadTracking::IS_UNSUBSCRIBED_COLUMN,

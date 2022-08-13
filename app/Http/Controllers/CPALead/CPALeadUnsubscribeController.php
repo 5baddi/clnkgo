@@ -24,17 +24,16 @@ class CPALeadUnsubscribeController extends Controller
     public function __invoke(Request $request)
     {
         try {
-            if ($request->has('email') && filter_var($request->query('email'), FILTER_VALIDATE_EMAIL)) {
-                $existsEmail = $this->CPALeadTrackingService->findByEmail($request->query('email'));
-                $data = [CPALeadTracking::EMAIL_COLUMN => $request->query('email')];
-
-                if ($existsEmail instanceof CPALeadTracking) {
-                    $data = $existsEmail->toArray();
-                }
-
-                $data[CPALeadTracking::IS_UNSUBSCRIBED_COLUMN] = 1;
-
-                $this->CPALeadTrackingService->save($data);
+            if (
+                $request->has(['email', 'campid']) 
+                && filter_var($request->query('email'), FILTER_VALIDATE_EMAIL)
+                && filter_var($request->query('campid'), FILTER_VALIDATE_INT)
+            ) {
+                $this->CPALeadTrackingService->save([
+                    CPALeadTracking::CAMPAIGN_ID_COLUMN     => $request->query('campid'),
+                    CPALeadTracking::EMAIL_COLUMN           => $request->query('email'),
+                    CPALeadTracking::IS_UNSUBSCRIBED_COLUMN => 1
+                ]);
             }
     
         } catch (Throwable $e) {
