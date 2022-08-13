@@ -91,6 +91,7 @@ class FetchCPALeadOffers extends Command
                                 ->whereNotIn(TwitterUser::EMAIL_COLUMN, $passedEmails)
                                 ->get()
                                 ->pluck([TwitterUser::EMAIL_COLUMN])
+                                ->random()
                                 ->toArray();
 dd($emails);
                             Event::dispatch(new CPALeadOfferMail('life5baddi@gmail.com', $offer));
