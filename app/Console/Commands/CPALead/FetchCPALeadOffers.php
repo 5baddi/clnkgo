@@ -6,9 +6,13 @@ use Throwable;
 use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Domains\CPAleadService;
+use Illuminate\Support\Collection;
 
 class FetchCPALeadOffers extends Command
 {
+    /** @var int */
+    const CHUNK_SIZE = 15;
+
     /**
      * The name and signature of the console command.
      *
@@ -46,7 +50,14 @@ class FetchCPALeadOffers extends Command
         $offerType = ! empty($this->option('offer-type')) ? $this->option('offer-type') : CPAleadService::EMAIL_SUMIT_OFFER_TYPE;
 
         try {
-            $this->CPAleadService->fetchCPALeadOffers($offerType);
+            $offers = $this->CPAleadService->fetchCPALeadOffers($offerType);
+
+            $offers->chunk(self::CHUNK_SIZE)
+                ->each(function (Collection $offers) {
+                    $offers->each(function (array $offer) {
+                        dd($offer);
+                    });
+                });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:cpa:lead-offers', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while fetching CPA lead offers: %s", $e->getMessage()));

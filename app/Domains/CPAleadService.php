@@ -74,10 +74,9 @@ class CPAleadService extends Service
                 );
 
             $data = json_decode($response->getBody(), true);
-            dd($data);
-            // if ($response->getStatusCode() === Response::HTTP_OK && isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
-            //     return collect($data);
-            // }
+            if ($response->getStatusCode() === Response::HTTP_OK && isset($data['offers'])) {
+                return collect($data['offers']);
+            }
         } catch (Exception | ClientException | RequestException $e) {
             AppLogger::error($e, 'twitter:fetch-by-hashtags');
         }
