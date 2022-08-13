@@ -51,7 +51,7 @@ class CPAleadService extends Service
         return $url;
     }
 
-    public function fetchCpaleadOffers(string $offerType = self::EMAIL_SUMIT_OFFER_TYPE): Collection
+    public function fetchCPALeadOffers(string $offerType = self::EMAIL_SUMIT_OFFER_TYPE): Collection
     {
         if (! $this->featureService->isEnabled(App::FETCH_CPALEAD_OFFERS_FEATURE)) {
             return collect();
