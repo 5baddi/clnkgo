@@ -90,16 +90,10 @@ class FetchCPALeadOffers extends Command
                             //     ->whereNotNull(TwitterUser::EMAIL_COLUMN)
                             //     ->get();
 
-                            // TODO: dipatch send offer mail
-                            Event::dispatch(
-                                new CPALeadOfferMail(
-                                    'life5baddi@gmail.com',
-                                    Arr::only($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
-                                )
-                            );
+                            Event::dispatch(new CPALeadOfferMail('life5baddi@gmail.com', $offer));
 
                             $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], 'clnkgo@baddi.info'));
-die();
+
                             sleep(120);
                         });
 
