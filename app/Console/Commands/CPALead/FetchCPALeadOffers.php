@@ -79,7 +79,7 @@ class FetchCPALeadOffers extends Command
 
                             $passedEmails = CPALeadTracking::query()
                                 ->select([CPALeadTracking::EMAIL_COLUMN])
-                                ->where(Carbon::parse(CPALeadTracking::SENT_AT_COLUMN)->diffInDays(Carbon::now()), '>', 1)
+                                ->whereDate(CPALeadTracking::SENT_AT_COLUMN, "<=", Carbon::now()->subHours(24))
                                 ->orWhere(CPALeadTracking::IS_UNSUBSCRIBED_COLUMN, 1)
                                 ->get()
                                 ->pluck([CPALeadTracking::EMAIL_COLUMN])
@@ -92,7 +92,7 @@ class FetchCPALeadOffers extends Command
                                 ->get()
                                 ->pluck([TwitterUser::EMAIL_COLUMN])
                                 ->toArray();
-dd($emails);
+dd($mails);
                             Event::dispatch(new CPALeadOfferMail('life5baddi@gmail.com', $offer));
 
                             $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], 'clnkgo@baddi.info'));
