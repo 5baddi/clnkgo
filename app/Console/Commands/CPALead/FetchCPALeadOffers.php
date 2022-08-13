@@ -93,9 +93,8 @@ class FetchCPALeadOffers extends Command
                             // TODO: dipatch send offer mail
                             Event::dispatch(
                                 new CPALeadOfferMail(
-                                    'clnkgo@baddi.info',
-                                    $offer
-                                    // Arr::only($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
+                                    'life5baddi@gmail.com',
+                                    Arr::only($offer, ['creatives', 'title', 'description', 'link', 'campid', 'category_name', 'amount', 'button_text'])
                                 )
                             );
 
