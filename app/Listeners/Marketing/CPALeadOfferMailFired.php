@@ -10,7 +10,10 @@ namespace BADDIServices\ClnkGO\Listeners\Marketing;
 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use BADDIServices\ClnkGO\Models\CPALeadTracking;
+use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMail;
+use Carbon\Carbon;
 
 class CPALeadOfferMailFired implements ShouldQueue
 {
@@ -21,10 +24,16 @@ class CPALeadOfferMailFired implements ShouldQueue
      */
     public $tries = 1;
 
+    public function __construct(private CPALeadTrackingService $CPALeadTrackingService) {}
+
     public function handle(CPALeadOfferMail $event)
     {
         $email = $event->email;
         $offer = $event->offer;
+
+        if (empty($offer['campid'])) {
+            return;
+        }
 
         $template = 'emails.marketing.cpalead_offer';
         $subject = $offer['title'] ?? 'New Offer for you!';
@@ -42,5 +51,11 @@ class CPALeadOfferMailFired implements ShouldQueue
             $message->to($email);
             $message->subject($subject);
         });
+
+        $CPALeadTrackingService->save([
+            CPALeadTracking::CAMPAIGN_ID_COLUMN     => $offer['campid'],
+            CPALeadTracking::EMAIL_COLUMN           => $email,
+            CPALeadTracking::SENT_AT_COLUMN         => Carbon::now(),
+        ])
     }
 }
