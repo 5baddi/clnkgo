@@ -19,9 +19,7 @@ class CPALeadUnsubscribeController extends Controller
 {
     public function __construct(
         private CPALeadTrackingService $CPALeadTrackingService
-    ) {
-        parent::__construct();
-    }
+    ) {}
 
     public function __invoke(Request $request)
     {
