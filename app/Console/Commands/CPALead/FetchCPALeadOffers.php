@@ -83,7 +83,7 @@ class FetchCPALeadOffers extends Command
                                 ->get()
                                 ->pluck([CPALeadTracking::EMAIL_COLUMN])
                                 ->toArray();
-dd($passedEmails);
+
                             $email = TwitterUser::query()
                                 ->select([TwitterUser::EMAIL_COLUMN])
                                 ->whereNotNull(TwitterUser::EMAIL_COLUMN)
@@ -96,10 +96,10 @@ dd($passedEmails);
                                 return true;
                             }
 
-                            Event::dispatch(new CPALeadOfferMail('clnkgo@baddi.info', $offer));
+                            Event::dispatch(new CPALeadOfferMail($email, $offer));
 
                             $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], $email));
-die();
+
                             sleep(120);
                         });
 
