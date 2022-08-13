@@ -27,4 +27,8 @@ return [
         'enabled'               => env('REPORT_BUGS_WITH_GLEAP_FEATURE_ENABLED', false),
         'for'                   => env('REPORT_BUGS_WITH_GLEAP_FEATURE_ENABLED_FOR'),
     ],
+    'fetch_cpalead_offers'      =>  [
+        'enabled'               => env('FETCH_CPALEAD_OFFERS_FEATURE_ENABLED', false),
+        'for'                   => env('FETCH_CPALEAD_OFFERS_FEATURE_ENABLED_FOR'),
+    ],
 ];
