@@ -14,6 +14,7 @@ class MailingList extends ModelEntity
 {   
     /** @var string */
     public const EMAIL_COLUMN = 'email';
+    public const NAME_COLUMN = 'name';
     public const ISO_COUNTRY_COLUMN = 'iso_country';
     public const SENT_AT_COLUMN = 'sent_at';
     public const IS_UNSUBSCRIBED_COLUMN = 'is_unsubscribed';

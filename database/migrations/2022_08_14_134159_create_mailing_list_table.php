@@ -16,6 +16,7 @@ class CreateMailingListTable extends Migration
         Schema::create('mailing_list', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('email')->unique();
+            $table->string('name')->nullable();
             $table->string('iso_country', 3)->nullable();
             $table->timestamp('sent_at')->nullable();
             $table->tinyInteger('is_unsubscribed')->default(0);
