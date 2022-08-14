@@ -89,7 +89,7 @@ class FetchCPALeadOffers extends Command
                                 ->pluck([TwitterUser::EMAIL_COLUMN])
                                 ->random();
 
-                            if (! is_string($email) || empty($email)) {
+                            if (! is_string($email) || empty($email) || ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
                                 return true;
                             }
 
