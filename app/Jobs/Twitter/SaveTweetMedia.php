@@ -59,6 +59,7 @@ class SaveTweetMedia implements ShouldQueue
 
             DB::beginTransaction();
 
+            // FIXME: find then update or create
             $twitterMediaService->save(
                 [
                     TwitterMedia::TWEET_ID_COLUMN           => $this->tweetId,

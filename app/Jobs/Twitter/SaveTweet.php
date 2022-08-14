@@ -73,6 +73,7 @@ class SaveTweet implements ShouldQueue
 
             preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $this->tweet['text'] ?? '', $emailMatches);
 
+            // FIXME: find then update or create
             $tweetService->save(
                 $this->hashtag,
                 [
