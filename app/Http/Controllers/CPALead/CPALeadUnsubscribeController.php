@@ -12,7 +12,7 @@ use Throwable;
 use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\AppLogger;
 use App\Http\Controllers\Controller;
-use BADDIServices\ClnkGO\Models\CPALeadTracking;
+use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 
 class CPALeadUnsubscribeController extends Controller

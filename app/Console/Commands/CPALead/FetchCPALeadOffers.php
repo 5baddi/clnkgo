@@ -11,7 +11,7 @@ use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\TwitterUser;
 use BADDIServices\ClnkGO\Domains\CPALeadService;
 use BADDIServices\ClnkGO\Jobs\Marketing\CPALeadOffer;
-use BADDIServices\ClnkGO\Models\CPALeadTracking;
+use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 
 class FetchCPALeadOffers extends Command
 {

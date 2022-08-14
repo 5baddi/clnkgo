@@ -10,7 +10,7 @@ namespace BADDIServices\ClnkGO\Repositories;
 
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\ClnkGO\Models\CPALeadTracking;
+use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 
 class CPALeadTrackingRepository
 {

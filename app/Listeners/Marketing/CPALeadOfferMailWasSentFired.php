@@ -10,7 +10,7 @@ namespace BADDIServices\ClnkGO\Listeners\Marketing;
 
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\ClnkGO\Models\CPALeadTracking;
+use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasSent;
 

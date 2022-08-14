@@ -8,7 +8,7 @@
 
 namespace BADDIServices\ClnkGO\Services;
 
-use BADDIServices\ClnkGO\Models\CPALeadTracking;
+use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 use BADDIServices\ClnkGO\Repositories\CPALeadTrackingRepository;
 
 class CPALeadTrackingService extends Service
