@@ -61,7 +61,7 @@ class FetchCPALeadOffers extends Command
 
         foreach ($emails as $email) {
             MailingList::query()
-                ->updateOrCreate([
+                ->create([
                     MailingList::EMAIL_COLUMN => $email,
                 ]);
         }
