@@ -12,6 +12,7 @@ use BADDIServices\ClnkGO\Models\TwitterUser;
 use BADDIServices\ClnkGO\Domains\CPALeadService;
 use BADDIServices\ClnkGO\Jobs\Marketing\CPALeadOffer;
 use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
+use BADDIServices\ClnkGO\Models\Marketing\MailingList;
 
 class FetchCPALeadOffers extends Command
 {
@@ -50,6 +51,21 @@ class FetchCPALeadOffers extends Command
      */
     public function handle()
     {
+        $emails = TwitterUser::query()
+                                ->select([TwitterUser::EMAIL_COLUMN])
+                                ->whereNotNull(TwitterUser::EMAIL_COLUMN)
+                                // ->whereNotIn(TwitterUser::EMAIL_COLUMN, $passedEmails)
+                                ->get()
+                                ->pluck([TwitterUser::EMAIL_COLUMN])
+                                ->toArray();
+
+        foreach ($emails as $email) {
+            MailingList::query()
+                ->create([
+                    MailingList::EMAIL_COLUMN => $email,
+                ]);
+        }
+        die();
         $this->info("Start fetching CPA lead offers");
         $startTime = microtime(true);
 
