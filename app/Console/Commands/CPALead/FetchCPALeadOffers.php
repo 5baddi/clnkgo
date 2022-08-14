@@ -8,9 +8,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use BADDIServices\ClnkGO\AppLogger;
-use BADDIServices\ClnkGO\Models\TwitterUser;
 use BADDIServices\ClnkGO\Domains\CPALeadService;
 use BADDIServices\ClnkGO\Jobs\Marketing\CPALeadOffer;
+use BADDIServices\ClnkGO\Models\Marketing\MailingList;
 use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 
 class FetchCPALeadOffers extends Command
@@ -79,12 +79,12 @@ class FetchCPALeadOffers extends Command
                                 ->pluck([CPALeadTracking::EMAIL_COLUMN])
                                 ->toArray();
 
-                            $email = TwitterUser::query()
-                                ->select([TwitterUser::EMAIL_COLUMN])
-                                ->whereNotNull(TwitterUser::EMAIL_COLUMN)
-                                ->whereNotIn(TwitterUser::EMAIL_COLUMN, $passedEmails)
+                            $email = MailingList::query()
+                                ->select([MailingList::EMAIL_COLUMN])
+                                ->whereNotNull(MailingList::EMAIL_COLUMN)
+                                ->whereNotIn(MailingList::EMAIL_COLUMN, $passedEmails)
                                 ->get()
-                                ->pluck([TwitterUser::EMAIL_COLUMN])
+                                ->pluck([MailingList::EMAIL_COLUMN])
                                 ->random();
 
                             if (! is_string($email) || empty($email) || ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
