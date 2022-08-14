@@ -21,6 +21,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use BADDIServices\ClnkGO\Models\TwitterUser;
 use BADDIServices\ClnkGO\Domains\TwitterService;
 use BADDIServices\ClnkGO\Helpers\EmojiParser;
+use BADDIServices\ClnkGO\Models\Marketing\MailingList;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 
@@ -105,6 +106,18 @@ class SaveTweetUser implements ShouldQueue
                     TwitterUser::WITHHELD_COLUMN              => json_encode($this->user['withheld'] ?? null),
                 ]
             );
+
+            if (! empty($emailMatches[0]) && filter_var($emailMatches[0], FILTER_VALIDATE_EMAIL)) {
+                MailingList::query()
+                    ->updateOrCreate(
+                        [
+                            MailingList::EMAIL_COLUMN => strtolower($emailMatches[0]),
+                        ],
+                        [
+                            MailingList::NAME_COLUMN => $this->user['name'] ?? null,
+                        ]
+                    );
+            }
 
             DB::commit();
         } catch (Throwable $e) {
