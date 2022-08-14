@@ -8,10 +8,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use BADDIServices\ClnkGO\AppLogger;
-use Illuminate\Support\Facades\Event;
 use BADDIServices\ClnkGO\Models\TwitterUser;
 use BADDIServices\ClnkGO\Domains\CPALeadService;
-use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMail;
 use BADDIServices\ClnkGO\Jobs\Marketing\CPALeadOffer;
 use BADDIServices\ClnkGO\Models\CPALeadTracking;
 
