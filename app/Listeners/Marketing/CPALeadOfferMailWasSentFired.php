@@ -42,13 +42,6 @@ class CPALeadOfferMailWasSentFired implements ShouldQueue
             return;
         }
 
-        $existsTrackingData = $this->CPALeadTrackingService
-            ->findByEmail($data[CPALeadTracking::EMAIL_COLUMN]);
-
-        if ($existsTrackingData instanceof CPALeadTracking) {
-            $data[CPALeadTracking::ID_COLUMN] = $existsTrackingData->getId();
-        }
-
         $this->CPALeadTrackingService
             ->save($data);
     }

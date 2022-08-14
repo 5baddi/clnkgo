@@ -51,7 +51,6 @@ class CPALeadTrackingService extends Service
                 return $value !== null;
             })
             ->only([
-                CPALeadTracking::ID_COLUMN,
                 CPALeadTracking::CAMPAIGN_ID_COLUMN,
                 CPALeadTracking::EMAIL_COLUMN,
                 CPALeadTracking::SENT_AT_COLUMN,

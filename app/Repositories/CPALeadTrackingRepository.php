@@ -41,16 +41,12 @@ class CPALeadTrackingRepository
     
     public function save(array $attributes): CPALeadTracking
     {
-        if (! Arr::has($attributes, CPALeadTracking::ID_COLUMN)) {
-            return $this->create($attributes);
-        }
-
         return CPALeadTracking::query()
             ->updateOrCreate(
                 [
-                    CPALeadTracking::ID_COLUMN      => $attributes[CPALeadTracking::ID_COLUMN]
+                    CPALeadTracking::EMAIL_COLUMN => $attributes[CPALeadTracking::EMAIL_COLUMN]
                 ],
-                Arr::except($attributes, [CPALeadTracking::ID_COLUMN])
+                Arr::except($attributes, [CPALeadTracking::EMAIL_COLUMN])
             );
     }
 
