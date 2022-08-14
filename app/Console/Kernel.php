@@ -39,6 +39,8 @@ class Kernel extends ConsoleKernel
 
             $schedule->command('mail:new-request')->hourly()->withoutOverlapping();
             $schedule->command('app:update-most-used-keywords')->weekly();
+
+            $schedule->command('cpa:lead-offers')->hourly()->withoutOverlapping();
         } else {
             $schedule->command('twitter:latest-tweets')->daily()->withoutOverlapping();
             $schedule->command('twitter:fetch-user-profile')->daily()->withoutOverlapping();
@@ -46,7 +48,7 @@ class Kernel extends ConsoleKernel
             $schedule->command('mail:new-request')->daily()->withoutOverlapping();
             $schedule->command('app:update-most-used-keywords')->weekly();
 
-            $schedule->command('cpa:lead-offers')->hourly()->withoutOverlapping();
+            $schedule->command('cpa:lead-offers')->daily()->withoutOverlapping();
         }
     }
 
