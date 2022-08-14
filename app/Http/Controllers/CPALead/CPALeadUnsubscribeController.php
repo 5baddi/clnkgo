@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\AppLogger;
 use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
+use BADDIServices\ClnkGO\Models\Marketing\MailingList;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 
 class CPALeadUnsubscribeController extends Controller
@@ -34,6 +35,17 @@ class CPALeadUnsubscribeController extends Controller
                     CPALeadTracking::EMAIL_COLUMN           => $request->query('email'),
                     CPALeadTracking::IS_UNSUBSCRIBED_COLUMN => 1
                 ]);
+
+                // TODO: use service
+                MailingList::query()
+                    ->updateOrCreate(
+                        [
+                            MailingList::EMAIL_COLUMN           => $request->query('email'),
+                        ],
+                        [
+                            MailingList::IS_UNSUBSCRIBED_COLUMN => 1
+                        ]
+                    );
             }
     
         } catch (Throwable $e) {

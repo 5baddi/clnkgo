@@ -108,6 +108,7 @@ class SaveTweetUser implements ShouldQueue
             );
 
             if (! empty($emailMatches[0]) && filter_var($emailMatches[0], FILTER_VALIDATE_EMAIL)) {
+                // TODO: use service
                 MailingList::query()
                     ->updateOrCreate(
                         [
