@@ -17,6 +17,7 @@ use BADDIServices\ClnkGO\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\ConfirmEmailController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword as ResetPassword;
 use BADDIServices\ClnkGO\Http\Controllers\CPALead\CPALeadUnsubscribeController;
+use BADDIServices\ClnkGO\Http\Controllers\CPALead\CPALeadRedirectToOfferController;
 
 Route::get('/', function () {
     return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT);
