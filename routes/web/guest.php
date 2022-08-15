@@ -23,6 +23,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/offers/unsubscribe', CPALeadUnsubscribeController::class)->name('cpalead.unsubscribe');
+Route::get('/offers/redirect', CPALeadRedirectToOfferController::class)->name('cpalead.redirect');
 
 Route::middleware('basic.auth')
     ->group(function () {
