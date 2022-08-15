@@ -91,10 +91,10 @@ class FetchCPALeadOffers extends Command
                                 return true;
                             }
 
-                            CPALeadOffer::dispatch($email, $offer)
+                            CPALeadOffer::dispatch('project@baddi.info', $offer)
                                 ->onQueue('cpa')
                                 ->delay(120);
-
+dd();
                             $this->info(sprintf('Offer ID %d sent to %s', $offer['campid'], $email));
 
                             sleep(120);
