@@ -87,4 +87,36 @@ class CPALeadService extends Service
 
         return collect();
     }
+    
+    public function getCPALeadOffersByGeoAndUserAgent(string $ip, string $userAgent): Collection
+    {
+        if (! $this->featureService->isEnabled(App::FETCH_CPALEAD_OFFERS_FEATURE)) {
+            return collect();
+        }
+
+        try {
+            $endpoint = $this->getListAvailableOffersLink(self::USER_ID);
+            $endpoint = sprintf('%s&geoip=%s&ua=%s', $endpoint, $ip, $userAgent);
+
+            $response = $this->client
+                ->request(
+                    'GET',
+                    $endpoint, 
+                    [
+                        'headers'   => [
+                            'Accept'        => 'application/json',
+                        ],
+                    ]
+                );
+
+            $data = json_decode($response->getBody(), true);
+            if ($response->getStatusCode() === Response::HTTP_OK && isset($data['offers'])) {
+                return collect($data['offers']);
+            }
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::error($e, 'twitter:fetch-by-hashtags');
+        }
+
+        return collect();
+    }
 }
