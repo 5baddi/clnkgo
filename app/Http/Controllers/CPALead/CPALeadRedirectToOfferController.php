@@ -33,7 +33,7 @@ class CPALeadRedirectToOfferController extends Controller
             ) {
                 $offers = $this->CPALeadService->getCPALeadOffersByGeoAndUserAgent(
                     $request->ip()
-                    // $request->userAgent()
+                    // FIXME: $request->userAgent()  Android phone, iOS phone, or desktop
                 );
 
                 if ($offers->count() > 0) {
