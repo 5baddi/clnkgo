@@ -88,7 +88,7 @@ class CPALeadService extends Service
         return collect();
     }
     
-    public function getCPALeadOffersByGeoAndUserAgent(string $ip, string $userAgent): Collection
+    public function getCPALeadOffersByGeoAndUserAgent(string $ip, ?string $userAgent = null): Collection
     {
         if (! $this->featureService->isEnabled(App::FETCH_CPALEAD_OFFERS_FEATURE)) {
             return collect();
@@ -96,7 +96,11 @@ class CPALeadService extends Service
 
         try {
             $endpoint = $this->getListAvailableOffersLink(self::USER_ID);
-            $endpoint = sprintf('%s&geoip=%s&ua=%s', $endpoint, $ip, $userAgent);
+            $endpoint = sprintf('%s&geoip=%s&ua=%s', $endpoint, $ip);
+
+            if (! empty($userAgent)) {
+                $endpoint = sprintf('%s&ua=%s', $endpoint, $userAgent);
+            }
 
             $response = $this->client
                 ->request(
