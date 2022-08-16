@@ -17,6 +17,7 @@ return [
         'instagram'     => env('APP_INSTAGRAM_USERNAME', 'clnkgo'),
         'linked'        => env('APP_LINKEDIN_USERNAME', 'clnkgo'),
     ],
+    'news_api_key'      => env('NEWS_API_KEY'),
     'hcaptcha_verify_endpoint'           => env('HCAPTCHA_VERIFY_ENDPOINT'),
     'hcaptcha_js_endpoint'               => env('HCAPTCHA_JS_ENDPOINT'),
     'hcaptcha_secret'                    => env('HCAPTCHA_SECRET'),

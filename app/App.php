@@ -45,4 +45,5 @@ class App
     public const JOURNALIST_AREA_FEATURE = 'journalist_area';
     public const REPORT_BUGS_WITH_GLEAP_FEATURE = 'report_bugs_with_gleap';
     public const FETCH_CPALEAD_OFFERS_FEATURE = 'fetch_cpalead_offers';
+    public const FETCH_NEWS_FEATURE = 'fetch_news';
 }
