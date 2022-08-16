@@ -9,6 +9,7 @@
 namespace BADDIServices\ClnkGO\Http\Controllers\CPALead;
 
 use Throwable;
+use Jenssegers\Agent\Agent;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\AppLogger;
@@ -27,7 +28,8 @@ class CPALeadRedirectToOfferController extends Controller
     public function __invoke(Request $request)
     {
         try {
-            dd($request->userAgent());
+            $agent = new Agent();
+            dd($agent);
             if (
                 $request->has(['email', 'offer']) 
                 && filter_var($request->query('email'), FILTER_VALIDATE_EMAIL)
