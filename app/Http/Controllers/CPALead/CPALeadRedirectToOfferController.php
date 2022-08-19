@@ -28,7 +28,7 @@ class CPALeadRedirectToOfferController extends Controller
     {
         try {
             if (
-                $request->has(['email', 'offer']) 
+                $request->has(['email']) 
                 && filter_var($request->query('email'), FILTER_VALIDATE_EMAIL)
             ) {
                 $offers = $this->CPALeadService->getCPALeadOffersByGeoAndUserAgent(
