@@ -41,13 +41,12 @@ class CPALeadOffer implements ShouldQueue
      */
     public function __construct(
         public string $email,
-        public array $offer,
         public array $article
     ) {}
 
     public function middleware()
     {
-        return [(new WithoutOverlapping($this->offer['campid']))->releaseAfter(600)];
+        return [(new WithoutOverlapping($this->email))->releaseAfter(600)];
     }
 
     /**
@@ -58,7 +57,7 @@ class CPALeadOffer implements ShouldQueue
     public function handle()
     {
         try {
-            if (! Arr::has($this->offer, ['link', 'campid']) || ! Arr::has($this->article, ['title', 'description', 'urlToImage'])) {
+            if (! Arr::has($this->article, ['title', 'description', 'urlToImage'])) {
                 return;
             }
     
@@ -70,9 +69,8 @@ class CPALeadOffer implements ShouldQueue
                 'subject'       => $subject,
                 'excerpt'       => $this->article['description'],
                 'thumbnail'     => $this->article['urlToImage'],
-                'link'          => $this->offer['link'],
             ];
-    
+
             Mail::send($template, $data, function ($message) use ($subject) {
                 $message->to($this->email);
                 $message->subject($subject);
@@ -80,7 +78,6 @@ class CPALeadOffer implements ShouldQueue
     
             Event::dispatch(
                 new CPALeadOfferMailWasSent([
-                    CPALeadTracking::CAMPAIGN_ID_COLUMN     => $this->offer['campid'],
                     CPALeadTracking::EMAIL_COLUMN           => $this->email,
                     CPALeadTracking::SENT_AT_COLUMN         => Carbon::now(),
                 ])

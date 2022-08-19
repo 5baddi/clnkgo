@@ -32,10 +32,10 @@ class CPALeadRedirectToOfferController extends Controller
                 && filter_var($request->query('email'), FILTER_VALIDATE_EMAIL)
             ) {
                 $offers = $this->CPALeadService->getCPALeadOffersByGeoAndUserAgent(
-                    $request->ip()
+                    "104.107.143.255",//$request->ip()
                     // FIXME: $request->userAgent()  Android phone, iOS phone, or desktop
                 );
-
+dd($offers);
                 if ($offers->count() > 0) {
                     $offer = $offers
                         ->filter(function (array $offer) {

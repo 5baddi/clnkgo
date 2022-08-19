@@ -2,10 +2,10 @@
 
 namespace App\Console;
 
-use App\Console\Commands\CPALead\FetchCPALeadOffers;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\Twitter\FetchUserProfile;
 use App\Console\Commands\Twitter\FetchLatestTweets;
+use App\Console\Commands\CPALead\SendCPALeadOffers;
 use App\Console\Commands\MailUserWhenThereNewRequest;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
         FetchLatestTweets::class,
         FetchUserProfile::class,
         MailUserWhenThereNewRequest::class,
-        FetchCPALeadOffers::class,
+        SendCPALeadOffers::class,
     ];
 
     /**

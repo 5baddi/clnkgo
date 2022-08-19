@@ -8,13 +8,13 @@
 
 namespace BADDIServices\ClnkGO;
 
-use App\Models\User;
-use BADDIServices\ClnkGO\Entities\ArrayValue;
 use Throwable;
+use App\Models\User;
 use Bugsnag\Client;
 use Bugsnag\Configuration;
 use Bugsnag\Breadcrumbs\Breadcrumb;
 use Illuminate\Support\Facades\Log;
+use BADDIServices\ClnkGO\Entities\ArrayValue;
 
 class AppLogger
 {
@@ -67,6 +67,10 @@ class AppLogger
             'extra'     =>  json_encode($extraAsJson->jsonSerialize(), JSON_PRETTY_PRINT)
         ]);
 
+        if (app()->environment() !== 'production') {
+            return;
+        }
+
         if (! self::$client) {
             self::getInstance();
         }
@@ -85,6 +89,10 @@ class AppLogger
         ];
 
         Log::info($message, $infoContext);
+
+        if (app()->environment() !== 'production') {
+            return;
+        }
 
         if (! self::$client) {
             self::getInstance();

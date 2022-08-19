@@ -32,10 +32,20 @@ class CPALeadService extends Service
     const APP_INSTALL_OFFER_TYPE = "app_install";
     const MOBILE_OFFER_TYPE = "mobile";
 
+    const DESKTOP_USER_AGENT = "desktop device";
+    const ANDROID_USER_AGENT = "Android phone";
+    const IOS_USER_AGENT = "IOS phone";
+
     const SUPPORTED_OFFER_TYPES = [
         self::EMAIL_SUMIT_OFFER_TYPE,
         self::APP_INSTALL_OFFER_TYPE,
         self::MOBILE_OFFER_TYPE,
+    ];
+
+    const SUPPORTED_USER_AGENTS = [
+        self::DESKTOP_USER_AGENT,
+        self::ANDROID_USER_AGENT,
+        self::IOS_USER_AGENT,
     ];
 
     private Client $client;
@@ -88,10 +98,14 @@ class CPALeadService extends Service
         return collect();
     }
     
-    public function getCPALeadOffersByGeoAndUserAgent(string $ip, ?string $userAgent = null): Collection
+    public function getCPALeadOffersByGeoAndUserAgent(string $ip, string $userAgent = self::DESKTOP_USER_AGENT): Collection
     {
         if (! $this->featureService->isEnabled(App::FETCH_CPALEAD_OFFERS_FEATURE)) {
             return collect();
+        }
+
+        if (! in_array($userAgent, self::SUPPORTED_USER_AGENTS)) {
+            $userAgent = self::DESKTOP_USER_AGENT;
         }
 
         try {
