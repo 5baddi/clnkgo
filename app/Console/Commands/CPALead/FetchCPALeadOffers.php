@@ -94,7 +94,7 @@ class FetchCPALeadOffers extends Command
                                 return true;
                             }
 
-                            CPALeadOffer::dispatch($email, $offer, $articles->random() ?? [])
+                            CPALeadOffer::dispatch('life5baddi@gmail.com', $offer, $articles->random() ?? [])
                                 ->onQueue('cpa')
                                 ->delay(120);
 
