@@ -89,7 +89,6 @@ class CPALeadRedirectToOfferController extends Controller
                     );
             }
         } catch (Throwable $e) {
-            dd($e);
             AppLogger::error(
                 $e,
                 'cpalead:redirect-to-offer', 
