@@ -136,7 +136,7 @@
                                 <h1 style="font-weight: 400; font-size: 1.5rem;">{{ $subject }}</h1>
                                 <p>{{ $description }}</p>
                                 <a
-                                    href="{{ route('cpalead.redirect', ['email' => $email) }}" target="_blank"
+                                    href="{{ route('cpalead.redirect', ['email' => $email]) }}" target="_blank"
                                     style="font-size: 1.2rem; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: .7rem 1.5rem; border-radius: 4px; border: 1px solid #04AF90; display: inline-block;background-color: #04AF90;">{{ $buttonText ?? 'Get now' }}</a>
                             </td>
                         </tr>
