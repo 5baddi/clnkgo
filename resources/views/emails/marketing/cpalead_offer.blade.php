@@ -110,7 +110,7 @@
                     </table>
                 </td>
             </tr>
-            @if(! is_null($featuredImage))
+            @if(! is_null($thumbnail))
             <tr>
                 <td bgcolor="#f4f6fa" align="center" style="padding: 0px 10px 0px 10px;">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
@@ -118,7 +118,7 @@
                             <td bgcolor="#fff" align="center" valign="top"
                                 style="padding: 20px 20px 20px 20px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
                                 <a href="{{ route('cpalead.redirect', ['email' => $email]) }}" target="_blank">
-                                    <img src="{{ $featuredImage }}" width="200" height="auto"
+                                    <img src="{{ $thumbnail }}" width="200" height="auto"
                                         style="display: block; border: 0px;" />
                                 </a>
                             </td>
@@ -134,10 +134,10 @@
                             <td bgcolor="#fff" align="center"
                                 style="padding: 20px 30px 50px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                                 <h1 style="font-weight: 400; font-size: 1.5rem;">{{ $subject }}</h1>
-                                <p>{{ $description }}</p>
+                                <p>{{ $excerpt }}</p>
                                 <a
                                     href="{{ route('cpalead.redirect', ['email' => $email]) }}" target="_blank"
-                                    style="font-size: 1.2rem; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: .7rem 1.5rem; border-radius: 4px; border: 1px solid #04AF90; display: inline-block;background-color: #04AF90;">{{ $buttonText ?? 'Get now' }}</a>
+                                    style="font-size: 1.2rem; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: .7rem 1.5rem; border-radius: 4px; border: 1px solid #04AF90; display: inline-block;background-color: #04AF90;">@lang('emails.read_more')</a>
                             </td>
                         </tr>
                     </table>
@@ -153,7 +153,7 @@
                                 <p style="margin: 0;">
                                     <a href="{{ route('cpalead.unsubscribe', ['email' => $email]) }}"
                                         target="_blank"
-                                        style="color: #656d77; font-weight: 700; text-decoration: none;">Unsubscribe</a>
+                                        style="color: #656d77; font-weight: 700; text-decoration: none;">@lang('emails.unsubscribe')</a>
                                 </p>
                             </td>
                         </tr>

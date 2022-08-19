@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Domains\NewsService;
 use BADDIServices\ClnkGO\Domains\CPALeadService;
 use BADDIServices\ClnkGO\Jobs\Marketing\CPALeadOffer;
 use BADDIServices\ClnkGO\Models\Marketing\MailingList;
@@ -38,6 +39,7 @@ class FetchCPALeadOffers extends Command
      * @return void
      */
     public function __construct(
+        private NewsService $newsService,
         private CPALeadService $CPALeadService
     ) {
         parent::__construct();
@@ -54,10 +56,11 @@ class FetchCPALeadOffers extends Command
         $startTime = microtime(true);
 
         try {
+            $articles = $this->newsService->getTopHeadlines();
             $offers = $this->CPALeadService->fetchCPALeadOffers();
 
             $offers->chunk(self::CHUNK_SIZE)
-                ->each(function (Collection $offers) {
+                ->each(function (Collection $offers) use ($articles) {
                     $offers
                         ->filter(function (array $offer) {
                             return (
@@ -70,7 +73,7 @@ class FetchCPALeadOffers extends Command
                             );
                         })
                         ->sortBy('amount', SORT_DESC)
-                        ->each(function (array $offer) {
+                        ->each(function (array $offer) use ($articles) {
                             $passedEmails = CPALeadTracking::query()
                                 ->select([CPALeadTracking::EMAIL_COLUMN])
                                 ->whereDate(CPALeadTracking::SENT_AT_COLUMN, ">=", Carbon::now()->subDays(3))
@@ -91,7 +94,7 @@ class FetchCPALeadOffers extends Command
                                 return true;
                             }
 
-                            CPALeadOffer::dispatch($email, $offer)
+                            CPALeadOffer::dispatch($email, $offer, $articles->random() ?? [])
                                 ->onQueue('cpa')
                                 ->delay(120);
 

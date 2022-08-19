@@ -21,6 +21,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasSent;
+use Illuminate\Support\Arr;
 
 class CPALeadOffer implements ShouldQueue
 {
@@ -40,7 +41,8 @@ class CPALeadOffer implements ShouldQueue
      */
     public function __construct(
         public string $email,
-        public array $offer
+        public array $offer,
+        public array $article
     ) {}
 
     public function middleware()
@@ -56,20 +58,19 @@ class CPALeadOffer implements ShouldQueue
     public function handle()
     {
         try {
-            if (empty($this->offer['campid'])) {
+            if (! Arr::has($this->offer, ['link', 'campid']) || ! Arr::has($this->article, ['title', 'description', 'urlToImage'])) {
                 return;
             }
     
             $template = 'emails.marketing.cpalead_offer';
-            $subject = $this->offer['title'] ?? 'New Offer for you!';
+            $subject = $this->article['title'];
     
             $data = [
                 'email'         => $this->email,
                 'subject'       => $subject,
+                'excerpt'       => $this->article['description'],
+                'thumbnail'     => $this->article['urlToImage'],
                 'link'          => $this->offer['link'],
-                'featuredImage' => end($this->offer['creatives'])['url'] ?? null,
-                'description'   => $this->offer['description'] ?? '',
-                'buttonText'    => $this->offer['button_text'] ?? null,
             ];
     
             Mail::send($template, $data, function ($message) use ($subject) {
