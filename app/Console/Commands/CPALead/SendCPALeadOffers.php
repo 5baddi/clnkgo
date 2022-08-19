@@ -71,7 +71,7 @@ class SendCPALeadOffers extends Command
             $targetedEmails->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $emails) use ($articles) {
                     $emails->each(function (array $email) use ($articles) {
-                        CPALeadOffer::dispatch('life5baddi@gmail.com', $articles->random() ?? [])
+                        CPALeadOffer::dispatch($email, $articles->random() ?? [])
                                 ->onQueue('cpa')
                                 ->delay(120);
 

@@ -14,8 +14,10 @@ use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\AppLogger;
 use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Domains\CPALeadService;
+use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 use BADDIServices\ClnkGO\Models\Marketing\MailingList;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
+use Carbon\Carbon;
 
 class CPALeadRedirectToOfferController extends Controller
 {
@@ -35,7 +37,7 @@ class CPALeadRedirectToOfferController extends Controller
                     $request->ip()
                     // FIXME: $request->userAgent()  Android phone, iOS phone, or desktop
                 );
-dd($offers);
+
                 if ($offers->count() > 0) {
                     $offer = $offers
                         ->filter(function (array $offer) {
@@ -49,11 +51,33 @@ dd($offers);
                         ->first();
 
                     if (is_array($offer) && Arr::has($offer, 'link')) {
+                        // TODO: use service
+                        MailingList::query()
+                            ->updateOrCreate(
+                                [
+                                    MailingList::EMAIL_COLUMN       => $request->query('email'),
+                                ],
+                                [
+                                    MailingList::IS_ACTIVE_COLUMN   => 1,
+                                    MailingList::SENT_AT_COLUMN     => Carbon::now(),
+                                ]
+                            );
+                            
+                        CPALeadTracking::query()
+                            ->updateOrCreate(
+                                [
+                                    CPALeadTracking::EMAIL_COLUMN       => $request->query('email'),
+                                ],
+                                [
+                                    CPALeadTracking::CAMPAIGN_ID_COLUMN => $offer['campid'],
+                                    CPALeadTracking::SENT_AT_COLUMN     => Carbon::now(),
+                                ]
+                            );
+
                         return redirect()->to($offer['link']);
                     }
                 }
 
-                // TODO: use service
                 MailingList::query()
                     ->updateOrCreate(
                         [
