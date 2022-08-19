@@ -31,4 +31,9 @@ class MailingList extends ModelEntity
     {
         return $this->getAttribute(self::IS_UNSUBSCRIBED_COLUMN) === 1;
     }
+
+    public function getEmail(): string
+    {
+        return $this->getAttribute(self::EMAIL_COLUMN);
+    }
 }
