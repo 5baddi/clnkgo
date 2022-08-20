@@ -54,7 +54,7 @@ class CPALeadRedirectToOfferController extends Controller
                     $request->ip(),
                     $userAgent
                 );
-dd($offers);
+
                 if ($offers->count() > 0) {
                     $offer = $offers
                         ->filter(function (array $offer) {
@@ -82,6 +82,7 @@ dd($offers);
 
             }
         } catch (Throwable $e) {
+            dd($e);
             AppLogger::error(
                 $e,
                 'cpalead:redirect-to-offer', 
