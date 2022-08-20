@@ -9,15 +9,14 @@
 namespace BADDIServices\ClnkGO\Http\Controllers\CPALead;
 
 use Throwable;
-use Carbon\Carbon;
-use Jenssegers\Agent\Agent;
 use Illuminate\Support\Arr;
+use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\AppLogger;
 use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Domains\CPALeadService;
-use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
-use BADDIServices\ClnkGO\Models\Marketing\MailingList;
+use BADDIServices\ClnkGO\Jobs\Marketing\TrackCPALead;
+use BADDIServices\ClnkGO\Jobs\Marketing\TrackMailingList;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 
 class CPALeadRedirectToOfferController extends Controller
@@ -63,42 +62,14 @@ class CPALeadRedirectToOfferController extends Controller
                         ->first();
 
                     if (is_array($offer) && Arr::has($offer, 'campid', 'link')) {
-                        // TODO: use service
-                        MailingList::query()
-                            ->updateOrCreate(
-                                [
-                                    MailingList::EMAIL_COLUMN       => $request->query('email'),
-                                ],
-                                [
-                                    MailingList::IS_ACTIVE_COLUMN   => 1,
-                                    MailingList::SENT_AT_COLUMN     => Carbon::now(),
-                                ]
-                            );
-                            
-                        CPALeadTracking::query()
-                            ->updateOrCreate(
-                                [
-                                    CPALeadTracking::EMAIL_COLUMN       => $request->query('email'),
-                                ],
-                                [
-                                    CPALeadTracking::CAMPAIGN_ID_COLUMN => $offer['campid'],
-                                    CPALeadTracking::SENT_AT_COLUMN     => Carbon::now(),
-                                ]
-                            );
+                        TrackMailingList::dispatch($request->query('email'));
+                        TrackCPALead::dispatch($request->query('email'), $offer['campid']);
 
                         return redirect()->to($offer['link']);
                     }
                 }
 
-                MailingList::query()
-                    ->updateOrCreate(
-                        [
-                            MailingList::EMAIL_COLUMN       => $request->query('email'),
-                        ],
-                        [
-                            MailingList::IS_ACTIVE_COLUMN => 1
-                        ]
-                    );
+                TrackMailingList::dispatch($request->query('email'));
             }
         } catch (Throwable $e) {
             AppLogger::error(
