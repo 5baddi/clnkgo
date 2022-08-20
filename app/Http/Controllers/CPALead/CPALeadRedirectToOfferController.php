@@ -20,6 +20,7 @@ use BADDIServices\ClnkGO\Domains\CPALeadService;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasViewed;
 use BADDIServices\ClnkGO\Events\Marketing\MailingListEmailWasVerified;
+use Illuminate\Http\Response;
 
 class CPALeadRedirectToOfferController extends Controller
 {
@@ -76,7 +77,7 @@ class CPALeadRedirectToOfferController extends Controller
                             )
                         );
 
-                        return redirect()->to($offer['link']);
+                        return redirect()->to($offer['link'], Response::HTTP_MOVED_PERMANENTLY);
                     }
                 }
 
