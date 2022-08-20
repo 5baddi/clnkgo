@@ -53,7 +53,7 @@ class SendCPALeadOffers extends Command
 
         try {
             $articles = $this->newsService->getTopHeadlines();
-dd($articles);
+
             $ignoredEmails = MailingList::query()
                 ->select([MailingList::EMAIL_COLUMN])
                 ->whereDate(MailingList::SENT_AT_COLUMN, ">=", Carbon::now()->subDays(3))
