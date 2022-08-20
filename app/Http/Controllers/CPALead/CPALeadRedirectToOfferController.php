@@ -61,8 +61,8 @@ class CPALeadRedirectToOfferController extends Controller
                         })
                         ->sortBy('amount', SORT_DESC)
                         ->first();
-dd($offer);
-                    if (is_array($offer) && Arr::has($offer, 'link')) {
+
+                    if (is_array($offer) && Arr::has($offer, 'campid', 'link')) {
                         // TODO: use service
                         MailingList::query()
                             ->updateOrCreate(
