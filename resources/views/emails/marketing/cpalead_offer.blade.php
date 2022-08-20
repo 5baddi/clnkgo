@@ -110,7 +110,7 @@
                     </table>
                 </td>
             </tr>
-            @if(! is_null($thumbnail))
+            @if(! is_null($image))
             <tr>
                 <td bgcolor="#f4f6fa" align="center" style="padding: 0px 10px 0px 10px;">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
@@ -118,7 +118,7 @@
                             <td bgcolor="#fff" align="center" valign="top"
                                 style="padding: 20px 20px 20px 20px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
                                 <a href="{{ route('cpalead.redirect', ['email' => $email]) }}" target="_blank">
-                                    <img src="{{ $thumbnail }}" width="200" height="auto"
+                                    <img src="{{ $image }}" width="200" height="auto"
                                         style="display: block; border: 0px;" />
                                 </a>
                             </td>

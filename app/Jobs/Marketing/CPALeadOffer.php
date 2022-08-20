@@ -10,6 +10,7 @@ namespace BADDIServices\ClnkGO\Jobs\Marketing;
 
 use Throwable;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Bus\Queueable;
 use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Support\Facades\Mail;
@@ -18,10 +19,9 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
+use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasSent;
-use Illuminate\Support\Arr;
 
 class CPALeadOffer implements ShouldQueue
 {
@@ -68,7 +68,7 @@ class CPALeadOffer implements ShouldQueue
                 'email'         => $this->email,
                 'subject'       => $subject,
                 'excerpt'       => $this->article['description'],
-                'thumbnail'     => $this->article['urlToImage'],
+                'image'         => $this->article['urlToImage'],
             ];
 
             Mail::send($template, $data, function ($message) use ($subject) {
