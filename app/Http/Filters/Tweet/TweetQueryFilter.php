@@ -14,6 +14,7 @@ use Illuminate\Auth\AuthManager;
 use BADDIServices\ClnkGO\Models\Tweet;
 use BADDIServices\ClnkGO\Models\RequestAnswer;
 use BADDIServices\ClnkGO\Http\Filters\QueryFilter;
+use BADDIServices\ClnkGO\Models\TwitterUser;
 use BADDIServices\ClnkGO\Models\UserFavoriteTweet;
 
 class TweetQueryFilter extends QueryFilter
@@ -35,7 +36,15 @@ class TweetQueryFilter extends QueryFilter
         }
 
         $this->builder
-            ->whereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$term}%"]);
+            ->whereRaw(sprintf("LOWER(%s) like ?", Tweet::TEXT_COLUMN), ["%{$term}%"])
+            ->orWhereRaw(sprintf("LOWER(%s) like ?", Tweet::EMAIL_COLUMN), ["%{$term}%"])
+            ->orWhereHas("author", function ($author) use ($term) {
+                return $author
+                    ->whereRaw(sprintf("LOWER(%s) like ?", TwitterUser::EMAIL_COLUMN), ["%{$term}%"])
+                    ->orWhereRaw(sprintf("LOWER(%s) like ?", TwitterUser::NAME_COLUMN), ["%{$term}%"])
+                    ->orWhereRaw(sprintf("LOWER(%s) like ?", TwitterUser::DESCRIPTION_COLUMN), ["%{$term}%"])
+                    ->orWhereRaw(sprintf("LOWER(%s) like ?", TwitterUser::WEBSITE_COLUMN), ["%{$term}%"]);
+            });
     }
     
     public function category(?string $category = null) 
