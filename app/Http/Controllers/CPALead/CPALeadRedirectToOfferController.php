@@ -54,7 +54,7 @@ class CPALeadRedirectToOfferController extends Controller
                     $request->ip(),
                     $userAgent
                 );
-
+dd($offers);
                 if ($offers->count() > 0) {
                     $offer = $offers
                         ->filter(function (array $offer) {
