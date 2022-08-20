@@ -66,7 +66,7 @@ class CPALeadRedirectToOfferController extends Controller
                         })
                         ->sortBy('amount', SORT_DESC)
                         ->first();
-
+dd($offer);
                     if (is_array($offer)) {
                         Event::dispatch(
                             new CPALeadOfferMailWasViewed(
