@@ -77,10 +77,7 @@ class CPALeadOffer implements ShouldQueue
             });
     
             Event::dispatch(
-                new CPALeadOfferMailWasSent([
-                    CPALeadTracking::EMAIL_COLUMN           => $this->email,
-                    CPALeadTracking::SENT_AT_COLUMN         => Carbon::now(),
-                ])
+                new CPALeadOfferMailWasSent($this->email, Carbon::now())
             );
         } catch (Throwable $e) {
             AppLogger::error(

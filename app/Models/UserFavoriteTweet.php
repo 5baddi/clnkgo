@@ -15,4 +15,5 @@ class UserFavoriteTweet extends ModelEntity
     /** @var string */
     public const USER_ID_COLUMN = 'user_id';
     public const TWEET_ID_COLUMN = 'tweet_id';
+    public const SAVED_AT_COLUMN = 'saved_at'; // TODO: persist saved at datetime
 }

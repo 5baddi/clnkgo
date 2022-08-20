@@ -8,6 +8,7 @@
 
 namespace BADDIServices\ClnkGO\Events\Marketing;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -17,5 +18,8 @@ class CPALeadOfferMailWasSent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels, Queueable;
 
-    public function __construct(public array $trackingData) {}
+    public function __construct(
+        public string $email,
+        public Carbon $sentAt
+    ) {}
 }

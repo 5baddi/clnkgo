@@ -8,8 +8,8 @@
 
 namespace BADDIServices\ClnkGO\Listeners\Marketing;
 
-use Illuminate\Support\Arr;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use BADDIServices\ClnkGO\Models\Marketing\MailingList;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasSent;
@@ -29,21 +29,25 @@ class CPALeadOfferMailWasSentFired implements ShouldQueue
 
     public function handle(CPALeadOfferMailWasSent $event)
     {
-        $data = $event->trackingData;
-
-        if (! Arr::has(
-            $data, 
-            [
-                CPALeadTracking::CAMPAIGN_ID_COLUMN,
-                CPALeadTracking::EMAIL_COLUMN,
-                CPALeadTracking::SENT_AT_COLUMN,
-            ]
-        )) {
-            return;
-        }
+        $email = $event->email;
+        $sentAt = $event->sentAt;
 
         // FIXME: find then update or create
         $this->CPALeadTrackingService
-            ->save($data);
+            ->save([
+                CPALeadTracking::EMAIL_COLUMN       => $email,
+                CPALeadTracking::SENT_AT_COLUMN     => $sentAt,
+            ]);
+
+        // FIXME: use service
+        MailingList::query()
+            ->updateOrCreate(
+                [
+                    MailingList::EMAIL_COLUMN       => $email,
+                ],
+                [
+                    MailingList::SENT_AT_COLUMN     => $sentAt,
+                ]
+            );
     }
 }

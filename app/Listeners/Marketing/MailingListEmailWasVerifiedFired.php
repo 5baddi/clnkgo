@@ -25,15 +25,15 @@ class MailingListEmailWasVerifiedFired implements ShouldQueue
     {
         $email = $event->email;
 
-        // FIXME: find then update or create
+        // FIXME: use service
         MailingList::query()
-                ->updateOrCreate(
-                    [
-                        MailingList::EMAIL_COLUMN       => $email,
-                    ],
-                    [
-                        MailingList::IS_ACTIVE_COLUMN   => 1,
-                    ]
-                );
+            ->updateOrCreate(
+                [
+                    MailingList::EMAIL_COLUMN       => $email,
+                ],
+                [
+                    MailingList::IS_ACTIVE_COLUMN   => 1,
+                ]
+            );
     }
 }
