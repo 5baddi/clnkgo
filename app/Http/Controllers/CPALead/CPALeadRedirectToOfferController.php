@@ -9,6 +9,8 @@
 namespace BADDIServices\ClnkGO\Http\Controllers\CPALead;
 
 use Throwable;
+use Carbon\Carbon;
+use Jenssegers\Agent\Agent;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\AppLogger;
@@ -17,7 +19,6 @@ use BADDIServices\ClnkGO\Domains\CPALeadService;
 use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
 use BADDIServices\ClnkGO\Models\Marketing\MailingList;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
-use Carbon\Carbon;
 
 class CPALeadRedirectToOfferController extends Controller
 {
@@ -33,9 +34,20 @@ class CPALeadRedirectToOfferController extends Controller
                 $request->has(['email']) 
                 && filter_var($request->query('email'), FILTER_VALIDATE_EMAIL)
             ) {
+                $agent = new Agent();
+                $userAgent = CPALeadService::DESKTOP_USER_AGENT;
+
+                if ($agent->isAndroidOS()) {
+                    $userAgent = CPALeadService::ANDROID_USER_AGENT;
+                }
+
+                if ($agent->isPhone()) {
+                    $userAgent = CPALeadService::IOS_USER_AGENT;
+                }
+dd($userAgent);
                 $offers = $this->CPALeadService->getCPALeadOffersByGeoAndUserAgent(
-                    $request->ip()
-                    // FIXME: $request->userAgent()  Android phone, iOS phone, or desktop
+                    $request->ip(),
+                    $userAgent
                 );
 
                 if ($offers->count() > 0) {
