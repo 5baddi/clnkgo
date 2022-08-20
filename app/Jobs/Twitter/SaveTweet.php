@@ -73,6 +73,8 @@ class SaveTweet implements ShouldQueue
 
             preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $this->tweet['text'] ?? '', $emailMatches);
 
+            $email = $emojiParser->replace($emailMatches[0] ?? null, '');
+
             // FIXME: find then update or create
             $tweetService->save(
                 $this->hashtag,
@@ -85,7 +87,7 @@ class SaveTweet implements ShouldQueue
                     Tweet::TEXT_COLUMN                  => $this->tweet['text'],
                     Tweet::LANG_COLUMN                  => $this->tweet['lang'] ?? null,
                     Tweet::DUE_AT_COLUMN                => ! is_null($dueAt) ? Carbon::parse($dueAt) : null,
-                    Tweet::EMAIL_COLUMN                 => ! empty($emailMatches[0]) ? strtolower($emailMatches[0]) : null,
+                    Tweet::EMAIL_COLUMN                 => $email ?? null,
                     Tweet::POSSIBLY_SENSITIVE_COLUMN    => $this->tweet['possibly_sensitive'] ?? false,
                     Tweet::IN_REPLY_TO_USER_ID_COLUMN   => $this->tweet['in_reply_to_user_id'] ?? null,
                     Tweet::REFERENCED_TWEETS_COLUMN     => json_encode($this->tweet['referenced_tweets'] ?? null),

@@ -81,7 +81,7 @@ class SaveTweetUser implements ShouldQueue
                 $website = extractWebsite($emailMatches[0] ?? '');
             }
 
-            $emailMatches[0] = $emojiParser->replace($emailMatches[0] ?? null, '');
+            $email = $emojiParser->replace($emailMatches[0] ?? null, '');
             $website = $emojiParser->replace($website ?? null, '');
 
 
@@ -90,7 +90,7 @@ class SaveTweetUser implements ShouldQueue
                 [
                     TwitterUser::ID_COLUMN                    => $this->user['id'],
                     TwitterUser::USERNAME_COLUMN              => $this->user['username'],
-                    TwitterUser::EMAIL_COLUMN                 => ! empty($emailMatches[0]) ? strtolower($emailMatches[0]) : null,
+                    TwitterUser::EMAIL_COLUMN                 => $email ?? null,
                     TwitterUser::WEBSITE_COLUMN               => $website,
                     TwitterUser::NAME_COLUMN                  => $this->user['name'] ?? null,
                     TwitterUser::VERIFIED_COLUMN              => $this->user['verified'] ?? false,
@@ -108,12 +108,12 @@ class SaveTweetUser implements ShouldQueue
                 ]
             );
 
-            if (! empty($emailMatches[0]) && filter_var($emailMatches[0], FILTER_VALIDATE_EMAIL)) {
+            if (! empty( $email) && filter_var( $email, FILTER_VALIDATE_EMAIL)) {
                 // TODO: use service
                 MailingList::query()
                     ->updateOrCreate(
                         [
-                            MailingList::EMAIL_COLUMN => strtolower($emailMatches[0]),
+                            MailingList::EMAIL_COLUMN => strtolower( $email),
                         ],
                         [
                             MailingList::NAME_COLUMN => $this->user['name'] ?? null,
