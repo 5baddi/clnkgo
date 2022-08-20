@@ -8,13 +8,12 @@
 
 namespace BADDIServices\ClnkGO\Listeners\Marketing;
 
-use Illuminate\Support\Arr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 use BADDIServices\ClnkGO\Models\Marketing\CPALeadTracking;
-use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasSent;
+use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasViewed;
 
-class CPALeadOfferMailWasSentFired implements ShouldQueue
+class CPALeadOfferMailWasViewedFired implements ShouldQueue
 {
     /**
      * The number of times the job may be attempted.
@@ -27,23 +26,18 @@ class CPALeadOfferMailWasSentFired implements ShouldQueue
         private CPALeadTrackingService $CPALeadTrackingService
     ) {}
 
-    public function handle(CPALeadOfferMailWasSent $event)
+    public function handle(CPALeadOfferMailWasViewed $event)
     {
-        $data = $event->trackingData;
-
-        if (! Arr::has(
-            $data, 
-            [
-                CPALeadTracking::CAMPAIGN_ID_COLUMN,
-                CPALeadTracking::EMAIL_COLUMN,
-                CPALeadTracking::SENT_AT_COLUMN,
-            ]
-        )) {
-            return;
-        }
+        $email = $event->email;
+        $campaignId = $event->campaignId;
+        $sentAt = $event->sentAt;
 
         // FIXME: find then update or create
         $this->CPALeadTrackingService
-            ->save($data);
+            ->save([
+                CPALeadTracking::EMAIL_COLUMN       => $email,
+                CPALeadTracking::CAMPAIGN_ID_COLUMN => $campaignId,
+                CPALeadTracking::SENT_AT_COLUMN     => $sentAt,
+            ]);
     }
 }

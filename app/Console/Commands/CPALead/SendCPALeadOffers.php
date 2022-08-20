@@ -56,8 +56,8 @@ class SendCPALeadOffers extends Command
 
             $ignoredEmails = MailingList::query()
                 ->select([MailingList::EMAIL_COLUMN])
-                // ->whereDate(MailingList::SENT_AT_COLUMN, ">=", Carbon::now()->subDays(3))
-                // ->orWhere(MailingList::IS_UNSUBSCRIBED_COLUMN, 1)
+                ->whereDate(MailingList::SENT_AT_COLUMN, ">=", Carbon::now()->subDays(3))
+                ->orWhere(MailingList::IS_UNSUBSCRIBED_COLUMN, 1)
                 ->get()
                 ->pluck([MailingList::EMAIL_COLUMN])
                 ->toArray();
@@ -71,16 +71,12 @@ class SendCPALeadOffers extends Command
             $targetedEmails->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $emails) use ($articles) {
                     $emails->each(function (MailingList $mailingList) use ($articles) {
-                        CPALeadOffer::dispatch("life5baddi@gmail.com", $articles->random() ?? []);
-                               // ->onQueue('cpa');
-                                //->delay(120);
+                        CPALeadOffer::dispatch($mailingList->getEmail(), $articles->random() ?? [])
+                                ->onQueue('cpa')
+                                ->delay(120);
 
-                            $this->info(sprintf('Offer sent to %s', "life5baddi@gmail.com"));
-
-                            sleep(120);
+                            $this->info(sprintf('Offer sent to %s', $mailingList->getEmail()));
                     });
-
-                    sleep(600);
                 });
             
         } catch (Throwable $e) {

@@ -9,15 +9,17 @@
 namespace BADDIServices\ClnkGO\Http\Controllers\CPALead;
 
 use Throwable;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\AppLogger;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Event;
 use BADDIServices\ClnkGO\Domains\CPALeadService;
-use BADDIServices\ClnkGO\Jobs\Marketing\TrackCPALead;
-use BADDIServices\ClnkGO\Jobs\Marketing\TrackMailingList;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
+use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasViewed;
+use BADDIServices\ClnkGO\Events\Marketing\MailingListEmailWasVerified;
 
 class CPALeadRedirectToOfferController extends Controller
 {
@@ -33,6 +35,10 @@ class CPALeadRedirectToOfferController extends Controller
                 $request->has(['email']) 
                 && filter_var($request->query('email'), FILTER_VALIDATE_EMAIL)
             ) {
+                Event::dispatch(
+                    new MailingListEmailWasVerified($request->query('email'))
+                );
+
                 $agent = new Agent();
                 $userAgent = CPALeadService::DESKTOP_USER_AGENT;
 
@@ -62,14 +68,18 @@ class CPALeadRedirectToOfferController extends Controller
                         ->first();
 
                     if (is_array($offer) && Arr::has($offer, 'campid', 'link')) {
-                        TrackMailingList::dispatch($request->query('email'));
-                        TrackCPALead::dispatch($request->query('email'), $offer['campid']);
+                        Event::dispatch(
+                            new CPALeadOfferMailWasViewed(
+                                $request->query('email'),
+                                $offer['campid'],
+                                Carbon::now()
+                            )
+                        );
 
                         return redirect()->to($offer['link']);
                     }
                 }
 
-                TrackMailingList::dispatch($request->query('email'));
             }
         } catch (Throwable $e) {
             AppLogger::error(
