@@ -67,7 +67,7 @@ class CPALeadRedirectToOfferController extends Controller
                         ->sortBy('amount', SORT_DESC)
                         ->first();
 
-                    if (is_array($offer) && Arr::has($offer, 'campid', 'link')) {
+                    if (is_array($offer)) {
                         Event::dispatch(
                             new CPALeadOfferMailWasViewed(
                                 $request->query('email'),
@@ -82,7 +82,6 @@ class CPALeadRedirectToOfferController extends Controller
 
             }
         } catch (Throwable $e) {
-            dd($e);
             AppLogger::error(
                 $e,
                 'cpalead:redirect-to-offer', 
