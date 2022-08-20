@@ -11,8 +11,8 @@ namespace BADDIServices\ClnkGO\Http\Controllers\CPALead;
 use Throwable;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
-use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use BADDIServices\ClnkGO\AppLogger;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
@@ -20,7 +20,6 @@ use BADDIServices\ClnkGO\Domains\CPALeadService;
 use BADDIServices\ClnkGO\Services\CPALeadTrackingService;
 use BADDIServices\ClnkGO\Events\Marketing\CPALeadOfferMailWasViewed;
 use BADDIServices\ClnkGO\Events\Marketing\MailingListEmailWasVerified;
-use Illuminate\Http\Response;
 
 class CPALeadRedirectToOfferController extends Controller
 {
@@ -40,20 +39,9 @@ class CPALeadRedirectToOfferController extends Controller
                     new MailingListEmailWasVerified($request->query('email'))
                 );
 
-                $agent = new Agent();
-                $userAgent = CPALeadService::DESKTOP_USER_AGENT;
-
-                if ($agent->isAndroidOS()) {
-                    $userAgent = CPALeadService::ANDROID_USER_AGENT;
-                }
-
-                if ($agent->isPhone()) {
-                    $userAgent = CPALeadService::IOS_USER_AGENT;
-                }
-
                 $offers = $this->CPALeadService->getCPALeadOffersByGeoAndUserAgent(
                     $request->ip(),
-                    $userAgent
+                    $request->header('User-Agent')
                 );
 
                 if ($offers->count() > 0) {
