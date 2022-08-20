@@ -44,7 +44,7 @@ class CPALeadRedirectToOfferController extends Controller
                 if ($agent->isPhone()) {
                     $userAgent = CPALeadService::IOS_USER_AGENT;
                 }
-dd($userAgent);
+
                 $offers = $this->CPALeadService->getCPALeadOffersByGeoAndUserAgent(
                     $request->ip(),
                     $userAgent
@@ -61,7 +61,7 @@ dd($userAgent);
                         })
                         ->sortBy('amount', SORT_DESC)
                         ->first();
-
+dd($offer);
                     if (is_array($offer) && Arr::has($offer, 'link')) {
                         // TODO: use service
                         MailingList::query()
