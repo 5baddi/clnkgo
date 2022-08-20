@@ -49,8 +49,7 @@ class CPALeadRedirectToOfferController extends Controller
                         ->filter(function (array $offer) {
                             return (
                                 Arr::has($offer, ['link', 'campid', 'amount', 'category_name'])
-                                && in_array($offer['category_name'], CPALeadService::SUPPORTED_OFFER_TYPES)
-                                && floatval($offer['amount'] ?? 0) > 0.25
+                                && floatval($offer['amount'] ?? 0) > 0
                             );
                         })
                         ->sortBy('amount', SORT_DESC)
