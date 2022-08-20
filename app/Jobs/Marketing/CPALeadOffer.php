@@ -63,18 +63,20 @@ class CPALeadOffer implements ShouldQueue
     
             $template = 'emails.marketing.cpalead_offer';
             $subject = $this->article['title'];
-    
-            $data = [
-                'email'         => $this->email,
-                'subject'       => $subject,
-                'excerpt'       => $this->article['description'],
-                'image'         => $this->article['urlToImage'],
-            ];
 
-            Mail::send($template, $data, function ($message) use ($subject) {
-                $message->to($this->email);
-                $message->subject($subject);
-            });
+            Mail::send(
+                $template, 
+                [
+                    'email'         => $this->email,
+                    'subject'       => $subject,
+                    'excerpt'       => $this->article['description'],
+                    'image'         => $this->article['urlToImage'],
+                ], 
+                function ($message) use ($subject) {
+                    $message->to($this->email);
+                    $message->subject($subject);
+                }
+            );
     
             Event::dispatch(
                 new CPALeadOfferMailWasSent([
