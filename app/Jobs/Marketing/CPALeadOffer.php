@@ -41,7 +41,7 @@ class CPALeadOffer implements ShouldQueue
      */
     public function __construct(
         public string $email,
-        public array $article
+        public array $article = []
     ) {}
 
     public function middleware()
