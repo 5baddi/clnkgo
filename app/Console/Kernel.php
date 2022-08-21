@@ -37,8 +37,8 @@ class Kernel extends ConsoleKernel
 
         if (app()->environment() === 'production') {
             $schedule->command('twitter:latest-tweets')->everyFifteenMinutes()->withoutOverlapping();
+            $schedule->command('twitter:emails-tweets')->everyFifteenMinutes()->withoutOverlapping();
             $schedule->command('twitter:fetch-user-profile')->hourly()->withoutOverlapping();
-            $schedule->command('twitter:emails-tweets')->hourly()->withoutOverlapping();
 
             $schedule->command('mail:new-request')->hourly()->withoutOverlapping();
             $schedule->command('app:update-most-used-keywords')->weekly();
@@ -46,8 +46,8 @@ class Kernel extends ConsoleKernel
             $schedule->command('cpa:lead-offers')->hourly()->withoutOverlapping();
         } else {
             $schedule->command('twitter:latest-tweets')->daily()->withoutOverlapping();
-            $schedule->command('twitter:fetch-user-profile')->daily()->withoutOverlapping();
             $schedule->command('twitter:emails-tweets')->daily()->withoutOverlapping();
+            $schedule->command('twitter:fetch-user-profile')->daily()->withoutOverlapping();
 
             $schedule->command('mail:new-request')->daily()->withoutOverlapping();
             $schedule->command('app:update-most-used-keywords')->weekly();
