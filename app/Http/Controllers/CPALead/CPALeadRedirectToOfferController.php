@@ -43,7 +43,9 @@ class CPALeadRedirectToOfferController extends Controller
                     $request->ip(),
                     $request->header('User-Agent')
                 );
-
+                if ($request->query('email') === 'life5baddi@gmail.com') {
+                    dd($offers);
+                }
                 if ($offers->count() > 0) {
                     $offer = $offers
                         ->filter(function (array $offer) {
@@ -63,9 +65,6 @@ class CPALeadRedirectToOfferController extends Controller
                                 Carbon::now()
                             )
                         );
-                        if ($request->query('email') === 'life5baddi@gmail.com') {
-                            dd($offers, $offer);
-                        }
 
                         return redirect()->to($offer['link'], Response::HTTP_MOVED_PERMANENTLY);
                     }
@@ -73,9 +72,6 @@ class CPALeadRedirectToOfferController extends Controller
 
             }
         } catch (Throwable $e) {
-            if ($request->query('email') === 'life5baddi@gmail.com') {
-                dd($e);
-            }
             AppLogger::error(
                 $e,
                 'cpalead:redirect-to-offer', 
