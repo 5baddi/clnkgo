@@ -1,10 +1,12 @@
 <?php
 
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use BADDIServices\ClnkGO\App;
 use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\AppSetting;
+use BADDIServices\ClnkGO\Helpers\EmojiParser;
 use BADDIServices\ClnkGO\Services\AppSettingService;
-use Carbon\Carbon;
 
 /**
  * ClnkGO
@@ -135,5 +137,25 @@ if (! function_exists('extractWebsite')) {
         }
 
         return null;
+    }
+}
+
+if (! function_exists('extractEmail')) {
+    function extractEmail(string $text): ?string 
+    {
+        preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $text ?? '', $emailMatches);
+        if (empty($emailMatches[0])) {
+            return null;
+        }
+
+        /** @var EmojiParser */
+        $emojiParser = app(EmojiParser::class);
+
+        $email = $emojiParser->replace($emailMatches[0] ?? null, '');
+        $email = Str::replace('//t.co/', '', $email);
+
+        return filter_var($email, FILTER_VALIDATE_EMAIL)
+            ? $email
+            : null;
     }
 }

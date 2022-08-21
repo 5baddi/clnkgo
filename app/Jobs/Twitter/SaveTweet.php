@@ -10,6 +10,7 @@ namespace BADDIServices\ClnkGO\Jobs\Twitter;
 
 use Throwable;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\DB;
 use BADDIServices\ClnkGO\AppLogger;
@@ -71,9 +72,7 @@ class SaveTweet implements ShouldQueue
             $dueAt = extractDate($this->tweet['text']);
             $dueAt = $emojiParser->replace($dueAt ?? null, '');
 
-            preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $this->tweet['text'] ?? '', $emailMatches);
-
-            $email = $emojiParser->replace($emailMatches[0] ?? null, '');
+            $email = extractEmail($this->tweet['text'] ?? '');
 
             // FIXME: find then update or create
             $tweetService->save(

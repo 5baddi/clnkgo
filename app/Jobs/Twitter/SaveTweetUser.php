@@ -70,18 +70,17 @@ class SaveTweetUser implements ShouldQueue
             DB::beginTransaction();
 
             $website = extractWebsite($this->user['description'] ?? '');
-            preg_match('/(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/im', $this->user['description'] ?? '', $emailMatches);
-            
-            if (! isset($emailMatches[0]) && isset($this->user['location']) && filter_var($this->user['location'], FILTER_VALIDATE_EMAIL)) {
-                $emailMatches[0] = $this->user['location'];
+
+            $email = extractEmail($this->tweet['text'] ?? '');
+            if (! empty($email) && isset($this->user['location']) && filter_var($this->user['location'], FILTER_VALIDATE_EMAIL)) {
+                $email = $this->user['location'];
                 $this->user['location'] = null;
             }
 
-            if (is_null($website) && isset($emailMatches[0])) {
-                $website = extractWebsite($emailMatches[0] ?? '');
+            if (is_null($website) && ! empty($email)) {
+                $website = extractWebsite($email);
             }
 
-            $email = $emojiParser->replace($emailMatches[0] ?? null, '');
             $website = $emojiParser->replace($website ?? null, '');
 
 
