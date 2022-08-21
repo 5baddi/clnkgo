@@ -23,6 +23,7 @@ use BADDIServices\ClnkGO\Helpers\EmojiParser;
 use BADDIServices\ClnkGO\Services\TweetService;
 use BADDIServices\ClnkGO\Domains\TwitterService;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
+use BADDIServices\ClnkGO\Jobs\Marketing\NewEmailForMailingList;
 
 class SaveTweet implements ShouldQueue
 {
@@ -73,6 +74,9 @@ class SaveTweet implements ShouldQueue
             $dueAt = $emojiParser->replace($dueAt ?? null, '');
 
             $email = extractEmail($this->tweet['text'] ?? '');
+            if (! empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                NewEmailForMailingList::dispatch($email, null);
+            }
 
             // FIXME: find then update or create
             $tweetService->save(

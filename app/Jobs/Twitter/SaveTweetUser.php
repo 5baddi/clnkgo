@@ -21,6 +21,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use BADDIServices\ClnkGO\Models\TwitterUser;
 use BADDIServices\ClnkGO\Domains\TwitterService;
 use BADDIServices\ClnkGO\Helpers\EmojiParser;
+use BADDIServices\ClnkGO\Jobs\Marketing\NewEmailForMailingList;
 use BADDIServices\ClnkGO\Models\Marketing\MailingList;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
@@ -72,9 +73,13 @@ class SaveTweetUser implements ShouldQueue
             $website = extractWebsite($this->user['description'] ?? '');
 
             $email = extractEmail($this->tweet['text'] ?? '');
-            if (! empty($email) && isset($this->user['location']) && filter_var($this->user['location'], FILTER_VALIDATE_EMAIL)) {
+            if (empty($email) && isset($this->user['location']) && filter_var($this->user['location'], FILTER_VALIDATE_EMAIL)) {
                 $email = $this->user['location'];
                 $this->user['location'] = null;
+            }
+
+            if (! empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                NewEmailForMailingList::dispatch($email, $this->user['name'] ?? null);
             }
 
             if (is_null($website) && ! empty($email)) {
@@ -82,7 +87,6 @@ class SaveTweetUser implements ShouldQueue
             }
 
             $website = $emojiParser->replace($website ?? null, '');
-
 
             // FIXME: find then update or create
             $twitterUserService->save(
@@ -106,19 +110,6 @@ class SaveTweetUser implements ShouldQueue
                     TwitterUser::WITHHELD_COLUMN              => json_encode($this->user['withheld'] ?? null),
                 ]
             );
-
-            if (! empty( $email) && filter_var( $email, FILTER_VALIDATE_EMAIL)) {
-                // TODO: use service
-                MailingList::query()
-                    ->updateOrCreate(
-                        [
-                            MailingList::EMAIL_COLUMN => strtolower( $email),
-                        ],
-                        [
-                            MailingList::NAME_COLUMN => $this->user['name'] ?? null,
-                        ]
-                    );
-            }
 
             DB::commit();
         } catch (Throwable $e) {
