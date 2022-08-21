@@ -119,19 +119,11 @@ if (! function_exists('extractWebsite')) {
                 $domainName = $matches[0] ?? $domainName;
             }
 
-            if (! is_string($domainName) || empty($domainName)) {
+            if (! is_string($domainName) || empty($domainName) || Str::contains($domainName, $emailsProviders)) {
                 return null;
             }
 
-            $isEmailProvider = array_filter($emailsProviders, function ($value) use ($domainName) {
-                $domainName = '@' . $domainName;
-
-                return strpos(strtolower($value), strtolower($domainName)) !== false;
-            });
-
-            if (count($isEmailProvider) === 0) {
-                return strtolower($domainName);
-            }
+            return strtolower($domainName);
         } catch (Throwable $e) {
             AppLogger::error($e, 'extract:website', ['text' => $text, 'domain' => $domainName]);
         }
