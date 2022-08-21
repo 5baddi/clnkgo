@@ -41,6 +41,7 @@
         "psr-4": {
             "App\\": "app/",
             "BADDIServices\\ClnkGO\\": "app/",
+            "BADDIServices\\Framework\\": "core/src",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },

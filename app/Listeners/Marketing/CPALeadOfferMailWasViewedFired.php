@@ -32,12 +32,13 @@ class CPALeadOfferMailWasViewedFired implements ShouldQueue
         $campaignId = $event->campaignId;
         $sentAt = $event->sentAt;
 
-        // FIXME: find then update or create
         $this->CPALeadTrackingService
-            ->save([
-                CPALeadTracking::EMAIL_COLUMN       => $email,
-                CPALeadTracking::CAMPAIGN_ID_COLUMN => $campaignId,
-                CPALeadTracking::SENT_AT_COLUMN     => $sentAt,
-            ]);
+            ->updateOrCreate(
+                [CPALeadTracking::EMAIL_COLUMN       => $email],
+                [
+                    CPALeadTracking::SENT_AT_COLUMN     => $sentAt,
+                    CPALeadTracking::CAMPAIGN_ID_COLUMN => $campaignId,
+                ]
+            );
     }
 }

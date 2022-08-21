@@ -8,9 +8,9 @@
 
 namespace BADDIServices\ClnkGO\Models\Marketing;
 
-use BADDIServices\ClnkGO\Entities\ModelEntity;
+use BADDIServices\Framework\Entities\Entity;
 
-class CPALeadTracking extends ModelEntity
+class CPALeadTracking extends Entity
 {   
     /** @var string */
     public const CAMPAIGN_ID_COLUMN = 'campaign_id';
