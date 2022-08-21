@@ -46,7 +46,7 @@ class MailUserWhenThereNewRequest extends Command
                 ->where(User::IS_SUPERADMIN_COLUMN, false)
                 ->chunkById(App::CHUNK_SIZE, function (Collection $users) {
                     $users->each(function (User $user) {
-                        if (! $user->isSuperAdmin() && ! $user->subscription->isActive()) {
+                        if (! $user->subscription->isActive()) {
                             return true;
                         }
 
