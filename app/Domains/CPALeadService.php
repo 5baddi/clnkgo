@@ -104,9 +104,9 @@ class CPALeadService extends Service
 
         try {
             $endpoint = $this->getListAvailableOffersLink(self::USER_ID);
-            // $endpoint = sprintf('%s&geoip=%s&ua=%s', $endpoint, $ip, $userAgent);
-            $endpoint = sprintf('%s&geoip=%s', $endpoint, $ip);
-
+            $endpoint = sprintf('%s&geoip=%s&ua=%s', $endpoint, $ip, $userAgent);
+            $endpoint = sprintf('%s&geoip=%s&ua=%s', $endpoint, $ip, $userAgent);
+dd($endpoint);
             $response = $this->client
                 ->request(
                     'GET',
@@ -119,7 +119,6 @@ class CPALeadService extends Service
                 );
 
             $data = json_decode($response->getBody(), true);
-            dd($data);
             if ($response->getStatusCode() === Response::HTTP_OK && isset($data['offers'])) {
                 return collect($data['offers']);
             }
