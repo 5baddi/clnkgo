@@ -106,7 +106,7 @@ class CPALeadService extends Service
             $endpoint = $this->getListAvailableOffersLink(self::USER_ID);
             $endpoint = sprintf('%s&geoip=%s&ua=%s', $endpoint, $ip, $userAgent);
             $endpoint = sprintf('%s&geoip=%s&ua=%s', $endpoint, $ip, $userAgent);
-dd($endpoint);
+
             $response = $this->client
                 ->request(
                     'GET',
