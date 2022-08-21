@@ -56,8 +56,8 @@ class SendCPALeadOffers extends Command
 
             $ignoredEmails = MailingList::query()
                 ->select([MailingList::EMAIL_COLUMN])
-                // ->whereDate(MailingList::SENT_AT_COLUMN, ">=", Carbon::now()->subHours(12))
-                ->where(MailingList::IS_UNSUBSCRIBED_COLUMN, 1)
+                ->whereDate(MailingList::SENT_AT_COLUMN, ">=", Carbon::now()->subDay())
+                ->orWhere(MailingList::IS_UNSUBSCRIBED_COLUMN, 1)
                 ->get()
                 ->pluck([MailingList::EMAIL_COLUMN])
                 ->toArray();
