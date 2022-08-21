@@ -72,7 +72,7 @@ class SaveTweetUser implements ShouldQueue
 
             $website = extractWebsite($this->user['description'] ?? '');
 
-            $email = extractEmail($this->tweet['text'] ?? '');
+            $email = extractEmail($this->user['description'] ?? '');
             if (empty($email) && isset($this->user['location']) && filter_var($this->user['location'], FILTER_VALIDATE_EMAIL)) {
                 $email = $this->user['location'];
                 $this->user['location'] = null;

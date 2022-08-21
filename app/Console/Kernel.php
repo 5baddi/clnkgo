@@ -4,8 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\Twitter\FetchUserProfile;
-use App\Console\Commands\Twitter\FetchLatestTweets;
 use App\Console\Commands\CPALead\SendCPALeadOffers;
+use App\Console\Commands\Twitter\FetchEmailsTweets;
+use App\Console\Commands\Twitter\FetchLatestTweets;
 use App\Console\Commands\MailUserWhenThereNewRequest;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
         FetchUserProfile::class,
         MailUserWhenThereNewRequest::class,
         SendCPALeadOffers::class,
+        FetchEmailsTweets::class,
     ];
 
     /**
@@ -36,6 +38,7 @@ class Kernel extends ConsoleKernel
         if (app()->environment() === 'production') {
             $schedule->command('twitter:latest-tweets')->everyFifteenMinutes()->withoutOverlapping();
             $schedule->command('twitter:fetch-user-profile')->hourly()->withoutOverlapping();
+            $schedule->command('twitter:emails-tweets')->hourly()->withoutOverlapping();
 
             $schedule->command('mail:new-request')->hourly()->withoutOverlapping();
             $schedule->command('app:update-most-used-keywords')->weekly();
@@ -44,6 +47,7 @@ class Kernel extends ConsoleKernel
         } else {
             $schedule->command('twitter:latest-tweets')->daily()->withoutOverlapping();
             $schedule->command('twitter:fetch-user-profile')->daily()->withoutOverlapping();
+            $schedule->command('twitter:emails-tweets')->daily()->withoutOverlapping();
 
             $schedule->command('mail:new-request')->daily()->withoutOverlapping();
             $schedule->command('app:update-most-used-keywords')->weekly();

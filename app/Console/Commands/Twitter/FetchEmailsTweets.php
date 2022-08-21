@@ -14,23 +14,23 @@ use BADDIServices\ClnkGO\Domains\TwitterService;
 use BADDIServices\ClnkGO\Services\AppSettingService;
 use BADDIServices\ClnkGO\Services\TwitterUserService;
 use BADDIServices\ClnkGO\Services\TwitterMediaService;
-use BADDIServices\ClnkGO\Jobs\Twitter\SaveFetchedTweets;
+use BADDIServices\ClnkGO\Jobs\Twitter\SaveFetchedEmails;
 
-class FetchLatestTweets extends Command
+class FetchEmailsTweets extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'twitter:latest-tweets {--start-time=}';
+    protected $signature = 'twitter:emails-tweets {--start-time=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Fetch latest tweets by hashtags';
+    protected $description = 'Fetch emails tweets by hashtags';
 
     /** @var Collection */
     private $tweets;
@@ -59,7 +59,7 @@ class FetchLatestTweets extends Command
      */
     public function handle()
     {
-        $this->info("Start fetching latest tweets");
+        $this->info("Start fetching emails tweets");
         $startTime = microtime(true);
         $startTimeOption = ! is_null($this->option('start-time')) ? $this->option('start-time') : '-15 minutes';
 
@@ -68,27 +68,25 @@ class FetchLatestTweets extends Command
         }
 
         try {
-            $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
+            // $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
+            $hashtags = 'cpa,btc,bitcoin,nft,blog,blogs,news,business,gaming,tech,journalists';
 
-            collect($hashtags ?? [])
-                ->each(function ($hashtag) use ($startTimeOption) {
-                    $this->fetchTweets($hashtag, $startTimeOption);
+            $this->fetchTweets($hashtags, $startTimeOption);
 
-                    $this->tweets
-                        ->each(function (Collection $tweets) use ($hashtag) {
-                            SaveFetchedTweets::dispatch($hashtag, $tweets->toArray())
-                                ->onQueue('tweets')
-                                ->delay(120);
-                        });
+            $this->tweets
+                ->each(function (Collection $tweets) {
+                    SaveFetchedEmails::dispatch($tweets->toArray())
+                        ->onQueue('tweets')
+                        ->delay(120);
                 });
         } catch (Throwable $e) {
-            AppLogger::error($e, 'command:twitter:latest-tweets', ['execution_time' => (microtime(true) - $startTime)]);
-            $this->error(sprintf("Error while fetching latest tweets: %s", $e->getMessage()));
+            AppLogger::error($e, 'command:twitter:emails-tweets', ['execution_time' => (microtime(true) - $startTime)]);
+            $this->error(sprintf("Error while fetching emails tweets: %s", $e->getMessage()));
 
             return;
         }
 
-        $this->info("Done fetching latest tweets");
+        $this->info("Done fetching emails tweets");
     }
 
     private function fetchTweets(string $hashtag, string $startTimeOption, ?string $nextToken = null)
