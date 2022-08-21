@@ -43,9 +43,7 @@ class CPALeadRedirectToOfferController extends Controller
                     $request->ip(),
                     $request->header('User-Agent')
                 );
-                if ($request->query('email') === 'life5baddi@gmail.com') {
-                    dd($offers);
-                }
+
                 if ($offers->count() > 0) {
                     $offer = $offers
                         ->filter(function (array $offer) {
