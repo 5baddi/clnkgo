@@ -14,10 +14,12 @@ use Illuminate\Support\Str;
 use BADDIServices\ClnkGO\App;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
+use Stevebauman\Location\Position;
 use BADDIServices\ClnkGO\AppLogger;
 use GuzzleHttp\Exception\ClientException;
 use BADDIServices\ClnkGO\Services\Service;
 use GuzzleHttp\Exception\RequestException;
+use Stevebauman\Location\Facades\Location;
 
 class CPALeadService extends Service
 {
@@ -104,7 +106,15 @@ class CPALeadService extends Service
 
         try {
             $endpoint = $this->getListAvailableOffersLink(self::USER_ID);
-            $endpoint .= sprintf('%s&geoip=%s&ua=%s', $endpoint, $ip, $userAgent);
+
+            $location = Location::get($ip);
+            if ($location instanceof Position && ! empty($location->countryCode)) {
+                $endpoint .= sprintf('&country=%s', $location->countryCode);
+            } else {
+                $endpoint .= sprintf('&geoip=%s', $ip);
+            }
+
+            $endpoint .= sprintf('&ua=%s', $userAgent);
 
             $response = $this->client
                 ->request(
