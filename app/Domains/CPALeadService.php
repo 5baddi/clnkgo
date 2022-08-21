@@ -60,7 +60,8 @@ class CPALeadService extends Service
 
     public function getListAvailableOffersLink(string $userId = self::USER_ID): string
     {
-        $url = (string)Str::replace("{userId}", $userId, self::LIST_AVAILABLE_OFFERS_ENDPOINT);
+        $url = self::BASE_API_URL;
+        $url .= (string)Str::replace("{userId}", $userId, self::LIST_AVAILABLE_OFFERS_ENDPOINT);
         $url .= "&format=JSON&offerwall_offers=false&dating=true";
         $url .= sprintf("&offer_type=%s", implode(',', self::SUPPORTED_OFFER_TYPES));
 
