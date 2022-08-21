@@ -30,12 +30,19 @@ class CPALeadService extends Service
 
     const EMAIL_SUMIT_OFFER_TYPE = "email_submit";
     const APP_INSTALL_OFFER_TYPE = "app_install";
+    const PIN_SUBMIT_OFFER_TYPE = "pin_submit";
     const MOBILE_OFFER_TYPE = "mobile";
+    const TRIAL_OFFER_TYPE = "trial";
+    const PURCHASE_OFFER_TYPE = "purchase";
+    const DOWNLOAD_OFFER_TYPE = "download";
 
     const SUPPORTED_OFFER_TYPES = [
         self::EMAIL_SUMIT_OFFER_TYPE,
         self::APP_INSTALL_OFFER_TYPE,
         self::MOBILE_OFFER_TYPE,
+        self::TRIAL_OFFER_TYPE,
+        self::PURCHASE_OFFER_TYPE,
+        self::DOWNLOAD_OFFER_TYPE,
     ];
 
     private Client $client;
@@ -55,7 +62,7 @@ class CPALeadService extends Service
     {
         $url = (string)Str::replace("{userId}", $userId, self::LIST_AVAILABLE_OFFERS_ENDPOINT);
         $url .= "&format=JSON&offerwall_offers=false&dating=true";
-        // $url .= sprintf("&offer_type=%s", implode(',', self::SUPPORTED_OFFER_TYPES));
+        $url .= sprintf("&offer_type=%s", implode(',', self::SUPPORTED_OFFER_TYPES));
 
         return $url;
     }
