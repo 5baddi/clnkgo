@@ -69,7 +69,7 @@ class FetchEmailsTweets extends Command
 
         try {
             // $hashtags = $this->appSettingService->get(AppSetting::MAIN_HASHTAGS_KEY, App::DEFAULT_MAIN_HASHTAGS);
-            $hashtags = 'cpa,btc,bitcoin,nft,blog,blogs,news,business,gaming,tech,journalists';
+            $hashtags = 'cpa,btc,bitcoin,nft,blog,blogs,news,business,gaming,tech';
 
             $this->fetchTweets($hashtags, $startTimeOption);
 
