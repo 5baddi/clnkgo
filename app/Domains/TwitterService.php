@@ -145,7 +145,7 @@ class TwitterService extends Service
 
             if (is_null($nextToken)) {
                 $email = explode('@', $term);
-                $query['q'] = sprintf('%s -is:retweet', $email[0] ?? '');
+                $query['query'] = sprintf('%s -is:retweet', $email[0] ?? '');
             }
 
             // if (! empty($startTime)) {
