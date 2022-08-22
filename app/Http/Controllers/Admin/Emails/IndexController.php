@@ -17,9 +17,9 @@ class IndexController extends AdminController
     public function __invoke(Request $request)
     {
         $emails = MailingList::query()
-            ->orderBy(MailingList::CREATED_AT, 'DESC')
+            ->where(MailingList::IS_ACTIVE_COLUMN, 1)
             ->orderBy(MailingList::NAME_COLUMN, 'ASC')
-            ->orderBy(MailingList::IS_ACTIVE_COLUMN, 'DESC')
+            ->orderBy(MailingList::CREATED_AT, 'DESC')
             ->paginate(50);
 
         return $this->render(
