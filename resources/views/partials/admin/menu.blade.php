@@ -192,12 +192,10 @@
       <li class="breadcrumb-item">
         @if(request()->routeIs(['admin', 'admin.*']))
         <a href="{{ route('admin') }}">Admin</a>
-        @else
-        <a href="{{ route('dashboard') }}">Dashboard</a>
         @endif
       </li>
       @foreach (request()->segments() as $key => $segment)
-          @if ($segment === 'dashboard')
+          @if ($segment === 'admin')
           @continue
           @endif
           @if(! is_numeric($segment) && (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $segment) !== 1))
