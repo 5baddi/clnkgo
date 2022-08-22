@@ -145,12 +145,12 @@ class TwitterService extends Service
 
             if (is_null($nextToken)) {
                 $email = explode('@', $term);
-                $query['query'] = sprintf('%s %s -is:retweet', $email[0] ?? '', $email[1] ?? '');
+                $query['query'] = sprintf('%s -is:retweet', $email[0] ?? '');
             }
 
-            if (! empty($startTime)) {
-                $query['start_time'] = date(DATE_RFC3339, strtotime($startTime));
-            }
+            // if (! empty($startTime)) {
+            //     $query['start_time'] = date(DATE_RFC3339, strtotime($startTime));
+            // }
             
             if (! empty($nextToken)) {
                 $query['next_token'] = $nextToken;
