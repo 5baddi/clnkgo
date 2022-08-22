@@ -39,35 +39,37 @@ class CPALeadRedirectToOfferController extends Controller
                     new MailingListEmailWasVerified($request->query('email'))
                 );
 
-                $offers = $this->CPALeadService->getCPALeadOffersByGeoAndUserAgent(
-                    $request->ip(),
-                    $request->header('User-Agent')
-                );
+                return redirect()->route('signup');
 
-                if ($offers->count() > 0) {
-                    $offer = $offers
-                        ->filter(function (array $offer) {
-                            return (
-                                Arr::has($offer, ['link', 'campid', 'amount', 'category_name'])
-                                && floatval($offer['amount'] ?? 0) > 0
-                                && in_array($offer['category_name'], CPALeadService::SUPPORTED_OFFER_TYPES)
-                            );
-                        })
-                        ->sortBy('amount', SORT_DESC)
-                        ->first();
+                // $offers = $this->CPALeadService->getCPALeadOffersByGeoAndUserAgent(
+                //     $request->ip(),
+                //     $request->header('User-Agent')
+                // );
 
-                    if (is_array($offer)) {
-                        Event::dispatch(
-                            new CPALeadOfferMailWasViewed(
-                                $request->query('email'),
-                                $offer['campid'],
-                                Carbon::now()
-                            )
-                        );
+                // if ($offers->count() > 0) {
+                //     $offer = $offers
+                //         ->filter(function (array $offer) {
+                //             return (
+                //                 Arr::has($offer, ['link', 'campid', 'amount', 'category_name'])
+                //                 && floatval($offer['amount'] ?? 0) > 0
+                //                 && in_array($offer['category_name'], CPALeadService::SUPPORTED_OFFER_TYPES)
+                //             );
+                //         })
+                //         ->sortBy('amount', SORT_DESC)
+                //         ->first();
 
-                        return redirect()->to($offer['link'], Response::HTTP_MOVED_PERMANENTLY);
-                    }
-                }
+                //     if (is_array($offer)) {
+                //         Event::dispatch(
+                //             new CPALeadOfferMailWasViewed(
+                //                 $request->query('email'),
+                //                 $offer['campid'],
+                //                 Carbon::now()
+                //             )
+                //         );
+
+                //         return redirect()->to($offer['link'], Response::HTTP_MOVED_PERMANENTLY);
+                //     }
+                // }
 
             }
         } catch (Throwable $e) {
