@@ -14,6 +14,7 @@
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Verified</th>
                   <th>Added at</th>
                   <th></th>
                 </tr>
@@ -24,15 +25,13 @@
                     <td colspan="5" class="text-center text-xs text-muted">No data</td>
                   </tr>
                   @endif
-                  @foreach ($emails as $client)
-                    @if ($client->id === Auth::id())
-                    @continue
-                    @endif
+                  @foreach ($emails as $email)
                     <tr>
                         <td>{{ ucwords($email->name ?? '') }}</td>
-                        <td>{{ $client->email }}</td>
-                        <td>{{ $client->created_at->format('d/m/Y') }}</td>
-                        {{-- <td>{{ $client->last_login ? $client->last_login->format('d/m/Y H:m') : '---' }}</td> --}}
+                        <td>{{ $email->email }}</td>
+                        <td>{{ $email->is_active }}</td>
+                        <td>{{ $email->created_at->format('d/m/Y') }}</td>
+                        {{-- <td>{{ $email->last_login ? $email->last_login->format('d/m/Y H:m') : '---' }}</td> --}}
                         {{-- <td>{{ ucwords($subscription->store->name) }}</td>
                         <td>{{ ucwords($subscription->client->getFullName()) }}</td>
                         <td>{{ ucwords($subscription->pack->name) }}</td>
@@ -40,7 +39,7 @@
                         <td>{{ ucfirst($subscription->status) }}</td>
                         <td>{{ $subscription->activated_on->format('d/m/Y') }}</td>--}}
                         {{-- <td align="center">
-                            <a href="#" class="btn btn-dark" title="Reset password" data-bs-toggle="modal" data-bs-target="#modal-password-{{ $client->id }}">
+                            <a href="#" class="btn btn-dark" title="Reset password" data-bs-toggle="modal" data-bs-target="#modal-password-{{ $email->id }}">
                               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-key" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <circle cx="8" cy="15" r="4"></circle>
@@ -49,9 +48,9 @@
                                 <line x1="15" y1="8" x2="17" y2="10"></line>
                               </svg>
                             </a>
-                            <form action="{{ route('admin.clients.restrict', ['id' => $client->id]) }}" method="POST" style="display: inline;">
+                            <form action="{{ route('admin.clients.restrict', ['id' => $email->id]) }}" method="POST" style="display: inline;">
                               @csrf
-                              @if(! $client->isBanned())
+                              @if(! $email->isBanned())
                               <button class="btn btn-danger" title="Ban">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
