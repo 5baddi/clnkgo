@@ -23,10 +23,10 @@
   <body class="antialiased">
     <div class="wrapper">
       @include('partials.admin.menu')
-      <div class="page-wrapper">
+      <div class="page-wrapper mt-2">
         {{-- @include('partials.dashboard.breadcrumb') --}}
         <div class="page-body">
-          <div class="container-xl">
+          <div class="container-xl mt-2">
             @include('partials.dashboard.alert')
 
             @yield('content')
