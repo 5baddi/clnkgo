@@ -16,11 +16,17 @@ class IndexController extends AdminController
 {
     public function __invoke(Request $request)
     {
+        $emails = MailingList::query()
+            ->orderBy(MailingList::CREATED_AT, 'DESC')
+            ->orderBy(MailingList::NAME_COLUMN, 'ASC')
+            ->orderBy(MailingList::IS_ACTIVE_COLUMN, 'DESC')
+            ->paginate(50);
+
         return $this->render(
             'admin.emails.index',
             [
                 'title'     => 'Manage emails',
-                'emails'    => MailingList::query()->orderBy(MailingList::CREATED_AT)->paginate(50)
+                'emails'    => $emails
             ]
         );
     }
