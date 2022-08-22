@@ -136,15 +136,15 @@ class TwitterService extends Service
             }
 
             $query = [
-                'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
+                // 'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
                 'user.fields'   => 'created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
-                'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
-                'max_results'   => self::MAX_RESULTS_PER_RESPONSE,
-                'expansions'    => 'attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id'
+                // 'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
+                'max_results'   => 1,
+                // 'expansions'    => 'attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id'
             ];
 
             if (is_null($nextToken)) {
-                $query['query'] = sprintf('"%s" -is:retweet', $term);
+                $query['query'] = sprintf('%s -is:retweet', $term);
             }
 
             // if (! empty($startTime)) {
