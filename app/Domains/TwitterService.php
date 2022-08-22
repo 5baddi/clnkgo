@@ -124,6 +124,63 @@ class TwitterService extends Service
         }
     }
 
+    public function fetchTweetsByTerm(string $term, ?string $startTime = null, ?string $nextToken = null): Collection
+    {
+        if (! $this->featureService->isEnabled(App::FETCH_TWEETS_FEATURE)) {
+            return collect();
+        }
+
+        try {
+            if (strlen($term) === 0 || $term === "") {
+                return collect();
+            }
+
+            $query = [
+                'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
+                'user.fields'   => 'created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
+                'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
+                'max_results'   => self::MAX_RESULTS_PER_RESPONSE,
+                'expansions'    => 'attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id'
+            ];
+
+            if (is_null($nextToken)) {
+                $query['query'] = sprintf('"%s" -is:retweet', $term);
+            }
+
+            if (! empty($startTime)) {
+                $query['start_time'] = date(DATE_RFC3339, strtotime($startTime));
+            }
+            
+            if (! empty($nextToken)) {
+                $query['next_token'] = $nextToken;
+
+                sleep(10);
+            }
+
+            $response = $this->getClient()
+                ->request(
+                    'GET',
+                    self::RECENT_SEARCH_ENDPOINT, 
+                    [
+                        'headers'   => [
+                            'Accept'        => 'application/json',
+                            'Authorization' => sprintf('Bearer %s', config('twitter.bearer_token'))
+                        ],
+                        'query'     => $query
+                    ]
+                );
+
+            $data = json_decode($response->getBody(), true);
+            if ($response->getStatusCode() === Response::HTTP_OK && isset($data['data']) && isset($data['meta']['result_count']) && $data['meta']['result_count'] > 0) {
+                return collect($data);
+            }
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::error($e, 'twitter:fetch-by-hashtags');
+        }
+
+        return collect();
+    }
+
     public function fetchUserProfile(int $userId, string $userName): Collection
     {
         if (! $this->featureService->isEnabled(App::FETCH_TWEETS_FEATURE)) {
