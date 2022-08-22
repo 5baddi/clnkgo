@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
 	        URL::forceScheme('https');
         }
 
-        view()->composer('partials.dashboard.*', function ($view) {
+        view()->composer(['partials.dashboard.*', 'partials.admin.*'], function ($view) {
             $user = Auth::user();
             $avatar = $user instanceof User ? Gravatar::get($user->email) : null;
 
