@@ -32,6 +32,25 @@
       }}();
     </script>
     @endif
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGDWP8P20K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DGDWP8P20K', {
+      'allow_display_features': false
+      });
+
+      if (window.performance) {
+        var timeSincePageLoad = Math.round(performance.now());
+        gtag('event', 'timing_complete', {
+          'name': 'load',
+          'value': timeSincePageLoad,
+          'event_category': 'JS Dependencies'
+        });
+      }
+    </script>
   </head>
   <body class="antialiased" id="app">
     <div class="wrapper">
