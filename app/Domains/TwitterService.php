@@ -136,20 +136,21 @@ class TwitterService extends Service
             }
 
             $query = [
-                // 'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
+                'tweet.fields'  => 'source,author_id,created_at,geo,lang,public_metrics,referenced_tweets,withheld,in_reply_to_user_id,possibly_sensitive,entities,context_annotations,attachments',
                 'user.fields'   => 'created_at,description,entities,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,withheld',
-                // 'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
-                // 'max_results'   => 1,
-                // 'expansions'    => 'attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id'
+                'media.fields'  => 'duration_ms,height,preview_image_url,public_metrics,width,alt_text,url',
+                'max_results'   => self::MAX_RESULTS_PER_RESPONSE,
+                'expansions'    => 'attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id'
             ];
 
             if (is_null($nextToken)) {
-                $query['query'] = sprintf('%s -is:retweet', $term);
+                $email = explode('@', $term);
+                $query['query'] = sprintf('%s %s -is:retweet', $email[0] ?? '', $email[1] ?? '');
             }
 
-            // if (! empty($startTime)) {
-            //     $query['start_time'] = date(DATE_RFC3339, strtotime($startTime));
-            // }
+            if (! empty($startTime)) {
+                $query['start_time'] = date(DATE_RFC3339, strtotime($startTime));
+            }
             
             if (! empty($nextToken)) {
                 $query['next_token'] = $nextToken;
