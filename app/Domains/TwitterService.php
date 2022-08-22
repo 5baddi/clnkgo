@@ -147,9 +147,9 @@ class TwitterService extends Service
                 $query['query'] = sprintf('"%s" -is:retweet', $term);
             }
 
-            if (! empty($startTime)) {
-                $query['start_time'] = date(DATE_RFC3339, strtotime($startTime));
-            }
+            // if (! empty($startTime)) {
+            //     $query['start_time'] = date(DATE_RFC3339, strtotime($startTime));
+            // }
             
             if (! empty($nextToken)) {
                 $query['next_token'] = $nextToken;

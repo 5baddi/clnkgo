@@ -65,7 +65,7 @@ class FetchUserProfileByEmail extends Command
             $targetedEmails->chunk(self::CHUNK_SIZE)
                 ->each(function (Collection $emails) {
                     $emails->each(function (MailingList $mailingList) {
-                        dd($this->twitterService->fetchTweetsByTerm($mailingList->getEmail()));
+                        dd($this->twitterService->fetchTweetsByTerm('kerry.breen@nbcuni.com'));
                     });
                 });
         } catch (Throwable $e) {
