@@ -24,7 +24,7 @@
     <div class="wrapper">
       @include('partials.admin.menu')
       <div class="page-wrapper">
-        @include('partials.dashboard.breadcrumb')
+        {{-- @include('partials.dashboard.breadcrumb') --}}
         <div class="page-body">
           <div class="container-xl">
             @include('partials.dashboard.alert')
