@@ -21,7 +21,7 @@ class IndexController extends AdminController
             'admin.emails.index',
             [
                 'title'     => 'Manage emails',
-                'clients'   => MailingList::query()->paginate(App::PAGINATION_LIMIT)
+                'emails'    => MailingList::query()->paginate(App::PAGINATION_LIMIT)
             ]
         );
     }
