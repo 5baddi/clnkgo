@@ -30,7 +30,7 @@
                         <td>{{ ucwords($email->name ?? '') }}</td>
                         <td>{{ $email->email }}</td>
                         <td>{{ $email->is_active }}</td>
-                        <td>{{ $email->created_at->format('d/m/Y') }}</td>
+                        <td>{{ $email->created_at?->format('d/m/Y') }}</td>
                         {{-- <td>{{ $email->last_login ? $email->last_login->format('d/m/Y H:m') : '---' }}</td> --}}
                         {{-- <td>{{ ucwords($subscription->store->name) }}</td>
                         <td>{{ ucwords($subscription->client->getFullName()) }}</td>
