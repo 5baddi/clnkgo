@@ -8,7 +8,6 @@
 
 namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Emails;
 
-use BADDIServices\ClnkGO\App;
 use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\Http\Controllers\AdminController;
 use BADDIServices\ClnkGO\Models\Marketing\MailingList;
@@ -21,7 +20,7 @@ class IndexController extends AdminController
             'admin.emails.index',
             [
                 'title'     => 'Manage emails',
-                'emails'    => MailingList::query()->paginate(App::PAGINATION_LIMIT)
+                'emails'    => MailingList::query()->orderBy(MailingList::CREATED_AT)->paginate(50)
             ]
         );
     }
