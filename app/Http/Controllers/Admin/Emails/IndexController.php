@@ -8,6 +8,7 @@
 
 namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Emails;
 
+use BADDIServices\ClnkGO\App;
 use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\Http\Controllers\AdminController;
 use BADDIServices\ClnkGO\Models\Marketing\MailingList;
@@ -20,7 +21,7 @@ class IndexController extends AdminController
             ->where(MailingList::IS_ACTIVE_COLUMN, 1)
             ->orderBy(MailingList::NAME_COLUMN, 'ASC')
             ->orderBy(MailingList::CREATED_AT, 'DESC')
-            ->paginate(50);
+            ->paginate(App::PAGINATION_LIMIT);
 
         $verifiedEmails = MailingList::query()
             ->where(MailingList::IS_ACTIVE_COLUMN, 1)
