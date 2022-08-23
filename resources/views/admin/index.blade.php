@@ -21,10 +21,10 @@
                             </div>
                             <div class="col">
                                 <div class="font-weight-medium">
-                                    {{ $verifiedEmails }} Email
+                                    {{ number_format($verifiedEmails, 0, ',', ' ') }} Email
                                 </div>
                                 <div class="text-muted">
-                                    {{ $unverifiedEmails }} waiting for verification
+                                    {{ number_format($unverifiedEmails, 0, ',', ' ') }} waiting for verification
                                 </div>
                             </div>
                         </div>
