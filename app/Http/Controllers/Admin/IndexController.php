@@ -22,7 +22,7 @@ class IndexController extends AdminController
             
         $unverifiedEmails = MailingList::query()
             ->where(MailingList::IS_ACTIVE_COLUMN, 0)
-            ->where(MailingList::IS_UNSUBSCRIBED_COLUMN, 1)
+            ->where(MailingList::IS_UNSUBSCRIBED_COLUMN, 0)
             ->count();
 
         return $this->render(
