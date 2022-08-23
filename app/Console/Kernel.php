@@ -8,7 +8,6 @@ use App\Console\Commands\CPALead\SendCPALeadOffers;
 use App\Console\Commands\Twitter\FetchEmailsTweets;
 use App\Console\Commands\Twitter\FetchLatestTweets;
 use App\Console\Commands\MailUserWhenThereNewRequest;
-use App\Console\Commands\Twitter\FetchUserProfileByEmail;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -24,7 +23,6 @@ class Kernel extends ConsoleKernel
         MailUserWhenThereNewRequest::class,
         SendCPALeadOffers::class,
         FetchEmailsTweets::class,
-        FetchUserProfileByEmail::class,
     ];
 
     /**
