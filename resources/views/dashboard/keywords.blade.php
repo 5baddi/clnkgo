@@ -73,10 +73,10 @@
                             <li>Add your hobbies, family circumstances and things you have a passion for.</li>
                             <li>Regularly check new requests on the 'Queries' page for keyword ideas. </li>
                         </ul>
-                        <p>Still struggling to come up with keywords? Have a look at our Word Cloud. 👇</p>
+                        {{-- <p>Still struggling to come up with keywords? Have a look at our Word Cloud. 👇</p>
                         <h4 class="mt-2">Word Cloud</h4>
                         <p>We've analysed requests from the past 2 weeks and pulled the most frequently used words.</p>
-                        <p>This word cloud is frequently refreshed so check back for more inspiration.</p>
+                        <p>This word cloud is frequently refreshed so check back for more inspiration.</p> --}}
                     </div>
                 </div>
             </div>
