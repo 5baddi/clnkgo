@@ -22,11 +22,23 @@ class IndexController extends AdminController
             ->orderBy(MailingList::CREATED_AT, 'DESC')
             ->paginate(50);
 
+        $verifiedEmails = MailingList::query()
+            ->where(MailingList::IS_ACTIVE_COLUMN, 1)
+            ->where(MailingList::IS_UNSUBSCRIBED_COLUMN, 0)
+            ->count();
+            
+        $unverifiedEmails = MailingList::query()
+            ->where(MailingList::IS_ACTIVE_COLUMN, 0)
+            ->where(MailingList::IS_UNSUBSCRIBED_COLUMN, 0)
+            ->count();
+
         return $this->render(
             'admin.emails.index',
             [
-                'title'     => 'Manage emails',
-                'emails'    => $emails
+                'title'            => 'Manage emails',
+                'emails'           => $emails,
+                'verifiedEmails'   => $verifiedEmails,
+                'unverifiedEmails' => $unverifiedEmails,
             ]
         );
     }
