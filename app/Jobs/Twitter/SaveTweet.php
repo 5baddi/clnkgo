@@ -90,7 +90,7 @@ class SaveTweet implements ShouldQueue
                     Tweet::TEXT_COLUMN                  => $this->tweet['text'],
                     Tweet::LANG_COLUMN                  => $this->tweet['lang'] ?? null,
                     Tweet::DUE_AT_COLUMN                => ! is_null($dueAt) ? Carbon::parse($dueAt) : null,
-                    Tweet::EMAIL_COLUMN                 => $email ?? null,
+                    Tweet::EMAIL_COLUMN                 => $email,
                     Tweet::POSSIBLY_SENSITIVE_COLUMN    => $this->tweet['possibly_sensitive'] ?? false,
                     Tweet::IN_REPLY_TO_USER_ID_COLUMN   => $this->tweet['in_reply_to_user_id'] ?? null,
                     Tweet::REFERENCED_TWEETS_COLUMN     => json_encode($this->tweet['referenced_tweets'] ?? null),

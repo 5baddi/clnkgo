@@ -93,7 +93,7 @@ class SaveTweetUser implements ShouldQueue
                 [
                     TwitterUser::ID_COLUMN                    => $this->user['id'],
                     TwitterUser::USERNAME_COLUMN              => $this->user['username'],
-                    TwitterUser::EMAIL_COLUMN                 => $email ?? null,
+                    TwitterUser::EMAIL_COLUMN                 => $email,
                     TwitterUser::WEBSITE_COLUMN               => $website,
                     TwitterUser::NAME_COLUMN                  => $this->user['name'] ?? null,
                     TwitterUser::VERIFIED_COLUMN              => $this->user['verified'] ?? false,

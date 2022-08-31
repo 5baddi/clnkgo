@@ -92,7 +92,7 @@ class TweetService extends Service
             ]);
 
         if ($filteredAttributes->has(Tweet::HASHTAG_COLUMN)) {
-            $filteredAttributes->put(Tweet::HASHTAG_COLUMN, strtolower($filteredAttributes->get(Tweet::HASHTAG_COLUMN)));
+            $filteredAttributes->put(Tweet::HASHTAG_COLUMN, strtolower((string) $filteredAttributes->get(Tweet::HASHTAG_COLUMN)));
         }
 
         return $this->tweetRespository->save($filteredAttributes->toArray());
