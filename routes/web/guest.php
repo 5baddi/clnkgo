@@ -76,5 +76,6 @@ Route::post('/webceo/signin', function () {
 });
 
 Route::post('/webceo/callback', function (Request $request) {
-    dd($request->input('code'));
+    return response()
+        ->json(['client_id' => '6eb617271c3c1fc349', 'email' => 'project@baddi.info']);
 });
