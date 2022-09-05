@@ -65,3 +65,7 @@ Route::middleware(['auth'])
     ->group(function() {
         Route::get('/logout', SignOutController::class)->name('signout');
     });
+
+Route::get('/webceo', function () {
+    return view('webceo.signin');
+});
