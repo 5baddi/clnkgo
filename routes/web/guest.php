@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
+use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -20,6 +21,7 @@ use BADDIServices\ClnkGO\Http\Controllers\Auth\ConfirmEmailController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword as ResetPassword;
 use BADDIServices\ClnkGO\Http\Controllers\CPALead\CPALeadUnsubscribeController;
 use BADDIServices\ClnkGO\Http\Controllers\CPALead\CPALeadRedirectToOfferController;
+use Illuminate\Support\Facades\Hash;
 
 Route::get('/', function () {
     return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT);
@@ -100,40 +102,36 @@ Route::post('/webceo/signup', function (Request $request) {
             ]
         );
 
-    $code = explode('@', $request->input('email'))[0] || '';
+    $user = User::query()
+        ->create([
+            User::EMAIL_COLUMN => $request->input('email'),
+            User::PASSWORD_COLUMN => Hash::make($request->input('password')),
+            User::FIRST_NAME_COLUMN => Hash::make($request->input('full_name')),
+            User::LAST_LOGIN_COLUMN => '',
+            User::REMEMBER_TOLEN_COLUMN => $request->input('discount_code'),
+        ]);
 
-    if ($response->getStatusCode() === Response::HTTP_OK || empty($code)) {
-        return redirect(sprintf('https://go.seokits.co/accounts/domain/login/?code=%s', $code));
+    if ($response->getStatusCode() === Response::HTTP_OK && $user instanceof User) {
+        return redirect(sprintf('https://go.seokits.co/accounts/domain/login/?code=%s', $user->id));
     }
 
     return abort(400);
 });
 
 Route::post('/webceo/callback', function (Request $request) {
-    $client = new Client([
-        'base_uri'      => 'https://online.webceo.com/api/',
-        'debug'         => false,
-        'http_errors'   => false,
-    ]);
+    $id = $request->query('id');
 
-    $response = $client
-        ->request(
-            'POST',
-            '', 
-            [
-                'headers'           => [
-                    'Accept'        => 'application/json',
-                ],
-                'body'              => json_encode([
-                    'method'        => 'get_users',
-                    'key'           => '6eb617271c3c1fc349',
-                ])
-            ]
-        );
+    if (! empty($id)) {
+        $user = User::query()
+            ->find($id);
 
-    if ($response->getStatusCode() === Response::HTTP_OK) {
-        $results = json_decode($response->getBody(), true);
-        dd($results[0]['data'][0]['email']);
+        if ($user instanceof User) {
+            return response()
+                ->json([
+                    'client_id' => '6eb617271c3c1fc349',
+                    'email'     => $user->email
+                ]);
+        }
     }
 
     return abort(401);
