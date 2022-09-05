@@ -119,7 +119,7 @@ Route::post('/webceo/signup', function (Request $request) {
 });
 
 Route::post('/webceo/callback', function (Request $request) {
-    $id = $request->query('id');
+    $id = $request->query('code');
 
     if (! empty($id)) {
         $user = User::query()
