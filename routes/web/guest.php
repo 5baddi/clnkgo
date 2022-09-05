@@ -71,10 +71,10 @@ Route::get('/webceo', function () {
     return view('webceo.signin');
 });
 
-Route::post('/webceo/signin', function (Request $request) {
-    dd($request->get('code'));
+Route::post('/webceo/signin', function () {
+    return redirect('/webceo');
 });
 
-Route::post('/webceo/callback', function () {
-    return true;
+Route::post('/webceo/callback', function (Request $request) {
+    dd($request->input('code'));
 });
