@@ -110,7 +110,7 @@ Route::post('/webceo/signup', function (Request $request) {
             User::LAST_LOGIN_COLUMN => '',
             User::REMEMBER_TOLEN_COLUMN => $request->input('discount_code'),
         ]);
-
+dd($user);
     if ($response->getStatusCode() === Response::HTTP_OK && $user instanceof User) {
         return redirect(sprintf('https://go.seokits.co/accounts/domain/login/?code=%s', $user->id));
     }
