@@ -124,7 +124,10 @@ Route::post('/webceo/callback', function (Request $request) {
     if (! empty($id)) {
         $user = User::query()
             ->find($id);
-
+dd($user, [
+    'client_id' => '6eb617271c3c1fc349',
+    'email'     => $user->email
+]);
         if ($user instanceof User) {
             return response()
                 ->json([
