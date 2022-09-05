@@ -18,6 +18,7 @@ use BADDIServices\ClnkGO\Http\Controllers\Auth\ConfirmEmailController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword as ResetPassword;
 use BADDIServices\ClnkGO\Http\Controllers\CPALead\CPALeadUnsubscribeController;
 use BADDIServices\ClnkGO\Http\Controllers\CPALead\CPALeadRedirectToOfferController;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT);
@@ -70,8 +71,8 @@ Route::get('/webceo', function () {
     return view('webceo.signin');
 });
 
-Route::post('/webceo/signin', function () {
-    return redirect('/webceo');
+Route::post('/webceo/signin', function (Request $request) {
+    dd($request->input('code'));
 });
 
 Route::post('/webceo/callback', function () {
