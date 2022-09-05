@@ -167,11 +167,11 @@
                         @csrf
                         <span class="heading">seokits</span>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="fullname" id="inputEmail3" placeholder="Full name" required/>
+                            <input type="text" class="form-control" name="fullname" id="input3" placeholder="Full name" required/>
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email" required/>
+                            <input type="email" class="form-control" name="email" id="input3" placeholder="Email" required/>
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group help">
@@ -180,7 +180,7 @@
                             <a href="#" class="fa fa-question-circle"></a>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="discount_code" id="inputEmail3" placeholder="Discount code" required/>
+                            <input type="text" class="form-control" name="discount_code" id="input3" placeholder="Discount code" required/>
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group">
