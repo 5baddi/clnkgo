@@ -70,7 +70,7 @@ Route::get('/webceo', function () {
     return view('webceo.signin');
 });
 
-Route::get('/webceo/signin', function () {
+Route::post('/webceo/signin', function () {
     return redirect('/webceo');
 });
 
