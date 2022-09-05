@@ -162,18 +162,26 @@
     <div class="form-bg">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-3 col-md-6">
-                    <form class="form-horizontal" action="{{ url('/webceo/signin') }}" method="POST">
+                <div class="col-md-offset-3 col-md-6">Email, password, name and unique discount code
+                    <form class="form-horizontal" action="{{ url('/webceo/signup') }}" method="POST">
                         @csrf
                         <span class="heading">seokits</span>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email" required/>
+                            <input type="text" class="form-control" name="fullname" id="inputEmail3" placeholder="Full name" required/>
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email" required/>
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group help">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" required/>
+                            <input type="password" class="form-control" minlength="8" name="password" id="inputPassword3" placeholder="Password" required/>
                             <i class="fa fa-lock"></i>
                             <a href="#" class="fa fa-question-circle"></a>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="discount_code" id="inputEmail3" placeholder="Discount code" required/>
+                            <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-default">log in</button>

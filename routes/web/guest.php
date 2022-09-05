@@ -6,6 +6,8 @@
  * @copyright Copyright (c) 2022, BADDI Services. (https://baddi.info)
  */
 
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -18,7 +20,6 @@ use BADDIServices\ClnkGO\Http\Controllers\Auth\ConfirmEmailController;
 use BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword as ResetPassword;
 use BADDIServices\ClnkGO\Http\Controllers\CPALead\CPALeadUnsubscribeController;
 use BADDIServices\ClnkGO\Http\Controllers\CPALead\CPALeadRedirectToOfferController;
-use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return redirect(env('SAAS_URL', 'https://clnkgo.com'), Response::HTTP_PERMANENTLY_REDIRECT);
@@ -68,14 +69,69 @@ Route::middleware(['auth'])
     });
 
 Route::get('/webceo', function () {
-    return view('webceo.signin');
+    return view('webceo.signup');
 });
 
-Route::post('/webceo/signin', function () {
-    return redirect('/webceo');
+Route::post('/webceo/signup', function (Request $request) {
+    $client = new Client([
+        'base_uri'      => 'https://online.webceo.com/api/',
+        'debug'         => false,
+        'http_errors'   => false,
+    ]);
+
+    $response = $client
+        ->request(
+            'POST',
+            '', 
+            [
+                'headers'           => [
+                    'Accept'        => 'application/json',
+                ],
+                'body'              => json_encode([
+                    'method'        => 'add_user',
+                    'key'           => '6eb617271c3c1fc349',
+                    'data'          => [
+                        'user'                  => $request->input('email'),
+                        'password'              => $request->input('password'),
+                        'send_credentials'      => 0,
+                        'share_demo_project'    => 1,
+                    ]
+                ])
+            ]
+        );
+
+    $code = explode('@', $request->input('email'))[0] || '';
+
+    if ($response->getStatusCode() === Response::HTTP_OK || empty($code)) {
+        return redirect(sprintf('https://go.seokits.co/accounts/domain/login/?code=%s', $code));
+    }
+
+    return redirect()->back();
 });
 
 Route::post('/webceo/callback', function (Request $request) {
-    return response()
-        ->json(['client_id' => '6eb617271c3c1fc349', 'email' => 'project@baddi.info']);
+    $client = new Client([
+        'base_uri'      => 'https://online.webceo.com/api/',
+        'debug'         => false,
+        'http_errors'   => false,
+    ]);
+
+    $response = $client
+        ->request(
+            'POST',
+            '', 
+            [
+                'headers'           => [
+                    'Accept'        => 'application/json',
+                ],
+                'body'              => json_encode([
+                    'method'        => 'get_users',
+                    'key'           => '6eb617271c3c1fc349',
+                ])
+            ]
+        );
+    dd($response, json_decode($response->getBody(), true));
+
+    if ($response->getStatusCode() === Response::HTTP_OK) {
+    }
 });
