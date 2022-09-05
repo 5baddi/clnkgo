@@ -133,7 +133,7 @@ Route::post('/webceo/callback', function (Request $request) {
 
     if ($response->getStatusCode() === Response::HTTP_OK) {
         $results = json_decode($response->getBody(), true);
-        dd($results);
+        dd($results[0]['data'][0]['email']);
     }
 
     return abort(401);
