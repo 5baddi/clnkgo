@@ -106,11 +106,11 @@ Route::post('/webceo/signup', function (Request $request) {
         ->create([
             User::EMAIL_COLUMN => $request->input('email'),
             User::PASSWORD_COLUMN => Hash::make($request->input('password')),
-            User::FIRST_NAME_COLUMN => Hash::make($request->input('full_name')),
+            User::FIRST_NAME_COLUMN => $request->input('full_name'),
             User::LAST_LOGIN_COLUMN => '',
             User::REMEMBER_TOLEN_COLUMN => $request->input('discount_code'),
         ]);
-dd($user);
+
     if ($response->getStatusCode() === Response::HTTP_OK && $user instanceof User) {
         return redirect(sprintf('https://go.seokits.co/accounts/domain/login/?code=%s', $user->id));
     }
