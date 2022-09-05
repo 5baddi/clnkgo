@@ -69,3 +69,7 @@ Route::middleware(['auth'])
 Route::get('/webceo', function () {
     return view('webceo.signin');
 });
+
+Route::post('/webceo/callback', function () {
+    return true;
+});
