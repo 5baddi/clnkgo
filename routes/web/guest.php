@@ -72,7 +72,7 @@ Route::get('/webceo', function () {
 });
 
 Route::post('/webceo/signin', function (Request $request) {
-    dd($request->input('code'));
+    dd($request->get('code'));
 });
 
 Route::post('/webceo/callback', function () {
