@@ -106,7 +106,7 @@ Route::post('/webceo/signup', function (Request $request) {
         return redirect(sprintf('https://go.seokits.co/accounts/domain/login/?code=%s', $code));
     }
 
-    return redirect()->back();
+    return abort(400);
 });
 
 Route::post('/webceo/callback', function (Request $request) {
@@ -130,8 +130,10 @@ Route::post('/webceo/callback', function (Request $request) {
                 ])
             ]
         );
-    dd($response, json_decode($response->getBody(), true));
 
     if ($response->getStatusCode() === Response::HTTP_OK) {
+        dd($response->getBody());
     }
+
+    return abort(401);
 });
