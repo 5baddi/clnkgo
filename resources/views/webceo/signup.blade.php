@@ -162,7 +162,7 @@
     <div class="form-bg">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-3 col-md-6">Email, password, name and unique discount code
+                <div class="col-md-offset-3 col-md-6">
                     <form class="form-horizontal" action="{{ url('/webceo/signup') }}" method="POST">
                         @csrf
                         <span class="heading">seokits</span>
