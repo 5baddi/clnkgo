@@ -164,6 +164,7 @@
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
                     <form class="form-horizontal" action="{{ url('/webceo/signin') }}" method="POST">
+                        @csrf
                         <span class="heading">seokits</span>
                         <div class="form-group">
                             <input type="email" class="form-control" id="inputEmail3" placeholder="Email" />
