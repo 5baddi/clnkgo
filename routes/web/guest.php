@@ -119,15 +119,12 @@ Route::post('/webceo/signup', function (Request $request) {
 });
 
 Route::post('/webceo/callback', function (Request $request) {
-    $id = $request->query('code');
+    $id = $request->input('code');
 
     if (! empty($id)) {
         $user = User::query()
             ->find($id);
-dd($user, [
-    'client_id' => '6eb617271c3c1fc349',
-    'email'     => $user->email
-]);
+
         if ($user instanceof User) {
             return response()
                 ->json([
