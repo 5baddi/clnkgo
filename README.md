@@ -124,23 +124,6 @@ Run scheduled commands
 php artisan schedule:run
 ```
 
-## Mail configuration
-`MAIL_MAILER`=smtp
-
-`MAIL_HOST`=baddi.info
-
-`MAIL_PORT`=465
-
-`MAIL_USERNAME`=noreply@baddi.info
-
-`MAIL_PASSWORD`=VR4sE0JIBOHP
-
-`MAIL_ENCRYPTION`=SSL
-
-`MAIL_FROM_ADDRESS=`noreply@baddi.info
-
----
-
 ## Twitter API Config variables
 
 - TWITTER_BEARER_TOKEN
